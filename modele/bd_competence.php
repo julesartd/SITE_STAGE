@@ -28,4 +28,37 @@ function InsererSousCompetence($nomSousCompetence ,$idCompetence ,$idBloc){
     }
 }
 
+function GetCompetence($idBloc){
+    $resultat = array();
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("select * from competence where IDBLOC = :idBloc");
+        $rec->bindValue('idBloc', $idBloc);
+        $req->execute();
+
+        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function GetSousCompetence($idCompetence){
+    $resultat = array();
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("select * from sous_competence where IDCOMPETENCE = :idCompetence");
+        $rec->bindValue('idCompetence', $idCompetence);
+        $req->execute();
+
+        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
 ?>
