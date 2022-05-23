@@ -8,7 +8,8 @@ function controleurPrincipal($action){
     $lesActions = array();
 
     $lesActions["calendrier"] = "calendrierProfesseur.php";
-    $lesActions["defaut"] = "calendrierProfesseur.php";
+
+    $lesActions["insertion"] = "insertionCompetence.php";
 
  
     if (array_key_exists ( $action , $lesActions )){

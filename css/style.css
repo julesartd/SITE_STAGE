@@ -1,0 +1,40 @@
+#calendar {
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#calendar th {
+    border: 1px solid black;
+    border-bottom: 2px solid black
+}
+
+#calendar td {
+    padding-left: 3px;
+    padding-right: 3px
+}
+
+#calendar td.dayOfWeek {
+    border-left: 1px solid black;
+}
+
+#calendar td.day {
+    text-align: right;
+}
+
+#calendar td.week {
+    border-right: 1px solid black;
+    font-weight: bold;
+}
+
+#calendar td.endOfMonth {
+    border-bottom: 2px solid black;
+}
+
+#calendar .weekend {
+    background-color: #CCC;
+}
+
+
