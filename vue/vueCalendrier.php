@@ -26,7 +26,7 @@
 					<tr>
 						
 						<?php 
-						$ferie = ((($d == 1 and $m==1) and $d <= $aMonthDays[$m]) ? " ferie" : "");
+				
 						for ($m = 0; $m < 12; $m++) { // Creation d'une boucle pour ecrire les colonnes
 							$newDate = new DateTime(); // Creation d'une date pour obtenir le numero du jour de la semaine et le numero de semaine
 							$newDate->setDate($year, ($m + 1), $d);
