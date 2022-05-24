@@ -1,6 +1,6 @@
 <?php
 
-include "bd_connexion.php";
+include_once "bd_connexion.php";
 
 function insertCompetence($idCompetence, $nomCompetence, $idBloc){
 
@@ -31,6 +31,25 @@ function getMaxCompetence(){
 
         $resultat=$req->fetch(PDO::FETCH_DEFAULT);
 
+        $rec = $connex->prepare("select * from bloc");
+        $rec->execute();
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function GetSousCompetence($idCompetence){
+    $resultat = array();
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("select * from sous_competence where IDCOMPETENCE = :idCompetence");
+        $req->bindValue('idCompetence', $idCompetence);
+        $req->execute();
+
+        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
     }catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();

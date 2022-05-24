@@ -12,10 +12,7 @@
         } 
     }
     $listeBac = getBac();
-   
   
-    include "vue/vueBloc.php";
-    
-
+    include "vue/vueBloc.php"
     ?>
 </div>
