@@ -34,11 +34,15 @@ function GetCompetence($idBloc){
     try {
         $cnx = connexionPDO();
         $req = $cnx->prepare("select * from competence where IDBLOC = :idBloc");
-        $rec->bindValue('idBloc', $idBloc);
+        $req->bindValue('idBloc', $idBloc);
         $req->execute();
 
         $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
     }
+    return $resultat;
 }
 function getBloc() { 
     try {
@@ -49,7 +53,7 @@ function getBloc() {
         print "Erreur !: " . $e->getMessage();
         die();
     }
-    return $resultat;
+    
 }
 
 function GetSousCompetence($idCompetence){
@@ -58,7 +62,7 @@ function GetSousCompetence($idCompetence){
     try {
         $cnx = connexionPDO();
         $req = $cnx->prepare("select * from sous_competence where IDCOMPETENCE = :idCompetence");
-        $rec->bindValue('idCompetence', $idCompetence);
+        $req->bindValue('idCompetence', $idCompetence);
         $req->execute();
 
         $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
