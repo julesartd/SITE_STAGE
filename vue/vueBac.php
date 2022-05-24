@@ -6,8 +6,8 @@
     <input type="submit" value="AJOUTER" name="btnAjout">
     </br>
     </br>
+    <h1>Baccalauréat déja enregistrer</h1>
     <table class="table-info gestion">
-        <caption>Baccalauréat déja enregistrer</caption>
         <tr>
             <th>nom Baccalauréat</th>
             <th>Supprimer le Baccalauréat</th>

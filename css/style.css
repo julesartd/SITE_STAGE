@@ -54,6 +54,7 @@ body {
 }
 
 table.gestion {
+    margin: 0px auto;
     table-layout: auto;
     width: auto;
     border-collapse: collapse;
@@ -63,7 +64,6 @@ table.gestion {
 table.gestion th,
 table.gestion td {
     border: solid 3px rgb(0, 0, 0);
-    ;
 }
 
 #entete {
@@ -83,9 +83,22 @@ table.gestion td {
 }
 
 #menu{
-    text-align: left;
-    width: 20%;
+    text-align : left;
+    width: 250px;
     height: 800px;
     margin-left:0px;
     background-color: rgb(128, 4, 4);
+    float: left;
+    
 }
+
+#centre{ 
+	width:100%; 
+}
+
+#navigation { 
+	margin-top:0px;
+	margin-left:250px; 
+	background-color:#a9bbd1; 
+    text-align: center;
+} 
