@@ -51,7 +51,7 @@ return $resultat;
 function getBloc() { 
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM bloc");
+        $rec = $connex->prepare("select * from bloc");
         $rec->execute();
     }catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
