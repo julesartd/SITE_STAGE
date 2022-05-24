@@ -2,12 +2,8 @@
     <?php
 
     include "modele/bd_competence.php";
-
-  
-
-    // if (empty($_SESSION['mailU']) || empty($_SESSION['mdpU'])) {
-    //     header("Location:/?action=");
-    // }
+    include "modele/bd_bac.php";
+    
 
     if (isset($_POST['btnAjout'])) {
         if (isset($_POST['txtIDBLOC'], $_POST['txtNomBloc'], $_POST['txtIDBAC'])) {

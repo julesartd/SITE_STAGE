@@ -22,9 +22,5 @@
         </select>
 
         </br>
-        <input type="submit" value="AJOUTER"  name="btnAjout">
-        <input type="submit" value="ANNULER"  name="btnCancel">
-
-
-     
+        <input type="submit" value="AJOUTER"  name="btnAjout">  
     </form>

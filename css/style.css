@@ -38,3 +38,27 @@
 }
 
 
+html,body {
+	margin:0;
+	padding:0;
+	font-family: sans-serif;
+} 
+
+.collapse
+{
+	border-collapse: collapse;
+}
+
+.separate {
+   border-collapse: separate;
+ }
+
+ table.gestion {
+   table-layout: auto;
+   width: auto;
+   border-collapse: collapse;
+   border: 2px solid rgb(34, 0, 0);
+ }
+ table.gestion th, table.gestion td{
+	 border: solid 3px rgb(0, 0, 0);;
+ }
