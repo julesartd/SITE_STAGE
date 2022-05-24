@@ -1,16 +1,16 @@
 <form method="POST" class="lb mb-3">
     <h1 id="lstA">Ajouter un Baccalauréat</h1>
     </br>
-    <caption>Insertion d'un Baccalauréat :</caption>
+    <caption>Insertion d'un Bac :</caption>
     <input type="text" name='txtNomBac' placeholder='Nom du bac' required>
     <input type="submit" value="AJOUTER" name="btnAjout">
     </br>
     </br>
-    <h1>Baccalauréat déja enregistrer</h1>
-    <table class="table-info gestion">
+    <h2>Voici la liste des Bacs déjà enregistrés</h2>
+    <table class="table table-bordered">
         <tr>
-            <th>nom Baccalauréat</th>
-            <th>Supprimer le Baccalauréat</th>
+            <th>nom Bac</th>
+            <th>Supprimer le Bac</th>
         </tr>
         <?php
         foreach ($tableauBac as $Bac) {

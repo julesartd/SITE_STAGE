@@ -8,7 +8,7 @@ function controleurPrincipal($action){
     $lesActions = array();
 
     $lesActions["calendrier"] = "calendrierProfesseur.php";
-    $lesActions["insertion"] = "insertionBloc.php";
+    $lesActions["bloc"] = "insertionBloc.php";
     $lesActions["competence"] = "insertionCompetence.php";
     $lesActions["bac"] = "insertionBac.php";
     

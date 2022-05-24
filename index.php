@@ -22,29 +22,25 @@
             ?>
         </div>
         <div id="centre">
-            <div id="menu">
-                <?php
-                include "$racine/vue/menu.php";
-                ?>
-            </div>
+            
 
-            <div id="navigation" ;>
-                <?php
-                include "$racine/controleur/controleurPrincipal.php";
+       
+        <?php
+
+        include "$racine/controleur/controleurPrincipal.php";
 
 
-                if (isset($_GET["action"])) {
-                    $action = $_GET["action"];
-                } else {
+        if (isset($_GET["action"])) {
+            $action = $_GET["action"];
+        } else {
 
-                    $action = "defaut";
-                }
+            $action = "bac";
+        }
 
-                $fichier = controleurPrincipal($action);
-                include "$racine/controleur/$fichier";
-                ?>
-            </div>
-        </div>
+        $fichier = controleurPrincipal($action);
+        include "$racine/controleur/$fichier";
+
+        ?>
     </div>
 </body>
 
