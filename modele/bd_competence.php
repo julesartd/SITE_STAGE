@@ -1,7 +1,23 @@
 <?php
 
 include "bd_connexion.php";
-function InsererCompetence($nomCompetence ,$idBloc){
+
+function insertCompetenceChapeau($idCP, $nomCP, $idBac){
+
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("INSERT INTO bloc VALUES (:idCP , :idBac, :nomCP)");
+        $req->bindValue('idCP', $idCP);
+        $req->bindValue('idBac', $idBac);
+        $req->bindValue('nomCP', $nomCP);
+        $req->execute();
+        
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
+function insertCompetence($nomCompetence ,$idBloc){
     try {
         $connex = connexionPDO();
         $rec = $connex->prepare("INSERT INTO competence VALUES(:idBloc , null, :nomCompetence)");
@@ -14,7 +30,7 @@ function InsererCompetence($nomCompetence ,$idBloc){
     }
 }
 
-function InsererSousCompetence($nomSousCompetence ,$idCompetence ,$idBloc){
+function insertSousCompetence($nomSousCompetence ,$idCompetence ,$idBloc){
     try {
         $connex = connexionPDO();
         $rec = $connex->prepare("INSERT INTO sous_Competence VALUES(:idBloc , :idCompetence , null, :nomSousCompetence)");
@@ -28,7 +44,7 @@ function InsererSousCompetence($nomSousCompetence ,$idCompetence ,$idBloc){
     }
 }
 
-function GetCompetence($idBloc){
+function getCompetence($idBloc){
     $resultat = array();
 
     try {
@@ -48,7 +64,10 @@ catch (PDOException $e) {
 }
 return $resultat;
 }
+
+
 function getBloc() { 
+    $resultat = array();
     try {
         $connex = connexionPDO();
         $rec = $connex->prepare("SELECT * FROM bloc");
@@ -57,8 +76,24 @@ function getBloc() {
         print "Erreur !: " . $e->getMessage();
         die();
     }
-    
+    return $resultat;
 }
+
+function getBac() { 
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM bac");
+        $req->execute();
+
+        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 
 function GetSousCompetence($idCompetence){
     $resultat = array();
