@@ -2,7 +2,7 @@
         <h1 id="lstA">Ajouter un Baccalauréat</h1>
         </br>
         <caption>Insertion d'un Baccalauréat :</caption>
-        <input type="text" name='txtNomBac' placeholder='Nom du bac'>
+        <input type="text" name='txtNomBac' placeholder='Nom du bac' required>
         <input type="submit" value="AJOUTER"  name="btnAjout">
         </br>
         </br>

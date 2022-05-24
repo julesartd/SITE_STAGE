@@ -2,10 +2,10 @@
         <h1 id="lstA">Créer une compétence</h1>
         </br>
        
-        <input type="text" name='txtIDBLOC' placeholder='Code de la compétence chapeau'>
+        <input type="text" name='txtIDBLOC' placeholder='Code de la compétence chapeau' required>
       
        
-        <input type="text" name='txtNomBloc' placeholder='Nom de la compétence chapeau'>
+        <input type="text" name='txtNomBloc' placeholder='Nom de la compétence chapeau' required>
 
 
         <select name="txtIDBAC">
