@@ -5,5 +5,4 @@
     <li><a href="./?action=competence">Insérer des compétences</a></li>
     <li><a href="./?action=bac">Ajouter un Baccalauréat</a></li>
 
-
 </ul>
