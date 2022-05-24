@@ -39,6 +39,11 @@ function GetCompetence($idBloc){
 
         $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
     }
+catch (PDOException $e) {
+    print "Erreur !: " . $e->getMessage();
+    die();
+}
+return $resultat;
 }
 function getBloc() { 
     try {
