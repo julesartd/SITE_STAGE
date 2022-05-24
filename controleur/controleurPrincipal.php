@@ -10,6 +10,7 @@ function controleurPrincipal($action){
     $lesActions["calendrier"] = "calendrierProfesseur.php";
     $lesActions["insertion"] = "insertionBloc.php";
     $lesActions["bac"] = "insertionBac.php";
+    $lesActions["test"] = "insertion.php";
  
     if (array_key_exists ( $action , $lesActions )){
         return $lesActions[$action];

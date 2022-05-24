@@ -5,31 +5,44 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <title>Document</title>
 </head>
 
 <body>
-    <?php
+    <div id="tout">
+        <?php
+        include "getRacine.php";
+        ?>
 
-  
-    include "getRacine.php";
-    include "$racine/vue/menu.php";
+        <div id="entete">
+            <?php
+            include "$racine/vue/entete.php";
+            ?>
+        </div>
 
-    include "$racine/controleur/controleurPrincipal.php";
-   
+        <div id="menu">
+            <?php
+            include "$racine/vue/menu.php";
+            ?>
+        </div>
+        <?php
 
-    if (isset($_GET["action"])) {
-        $action = $_GET["action"];
-    } else {
+        include "$racine/controleur/controleurPrincipal.php";
 
-        $action = "defaut";
-    }
 
-    $fichier = controleurPrincipal($action);
-    include "$racine/controleur/$fichier";
+        if (isset($_GET["action"])) {
+            $action = $_GET["action"];
+        } else {
 
-    ?>
+            $action = "defaut";
+        }
+
+        $fichier = controleurPrincipal($action);
+        include "$racine/controleur/$fichier";
+
+        ?>
+    </div>
 </body>
 
 </html>

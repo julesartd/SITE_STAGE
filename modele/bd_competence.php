@@ -95,4 +95,3 @@ function GetSousCompetence($idCompetence){
     }
     return $resultat;
 }
-?>
