@@ -6,7 +6,7 @@
     <input type="submit" value="AJOUTER" name="btnAjout">
     </br>
     </br>
-    <table class="table-info gestion">
+    <table class="table table-bordered">
         <caption>Baccalauréat déja enregistrer</caption>
         <tr>
             <th>nom Baccalauréat</th>

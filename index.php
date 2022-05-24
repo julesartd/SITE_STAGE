@@ -23,11 +23,7 @@
             ?>
         </div>
 
-        <div id="menu">
-            <?php
-            include "$racine/vue/menu.php";
-            ?>
-        </div>
+       
         <?php
 
         include "$racine/controleur/controleurPrincipal.php";
