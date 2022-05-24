@@ -1,7 +1,7 @@
 <div>
     <?php
 
-    include "modele/bd_competence.php";
+    include "modele/bd_bloc.php";
 
     
 
