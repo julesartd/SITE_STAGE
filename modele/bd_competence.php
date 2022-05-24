@@ -29,10 +29,8 @@ function getMaxCompetence(){
         $req = $connex->prepare("SELECT MAX(IDCOMPETENCE) FROM COMPETENCE");
         $req->execute();
 
-        $resultat=$req->fetch(PDO::FETCH_DEFAULT);
+        $resultat=$req->fetch(PDO::FETCH_ASSOC);
 
-        $rec = $connex->prepare("select * from bloc");
-        $rec->execute();
     }catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();

@@ -67,20 +67,20 @@ function getBac() {
 }
 
 
-function GetSousCompetence($idCompetence){
-    $resultat = array();
+// function GetSousCompetence($idCompetence){
+//     $resultat = array();
 
-    try {
-        $cnx = connexionPDO();
-        $req = $cnx->prepare("select * from sous_competence where IDCOMPETENCE = :idCompetence");
-        $req->bindValue('idCompetence', $idCompetence);
-        $req->execute();
+//     try {
+//         $cnx = connexionPDO();
+//         $req = $cnx->prepare("select * from sous_competence where IDCOMPETENCE = :idCompetence");
+//         $req->bindValue('idCompetence', $idCompetence);
+//         $req->execute();
 
-        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
-    }catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
-        die();
-    }
-    return $resultat;
-}
+//         $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
+//     }catch (PDOException $e) {
+//         print "Erreur !: " . $e->getMessage();
+//         die();
+//     }
+//     return $resultat;
+// }
 ?>
