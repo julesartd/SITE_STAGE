@@ -12,16 +12,18 @@
 
 
 
-    if (isset($_POST['btnAjoutSousCompetence'])) {
+    if (isset($_POST['btnAjoutSousCompetence'])&& isset($_GET['id'])) {
         if (isset($_POST['txtIntituleSousCompetence'])) {
            
             insertSousCompetence($maxSousCompetence+1 ,$_POST['txtIntituleSousCompetence'], $_GET['id']);
+        
         }
       
     }
     
     if (isset($_GET['idSuppr'])) {
         supprSousCompetence($_GET['idSuppr']);
+       
     }
 
    

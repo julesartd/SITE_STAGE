@@ -1,4 +1,4 @@
-<form method="POST" class="lb mb-3" action ="">
+<form method="POST" class="lb mb-3" action="">
     <h1 id="lstA">Créer une compétence</h1>
     </br>
 
@@ -26,19 +26,19 @@
             <?php
         foreach ($listeCompetence as $uneCompetence) {
         ?>
-        <tr>
+            <tr>
                 <input class='txt' type='hidden' name='txtNum' value="<?php echo $uneCompetence["idCompetence"]; ?>">
                 <td><?php echo $uneCompetence["libelleCompetence"];?></td>
                 <td><?php echo $uneCompetence["intituleCompetence"];?></td>
                 <td><a name="voir" href="index.php?action=sousCompetence&id=<?php echo $uneCompetence['idCompetence']; ?>">Voir les sous-compétences</td>
                 <td><a href="index.php?action=competence&idSuppr=<?php echo $uneCompetence['idCompetence']; ?>&id=<?php echo $uneCompetence["idBac"]; ?>">Supprimer</td>
 
-        </tr>
-    <?php
+            </tr>
+        <?php
         }
 
-?>
-  </table>
+        ?>
+    </table>
 
 
 </form>
