@@ -6,7 +6,6 @@
     
     $idBac = $_GET['id'];
 
-    print_r($idBac);
 
     if (isset($_POST['btnAjoutCompetence']) && isset($_GET['id'])) {
         $idBac = $_GET['id'];

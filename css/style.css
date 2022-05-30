@@ -73,6 +73,11 @@ table{
     padding-right: 300px;
 
 }
+
+#retour{
+  float: right;
+}
+
 /*
 =====
 DEPENDENCES
@@ -192,4 +197,3 @@ DEPENDENCES
     transition-duration: .2s;
   }
   
- 

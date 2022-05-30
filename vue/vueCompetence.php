@@ -21,6 +21,7 @@
             <th>Libellé</th>
             <th>Intitulé</th>
             <th></th>
+            <th></th>
             </tr>
             <?php
         foreach ($listeCompetence as $uneCompetence) {
@@ -30,7 +31,7 @@
                 <td><?php echo $uneCompetence["libelleCompetence"];?></td>
                 <td><?php echo $uneCompetence["intituleCompetence"];?></td>
                 <td><a name="voir" href="index.php?action=sousCompetence&id=<?php echo $uneCompetence['idCompetence']; ?>">Voir les sous-compétences</td>
-
+                <td><a href="index.php?action=competence&idSuppr=<?php echo $uneCompetence['idCompetence']; ?>&id=<?php echo $uneCompetence["idBac"]; ?>">Supprimer</td>
 
         </tr>
     <?php
