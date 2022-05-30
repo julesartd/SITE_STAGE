@@ -11,6 +11,7 @@ function controleurPrincipal($action){
     $lesActions["bloc"] = "insertionBloc.php";
     $lesActions["competence"] = "insertionCompetence.php";
     $lesActions["bac"] = "insertionBac.php";
+    $lesActions["sousCompetence"] = "insertionSousCompetence.php";
     
  
  
