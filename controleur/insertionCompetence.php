@@ -5,7 +5,8 @@
     include_once "modele/bd_bac.php";
     
     $idBac = $_GET['id'];
-
+    $listeBac = getBac();
+    $listeCompetence= getCompetenceChapeauByBac($_GET['id']);
     print_r($idBac);
 
     if (isset($_POST['btnAjoutCompetence']) && isset($_GET['id'])) {
@@ -17,8 +18,7 @@
         }
       
     }
-    $listeBac = getBac();
-    $listeCompetence= getCompetenceChapeauByBac($_GET['id']);
+
 
    
   

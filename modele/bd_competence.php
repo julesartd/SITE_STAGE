@@ -1,3 +1,9 @@
+<script language="Javascript">
+function confirmerSuppression(){
+  return window.confirm("Voulez vous supprimer ce bac ? Cela supprimera toutes les compétences reliés à ce bac" );
+}
+</script>
+
 <?php
 
 include_once "bd_connexion.php";
