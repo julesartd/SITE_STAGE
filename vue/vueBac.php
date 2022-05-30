@@ -17,8 +17,9 @@
             foreach ($tableauBac as $Bac) {
             ?>
                 <tr>
-                    <td><?php echo $Bac["NOMDUBAC"]; ?></td>
-                    <td><a href="index.php?action=bac&idSuppr=<?php echo $Bac['IDBAC']; ?>">Supprimer</td>
+                    <td><?php echo $Bac["nomBac"]; ?></td>
+                    <td><a href="index.php?action=bac&idSuppr=<?php echo $Bac['idBac']; ?>">Supprimer</td>
+                    <td><a href="index.php?action=competence&id=<?php echo $Bac['idBac']; ?>">Voir les compétences</td>
                 <?php
             }
                 ?>
