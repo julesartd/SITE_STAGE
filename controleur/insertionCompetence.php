@@ -2,7 +2,7 @@
     <?php
 
     include_once "modele/bd_competence.php";
-    include_once "modele/bd_bloc.php";
+    include_once "modele/bd_bac.php";
     
 
     if (isset($_POST['btnAjout'])) {

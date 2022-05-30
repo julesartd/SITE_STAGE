@@ -24,20 +24,6 @@ function getBloc() {
     return $resultat;
 }
 
-function getBac() { 
-    $resultat = array();
-    try {
-        $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM bac");
-        $req->execute();
-
-        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
-    }catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
-        die();
-    }
-    return $resultat;
-}
 
 
 // function GetSousCompetence($idCompetence){
