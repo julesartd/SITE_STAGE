@@ -15,7 +15,7 @@
     <table class="table table-dark">
 
         <tr class="table-active">
-
+            <th>Libellé compétence chapeau</th>
             <th>Libellé</th>
             <th>Intitulé</th>
             <th></th>
@@ -25,6 +25,7 @@
         ?>
             <tr>
                 <input class='txt' type='hidden' name='txtNum' value="<?php echo $uneSousCompetence["idSousCompetence"]; ?>">
+                <td><?php echo $uneCompetenceId["libelleCompetence"]; ?></td>
                 <td><?php echo $uneSousCompetence["libelleSousCompetence"]; ?></td>
                 <td><?php echo $uneSousCompetence["intituleSousCompetence"]; ?></td>
                 <td><a href="index.php?action=sousCompetence&idSuppr=<?php echo $uneSousCompetence['idSousCompetence']; ?>&id=<?php echo $uneSousCompetence["idCompetence"]; ?>">Supprimer</td>

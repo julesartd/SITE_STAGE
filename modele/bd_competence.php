@@ -75,6 +75,26 @@ function getCompetenceChapeauByBac($id){
     return $resultat;
 }
 
+
+function getCompetenceChapeauById($id){
+
+   
+    try {
+        $connex = connexionPDO();
+        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idCompetence =:id");
+        $rec->bindValue("id", $id);
+        $rec->execute();
+
+
+        $resultat=$rec->fetch(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+
 function getSousCompetenceById($id){
 
    

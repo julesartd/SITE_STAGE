@@ -7,7 +7,7 @@
     $maxSousCompetence = $max['num'];
 
 
-
+    $uneCompetenceId = getCompetenceChapeauById($_GET['id']);
     $listeSousCompetence= getSousCompetenceById($_GET['id']);
 
 
