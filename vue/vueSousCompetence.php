@@ -1,4 +1,4 @@
-<form method="POST" class="lb mb-3" action ="index.php?action=sousCompetence">
+<form method="POST" class="lb mb-3" action ="">
     <h1 id="lstA">Créer une sous-compétence</h1>
     </br>
 
@@ -18,7 +18,7 @@
     <table class="table table-dark">
 
         <tr class="table-active">
-
+            <th>Libellé compétence chapeau</th>
             <th>Libellé</th>
             <th>Intitulé</th>
            
@@ -28,6 +28,7 @@
         ?>
             <tr>
                 <input class='txt' type='hidden' name='txtNum' value="<?php echo $uneSousCompetence["idSousCompetence"]; ?>">
+                <td><?php echo $uneCompetenceId["libelleCompetence"]; ?></td>
                 <td><?php echo $uneSousCompetence["libelleSousCompetence"]; ?></td>
                 <td><?php echo $uneSousCompetence["intituleSousCompetence"]; ?></td>
     

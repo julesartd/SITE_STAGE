@@ -18,11 +18,9 @@
             ?>
                 <tr>
                     <td><?php echo $Bac["nomBac"]; ?></td>
-                    <td><a href="index.php?action=bac&idSuppr=<?php echo $Bac['idBac']; ?>">Supprimer</td>
-<<<<<<< HEAD
-=======
+                    <td><a href="index.php?action=bac&idSuppr=<?php echo $Bac['idBac']; ?>" 
+                    onclick="confirmerSuppression()">Supprimer</td>
                     <td><a href="index.php?action=competence&id=<?php echo $Bac['idBac']; ?>">Voir les compétences</td>
->>>>>>> a6302b0f55a9005c14715e65f9f2be2ed2c7dff8
                 <?php
             }
                 ?>
@@ -31,3 +29,9 @@
     </div>
     </br>
 </form>
+
+<script language="Javascript">
+function confirmerSuppression(){
+  return window.confirm("Voulez vous supprimer ce bac ? Cela supprimera toutes les compétences reliés à ce bac" );
+}
+</script>
