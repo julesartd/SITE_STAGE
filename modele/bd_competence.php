@@ -99,7 +99,7 @@ function getMaxCompetenceId($id){
     try {
 
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT MAX(idSousCompetence) as num FROM sous_competence where idCompetence = :id");
+        $req = $connex->prepare("SELECT MAX(libelleSousCompetence) as num FROM sous_competence where idCompetence = :id");
         $req->bindValue("id", $id);
         $req->execute();
 
@@ -112,3 +112,16 @@ function getMaxCompetenceId($id){
     return $resultat;
 }
 
+function supprSousCompetence($id){
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("DELETE FROM sous_competence WHERE idSousCompetence=:id");
+        $req->bindValue(':id', $id);
+        $req->execute();
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+
+}

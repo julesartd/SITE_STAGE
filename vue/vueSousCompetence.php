@@ -1,4 +1,4 @@
-<form method="POST" class="lb mb-3" action ="index.php?action=sousCompetence">
+<form method="POST" class="lb mb-3" action ="">
     <h1 id="lstA">Créer une sous-compétence</h1>
     </br>
 
@@ -11,9 +11,6 @@
     <input type="submit" value="AJOUTER" name="btnAjoutSousCompetence">
     <input type="submit" value="ANNULER" name="btnCancel">
 
-</form>
-
-
 
     <table class="table table-dark">
 
@@ -21,7 +18,7 @@
 
             <th>Libellé</th>
             <th>Intitulé</th>
-           
+            <th></th>
         </tr>
         <?php
         foreach ($listeSousCompetence as $uneSousCompetence) {
@@ -30,7 +27,7 @@
                 <input class='txt' type='hidden' name='txtNum' value="<?php echo $uneSousCompetence["idSousCompetence"]; ?>">
                 <td><?php echo $uneSousCompetence["libelleSousCompetence"]; ?></td>
                 <td><?php echo $uneSousCompetence["intituleSousCompetence"]; ?></td>
-    
+                <td><a href="index.php?action=sousCompetence&idSuppr=<?php echo $uneSousCompetence['idSousCompetence']; ?>&id=<?php echo $uneSousCompetence["idCompetence"]; ?>">Supprimer</td>
 
 
             </tr>
@@ -41,3 +38,4 @@
     </table>
 
 
+    </form>

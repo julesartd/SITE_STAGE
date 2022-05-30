@@ -16,12 +16,13 @@
         if (isset($_POST['txtIntituleSousCompetence'])) {
            
             insertSousCompetence($maxSousCompetence+1 ,$_POST['txtIntituleSousCompetence'], $_GET['id']);
-            echo "Ajout effectué";
         }
       
     }
     
-
+    if (isset($_GET['idSuppr'])) {
+        supprSousCompetence($_GET['idSuppr']);
+    }
 
    
   

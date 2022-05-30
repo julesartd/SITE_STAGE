@@ -31,7 +31,7 @@
                 <td><?php echo $uneCompetence["intituleCompetence"];?></td>
                 <td><a name="voir" href="index.php?action=sousCompetence&id=<?php echo $uneCompetence['idCompetence']; ?>">Voir les sous-compétences</td>
 
-        
+
         </tr>
     <?php
         }
