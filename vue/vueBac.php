@@ -7,22 +7,23 @@
     </br>
     </br>
     <h2>Voici la liste des Bacs déjà enregistrés</h2>
-    <table class="table table-bordered">
-        <tr>
-            <th>nom Bac</th>
-            <th>Supprimer le Bac</th>
-        </tr>
-        <?php
-        foreach ($tableauBac as $Bac) {
-        ?>
+    <div id=tableau>
+        <table class="table table-bordered">
             <tr>
-                <td><?php echo $Bac["NOMDUBAC"]; ?></td>
-                <td><a href="index.php?action=bac&idSuppr=<?php echo $Bac['IDBAC']; ?>">Supprimer</td>
+                <th>nom Bac</th>
+                <th>Supprimer le Bac</th>
+            </tr>
             <?php
-        }
+            foreach ($tableauBac as $Bac) {
             ?>
+                <tr>
+                    <td><?php echo $Bac["NOMDUBAC"]; ?></td>
+                    <td><a href="index.php?action=bac&idSuppr=<?php echo $Bac['IDBAC']; ?>">Supprimer</td>
+                <?php
+            }
+                ?>
 
-    </table>
-
+        </table>
+    </div>
     </br>
 </form>
