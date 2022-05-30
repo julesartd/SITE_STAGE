@@ -1,29 +1,43 @@
-<form  method="POST" class="lb mb-3">
-        <h1 id="lstA">Créer une sous-compétence</h1>
-        </br>
-       
-        <input required type="text" name='txtLibelleSousCompetence' placeholder='Libellé de la sous-compétence'>
-
-        <input required type="text" name='txtIntituleSousCompetence' placeholder='Intitulé de la sous-compétence'>
+<form method="POST" class="lb mb-3" action ="index.php?action=sousCompetence">
+    <h1 id="lstA">Créer une sous-compétence</h1>
+    </br>
 
 
-        <select name="txtCompetence">
-            <option selected>Sélectionnez une compétence chapeau</option>
-            <?php
+    <input required type="text" name='txtIntituleSousCompetence' placeholder='Intitulé de la sous-compétence'>
 
-            foreach ($listeCompetence as $uneCompetence) {
 
-            ?>
-                <option value=<?php echo $uneCompetence['idCompetence']; ?>><?php echo $uneCompetence['libelleCompetence'] . $uneCompetence['intituleCompetence'] ; ?></option>
-            <?php
-            }
-            ?>
-        </select>
 
-        </br>
-        <input type="submit" value="AJOUTER"  name="btnAjoutSousCompetence">
-        <input type="submit" value="ANNULER"  name="btnCancel">
+    </br>
+    <input type="submit" value="AJOUTER" name="btnAjoutSousCompetence">
+    <input type="submit" value="ANNULER" name="btnCancel">
 
-      
-     
-    </form>
+</form>
+
+
+
+    <table class="table table-dark">
+
+        <tr class="table-active">
+
+            <th>Libellé</th>
+            <th>Intitulé</th>
+           
+        </tr>
+        <?php
+        foreach ($listeSousCompetence as $uneSousCompetence) {
+        ?>
+            <tr>
+                <input class='txt' type='hidden' name='txtNum' value="<?php echo $uneSousCompetence["idSousCompetence"]; ?>">
+                <td><?php echo $uneSousCompetence["libelleSousCompetence"]; ?></td>
+                <td><?php echo $uneSousCompetence["intituleSousCompetence"]; ?></td>
+    
+
+
+            </tr>
+        <?php
+        }
+
+        ?>
+    </table>
+
+

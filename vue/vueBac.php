@@ -19,6 +19,10 @@
                 <tr>
                     <td><?php echo $Bac["nomBac"]; ?></td>
                     <td><a href="index.php?action=bac&idSuppr=<?php echo $Bac['idBac']; ?>">Supprimer</td>
+<<<<<<< HEAD
+=======
+                    <td><a href="index.php?action=competence&id=<?php echo $Bac['idBac']; ?>">Voir les compétences</td>
+>>>>>>> a6302b0f55a9005c14715e65f9f2be2ed2c7dff8
                 <?php
             }
                 ?>

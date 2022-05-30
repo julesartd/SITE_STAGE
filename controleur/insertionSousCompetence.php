@@ -2,19 +2,25 @@
     <?php
 
     include_once "modele/bd_competence.php";
-    include_once "modele/bd_bloc.php";
-    
+
+    $max = getMaxCompetenceId($_GET['id']);
+    $maxSousCompetence = $max['num'];
+
+
+
+    $listeSousCompetence= getSousCompetenceById($_GET['id']);
+
+
 
     if (isset($_POST['btnAjoutSousCompetence'])) {
-        if (isset($_POST['txtLibelle'],$_POST['txtIntitule'],$_POST['txtCompetence'])) {
+        if (isset($_POST['txtIntituleSousCompetence'])) {
            
-            insertSousCompetence($_POST['txtLibelle'],$_POST['txtIntitule'],$_POST['txtCompetence']);
+            insertSousCompetence($maxSousCompetence+1 ,$_POST['txtIntituleSousCompetence'], $_GET['id']);
+            echo "Ajout effectué";
         }
-        else {
-            echo "Erreur";
-        }
+      
     }
-    $listeCompetence = getCompetenceChapeau();
+    
 
 
    

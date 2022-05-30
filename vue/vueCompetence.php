@@ -1,4 +1,4 @@
-<form method="POST" class="lb mb-3">
+<form method="POST" class="lb mb-3" action ="">
     <h1 id="lstA">Créer une compétence</h1>
     </br>
 
@@ -7,21 +7,9 @@
     <input required type="text" name='txtIntitule' placeholder='Intitulé de la compétence'>
 
 
-    <select name="txtBac">
-        <option selected>Sélectionnez un bac</option>
-        <?php
-
-        foreach ($listeBac as $unBac) {
-
-        ?>
-            <option value=<?php echo $unBac['idBac']; ?>><?php echo $unBac['nomBac']; ?></option>
-        <?php
-        }
-        ?>
-    </select>
 
     </br>
-    <input type="submit" value="AJOUTER" name="btnAjout">
+    <input type="submit" value="AJOUTER" name="btnAjoutCompetence">
     <input type="submit" value="ANNULER" name="btnCancel">
 
     <br>
@@ -41,7 +29,7 @@
                 <input class='txt' type='hidden' name='txtNum' value="<?php echo $uneCompetence["idCompetence"]; ?>">
                 <td><?php echo $uneCompetence["libelleCompetence"];?></td>
                 <td><?php echo $uneCompetence["intituleCompetence"];?></td>
-                <td><input type="submit" name="btnInfo" value="Voir les compétences" class="record"></td>
+                <td><a name="voir" href="index.php?action=sousCompetence&id=<?php echo $uneCompetence['idCompetence']; ?>">Voir les sous-compétences</td>
 
         
         </tr>
