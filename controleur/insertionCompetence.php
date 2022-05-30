@@ -6,19 +6,22 @@
     
 
     if (isset($_POST['btnAjout'])) {
-        if (isset($_POST['txtIDBLOC'],$_POST['txtNomCompetence'])) {
-           
-            
-            
-            //insertCompetence($_POST['txtIDBLOC'],$_POST['txtNomCompetence']);
-        } 
+        if (isset($_POST['txtLibelle'],$_POST['txtIntitule'],$_POST['txtBac'])) {
+       
+            insertCompetence($_POST['txtLibelle'],$_POST['txtIntitule'],$_POST['txtBac']);
+        }
+        else {
+            echo "Erreur";
+        }
     }
-    $listeBloc = getBloc();
-
+    $listeBac = getBac();
+    $listeCompetence = getCompetenceChapeau();
 
    
   
     include "vue/vueCompetence.php";
+
+
     
 
     ?>
