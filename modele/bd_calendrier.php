@@ -12,8 +12,8 @@ function insertEvenement($event,$classe,$semaine){
         $req->bindValue('idClasse', $classe);
         $req->bindValue('idSemaine', $semaine);
         $req->execute();
-        ECHO "test";
-        
+
+    
     }catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();

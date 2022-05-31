@@ -8,12 +8,20 @@
     $listeEvent = getEvent();   
 
     if (isset($_POST['btnAjoutEvent'])) {
+        $semaine = substr($_POST['numero'],-2);
   
         if (isset($_POST['numero'],$_POST['evenement'],$_POST['classe'])) {
-           
-            print_r($_POST['numero']);
-            //insertEvenement($_POST['evenement'],$_POST['classe'],$_POST['numero']);
+         
+            if ($semaine <10){
+                print_r(substr($semaine,-1));
+                insertEvenement($_POST['evenement'],$_POST['classe'], substr($semaine,-1));
             
+            }else {
+                print_r($semaine);
+                insertEvenement($_POST['evenement'],$_POST['classe'], $semaine);
+            
+            }
+          
         
         }
       
