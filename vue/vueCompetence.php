@@ -32,7 +32,7 @@
             <td><?php echo $uneCompetence["libelleCompetence"]; ?></td>
             <td><?php echo $uneCompetence["intituleCompetence"]; ?></td>
             <td><a href="index.php?action=sousCompetence&id=<?php echo $uneCompetence['idCompetence']; ?>">Voir les sous-compétences</td>
-            <td><a href="index.php?action=competence&idSuppr=<?php echo $uneCompetence['idCompetence']; ?>&id=<?php echo $uneCompetence["idDiplome"]; ?>">Supprimer</td>
+            <td><a href="index.php?action=competence&idSuppr=<?php echo $uneCompetence['idCompetence']; ?>&id=<?php echo $uneCompetence["idDiplome"]; ?> "onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet compétence ?Cette action supprimera les sous compétences affecter à celle-ci !')">Supprimer</td>
 
         </tr>
     <?php

@@ -18,7 +18,7 @@
             ?>
                 <tr>
                     <td><?php echo $diplome["nomDiplome"]; ?></td>
-                    <td><a href="index.php?action=diplome&idSuppr=<?php echo $diplome['idDiplome']; ?>">Supprimer</td>
+                    <td><a href="index.php?action=diplome&idSuppr=<?php echo $diplome['idDiplome']; ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce diplôme ?Cette action supprimera les compétences et sous compétences affecter à celui-ci !')">Supprimer</td>
                     <td><a href="index.php?action=competence&id=<?php echo $diplome['idDiplome']; ?>">Voir les compétences</td>
                 <?php
             }

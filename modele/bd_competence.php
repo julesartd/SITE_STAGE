@@ -160,6 +160,20 @@ function supprCompetence($id){
 
 }
 
+function supprSousCompetenceByCompetence($id){
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("DELETE FROM Sous_Competence WHERE idCompetence=:id");
+        $req->bindValue(':id', $id);
+        $req->execute();
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+
+}
+
 function supprCompetenceByDiplome($id){
 
     try {
@@ -173,3 +187,4 @@ function supprCompetenceByDiplome($id){
     }
 
 }
+
