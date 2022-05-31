@@ -48,7 +48,7 @@ function getClasse(){
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM classe");
+        $req = $cnx->prepare("SELECT *, nomBac FROM classe inner join bac on classe.idBac=bac.idBac");
         $req->execute();
 
         $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
@@ -59,18 +59,4 @@ function getClasse(){
     return $resultat;
 }
 
-function getBacByClasse($id) { 
-    $resultat = array();
-    try {
-        $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM bac INNER JOIN classe on bac.idBac=classe.idBac WHERE classe.idClasse= :id");
-        $req->bindValue("id",$id);
-        $req->execute();
 
-        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
-    }catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
-        die();
-    }
-    return $resultat;
-}

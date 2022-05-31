@@ -11,7 +11,7 @@
 
         ?>
 
-            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'] ." ".  $unBac['nomBac']  ?></option>
+            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'] ." ".$uneClasse['nomBac'] ?></option>
         <?php
         }
 
