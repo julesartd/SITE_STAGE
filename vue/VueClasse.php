@@ -9,16 +9,16 @@
     <option value = 2nd> 2nd</option>
     </select>
 
-    <select  aria-label="Default select example" name="bac">
+    <select  aria-label="Default select example" name="diplome">
 
-        <option selected>Sélectionnez un Bac</option>
+        <option selected>Sélectionnez un diplome</option>
 
         <?php
-        foreach ($listeBac as $unBac) {
+        foreach ($listeDiplome as $unDiplome) {
 
         ?>
 
-            <option value=<?php echo $unBac['idBac']; ?>><?php echo $unBac['nomBac']; ?></option>
+            <option value=<?php echo $unDiplome['idDiplome']; ?>><?php echo $unDiplome['nomDiplome']; ?></option>
         <?php
         }
 
