@@ -14,8 +14,15 @@
           
        
             insertCompetence($_POST['txtLibelle'],$_POST['txtIntitule'], $idBac);
+            header("Location:index.php?action=competence&id=$idBac");
         }
       
+    }
+    if (isset($_GET['idSuppr'])) {
+     
+        supprCompetence($_GET['idSuppr']);
+        header("Location:index.php?action=competence&id=$idBac");
+        
     }
 
 

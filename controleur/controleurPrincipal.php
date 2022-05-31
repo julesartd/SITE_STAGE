@@ -12,6 +12,7 @@ function controleurPrincipal($action){
     $lesActions["competence"] = "insertionCompetence.php";
     $lesActions["bac"] = "insertionBac.php";
     $lesActions["sousCompetence"] = "insertionSousCompetence.php";
+    $lesActions["event"] = "insertionEvent.php";
     
  
  

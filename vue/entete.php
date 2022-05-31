@@ -5,6 +5,7 @@
             <li class="menu__group"><a href="./?action=calendrier" class="menu__link r-link text-underlined">Calendrier</a></li>
         
             <li class="menu__group"><a href="./?action=bac" class="menu__link r-link text-underlined">Bac</a></li> 
+            <li class="menu__group"><a href="./?action=event" class="menu__link r-link text-underlined">Event</a></li> 
 
         </ul>
     </nav>

@@ -11,6 +11,7 @@
 
     if(isset($_GET["idSuppr"])){
         $idBac = $_GET["idSuppr"];
+        supprCompetenceByBac($idBac);
         supprBac($idBac);
     }
 

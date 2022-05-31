@@ -150,7 +150,21 @@ function supprCompetence($id){
 
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("DELETE FROM sous_competence WHERE idSousCompetence=:id");
+        $req = $cnx->prepare("DELETE FROM competence_chapeau WHERE idCompetence=:id");
+        $req->bindValue(':id', $id);
+        $req->execute();
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+
+}
+
+function supprCompetenceByBac($id){
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("DELETE FROM competence_chapeau WHERE idBac=:id");
         $req->bindValue(':id', $id);
         $req->execute();
     }catch (PDOException $e) {

@@ -10,7 +10,7 @@
     </br>
     <input type="submit" value="AJOUTER" name="btnAjoutSousCompetence">
     <input type="submit" value="ANNULER" name="btnCancel">
-</form>
+
 
     <table class="table table-dark">
 
@@ -38,4 +38,4 @@
         ?>
     </table>
 
-
+    </form>

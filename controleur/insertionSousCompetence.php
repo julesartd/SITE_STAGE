@@ -5,25 +5,29 @@
 
     $max = getMaxCompetenceId($_GET['id']);
     $maxSousCompetence = $max['num'];
+    $idComp = $_GET['id'];
 
+    $uneCompetenceId = getCompetenceChapeauById($idComp);
+    $listeSousCompetence= getSousCompetenceById($idComp);
 
-    $uneCompetenceId = getCompetenceChapeauById($_GET['id']);
-    $listeSousCompetence= getSousCompetenceById($_GET['id']);
-
+  
 
 
     if (isset($_POST['btnAjoutSousCompetence'])&& isset($_GET['id'])) {
         if (isset($_POST['txtIntituleSousCompetence'])) {
            
-            insertSousCompetence($maxSousCompetence+1 ,$_POST['txtIntituleSousCompetence'], $_GET['id']);
+            insertSousCompetence($maxSousCompetence+1 ,$_POST['txtIntituleSousCompetence'], $idComp);
+            header("Location:index.php?action=sousCompetence&id=$idComp");
         
         }
       
     }
     
     if (isset($_GET['idSuppr'])) {
+        
         supprSousCompetence($_GET['idSuppr']);
-       
+        header("Location:index.php?action=sousCompetence&id=$idComp");
+        
     }
 
    

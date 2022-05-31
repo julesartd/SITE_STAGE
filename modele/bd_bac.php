@@ -6,7 +6,7 @@ function getBac() {
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM bac");
+        $req = $cnx->prepare("SELECT * FROM bac INNER JOIN classe on bac.idBac=classe.idBac");
         $req->execute();
 
         $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
@@ -41,4 +41,36 @@ function supprBac($idBac) {
         print "Erreur !: " . $e->getMessage();
         die();
     }
+}
+
+
+function getClasse(){
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM classe");
+        $req->execute();
+
+        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getBacByClasse($id) { 
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM bac INNER JOIN classe on bac.idBac=classe.idBac WHERE classe.idClasse= :id");
+        $req->bindValue("id",$id);
+        $req->execute();
+
+        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
 }
