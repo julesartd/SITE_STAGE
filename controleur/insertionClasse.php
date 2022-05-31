@@ -2,13 +2,13 @@
     <?php
 
     include_once "modele/bd_competence.php";
-    include_once "modele/bd_bac.php";
+    include_once "modele/bd_diplome.php";
 
 
-    $listeBac = getBac();
+    $listeDiplome = getDiplome();
 
     if(isset($_POST['btnAjoutClasse'])){
-        insertClasse($_POST['txtNiveaux'], $_POST['bac']);
+        insertClasse($_POST['txtNiveaux'], $_POST['diplome']);
     }
 
     include "vue/vueClasse.php";

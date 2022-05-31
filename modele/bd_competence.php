@@ -2,14 +2,14 @@
 
 include_once "bd_connexion.php";
 
-function insertCompetence($libelle, $intitule, $idBac){
+function insertCompetence($libelle, $intitule, $idDiplome){
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO competence_chapeau VALUES(null, :libelle, :intitule, :idBac)");
+        $req = $connex->prepare("INSERT INTO competence_chapeau VALUES(null, :libelle, :intitule, :idDiplome)");
 
         $req->bindValue('libelle', $libelle);
         $req->bindValue('intitule', $intitule);
-        $req->bindValue('idBac', $idBac);
+        $req->bindValue('idDiplome', $idDiplome);
         $req->execute();
         
     }catch (PDOException $e) {
@@ -57,12 +57,12 @@ function getCompetenceChapeau(){
 
 
 
-function getCompetenceChapeauByBac($id){
+function getCompetenceChapeauByDiplome($id){
 
    
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idBac =:id");
+        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idDiplome =:id");
         $rec->bindValue("id", $id);
         $rec->execute();
 
@@ -160,11 +160,11 @@ function supprCompetence($id){
 
 }
 
-function supprCompetenceByBac($id){
+function supprCompetenceByDiplome($id){
 
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("DELETE FROM competence_chapeau WHERE idBac=:id");
+        $req = $cnx->prepare("DELETE FROM competence_chapeau WHERE idDiplome=:id");
         $req->bindValue(':id', $id);
         $req->execute();
     }catch (PDOException $e) {

@@ -2,11 +2,11 @@
 
 include_once "bd_connexion.php";
 
-function getBac() { 
+function getDiplomeWithClasse() { 
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM bac INNER JOIN classe on bac.idBac=classe.idBac");
+        $req = $cnx->prepare("SELECT * FROM diplome INNER JOIN classe on diplome.idDiplome=classe.idDiplome");
         $req->execute();
 
         $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
@@ -17,11 +17,27 @@ function getBac() {
     return $resultat;
 }
 
-function insertBac($nomBac) {
+
+function getDiplome() { 
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM diplome");
+        $req->execute();
+
+        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function insertDiplome($nomDiplome) {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO bac VALUES (null, :nomBac)");
-        $req->bindValue('nomBac', $nomBac);
+        $req = $connex->prepare("INSERT INTO diplome VALUES (null, :nomDiplome)");
+        $req->bindValue('nomDiplome', $nomDiplome);
         $req->execute();
         
     }catch (PDOException $e) {
@@ -31,11 +47,11 @@ function insertBac($nomBac) {
     }
 }
 
-function supprBac($idBac) {
+function supprDiplome($idDiplome) {
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("DELETE FROM bac WHERE IDBAC=:idBac");
-        $req->bindValue(':idBac', $idBac);
+        $req = $cnx->prepare("DELETE FROM diplome WHERE idDiplome=:idDiplome");
+        $req->bindValue(':idDiplome', $idDiplome);
         $req->execute();
     }catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
@@ -48,7 +64,7 @@ function getClasse(){
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT *, nomBac FROM classe inner join bac on classe.idBac=bac.idBac");
+        $req = $cnx->prepare("SELECT *, nomDiplome FROM classe inner join diplome on classe.idDiplome=diplome.idDiplome");
         $req->execute();
 
         $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
@@ -59,12 +75,12 @@ function getClasse(){
     return $resultat;
 }
 
-function insertClasse($nomClasse, $idBac){
+function insertClasse($nomClasse, $idDiplome){
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO classe VALUES (null, :nomClasse, :idBac)");
+        $req = $connex->prepare("INSERT INTO classe VALUES (null, :nomClasse, :idDiplome)");
         $req->bindValue('nomClasse', $nomClasse);
-        $req->bindValue('idBac', $idBac);
+        $req->bindValue('idDiplome', $idDiplome);
         $req->execute();
         
     }catch (PDOException $e) {

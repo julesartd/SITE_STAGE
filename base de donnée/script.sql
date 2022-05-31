@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 30 mai 2022 à 10:28
+-- Généré le : mar. 31 mai 2022 à 09:31
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -52,24 +52,25 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Structure de la table `bac`
+-- Structure de la table `affecter`
 --
 
-DROP TABLE IF EXISTS `bac`;
-CREATE TABLE IF NOT EXISTS `bac` (
-  `idBac` int(11) NOT NULL AUTO_INCREMENT,
-  `nomBac` varchar(500) NOT NULL,
-  PRIMARY KEY (`idBac`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+DROP TABLE IF EXISTS `affecter`;
+CREATE TABLE IF NOT EXISTS `affecter` (
+  `idEvent` int(11) NOT NULL,
+  `idClasse` int(11) NOT NULL,
+  `idWeek` int(11) NOT NULL,
+  PRIMARY KEY (`idEvent`,`idClasse`,`idWeek`),
+  KEY `fk_classe` (`idClasse`),
+  KEY `fk_week` (`idWeek`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `bac`
+-- Déchargement des données de la table `affecter`
 --
 
-INSERT INTO `bac` (`idBac`, `nomBac`) VALUES
-(1, 'BAC TCI'),
-(3, 'BAC TRMP'),
-(4, 'BAC MCV');
+INSERT INTO `affecter` (`idEvent`, `idClasse`, `idWeek`) VALUES
+(2, 2, 24);
 
 -- --------------------------------------------------------
 
@@ -81,17 +82,19 @@ DROP TABLE IF EXISTS `classe`;
 CREATE TABLE IF NOT EXISTS `classe` (
   `idClasse` int(11) NOT NULL AUTO_INCREMENT,
   `niveauClasse` varchar(500) NOT NULL,
-  `idBac` int(11) NOT NULL,
+  `idDiplome` int(11) NOT NULL,
+  `nomClasse` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`idClasse`),
-  KEY `FKBac` (`idBac`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  KEY `FKBac` (`idDiplome`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `classe`
 --
 
-INSERT INTO `classe` (`idClasse`, `niveauClasse`, `idBac`) VALUES
-(1, 'seconde', 1);
+INSERT INTO `classe` (`idClasse`, `niveauClasse`, `idDiplome`, `nomClasse`) VALUES
+(2, '1ère', 3, NULL),
+(3, 'Seconde', 3, NULL);
 
 -- --------------------------------------------------------
 
@@ -104,21 +107,66 @@ CREATE TABLE IF NOT EXISTS `competence_chapeau` (
   `idCompetence` int(11) NOT NULL AUTO_INCREMENT,
   `libelleCompetence` varchar(500) NOT NULL,
   `intituleCompetence` varchar(5000) NOT NULL,
-  `idBac` int(11) NOT NULL,
+  `idDiplome` int(11) NOT NULL,
   PRIMARY KEY (`idCompetence`),
-  KEY `FKBac1` (`idBac`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+  KEY `FKBac1` (`idDiplome`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `competence_chapeau`
 --
 
-INSERT INTO `competence_chapeau` (`idCompetence`, `libelleCompetence`, `intituleCompetence`, `idBac`) VALUES
-(1, 'C1', 'Rechercher les informations', 3),
-(2, 'C4', 'Interpreter et verifier les données de définition d\'un outillage', 3),
-(3, 'C5', 'Preparer la réalisation d\'un outillage', 3),
-(5, 'C1', 'Suivre les ventes', 4),
-(6, 'C2', 'FIDELISER LA CLIENTELE ET DEVELOPPER LA RELATION CLIENT', 4);
+INSERT INTO `competence_chapeau` (`idCompetence`, `libelleCompetence`, `intituleCompetence`, `idDiplome`) VALUES
+(10, 'C1', 'Bonjour', 3),
+(11, 'C2', 'Test', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `diplome`
+--
+
+DROP TABLE IF EXISTS `diplome`;
+CREATE TABLE IF NOT EXISTS `diplome` (
+  `idDiplome` int(11) NOT NULL AUTO_INCREMENT,
+  `nomDiplome` varchar(500) NOT NULL,
+  PRIMARY KEY (`idDiplome`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `diplome`
+--
+
+INSERT INTO `diplome` (`idDiplome`, `nomDiplome`) VALUES
+(3, 'BAC TRMP'),
+(7, 'DDQDQD'),
+(8, 'DQDQD'),
+(9, 'DQ'),
+(10, 'DQ'),
+(11, 'FQDQDQ'),
+(12, 'BYS SIO');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `evenement`
+--
+
+DROP TABLE IF EXISTS `evenement`;
+CREATE TABLE IF NOT EXISTS `evenement` (
+  `idEvent` int(11) NOT NULL AUTO_INCREMENT,
+  `nomEvent` varchar(500) NOT NULL,
+  PRIMARY KEY (`idEvent`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `evenement`
+--
+
+INSERT INTO `evenement` (`idEvent`, `nomEvent`) VALUES
+(1, 'Vacances'),
+(2, 'Examen'),
+(3, 'Stage');
 
 -- --------------------------------------------------------
 
@@ -162,17 +210,15 @@ CREATE TABLE IF NOT EXISTS `sous_competence` (
   `idCompetence` int(11) NOT NULL,
   PRIMARY KEY (`idSousCompetence`),
   KEY `FKCOMPETENCE` (`idCompetence`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `sous_competence`
 --
 
 INSERT INTO `sous_competence` (`idSousCompetence`, `libelleSousCompetence`, `intituleSousCompetence`, `idCompetence`) VALUES
-(1, 1, 'Mettre en œuvre une démarche de recherche', 1),
-(2, 2, 'Classer hierarchiser les informations', 1),
-(3, 1, 'Localiser et identifier les sous ensembles', 2),
-(4, 1, 'Etablir une chronologie des opération de réalisation', 3);
+(24, 1, 'Salut', 10),
+(25, 2, 'Test', 10);
 
 -- --------------------------------------------------------
 
@@ -196,8 +242,9 @@ CREATE TABLE IF NOT EXISTS `time_dimension` (
   `event` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `td_ymd_idx` (`year`,`month`,`day`),
-  UNIQUE KEY `td_dbdate_idx` (`db_date`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  UNIQUE KEY `td_dbdate_idx` (`db_date`),
+  KEY `week` (`week`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `time_dimension`
@@ -1305,16 +1352,24 @@ INSERT INTO `time_dimension` (`id`, `db_date`, `year`, `month`, `day`, `quarter`
 --
 
 --
+-- Contraintes pour la table `affecter`
+--
+ALTER TABLE `affecter`
+  ADD CONSTRAINT `fk_classe` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
+  ADD CONSTRAINT `fk_event` FOREIGN KEY (`idEvent`) REFERENCES `evenement` (`idEvent`),
+  ADD CONSTRAINT `fk_week` FOREIGN KEY (`idWeek`) REFERENCES `time_dimension` (`week`);
+
+--
 -- Contraintes pour la table `classe`
 --
 ALTER TABLE `classe`
-  ADD CONSTRAINT `FKBac` FOREIGN KEY (`idBac`) REFERENCES `bac` (`idBac`);
+  ADD CONSTRAINT `FK_Diplome` FOREIGN KEY (`idDiplome`) REFERENCES `diplome` (`idDiplome`);
 
 --
 -- Contraintes pour la table `competence_chapeau`
 --
 ALTER TABLE `competence_chapeau`
-  ADD CONSTRAINT `FKBac1` FOREIGN KEY (`idBac`) REFERENCES `bac` (`idBac`);
+  ADD CONSTRAINT `FKDiplome1` FOREIGN KEY (`idDiplome`) REFERENCES `diplome` (`idDiplome`);
 
 --
 -- Contraintes pour la table `sous_competence`

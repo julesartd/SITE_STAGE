@@ -1,7 +1,7 @@
 <div>
     <?php
 
-    include_once "modele/bd_bac.php";
+    include_once "modele/bd_diplome.php";
 
     $listeClasse = getClasse();   
 
