@@ -6,9 +6,10 @@
 
 
     $listeBac = getBac();
+    $listeClasse = getClasse();
 
     if(isset($_POST['btnAjoutClasse'])){
-        insertClasse($_POST['txtNiveaux'], $_POST['bac']);
+        insertClasse($_POST['Niveaux'], $_POST['bac'], $_POST['txtNom']);
     }
 
     include "vue/vueClasse.php";

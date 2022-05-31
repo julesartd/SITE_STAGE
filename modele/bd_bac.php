@@ -59,12 +59,13 @@ function getClasse(){
     return $resultat;
 }
 
-function insertClasse($nomClasse, $idBac){
+function insertClasse($NiveauClasse, $idBac, $nomClasse){
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO classe VALUES (null, :nomClasse, :idBac)");
-        $req->bindValue('nomClasse', $nomClasse);
+        $req = $connex->prepare("INSERT INTO classe VALUES (null, :nomClasse, :idBac, :nomClasse)");
+        $req->bindValue('nomClasse', $NiveauClasse);
         $req->bindValue('idBac', $idBac);
+        $req->bindValue('nomClasse', $nomClasse);
         $req->execute();
         
     }catch (PDOException $e) {
