@@ -74,3 +74,18 @@ function getBacByClasse($id) {
     }
     return $resultat;
 }
+
+function insertClasse($nomClasse, $idBac){
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("INSERT INTO classe VALUES (null, :nomClasse, :idBac)");
+        $req->bindValue('nomClasse', $nomClasse);
+        $req->bindValue('idBac', $idBac);
+        $req->execute();
+        
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    
+    }
+}

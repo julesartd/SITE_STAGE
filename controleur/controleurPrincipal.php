@@ -13,7 +13,7 @@ function controleurPrincipal($action){
     $lesActions["bac"] = "insertionBac.php";
     $lesActions["sousCompetence"] = "insertionSousCompetence.php";
     $lesActions["event"] = "insertionEvent.php";
-    
+    $lesActions["classe"] = "insertionClasse.php";
  
  
     if (array_key_exists ( $action , $lesActions )){

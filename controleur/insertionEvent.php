@@ -1,7 +1,7 @@
 <div>
     <?php
 
-    include "modele/bd_bac.php";
+    include_once "modele/bd_bac.php";
 
     $unBac = getBacByClasse($_POST['classe']);
     $listeClasse = getClasse();
