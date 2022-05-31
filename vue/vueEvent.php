@@ -11,7 +11,7 @@
 
         ?>
 
-            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'] ." ".$uneClasse['nomDiplome'] ?></option>
+            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'] . " " . $uneClasse['nomDiplome'] ?></option>
         <?php
         }
 
@@ -20,6 +20,25 @@
     </select>
 
 
+    <select class="form-select" aria-label="Default select example" name="evenement">
+
+        <option selected>Sélectionnez un évènement</option>
+
+        <?php
+        foreach ($listeEvent as $unEvent) {
+
+        ?>
+
+            <option value=<?php echo $unEvent['idEvent']; ?>><?php echo $unEvent['nomEvent'];?></option>
+        <?php
+        }
+
+
+        ?>
+    </select>
+
+    
+    <input type="week" name="numero">
     <input type="submit" value="AJOUTER" name="btnAjoutEvent">
 
 
