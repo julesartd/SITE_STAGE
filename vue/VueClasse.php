@@ -2,11 +2,11 @@
     <h1 id="lstA">Créer une classe</h1>
     </br>
 
-    <select  aria-label="Default select example" name="Niveaux">
+    <select  aria-label="Default select example" name="NiveauxClasse">
     <option selected>Sélectionnez un niveau de classe</option>
-    <option value = terminal> terminal</option>
-    <option value = 1ère> 1ère</option>
-    <option value = 2nd> 2nd</option>
+    <option> terminal</option>
+    <option> 1ère</option>
+    <option> 2nd</option>
     </select>
 
     <select  aria-label="Default select example" name="diplome">
@@ -41,16 +41,16 @@
         <th>Niveau de classe</th>
         <th>Bac</th>
         <th>Nom de la classe</th>
-
+        <th></th>
     </tr>
     <?php
     foreach ($listeClasse as $uneClasse) {
     ?>
         <tr>
             <td><?php echo $uneClasse["niveauClasse"]; ?></td>
-            <td><?php echo $uneClasse["nomBac"]; ?></td>
+            <td><?php echo $uneClasse["nomDiplome"]; ?></td>
             <td><?php echo $uneClasse["nomClasse"]; ?></td>
-
+            <td><a href="index.php?action=classe&idSuppr=<?php echo $uneClasse['idClasse']; ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette classe ?')">Supprimer</td>
         </tr>
     <?php
     }

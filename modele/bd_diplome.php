@@ -78,8 +78,8 @@ function getClasse(){
 function insertClasse($NiveauClasse, $idDiplome, $nomClasse){
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO classe VALUES (null, :nomClasse, :idDiplome, :nomClasse)");
-        $req->bindValue('nomClasse', $NiveauClasse);
+        $req = $connex->prepare("INSERT INTO classe VALUES (null, :niveauClasse, :idDiplome, :nomClasse)");
+        $req->bindValue('niveauClasse', $NiveauClasse);
         $req->bindValue('idDiplome', $idDiplome);
         $req->bindValue('nomClasse', $nomClasse);
         $req->execute();
@@ -89,4 +89,17 @@ function insertClasse($NiveauClasse, $idDiplome, $nomClasse){
         die();
     
     }
+}
+
+function SupprClasse($id){
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("DELETE FROM classe WHERE idClasse=:idClasse");
+        $req->bindValue(':idClasse', $id);
+        $req->execute();
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+
 }

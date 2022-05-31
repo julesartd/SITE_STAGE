@@ -2,7 +2,7 @@
     <h1 id="lstA">Ajouter un évènement par semaine</h1>
 
 
-    <select class="form-select" aria-label="Default select example" name="classe">
+    <select  aria-label="Default select example" name="classe">
 
         <option selected>Sélectionnez une classe</option>
 
