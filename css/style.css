@@ -197,3 +197,6 @@ DEPENDENCES
     transition-duration: .2s;
   }
   
+.tableau{
+  table-layout: auto;
+}
