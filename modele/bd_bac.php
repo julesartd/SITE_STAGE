@@ -34,7 +34,7 @@ function insertBac($nomBac) {
 function supprBac($idBac) {
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("DELETE FROM bac WHERE IDBAC=:idBac");
+        $req = $cnx->prepare("DELETE FROM bac WHERE idBac=:idBac");
         $req->bindValue(':idBac', $idBac);
         $req->execute();
     }catch (PDOException $e) {
