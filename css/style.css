@@ -53,19 +53,6 @@ body {
     border-collapse: separate;
 }
 
-table.gestion {
-    margin: 0px auto;
-    table-layout: auto;
-    width: auto;
-    border-collapse: collapse;
-    border: 2px solid rgb(34, 0, 0);
-}
-
-table.gestion th,
-table.gestion td {
-    border: solid 3px rgb(0, 0, 0);
-}
-
 #entete {
    
     margin-bottom: 30px;
@@ -76,6 +63,21 @@ table.gestion td {
     text-align: center;
 
 }
+
+table{
+    table-layout: fixed;
+}
+
+#tableau{
+    padding-left: 300px;
+    padding-right: 300px;
+
+}
+
+#retour{
+  float: right;
+}
+
 /*
 =====
 DEPENDENCES
@@ -195,4 +197,6 @@ DEPENDENCES
     transition-duration: .2s;
   }
   
- 
+.tableau{
+  table-layout: auto;
+}

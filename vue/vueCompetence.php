@@ -1,30 +1,42 @@
-<form  method="POST" class="lb mb-3">
-        <h1 id="lstA">Créer une compétence</h1>
-        </br>
-       
-   
-      
-       
-        <input type="text" name='txtNomCompetence' placeholder='Nom de la compétence'>
+<form method="POST" class="lb mb-3" action="">
+    <h1 id="lstA">Créer une compétence</h1>
+    </br>
+
+    <input required type="text" name='txtLibelle' placeholder='Libellé de la compétence'>
+
+    <input required type="text" name='txtIntitule' placeholder='Intitulé de la compétence'>
 
 
-        <select name="txtIDBLOC">
-            <option selected>Sélectionnez un bloc</option>
-            <?php
 
-            foreach ($listeBloc as $unBloc) {
+    </br>
+    <input type="submit" value="AJOUTER" name="btnAjoutCompetence">
+    <input type="submit" value="ANNULER" name="btnCancel">
+</form>
 
-            ?>
-                <option value=<?php echo $unBloc['IDBLOC']; ?>><?php echo $unBloc['NOMDUBLOC']; ?></option>
-            <?php
-            }
-            ?>
-        </select>
+<br>
+<br>
+<table class="table table-dark">
 
-        </br>
-        <input type="submit" value="AJOUTER"  name="btnAjout">
-        <input type="submit" value="ANNULER"  name="btnCancel">
+    <tr class="table-active">
 
-      
-     
-    </form>
+        <th>Libellé</th>
+        <th>Intitulé</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <?php
+    foreach ($listeCompetence as $uneCompetence) {
+    ?>
+        <tr>
+            <input class='txt' type='hidden' name='txtNum' value="<?php echo $uneCompetence["idCompetence"]; ?>">
+            <td><?php echo $uneCompetence["libelleCompetence"]; ?></td>
+            <td><?php echo $uneCompetence["intituleCompetence"]; ?></td>
+            <td><a href="index.php?action=sousCompetence&id=<?php echo $uneCompetence['idCompetence']; ?>">Voir les sous-compétences</td>
+            <td><a href="index.php?action=competence&idSuppr=<?php echo $uneCompetence['idCompetence']; ?>&id=<?php echo $uneCompetence["idDiplome"]; ?> "onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet compétence ?Cette action supprimera les sous compétences affecter à celle-ci !')">Supprimer</td>
+
+        </tr>
+    <?php
+    }
+
+    ?>
+</table>
