@@ -5,8 +5,13 @@
     include_once "modele/bd_calendrier.php";
  
 
-
-    $listeClasse = getClasse();   
+    if($_SESSION["idDroitUtilisateur"] ==1){
+        $listeClasse = getClasse();   
+    }
+    if($_SESSION["idDroitUtilisateur"]== 2){
+        $listeClasse = getClasseByIdProf($_SESSION['idProfesseur']);   
+    }
+  
 
 
 
