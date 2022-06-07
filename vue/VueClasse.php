@@ -25,7 +25,6 @@
 
         ?>
     </select>
-    <input type="text" name='txtNom' placeholder='Nom de la classe'>
 
     </br>
     <input type="submit" value="AJOUTER" name="btnAjoutClasse">

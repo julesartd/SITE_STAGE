@@ -9,11 +9,16 @@ function login($mailU, $mdpU) {
 
     $util = getUtilisateurByMailU($mailU);
     $mdpBD = $util["mdpUtilisateur"];
+    $droitBD = $util["idDroitUtilisateur"];
+    $idProfBD = $util["idProfesseur"];
 
     if (trim($mdpBD) == trim($mdpU)) {
         // le mot de passe est celui de l'utilisateur dans la base de donnees
         $_SESSION["mailUtilisateur"] = $mailU;
         $_SESSION["mdpUtilisateur"] = $mdpBD;
+        $_SESSION["idDroitUtilisateur"] = $droitBD;
+        $_SESSION["idProfesseur"] = $idProfBD;
+
     }
 }
 
@@ -23,6 +28,8 @@ function logout() {
     }
     unset($_SESSION["mailUtilisateur"]);
     unset($_SESSION["mdpUtilisateur"]);
+    unset($_SESSION["idDroitUtilisateur"]);
+    unset($_SESSION["idProfesseur"]);
 }
 
 function getMailULoggedOn(){
