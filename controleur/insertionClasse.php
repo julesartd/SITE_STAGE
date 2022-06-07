@@ -4,10 +4,15 @@
     include_once "modele/bd_competence.php";
     include_once "modele/bd_diplome.php";
 
-
+if($_SESSION["idDroitUtilisateur"] == 1)
+{
     $listeDiplome = getDiplome();
     $listeClasse = getClasse();
-
+}
+if($_SESSION["idDroitUtilisateur"] == 2)
+{
+    $listeClasse = getClasseByIdProf($_SESSION["idProfesseur"]);
+}
     if(isset($_POST['btnAjoutClasse'])){
         insertClasse($_POST['NiveauxClasse'], $_POST['diplome']);
         

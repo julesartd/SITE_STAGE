@@ -97,6 +97,25 @@ function getClasse()
     return $resultat;
 }
 
+function getClasseByIdProf($idProf)
+{
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT *, nomDiplome FROM classe 
+        inner join diplome on classe.idDiplome=diplome.idDiplome 
+        INNER JOIN attribuer_classe a ON a.idClasse = classe.idClasse WHERE a.idProf = :idProf");
+        $req->bindValue('idProf', $idProf);
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 function insertClasse($NiveauClasse, $idDiplome)
 {
     try {
