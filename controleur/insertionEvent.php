@@ -5,7 +5,11 @@
     include_once "modele/bd_calendrier.php";
  
 
+
     $listeClasse = getClasse();   
+
+
+
     $listeEvent = getEvent();  
     $dateDt = getDateDebut();
     $dateDebut = $dateDt['db_date'];
