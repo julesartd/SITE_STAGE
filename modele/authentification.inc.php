@@ -27,6 +27,8 @@ function logout() {
     }
     unset($_SESSION["mailUtilisateur"]);
     unset($_SESSION["mdpUtilisateur"]);
+    unset($_SESSION["idDroitUtilisateur"]);
+    unset($_SESSION["idProfesseur"]);
 }
 
 function getMailULoggedOn(){

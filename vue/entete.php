@@ -4,7 +4,7 @@
         <ul class="menu__list r-list">
         <?php
 	session_start();
-	if(isset($_SESSION["mailUtilisateur"])){
+	if(isset($_SESSION["mailUtilisateur"]) && isset($_SESSION["mdpUtilisateur"])){
 		?>
             <li class="menu__group"><a href="./?action=calendrier" class="menu__link r-link text-underlined">Calendrier</a></li>
         

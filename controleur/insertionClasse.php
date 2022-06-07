@@ -9,7 +9,7 @@
     $listeClasse = getClasse();
 
     if(isset($_POST['btnAjoutClasse'])){
-        insertClasse($_POST['NiveauxClasse'], $_POST['diplome'],$_POST['txtNom']);
+        insertClasse($_POST['NiveauxClasse'], $_POST['diplome']);
         
         header("Location:index.php?action=classe");
     }

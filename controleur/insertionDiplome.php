@@ -19,9 +19,12 @@
         supprCompetenceByDiplome($idDiplome);
         supprDiplome($idDiplome);
     }
-
+if($_SESSION["idDroitUtilisateur"] ==1){
     $tableauDiplome = getDiplome();
-
+}
+if($_SESSION["idDroitUtilisateur"]== 2){
+    $tableauDiplome = getDiplomeByIdProf($_SESSION["idProfesseur"]);
+}
     include "vue/vueDiplome.php"
     ?>
 </div>
