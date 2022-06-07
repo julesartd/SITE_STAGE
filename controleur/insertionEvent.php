@@ -7,13 +7,22 @@
 
     $listeClasse = getClasse();   
     $listeEvent = getEvent();  
-    $semaine = getWeek();
+    $dateDt = getDateDebut();
+    $dateDebut = $dateDt['db_date'];
+    $dateF = getDateFin();
+    $dateFin = $dateF['db_date'];
+
+ 
+    $semaine = getWeekByDate($dateDebut,$dateFin);
+
+
+
+   
 
   
   
-    $semaineAdd = substr($_POST['numero'],-2);
-    $numeroEvent = $_POST['evenement'];
-    $numeroClasse = $_POST['classe'];
+    $semaineAdd = "";
+
 
   
 

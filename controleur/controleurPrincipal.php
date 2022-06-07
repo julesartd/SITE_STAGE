@@ -14,6 +14,7 @@ function controleurPrincipal($action){
     $lesActions["sousCompetence"] = "insertionSousCompetence.php";
     $lesActions["event"] = "insertionEvent.php";
     $lesActions["classe"] = "insertionClasse.php";
+    $lesActions["activite"] = "activite.php";
  
  
     if (array_key_exists ( $action , $lesActions )){
