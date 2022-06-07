@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 07 juin 2022 à 07:31
+-- Généré le : mar. 07 juin 2022 à 11:52
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -58,7 +58,7 @@ DELIMITER ;
 DROP TABLE IF EXISTS `activite`;
 CREATE TABLE IF NOT EXISTS `activite` (
   `idActivite` int(11) NOT NULL AUTO_INCREMENT,
-  `Scenario` varchar(5000) NOT NULL,
+  `nomActivite` varchar(5000) NOT NULL,
   `idCompetenceChapeau` int(11) NOT NULL,
   `idProfesseur` int(11) NOT NULL,
   PRIMARY KEY (`idActivite`),
@@ -96,6 +96,13 @@ CREATE TABLE IF NOT EXISTS `attribuer_classe` (
   KEY `FK_PROF45` (`idProf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `attribuer_classe`
+--
+
+INSERT INTO `attribuer_classe` (`idClasse`, `idProf`) VALUES
+(2, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -107,17 +114,17 @@ CREATE TABLE IF NOT EXISTS `classe` (
   `idClasse` int(11) NOT NULL AUTO_INCREMENT,
   `niveauClasse` varchar(500) NOT NULL,
   `idDiplome` int(11) NOT NULL,
-  `nomClasse` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`idClasse`),
   KEY `FKBac` (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `classe`
 --
 
-INSERT INTO `classe` (`idClasse`, `niveauClasse`, `idDiplome`, `nomClasse`) VALUES
-(2, '1ère', 3, NULL);
+INSERT INTO `classe` (`idClasse`, `niveauClasse`, `idDiplome`) VALUES
+(2, '1ère', 3),
+(31, '2nd', 3);
 
 -- --------------------------------------------------------
 
@@ -146,14 +153,15 @@ CREATE TABLE IF NOT EXISTS `diplome` (
   `idDiplome` int(11) NOT NULL AUTO_INCREMENT,
   `nomDiplome` varchar(500) NOT NULL,
   PRIMARY KEY (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `diplome`
 --
 
 INSERT INTO `diplome` (`idDiplome`, `nomDiplome`) VALUES
-(3, 'BAC TRMP');
+(3, 'BAC TRMP'),
+(18, 'BTS SIO');
 
 -- --------------------------------------------------------
 
@@ -210,7 +218,14 @@ CREATE TABLE IF NOT EXISTS `professeur` (
   `nomProf` varchar(500) NOT NULL,
   `prenomProf` varchar(500) NOT NULL,
   PRIMARY KEY (`idProf`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `professeur`
+--
+
+INSERT INTO `professeur` (`idProf`, `nomProf`, `prenomProf`) VALUES
+(1, 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -613,9 +628,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `mailUtilisateur` varchar(50) NOT NULL,
   `mdpUtilisateur` varchar(50) NOT NULL,
   `idDroitUtilisateur` int(11) NOT NULL,
-  `idprofesseur` int(11) DEFAULT NULL,
+  `idProfesseur` int(11) DEFAULT NULL,
   PRIMARY KEY (`mailUtilisateur`),
-  KEY `FK_PROF2` (`idprofesseur`),
+  KEY `FK_PROF2` (`idProfesseur`),
   KEY `FK_DROIT` (`idDroitUtilisateur`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -623,8 +638,9 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`mailUtilisateur`, `mdpUtilisateur`, `idDroitUtilisateur`, `idprofesseur`) VALUES
-('admin', 'admin', 1, NULL);
+INSERT INTO `utilisateur` (`mailUtilisateur`, `mdpUtilisateur`, `idDroitUtilisateur`, `idProfesseur`) VALUES
+('admin', 'admin', 1, NULL),
+('test', 'test', 2, 1);
 
 --
 -- Contraintes pour les tables déchargées
@@ -675,7 +691,7 @@ ALTER TABLE `sous_competence`
 --
 ALTER TABLE `utilisateur`
   ADD CONSTRAINT `FK_DROIT` FOREIGN KEY (`idDroitUtilisateur`) REFERENCES `droit` (`idDroit`),
-  ADD CONSTRAINT `FK_PROF2` FOREIGN KEY (`idprofesseur`) REFERENCES `professeur` (`idProf`);
+  ADD CONSTRAINT `FK_PROF2` FOREIGN KEY (`idProfesseur`) REFERENCES `professeur` (`idProf`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
