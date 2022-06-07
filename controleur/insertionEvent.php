@@ -60,7 +60,7 @@
 
 
   
-    include "vue/vueEvent.php";
+    include "vue/vueEvent.Admin.php";
   
     ?>
 </div>
