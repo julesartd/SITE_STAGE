@@ -18,7 +18,6 @@ function login($mailU, $mdpU) {
         $_SESSION["mdpUtilisateur"] = $mdpBD;
         $_SESSION["idDroitUtilisateur"] = $droitBD;
         $_SESSION["idProfesseur"] = $idProfBD;
-
     }
 }
 
