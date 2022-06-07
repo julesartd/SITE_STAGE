@@ -3,6 +3,7 @@
 if ( $_SERVER["SCRIPT_FILENAME"] == __FILE__ ){
     $racine="..";
 }
+include_once "modele/authentification.inc.php";
 
 function controleurPrincipal($action){
     $lesActions = array();
@@ -16,6 +17,14 @@ function controleurPrincipal($action){
     $lesActions["classe"] = "insertionClasse.php";
     $lesActions["activite"] = "activite.php";
  
+    $lesActions["connexion"] = "connexion.php";
+    $lesActions["deconnexion"] = "deconnexion.php";
+    if(isLoggedOn()){
+        $lesActions["defaut"] = "insertionClasse.php";
+    }
+    else{
+        $lesActions["defaut"] = "connexion.php";
+    }
  
     if (array_key_exists ( $action , $lesActions )){
         return $lesActions[$action];
