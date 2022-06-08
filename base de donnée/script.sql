@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 31 mai 2022 à 09:31
+-- Généré le : mar. 07 juin 2022 à 11:52
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -52,6 +52,23 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `activite`
+--
+
+DROP TABLE IF EXISTS `activite`;
+CREATE TABLE IF NOT EXISTS `activite` (
+  `idActivite` int(11) NOT NULL AUTO_INCREMENT,
+  `nomActivite` varchar(5000) NOT NULL,
+  `idCompetenceChapeau` int(11) NOT NULL,
+  `idProfesseur` int(11) NOT NULL,
+  PRIMARY KEY (`idActivite`),
+  KEY `FK_CPC` (`idCompetenceChapeau`),
+  KEY `FK_Prof` (`idProfesseur`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `affecter`
 --
 
@@ -65,12 +82,26 @@ CREATE TABLE IF NOT EXISTS `affecter` (
   KEY `fk_week` (`idWeek`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Déchargement des données de la table `affecter`
+-- Structure de la table `attribuer_classe`
 --
 
-INSERT INTO `affecter` (`idEvent`, `idClasse`, `idWeek`) VALUES
-(2, 2, 24);
+DROP TABLE IF EXISTS `attribuer_classe`;
+CREATE TABLE IF NOT EXISTS `attribuer_classe` (
+  `idClasse` int(11) NOT NULL,
+  `idProf` int(11) NOT NULL,
+  PRIMARY KEY (`idClasse`,`idProf`),
+  KEY `FK_PROF45` (`idProf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `attribuer_classe`
+--
+
+INSERT INTO `attribuer_classe` (`idClasse`, `idProf`) VALUES
+(2, 1);
 
 -- --------------------------------------------------------
 
@@ -83,18 +114,17 @@ CREATE TABLE IF NOT EXISTS `classe` (
   `idClasse` int(11) NOT NULL AUTO_INCREMENT,
   `niveauClasse` varchar(500) NOT NULL,
   `idDiplome` int(11) NOT NULL,
-  `nomClasse` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`idClasse`),
   KEY `FKBac` (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `classe`
 --
 
-INSERT INTO `classe` (`idClasse`, `niveauClasse`, `idDiplome`, `nomClasse`) VALUES
-(2, '1ère', 3, NULL),
-(3, 'Seconde', 3, NULL);
+INSERT INTO `classe` (`idClasse`, `niveauClasse`, `idDiplome`) VALUES
+(2, '1ère', 3),
+(31, '2nd', 3);
 
 -- --------------------------------------------------------
 
@@ -110,15 +140,7 @@ CREATE TABLE IF NOT EXISTS `competence_chapeau` (
   `idDiplome` int(11) NOT NULL,
   PRIMARY KEY (`idCompetence`),
   KEY `FKBac1` (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `competence_chapeau`
---
-
-INSERT INTO `competence_chapeau` (`idCompetence`, `libelleCompetence`, `intituleCompetence`, `idDiplome`) VALUES
-(10, 'C1', 'Bonjour', 3),
-(11, 'C2', 'Test', 3);
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -131,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `diplome` (
   `idDiplome` int(11) NOT NULL AUTO_INCREMENT,
   `nomDiplome` varchar(500) NOT NULL,
   PRIMARY KEY (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `diplome`
@@ -139,12 +161,28 @@ CREATE TABLE IF NOT EXISTS `diplome` (
 
 INSERT INTO `diplome` (`idDiplome`, `nomDiplome`) VALUES
 (3, 'BAC TRMP'),
-(7, 'DDQDQD'),
-(8, 'DQDQD'),
-(9, 'DQ'),
-(10, 'DQ'),
-(11, 'FQDQDQ'),
-(12, 'BYS SIO');
+(18, 'BTS SIO');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `droit`
+--
+
+DROP TABLE IF EXISTS `droit`;
+CREATE TABLE IF NOT EXISTS `droit` (
+  `idDroit` int(11) NOT NULL AUTO_INCREMENT,
+  `Droit` varchar(50) NOT NULL,
+  PRIMARY KEY (`idDroit`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `droit`
+--
+
+INSERT INTO `droit` (`idDroit`, `Droit`) VALUES
+(1, 'Administrateur'),
+(2, 'Professeur');
 
 -- --------------------------------------------------------
 
@@ -180,7 +218,14 @@ CREATE TABLE IF NOT EXISTS `professeur` (
   `nomProf` varchar(500) NOT NULL,
   `prenomProf` varchar(500) NOT NULL,
   PRIMARY KEY (`idProf`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `professeur`
+--
+
+INSERT INTO `professeur` (`idProf`, `nomProf`, `prenomProf`) VALUES
+(1, 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -210,15 +255,7 @@ CREATE TABLE IF NOT EXISTS `sous_competence` (
   `idCompetence` int(11) NOT NULL,
   PRIMARY KEY (`idSousCompetence`),
   KEY `FKCOMPETENCE` (`idCompetence`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
-
---
--- Déchargement des données de la table `sous_competence`
---
-
-INSERT INTO `sous_competence` (`idSousCompetence`, `libelleSousCompetence`, `intituleSousCompetence`, `idCompetence`) VALUES
-(24, 1, 'Salut', 10),
-(25, 2, 'Test', 10);
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -251,625 +288,12 @@ CREATE TABLE IF NOT EXISTS `time_dimension` (
 --
 
 INSERT INTO `time_dimension` (`id`, `db_date`, `year`, `month`, `day`, `quarter`, `week`, `day_name`, `month_name`, `holiday_flag`, `weekend_flag`, `event`) VALUES
-(20210101, '2021-01-01', 2021, 1, 1, 1, 53, 'Friday', 'January', 'f', 'f', NULL),
-(20210102, '2021-01-02', 2021, 1, 2, 1, 53, 'Saturday', 'January', 'f', 't', NULL),
-(20210103, '2021-01-03', 2021, 1, 3, 1, 53, 'Sunday', 'January', 'f', 't', NULL),
-(20210104, '2021-01-04', 2021, 1, 4, 1, 1, 'Monday', 'January', 'f', 'f', NULL),
-(20210105, '2021-01-05', 2021, 1, 5, 1, 1, 'Tuesday', 'January', 'f', 'f', NULL),
-(20210106, '2021-01-06', 2021, 1, 6, 1, 1, 'Wednesday', 'January', 'f', 'f', NULL),
-(20210107, '2021-01-07', 2021, 1, 7, 1, 1, 'Thursday', 'January', 'f', 'f', NULL),
-(20210108, '2021-01-08', 2021, 1, 8, 1, 1, 'Friday', 'January', 'f', 'f', NULL),
-(20210109, '2021-01-09', 2021, 1, 9, 1, 1, 'Saturday', 'January', 'f', 't', NULL),
-(20210110, '2021-01-10', 2021, 1, 10, 1, 1, 'Sunday', 'January', 'f', 't', NULL),
-(20210111, '2021-01-11', 2021, 1, 11, 1, 2, 'Monday', 'January', 'f', 'f', NULL),
-(20210112, '2021-01-12', 2021, 1, 12, 1, 2, 'Tuesday', 'January', 'f', 'f', NULL),
-(20210113, '2021-01-13', 2021, 1, 13, 1, 2, 'Wednesday', 'January', 'f', 'f', NULL),
-(20210114, '2021-01-14', 2021, 1, 14, 1, 2, 'Thursday', 'January', 'f', 'f', NULL),
-(20210115, '2021-01-15', 2021, 1, 15, 1, 2, 'Friday', 'January', 'f', 'f', NULL),
-(20210116, '2021-01-16', 2021, 1, 16, 1, 2, 'Saturday', 'January', 'f', 't', NULL),
-(20210117, '2021-01-17', 2021, 1, 17, 1, 2, 'Sunday', 'January', 'f', 't', NULL),
-(20210118, '2021-01-18', 2021, 1, 18, 1, 3, 'Monday', 'January', 'f', 'f', NULL),
-(20210119, '2021-01-19', 2021, 1, 19, 1, 3, 'Tuesday', 'January', 'f', 'f', NULL),
-(20210120, '2021-01-20', 2021, 1, 20, 1, 3, 'Wednesday', 'January', 'f', 'f', NULL),
-(20210121, '2021-01-21', 2021, 1, 21, 1, 3, 'Thursday', 'January', 'f', 'f', NULL),
-(20210122, '2021-01-22', 2021, 1, 22, 1, 3, 'Friday', 'January', 'f', 'f', NULL),
-(20210123, '2021-01-23', 2021, 1, 23, 1, 3, 'Saturday', 'January', 'f', 't', NULL),
-(20210124, '2021-01-24', 2021, 1, 24, 1, 3, 'Sunday', 'January', 'f', 't', NULL),
-(20210125, '2021-01-25', 2021, 1, 25, 1, 4, 'Monday', 'January', 'f', 'f', NULL),
-(20210126, '2021-01-26', 2021, 1, 26, 1, 4, 'Tuesday', 'January', 'f', 'f', NULL),
-(20210127, '2021-01-27', 2021, 1, 27, 1, 4, 'Wednesday', 'January', 'f', 'f', NULL),
-(20210128, '2021-01-28', 2021, 1, 28, 1, 4, 'Thursday', 'January', 'f', 'f', NULL),
-(20210129, '2021-01-29', 2021, 1, 29, 1, 4, 'Friday', 'January', 'f', 'f', NULL),
-(20210130, '2021-01-30', 2021, 1, 30, 1, 4, 'Saturday', 'January', 'f', 't', NULL),
-(20210131, '2021-01-31', 2021, 1, 31, 1, 4, 'Sunday', 'January', 'f', 't', NULL),
-(20210201, '2021-02-01', 2021, 2, 1, 1, 5, 'Monday', 'February', 'f', 'f', NULL),
-(20210202, '2021-02-02', 2021, 2, 2, 1, 5, 'Tuesday', 'February', 'f', 'f', NULL),
-(20210203, '2021-02-03', 2021, 2, 3, 1, 5, 'Wednesday', 'February', 'f', 'f', NULL),
-(20210204, '2021-02-04', 2021, 2, 4, 1, 5, 'Thursday', 'February', 'f', 'f', NULL),
-(20210205, '2021-02-05', 2021, 2, 5, 1, 5, 'Friday', 'February', 'f', 'f', NULL),
-(20210206, '2021-02-06', 2021, 2, 6, 1, 5, 'Saturday', 'February', 'f', 't', NULL),
-(20210207, '2021-02-07', 2021, 2, 7, 1, 5, 'Sunday', 'February', 'f', 't', NULL),
-(20210208, '2021-02-08', 2021, 2, 8, 1, 6, 'Monday', 'February', 'f', 'f', NULL),
-(20210209, '2021-02-09', 2021, 2, 9, 1, 6, 'Tuesday', 'February', 'f', 'f', NULL),
-(20210210, '2021-02-10', 2021, 2, 10, 1, 6, 'Wednesday', 'February', 'f', 'f', NULL),
-(20210211, '2021-02-11', 2021, 2, 11, 1, 6, 'Thursday', 'February', 'f', 'f', NULL),
-(20210212, '2021-02-12', 2021, 2, 12, 1, 6, 'Friday', 'February', 'f', 'f', NULL),
-(20210213, '2021-02-13', 2021, 2, 13, 1, 6, 'Saturday', 'February', 'f', 't', NULL),
-(20210214, '2021-02-14', 2021, 2, 14, 1, 6, 'Sunday', 'February', 'f', 't', NULL),
-(20210215, '2021-02-15', 2021, 2, 15, 1, 7, 'Monday', 'February', 'f', 'f', NULL),
-(20210216, '2021-02-16', 2021, 2, 16, 1, 7, 'Tuesday', 'February', 'f', 'f', NULL),
-(20210217, '2021-02-17', 2021, 2, 17, 1, 7, 'Wednesday', 'February', 'f', 'f', NULL),
-(20210218, '2021-02-18', 2021, 2, 18, 1, 7, 'Thursday', 'February', 'f', 'f', NULL),
-(20210219, '2021-02-19', 2021, 2, 19, 1, 7, 'Friday', 'February', 'f', 'f', NULL),
-(20210220, '2021-02-20', 2021, 2, 20, 1, 7, 'Saturday', 'February', 'f', 't', NULL),
-(20210221, '2021-02-21', 2021, 2, 21, 1, 7, 'Sunday', 'February', 'f', 't', NULL),
-(20210222, '2021-02-22', 2021, 2, 22, 1, 8, 'Monday', 'February', 'f', 'f', NULL),
-(20210223, '2021-02-23', 2021, 2, 23, 1, 8, 'Tuesday', 'February', 'f', 'f', NULL),
-(20210224, '2021-02-24', 2021, 2, 24, 1, 8, 'Wednesday', 'February', 'f', 'f', NULL),
-(20210225, '2021-02-25', 2021, 2, 25, 1, 8, 'Thursday', 'February', 'f', 'f', NULL),
-(20210226, '2021-02-26', 2021, 2, 26, 1, 8, 'Friday', 'February', 'f', 'f', NULL),
-(20210227, '2021-02-27', 2021, 2, 27, 1, 8, 'Saturday', 'February', 'f', 't', NULL),
-(20210228, '2021-02-28', 2021, 2, 28, 1, 8, 'Sunday', 'February', 'f', 't', NULL),
-(20210301, '2021-03-01', 2021, 3, 1, 1, 9, 'Monday', 'March', 'f', 'f', NULL),
-(20210302, '2021-03-02', 2021, 3, 2, 1, 9, 'Tuesday', 'March', 'f', 'f', NULL),
-(20210303, '2021-03-03', 2021, 3, 3, 1, 9, 'Wednesday', 'March', 'f', 'f', NULL),
-(20210304, '2021-03-04', 2021, 3, 4, 1, 9, 'Thursday', 'March', 'f', 'f', NULL),
-(20210305, '2021-03-05', 2021, 3, 5, 1, 9, 'Friday', 'March', 'f', 'f', NULL),
-(20210306, '2021-03-06', 2021, 3, 6, 1, 9, 'Saturday', 'March', 'f', 't', NULL),
-(20210307, '2021-03-07', 2021, 3, 7, 1, 9, 'Sunday', 'March', 'f', 't', NULL),
-(20210308, '2021-03-08', 2021, 3, 8, 1, 10, 'Monday', 'March', 'f', 'f', NULL),
-(20210309, '2021-03-09', 2021, 3, 9, 1, 10, 'Tuesday', 'March', 'f', 'f', NULL),
-(20210310, '2021-03-10', 2021, 3, 10, 1, 10, 'Wednesday', 'March', 'f', 'f', NULL),
-(20210311, '2021-03-11', 2021, 3, 11, 1, 10, 'Thursday', 'March', 'f', 'f', NULL),
-(20210312, '2021-03-12', 2021, 3, 12, 1, 10, 'Friday', 'March', 'f', 'f', NULL),
-(20210313, '2021-03-13', 2021, 3, 13, 1, 10, 'Saturday', 'March', 'f', 't', NULL),
-(20210314, '2021-03-14', 2021, 3, 14, 1, 10, 'Sunday', 'March', 'f', 't', NULL),
-(20210315, '2021-03-15', 2021, 3, 15, 1, 11, 'Monday', 'March', 'f', 'f', NULL),
-(20210316, '2021-03-16', 2021, 3, 16, 1, 11, 'Tuesday', 'March', 'f', 'f', NULL),
-(20210317, '2021-03-17', 2021, 3, 17, 1, 11, 'Wednesday', 'March', 'f', 'f', NULL),
-(20210318, '2021-03-18', 2021, 3, 18, 1, 11, 'Thursday', 'March', 'f', 'f', NULL),
-(20210319, '2021-03-19', 2021, 3, 19, 1, 11, 'Friday', 'March', 'f', 'f', NULL),
-(20210320, '2021-03-20', 2021, 3, 20, 1, 11, 'Saturday', 'March', 'f', 't', NULL),
-(20210321, '2021-03-21', 2021, 3, 21, 1, 11, 'Sunday', 'March', 'f', 't', NULL),
-(20210322, '2021-03-22', 2021, 3, 22, 1, 12, 'Monday', 'March', 'f', 'f', NULL),
-(20210323, '2021-03-23', 2021, 3, 23, 1, 12, 'Tuesday', 'March', 'f', 'f', NULL),
-(20210324, '2021-03-24', 2021, 3, 24, 1, 12, 'Wednesday', 'March', 'f', 'f', NULL),
-(20210325, '2021-03-25', 2021, 3, 25, 1, 12, 'Thursday', 'March', 'f', 'f', NULL),
-(20210326, '2021-03-26', 2021, 3, 26, 1, 12, 'Friday', 'March', 'f', 'f', NULL),
-(20210327, '2021-03-27', 2021, 3, 27, 1, 12, 'Saturday', 'March', 'f', 't', NULL),
-(20210328, '2021-03-28', 2021, 3, 28, 1, 12, 'Sunday', 'March', 'f', 't', NULL),
-(20210329, '2021-03-29', 2021, 3, 29, 1, 13, 'Monday', 'March', 'f', 'f', NULL),
-(20210330, '2021-03-30', 2021, 3, 30, 1, 13, 'Tuesday', 'March', 'f', 'f', NULL),
-(20210331, '2021-03-31', 2021, 3, 31, 1, 13, 'Wednesday', 'March', 'f', 'f', NULL),
-(20210401, '2021-04-01', 2021, 4, 1, 2, 13, 'Thursday', 'April', 'f', 'f', NULL),
-(20210402, '2021-04-02', 2021, 4, 2, 2, 13, 'Friday', 'April', 'f', 'f', NULL),
-(20210403, '2021-04-03', 2021, 4, 3, 2, 13, 'Saturday', 'April', 'f', 't', NULL),
-(20210404, '2021-04-04', 2021, 4, 4, 2, 13, 'Sunday', 'April', 'f', 't', NULL),
-(20210405, '2021-04-05', 2021, 4, 5, 2, 14, 'Monday', 'April', 'f', 'f', NULL),
-(20210406, '2021-04-06', 2021, 4, 6, 2, 14, 'Tuesday', 'April', 'f', 'f', NULL),
-(20210407, '2021-04-07', 2021, 4, 7, 2, 14, 'Wednesday', 'April', 'f', 'f', NULL),
-(20210408, '2021-04-08', 2021, 4, 8, 2, 14, 'Thursday', 'April', 'f', 'f', NULL),
-(20210409, '2021-04-09', 2021, 4, 9, 2, 14, 'Friday', 'April', 'f', 'f', NULL),
-(20210410, '2021-04-10', 2021, 4, 10, 2, 14, 'Saturday', 'April', 'f', 't', NULL),
-(20210411, '2021-04-11', 2021, 4, 11, 2, 14, 'Sunday', 'April', 'f', 't', NULL),
-(20210412, '2021-04-12', 2021, 4, 12, 2, 15, 'Monday', 'April', 'f', 'f', NULL),
-(20210413, '2021-04-13', 2021, 4, 13, 2, 15, 'Tuesday', 'April', 'f', 'f', NULL),
-(20210414, '2021-04-14', 2021, 4, 14, 2, 15, 'Wednesday', 'April', 'f', 'f', NULL),
-(20210415, '2021-04-15', 2021, 4, 15, 2, 15, 'Thursday', 'April', 'f', 'f', NULL),
-(20210416, '2021-04-16', 2021, 4, 16, 2, 15, 'Friday', 'April', 'f', 'f', NULL),
-(20210417, '2021-04-17', 2021, 4, 17, 2, 15, 'Saturday', 'April', 'f', 't', NULL),
-(20210418, '2021-04-18', 2021, 4, 18, 2, 15, 'Sunday', 'April', 'f', 't', NULL),
-(20210419, '2021-04-19', 2021, 4, 19, 2, 16, 'Monday', 'April', 'f', 'f', NULL),
-(20210420, '2021-04-20', 2021, 4, 20, 2, 16, 'Tuesday', 'April', 'f', 'f', NULL),
-(20210421, '2021-04-21', 2021, 4, 21, 2, 16, 'Wednesday', 'April', 'f', 'f', NULL),
-(20210422, '2021-04-22', 2021, 4, 22, 2, 16, 'Thursday', 'April', 'f', 'f', NULL),
-(20210423, '2021-04-23', 2021, 4, 23, 2, 16, 'Friday', 'April', 'f', 'f', NULL),
-(20210424, '2021-04-24', 2021, 4, 24, 2, 16, 'Saturday', 'April', 'f', 't', NULL),
-(20210425, '2021-04-25', 2021, 4, 25, 2, 16, 'Sunday', 'April', 'f', 't', NULL),
-(20210426, '2021-04-26', 2021, 4, 26, 2, 17, 'Monday', 'April', 'f', 'f', NULL),
-(20210427, '2021-04-27', 2021, 4, 27, 2, 17, 'Tuesday', 'April', 'f', 'f', NULL),
-(20210428, '2021-04-28', 2021, 4, 28, 2, 17, 'Wednesday', 'April', 'f', 'f', NULL),
-(20210429, '2021-04-29', 2021, 4, 29, 2, 17, 'Thursday', 'April', 'f', 'f', NULL),
-(20210430, '2021-04-30', 2021, 4, 30, 2, 17, 'Friday', 'April', 'f', 'f', NULL),
-(20210501, '2021-05-01', 2021, 5, 1, 2, 17, 'Saturday', 'May', 'f', 't', NULL),
-(20210502, '2021-05-02', 2021, 5, 2, 2, 17, 'Sunday', 'May', 'f', 't', NULL),
-(20210503, '2021-05-03', 2021, 5, 3, 2, 18, 'Monday', 'May', 'f', 'f', NULL),
-(20210504, '2021-05-04', 2021, 5, 4, 2, 18, 'Tuesday', 'May', 'f', 'f', NULL),
-(20210505, '2021-05-05', 2021, 5, 5, 2, 18, 'Wednesday', 'May', 'f', 'f', NULL),
-(20210506, '2021-05-06', 2021, 5, 6, 2, 18, 'Thursday', 'May', 'f', 'f', NULL),
-(20210507, '2021-05-07', 2021, 5, 7, 2, 18, 'Friday', 'May', 'f', 'f', NULL),
-(20210508, '2021-05-08', 2021, 5, 8, 2, 18, 'Saturday', 'May', 'f', 't', NULL),
-(20210509, '2021-05-09', 2021, 5, 9, 2, 18, 'Sunday', 'May', 'f', 't', NULL),
-(20210510, '2021-05-10', 2021, 5, 10, 2, 19, 'Monday', 'May', 'f', 'f', NULL),
-(20210511, '2021-05-11', 2021, 5, 11, 2, 19, 'Tuesday', 'May', 'f', 'f', NULL),
-(20210512, '2021-05-12', 2021, 5, 12, 2, 19, 'Wednesday', 'May', 'f', 'f', NULL),
-(20210513, '2021-05-13', 2021, 5, 13, 2, 19, 'Thursday', 'May', 'f', 'f', NULL),
-(20210514, '2021-05-14', 2021, 5, 14, 2, 19, 'Friday', 'May', 'f', 'f', NULL),
-(20210515, '2021-05-15', 2021, 5, 15, 2, 19, 'Saturday', 'May', 'f', 't', NULL),
-(20210516, '2021-05-16', 2021, 5, 16, 2, 19, 'Sunday', 'May', 'f', 't', NULL),
-(20210517, '2021-05-17', 2021, 5, 17, 2, 20, 'Monday', 'May', 'f', 'f', NULL),
-(20210518, '2021-05-18', 2021, 5, 18, 2, 20, 'Tuesday', 'May', 'f', 'f', NULL),
-(20210519, '2021-05-19', 2021, 5, 19, 2, 20, 'Wednesday', 'May', 'f', 'f', NULL),
-(20210520, '2021-05-20', 2021, 5, 20, 2, 20, 'Thursday', 'May', 'f', 'f', NULL),
-(20210521, '2021-05-21', 2021, 5, 21, 2, 20, 'Friday', 'May', 'f', 'f', NULL),
-(20210522, '2021-05-22', 2021, 5, 22, 2, 20, 'Saturday', 'May', 'f', 't', NULL),
-(20210523, '2021-05-23', 2021, 5, 23, 2, 20, 'Sunday', 'May', 'f', 't', NULL),
-(20210524, '2021-05-24', 2021, 5, 24, 2, 21, 'Monday', 'May', 'f', 'f', NULL),
-(20210525, '2021-05-25', 2021, 5, 25, 2, 21, 'Tuesday', 'May', 'f', 'f', NULL),
-(20210526, '2021-05-26', 2021, 5, 26, 2, 21, 'Wednesday', 'May', 'f', 'f', NULL),
-(20210527, '2021-05-27', 2021, 5, 27, 2, 21, 'Thursday', 'May', 'f', 'f', NULL),
-(20210528, '2021-05-28', 2021, 5, 28, 2, 21, 'Friday', 'May', 'f', 'f', NULL),
-(20210529, '2021-05-29', 2021, 5, 29, 2, 21, 'Saturday', 'May', 'f', 't', NULL),
-(20210530, '2021-05-30', 2021, 5, 30, 2, 21, 'Sunday', 'May', 'f', 't', NULL),
-(20210531, '2021-05-31', 2021, 5, 31, 2, 22, 'Monday', 'May', 'f', 'f', NULL),
-(20210601, '2021-06-01', 2021, 6, 1, 2, 22, 'Tuesday', 'June', 'f', 'f', NULL),
-(20210602, '2021-06-02', 2021, 6, 2, 2, 22, 'Wednesday', 'June', 'f', 'f', NULL),
-(20210603, '2021-06-03', 2021, 6, 3, 2, 22, 'Thursday', 'June', 'f', 'f', NULL),
-(20210604, '2021-06-04', 2021, 6, 4, 2, 22, 'Friday', 'June', 'f', 'f', NULL),
-(20210605, '2021-06-05', 2021, 6, 5, 2, 22, 'Saturday', 'June', 'f', 't', NULL),
-(20210606, '2021-06-06', 2021, 6, 6, 2, 22, 'Sunday', 'June', 'f', 't', NULL),
-(20210607, '2021-06-07', 2021, 6, 7, 2, 23, 'Monday', 'June', 'f', 'f', NULL),
-(20210608, '2021-06-08', 2021, 6, 8, 2, 23, 'Tuesday', 'June', 'f', 'f', NULL),
-(20210609, '2021-06-09', 2021, 6, 9, 2, 23, 'Wednesday', 'June', 'f', 'f', NULL),
-(20210610, '2021-06-10', 2021, 6, 10, 2, 23, 'Thursday', 'June', 'f', 'f', NULL),
-(20210611, '2021-06-11', 2021, 6, 11, 2, 23, 'Friday', 'June', 'f', 'f', NULL),
-(20210612, '2021-06-12', 2021, 6, 12, 2, 23, 'Saturday', 'June', 'f', 't', NULL),
-(20210613, '2021-06-13', 2021, 6, 13, 2, 23, 'Sunday', 'June', 'f', 't', NULL),
-(20210614, '2021-06-14', 2021, 6, 14, 2, 24, 'Monday', 'June', 'f', 'f', NULL),
-(20210615, '2021-06-15', 2021, 6, 15, 2, 24, 'Tuesday', 'June', 'f', 'f', NULL),
-(20210616, '2021-06-16', 2021, 6, 16, 2, 24, 'Wednesday', 'June', 'f', 'f', NULL),
-(20210617, '2021-06-17', 2021, 6, 17, 2, 24, 'Thursday', 'June', 'f', 'f', NULL),
-(20210618, '2021-06-18', 2021, 6, 18, 2, 24, 'Friday', 'June', 'f', 'f', NULL),
-(20210619, '2021-06-19', 2021, 6, 19, 2, 24, 'Saturday', 'June', 'f', 't', NULL),
-(20210620, '2021-06-20', 2021, 6, 20, 2, 24, 'Sunday', 'June', 'f', 't', NULL),
-(20210621, '2021-06-21', 2021, 6, 21, 2, 25, 'Monday', 'June', 'f', 'f', NULL),
-(20210622, '2021-06-22', 2021, 6, 22, 2, 25, 'Tuesday', 'June', 'f', 'f', NULL),
-(20210623, '2021-06-23', 2021, 6, 23, 2, 25, 'Wednesday', 'June', 'f', 'f', NULL),
-(20210624, '2021-06-24', 2021, 6, 24, 2, 25, 'Thursday', 'June', 'f', 'f', NULL),
-(20210625, '2021-06-25', 2021, 6, 25, 2, 25, 'Friday', 'June', 'f', 'f', NULL),
-(20210626, '2021-06-26', 2021, 6, 26, 2, 25, 'Saturday', 'June', 'f', 't', NULL),
-(20210627, '2021-06-27', 2021, 6, 27, 2, 25, 'Sunday', 'June', 'f', 't', NULL),
-(20210628, '2021-06-28', 2021, 6, 28, 2, 26, 'Monday', 'June', 'f', 'f', NULL),
-(20210629, '2021-06-29', 2021, 6, 29, 2, 26, 'Tuesday', 'June', 'f', 'f', NULL),
-(20210630, '2021-06-30', 2021, 6, 30, 2, 26, 'Wednesday', 'June', 'f', 'f', NULL),
-(20210701, '2021-07-01', 2021, 7, 1, 3, 26, 'Thursday', 'July', 'f', 'f', NULL),
-(20210702, '2021-07-02', 2021, 7, 2, 3, 26, 'Friday', 'July', 'f', 'f', NULL),
-(20210703, '2021-07-03', 2021, 7, 3, 3, 26, 'Saturday', 'July', 'f', 't', NULL),
-(20210704, '2021-07-04', 2021, 7, 4, 3, 26, 'Sunday', 'July', 'f', 't', NULL),
-(20210705, '2021-07-05', 2021, 7, 5, 3, 27, 'Monday', 'July', 'f', 'f', NULL),
-(20210706, '2021-07-06', 2021, 7, 6, 3, 27, 'Tuesday', 'July', 'f', 'f', NULL),
-(20210707, '2021-07-07', 2021, 7, 7, 3, 27, 'Wednesday', 'July', 'f', 'f', NULL),
-(20210708, '2021-07-08', 2021, 7, 8, 3, 27, 'Thursday', 'July', 'f', 'f', NULL),
-(20210709, '2021-07-09', 2021, 7, 9, 3, 27, 'Friday', 'July', 'f', 'f', NULL),
-(20210710, '2021-07-10', 2021, 7, 10, 3, 27, 'Saturday', 'July', 'f', 't', NULL),
-(20210711, '2021-07-11', 2021, 7, 11, 3, 27, 'Sunday', 'July', 'f', 't', NULL),
-(20210712, '2021-07-12', 2021, 7, 12, 3, 28, 'Monday', 'July', 'f', 'f', NULL),
-(20210713, '2021-07-13', 2021, 7, 13, 3, 28, 'Tuesday', 'July', 'f', 'f', NULL),
-(20210714, '2021-07-14', 2021, 7, 14, 3, 28, 'Wednesday', 'July', 'f', 'f', NULL),
-(20210715, '2021-07-15', 2021, 7, 15, 3, 28, 'Thursday', 'July', 'f', 'f', NULL),
-(20210716, '2021-07-16', 2021, 7, 16, 3, 28, 'Friday', 'July', 'f', 'f', NULL),
-(20210717, '2021-07-17', 2021, 7, 17, 3, 28, 'Saturday', 'July', 'f', 't', NULL),
-(20210718, '2021-07-18', 2021, 7, 18, 3, 28, 'Sunday', 'July', 'f', 't', NULL),
-(20210719, '2021-07-19', 2021, 7, 19, 3, 29, 'Monday', 'July', 'f', 'f', NULL),
-(20210720, '2021-07-20', 2021, 7, 20, 3, 29, 'Tuesday', 'July', 'f', 'f', NULL),
-(20210721, '2021-07-21', 2021, 7, 21, 3, 29, 'Wednesday', 'July', 'f', 'f', NULL),
-(20210722, '2021-07-22', 2021, 7, 22, 3, 29, 'Thursday', 'July', 'f', 'f', NULL),
-(20210723, '2021-07-23', 2021, 7, 23, 3, 29, 'Friday', 'July', 'f', 'f', NULL),
-(20210724, '2021-07-24', 2021, 7, 24, 3, 29, 'Saturday', 'July', 'f', 't', NULL),
-(20210725, '2021-07-25', 2021, 7, 25, 3, 29, 'Sunday', 'July', 'f', 't', NULL),
-(20210726, '2021-07-26', 2021, 7, 26, 3, 30, 'Monday', 'July', 'f', 'f', NULL),
-(20210727, '2021-07-27', 2021, 7, 27, 3, 30, 'Tuesday', 'July', 'f', 'f', NULL),
-(20210728, '2021-07-28', 2021, 7, 28, 3, 30, 'Wednesday', 'July', 'f', 'f', NULL),
-(20210729, '2021-07-29', 2021, 7, 29, 3, 30, 'Thursday', 'July', 'f', 'f', NULL),
-(20210730, '2021-07-30', 2021, 7, 30, 3, 30, 'Friday', 'July', 'f', 'f', NULL),
-(20210731, '2021-07-31', 2021, 7, 31, 3, 30, 'Saturday', 'July', 'f', 't', NULL),
-(20210801, '2021-08-01', 2021, 8, 1, 3, 30, 'Sunday', 'August', 'f', 't', NULL),
-(20210802, '2021-08-02', 2021, 8, 2, 3, 31, 'Monday', 'August', 'f', 'f', NULL),
-(20210803, '2021-08-03', 2021, 8, 3, 3, 31, 'Tuesday', 'August', 'f', 'f', NULL),
-(20210804, '2021-08-04', 2021, 8, 4, 3, 31, 'Wednesday', 'August', 'f', 'f', NULL),
-(20210805, '2021-08-05', 2021, 8, 5, 3, 31, 'Thursday', 'August', 'f', 'f', NULL),
-(20210806, '2021-08-06', 2021, 8, 6, 3, 31, 'Friday', 'August', 'f', 'f', NULL),
-(20210807, '2021-08-07', 2021, 8, 7, 3, 31, 'Saturday', 'August', 'f', 't', NULL),
-(20210808, '2021-08-08', 2021, 8, 8, 3, 31, 'Sunday', 'August', 'f', 't', NULL),
-(20210809, '2021-08-09', 2021, 8, 9, 3, 32, 'Monday', 'August', 'f', 'f', NULL),
-(20210810, '2021-08-10', 2021, 8, 10, 3, 32, 'Tuesday', 'August', 'f', 'f', NULL),
-(20210811, '2021-08-11', 2021, 8, 11, 3, 32, 'Wednesday', 'August', 'f', 'f', NULL),
-(20210812, '2021-08-12', 2021, 8, 12, 3, 32, 'Thursday', 'August', 'f', 'f', NULL),
-(20210813, '2021-08-13', 2021, 8, 13, 3, 32, 'Friday', 'August', 'f', 'f', NULL),
-(20210814, '2021-08-14', 2021, 8, 14, 3, 32, 'Saturday', 'August', 'f', 't', NULL),
-(20210815, '2021-08-15', 2021, 8, 15, 3, 32, 'Sunday', 'August', 'f', 't', NULL),
-(20210816, '2021-08-16', 2021, 8, 16, 3, 33, 'Monday', 'August', 'f', 'f', NULL),
-(20210817, '2021-08-17', 2021, 8, 17, 3, 33, 'Tuesday', 'August', 'f', 'f', NULL),
-(20210818, '2021-08-18', 2021, 8, 18, 3, 33, 'Wednesday', 'August', 'f', 'f', NULL),
-(20210819, '2021-08-19', 2021, 8, 19, 3, 33, 'Thursday', 'August', 'f', 'f', NULL),
-(20210820, '2021-08-20', 2021, 8, 20, 3, 33, 'Friday', 'August', 'f', 'f', NULL),
-(20210821, '2021-08-21', 2021, 8, 21, 3, 33, 'Saturday', 'August', 'f', 't', NULL),
-(20210822, '2021-08-22', 2021, 8, 22, 3, 33, 'Sunday', 'August', 'f', 't', NULL),
-(20210823, '2021-08-23', 2021, 8, 23, 3, 34, 'Monday', 'August', 'f', 'f', NULL),
-(20210824, '2021-08-24', 2021, 8, 24, 3, 34, 'Tuesday', 'August', 'f', 'f', NULL),
-(20210825, '2021-08-25', 2021, 8, 25, 3, 34, 'Wednesday', 'August', 'f', 'f', NULL),
-(20210826, '2021-08-26', 2021, 8, 26, 3, 34, 'Thursday', 'August', 'f', 'f', NULL),
-(20210827, '2021-08-27', 2021, 8, 27, 3, 34, 'Friday', 'August', 'f', 'f', NULL),
-(20210828, '2021-08-28', 2021, 8, 28, 3, 34, 'Saturday', 'August', 'f', 't', NULL),
-(20210829, '2021-08-29', 2021, 8, 29, 3, 34, 'Sunday', 'August', 'f', 't', NULL),
-(20210830, '2021-08-30', 2021, 8, 30, 3, 35, 'Monday', 'August', 'f', 'f', NULL),
-(20210831, '2021-08-31', 2021, 8, 31, 3, 35, 'Tuesday', 'August', 'f', 'f', NULL),
-(20210901, '2021-09-01', 2021, 9, 1, 3, 35, 'Wednesday', 'September', 'f', 'f', NULL),
-(20210902, '2021-09-02', 2021, 9, 2, 3, 35, 'Thursday', 'September', 'f', 'f', NULL),
-(20210903, '2021-09-03', 2021, 9, 3, 3, 35, 'Friday', 'September', 'f', 'f', NULL),
-(20210904, '2021-09-04', 2021, 9, 4, 3, 35, 'Saturday', 'September', 'f', 't', NULL),
-(20210905, '2021-09-05', 2021, 9, 5, 3, 35, 'Sunday', 'September', 'f', 't', NULL),
-(20210906, '2021-09-06', 2021, 9, 6, 3, 36, 'Monday', 'September', 'f', 'f', NULL),
-(20210907, '2021-09-07', 2021, 9, 7, 3, 36, 'Tuesday', 'September', 'f', 'f', NULL),
-(20210908, '2021-09-08', 2021, 9, 8, 3, 36, 'Wednesday', 'September', 'f', 'f', NULL),
-(20210909, '2021-09-09', 2021, 9, 9, 3, 36, 'Thursday', 'September', 'f', 'f', NULL),
-(20210910, '2021-09-10', 2021, 9, 10, 3, 36, 'Friday', 'September', 'f', 'f', NULL),
-(20210911, '2021-09-11', 2021, 9, 11, 3, 36, 'Saturday', 'September', 'f', 't', NULL),
-(20210912, '2021-09-12', 2021, 9, 12, 3, 36, 'Sunday', 'September', 'f', 't', NULL),
-(20210913, '2021-09-13', 2021, 9, 13, 3, 37, 'Monday', 'September', 'f', 'f', NULL),
-(20210914, '2021-09-14', 2021, 9, 14, 3, 37, 'Tuesday', 'September', 'f', 'f', NULL),
-(20210915, '2021-09-15', 2021, 9, 15, 3, 37, 'Wednesday', 'September', 'f', 'f', NULL),
-(20210916, '2021-09-16', 2021, 9, 16, 3, 37, 'Thursday', 'September', 'f', 'f', NULL),
-(20210917, '2021-09-17', 2021, 9, 17, 3, 37, 'Friday', 'September', 'f', 'f', NULL),
-(20210918, '2021-09-18', 2021, 9, 18, 3, 37, 'Saturday', 'September', 'f', 't', NULL),
-(20210919, '2021-09-19', 2021, 9, 19, 3, 37, 'Sunday', 'September', 'f', 't', NULL),
-(20210920, '2021-09-20', 2021, 9, 20, 3, 38, 'Monday', 'September', 'f', 'f', NULL),
-(20210921, '2021-09-21', 2021, 9, 21, 3, 38, 'Tuesday', 'September', 'f', 'f', NULL),
-(20210922, '2021-09-22', 2021, 9, 22, 3, 38, 'Wednesday', 'September', 'f', 'f', NULL),
-(20210923, '2021-09-23', 2021, 9, 23, 3, 38, 'Thursday', 'September', 'f', 'f', NULL),
-(20210924, '2021-09-24', 2021, 9, 24, 3, 38, 'Friday', 'September', 'f', 'f', NULL),
-(20210925, '2021-09-25', 2021, 9, 25, 3, 38, 'Saturday', 'September', 'f', 't', NULL),
-(20210926, '2021-09-26', 2021, 9, 26, 3, 38, 'Sunday', 'September', 'f', 't', NULL),
-(20210927, '2021-09-27', 2021, 9, 27, 3, 39, 'Monday', 'September', 'f', 'f', NULL),
-(20210928, '2021-09-28', 2021, 9, 28, 3, 39, 'Tuesday', 'September', 'f', 'f', NULL),
-(20210929, '2021-09-29', 2021, 9, 29, 3, 39, 'Wednesday', 'September', 'f', 'f', NULL),
-(20210930, '2021-09-30', 2021, 9, 30, 3, 39, 'Thursday', 'September', 'f', 'f', NULL),
-(20211001, '2021-10-01', 2021, 10, 1, 4, 39, 'Friday', 'October', 'f', 'f', NULL),
-(20211002, '2021-10-02', 2021, 10, 2, 4, 39, 'Saturday', 'October', 'f', 't', NULL),
-(20211003, '2021-10-03', 2021, 10, 3, 4, 39, 'Sunday', 'October', 'f', 't', NULL),
-(20211004, '2021-10-04', 2021, 10, 4, 4, 40, 'Monday', 'October', 'f', 'f', NULL),
-(20211005, '2021-10-05', 2021, 10, 5, 4, 40, 'Tuesday', 'October', 'f', 'f', NULL),
-(20211006, '2021-10-06', 2021, 10, 6, 4, 40, 'Wednesday', 'October', 'f', 'f', NULL),
-(20211007, '2021-10-07', 2021, 10, 7, 4, 40, 'Thursday', 'October', 'f', 'f', NULL),
-(20211008, '2021-10-08', 2021, 10, 8, 4, 40, 'Friday', 'October', 'f', 'f', NULL),
-(20211009, '2021-10-09', 2021, 10, 9, 4, 40, 'Saturday', 'October', 'f', 't', NULL),
-(20211010, '2021-10-10', 2021, 10, 10, 4, 40, 'Sunday', 'October', 'f', 't', NULL),
-(20211011, '2021-10-11', 2021, 10, 11, 4, 41, 'Monday', 'October', 'f', 'f', NULL),
-(20211012, '2021-10-12', 2021, 10, 12, 4, 41, 'Tuesday', 'October', 'f', 'f', NULL),
-(20211013, '2021-10-13', 2021, 10, 13, 4, 41, 'Wednesday', 'October', 'f', 'f', NULL),
-(20211014, '2021-10-14', 2021, 10, 14, 4, 41, 'Thursday', 'October', 'f', 'f', NULL),
-(20211015, '2021-10-15', 2021, 10, 15, 4, 41, 'Friday', 'October', 'f', 'f', NULL),
-(20211016, '2021-10-16', 2021, 10, 16, 4, 41, 'Saturday', 'October', 'f', 't', NULL),
-(20211017, '2021-10-17', 2021, 10, 17, 4, 41, 'Sunday', 'October', 'f', 't', NULL),
-(20211018, '2021-10-18', 2021, 10, 18, 4, 42, 'Monday', 'October', 'f', 'f', NULL),
-(20211019, '2021-10-19', 2021, 10, 19, 4, 42, 'Tuesday', 'October', 'f', 'f', NULL),
-(20211020, '2021-10-20', 2021, 10, 20, 4, 42, 'Wednesday', 'October', 'f', 'f', NULL),
-(20211021, '2021-10-21', 2021, 10, 21, 4, 42, 'Thursday', 'October', 'f', 'f', NULL),
-(20211022, '2021-10-22', 2021, 10, 22, 4, 42, 'Friday', 'October', 'f', 'f', NULL),
-(20211023, '2021-10-23', 2021, 10, 23, 4, 42, 'Saturday', 'October', 'f', 't', NULL),
-(20211024, '2021-10-24', 2021, 10, 24, 4, 42, 'Sunday', 'October', 'f', 't', NULL),
-(20211025, '2021-10-25', 2021, 10, 25, 4, 43, 'Monday', 'October', 'f', 'f', NULL),
-(20211026, '2021-10-26', 2021, 10, 26, 4, 43, 'Tuesday', 'October', 'f', 'f', NULL),
-(20211027, '2021-10-27', 2021, 10, 27, 4, 43, 'Wednesday', 'October', 'f', 'f', NULL),
-(20211028, '2021-10-28', 2021, 10, 28, 4, 43, 'Thursday', 'October', 'f', 'f', NULL),
-(20211029, '2021-10-29', 2021, 10, 29, 4, 43, 'Friday', 'October', 'f', 'f', NULL),
-(20211030, '2021-10-30', 2021, 10, 30, 4, 43, 'Saturday', 'October', 'f', 't', NULL),
-(20211031, '2021-10-31', 2021, 10, 31, 4, 43, 'Sunday', 'October', 'f', 't', NULL),
-(20211101, '2021-11-01', 2021, 11, 1, 4, 44, 'Monday', 'November', 'f', 'f', NULL),
-(20211102, '2021-11-02', 2021, 11, 2, 4, 44, 'Tuesday', 'November', 'f', 'f', NULL),
-(20211103, '2021-11-03', 2021, 11, 3, 4, 44, 'Wednesday', 'November', 'f', 'f', NULL),
-(20211104, '2021-11-04', 2021, 11, 4, 4, 44, 'Thursday', 'November', 'f', 'f', NULL),
-(20211105, '2021-11-05', 2021, 11, 5, 4, 44, 'Friday', 'November', 'f', 'f', NULL),
-(20211106, '2021-11-06', 2021, 11, 6, 4, 44, 'Saturday', 'November', 'f', 't', NULL),
-(20211107, '2021-11-07', 2021, 11, 7, 4, 44, 'Sunday', 'November', 'f', 't', NULL),
-(20211108, '2021-11-08', 2021, 11, 8, 4, 45, 'Monday', 'November', 'f', 'f', NULL),
-(20211109, '2021-11-09', 2021, 11, 9, 4, 45, 'Tuesday', 'November', 'f', 'f', NULL),
-(20211110, '2021-11-10', 2021, 11, 10, 4, 45, 'Wednesday', 'November', 'f', 'f', NULL),
-(20211111, '2021-11-11', 2021, 11, 11, 4, 45, 'Thursday', 'November', 'f', 'f', NULL),
-(20211112, '2021-11-12', 2021, 11, 12, 4, 45, 'Friday', 'November', 'f', 'f', NULL),
-(20211113, '2021-11-13', 2021, 11, 13, 4, 45, 'Saturday', 'November', 'f', 't', NULL),
-(20211114, '2021-11-14', 2021, 11, 14, 4, 45, 'Sunday', 'November', 'f', 't', NULL),
-(20211115, '2021-11-15', 2021, 11, 15, 4, 46, 'Monday', 'November', 'f', 'f', NULL),
-(20211116, '2021-11-16', 2021, 11, 16, 4, 46, 'Tuesday', 'November', 'f', 'f', NULL),
-(20211117, '2021-11-17', 2021, 11, 17, 4, 46, 'Wednesday', 'November', 'f', 'f', NULL),
-(20211118, '2021-11-18', 2021, 11, 18, 4, 46, 'Thursday', 'November', 'f', 'f', NULL),
-(20211119, '2021-11-19', 2021, 11, 19, 4, 46, 'Friday', 'November', 'f', 'f', NULL),
-(20211120, '2021-11-20', 2021, 11, 20, 4, 46, 'Saturday', 'November', 'f', 't', NULL),
-(20211121, '2021-11-21', 2021, 11, 21, 4, 46, 'Sunday', 'November', 'f', 't', NULL),
-(20211122, '2021-11-22', 2021, 11, 22, 4, 47, 'Monday', 'November', 'f', 'f', NULL),
-(20211123, '2021-11-23', 2021, 11, 23, 4, 47, 'Tuesday', 'November', 'f', 'f', NULL),
-(20211124, '2021-11-24', 2021, 11, 24, 4, 47, 'Wednesday', 'November', 'f', 'f', NULL),
-(20211125, '2021-11-25', 2021, 11, 25, 4, 47, 'Thursday', 'November', 'f', 'f', NULL),
-(20211126, '2021-11-26', 2021, 11, 26, 4, 47, 'Friday', 'November', 'f', 'f', NULL),
-(20211127, '2021-11-27', 2021, 11, 27, 4, 47, 'Saturday', 'November', 'f', 't', NULL),
-(20211128, '2021-11-28', 2021, 11, 28, 4, 47, 'Sunday', 'November', 'f', 't', NULL),
-(20211129, '2021-11-29', 2021, 11, 29, 4, 48, 'Monday', 'November', 'f', 'f', NULL),
-(20211130, '2021-11-30', 2021, 11, 30, 4, 48, 'Tuesday', 'November', 'f', 'f', NULL),
-(20211201, '2021-12-01', 2021, 12, 1, 4, 48, 'Wednesday', 'December', 'f', 'f', NULL),
-(20211202, '2021-12-02', 2021, 12, 2, 4, 48, 'Thursday', 'December', 'f', 'f', NULL),
-(20211203, '2021-12-03', 2021, 12, 3, 4, 48, 'Friday', 'December', 'f', 'f', NULL),
-(20211204, '2021-12-04', 2021, 12, 4, 4, 48, 'Saturday', 'December', 'f', 't', NULL),
-(20211205, '2021-12-05', 2021, 12, 5, 4, 48, 'Sunday', 'December', 'f', 't', NULL),
-(20211206, '2021-12-06', 2021, 12, 6, 4, 49, 'Monday', 'December', 'f', 'f', NULL),
-(20211207, '2021-12-07', 2021, 12, 7, 4, 49, 'Tuesday', 'December', 'f', 'f', NULL),
-(20211208, '2021-12-08', 2021, 12, 8, 4, 49, 'Wednesday', 'December', 'f', 'f', NULL),
-(20211209, '2021-12-09', 2021, 12, 9, 4, 49, 'Thursday', 'December', 'f', 'f', NULL),
-(20211210, '2021-12-10', 2021, 12, 10, 4, 49, 'Friday', 'December', 'f', 'f', NULL),
-(20211211, '2021-12-11', 2021, 12, 11, 4, 49, 'Saturday', 'December', 'f', 't', NULL),
-(20211212, '2021-12-12', 2021, 12, 12, 4, 49, 'Sunday', 'December', 'f', 't', NULL),
-(20211213, '2021-12-13', 2021, 12, 13, 4, 50, 'Monday', 'December', 'f', 'f', NULL),
-(20211214, '2021-12-14', 2021, 12, 14, 4, 50, 'Tuesday', 'December', 'f', 'f', NULL),
-(20211215, '2021-12-15', 2021, 12, 15, 4, 50, 'Wednesday', 'December', 'f', 'f', NULL),
-(20211216, '2021-12-16', 2021, 12, 16, 4, 50, 'Thursday', 'December', 'f', 'f', NULL),
-(20211217, '2021-12-17', 2021, 12, 17, 4, 50, 'Friday', 'December', 'f', 'f', NULL),
-(20211218, '2021-12-18', 2021, 12, 18, 4, 50, 'Saturday', 'December', 'f', 't', NULL),
-(20211219, '2021-12-19', 2021, 12, 19, 4, 50, 'Sunday', 'December', 'f', 't', NULL),
-(20211220, '2021-12-20', 2021, 12, 20, 4, 51, 'Monday', 'December', 'f', 'f', NULL),
-(20211221, '2021-12-21', 2021, 12, 21, 4, 51, 'Tuesday', 'December', 'f', 'f', NULL),
-(20211222, '2021-12-22', 2021, 12, 22, 4, 51, 'Wednesday', 'December', 'f', 'f', NULL),
-(20211223, '2021-12-23', 2021, 12, 23, 4, 51, 'Thursday', 'December', 'f', 'f', NULL),
-(20211224, '2021-12-24', 2021, 12, 24, 4, 51, 'Friday', 'December', 'f', 'f', NULL),
-(20211225, '2021-12-25', 2021, 12, 25, 4, 51, 'Saturday', 'December', 'f', 't', NULL),
-(20211226, '2021-12-26', 2021, 12, 26, 4, 51, 'Sunday', 'December', 'f', 't', NULL),
-(20211227, '2021-12-27', 2021, 12, 27, 4, 52, 'Monday', 'December', 'f', 'f', NULL),
-(20211228, '2021-12-28', 2021, 12, 28, 4, 52, 'Tuesday', 'December', 'f', 'f', NULL),
-(20211229, '2021-12-29', 2021, 12, 29, 4, 52, 'Wednesday', 'December', 'f', 'f', NULL),
-(20211230, '2021-12-30', 2021, 12, 30, 4, 52, 'Thursday', 'December', 'f', 'f', NULL),
-(20211231, '2021-12-31', 2021, 12, 31, 4, 52, 'Friday', 'December', 'f', 'f', NULL),
-(20220101, '2022-01-01', 2022, 1, 1, 1, 52, 'Saturday', 'January', 'f', 't', NULL),
-(20220102, '2022-01-02', 2022, 1, 2, 1, 52, 'Sunday', 'January', 'f', 't', NULL),
-(20220103, '2022-01-03', 2022, 1, 3, 1, 1, 'Monday', 'January', 'f', 'f', NULL),
-(20220104, '2022-01-04', 2022, 1, 4, 1, 1, 'Tuesday', 'January', 'f', 'f', NULL),
-(20220105, '2022-01-05', 2022, 1, 5, 1, 1, 'Wednesday', 'January', 'f', 'f', NULL),
-(20220106, '2022-01-06', 2022, 1, 6, 1, 1, 'Thursday', 'January', 'f', 'f', NULL),
-(20220107, '2022-01-07', 2022, 1, 7, 1, 1, 'Friday', 'January', 'f', 'f', NULL),
-(20220108, '2022-01-08', 2022, 1, 8, 1, 1, 'Saturday', 'January', 'f', 't', NULL),
-(20220109, '2022-01-09', 2022, 1, 9, 1, 1, 'Sunday', 'January', 'f', 't', NULL),
-(20220110, '2022-01-10', 2022, 1, 10, 1, 2, 'Monday', 'January', 'f', 'f', NULL),
-(20220111, '2022-01-11', 2022, 1, 11, 1, 2, 'Tuesday', 'January', 'f', 'f', NULL),
-(20220112, '2022-01-12', 2022, 1, 12, 1, 2, 'Wednesday', 'January', 'f', 'f', NULL),
-(20220113, '2022-01-13', 2022, 1, 13, 1, 2, 'Thursday', 'January', 'f', 'f', NULL),
-(20220114, '2022-01-14', 2022, 1, 14, 1, 2, 'Friday', 'January', 'f', 'f', NULL),
-(20220115, '2022-01-15', 2022, 1, 15, 1, 2, 'Saturday', 'January', 'f', 't', NULL),
-(20220116, '2022-01-16', 2022, 1, 16, 1, 2, 'Sunday', 'January', 'f', 't', NULL),
-(20220117, '2022-01-17', 2022, 1, 17, 1, 3, 'Monday', 'January', 'f', 'f', NULL),
-(20220118, '2022-01-18', 2022, 1, 18, 1, 3, 'Tuesday', 'January', 'f', 'f', NULL),
-(20220119, '2022-01-19', 2022, 1, 19, 1, 3, 'Wednesday', 'January', 'f', 'f', NULL),
-(20220120, '2022-01-20', 2022, 1, 20, 1, 3, 'Thursday', 'January', 'f', 'f', NULL),
-(20220121, '2022-01-21', 2022, 1, 21, 1, 3, 'Friday', 'January', 'f', 'f', NULL),
-(20220122, '2022-01-22', 2022, 1, 22, 1, 3, 'Saturday', 'January', 'f', 't', NULL),
-(20220123, '2022-01-23', 2022, 1, 23, 1, 3, 'Sunday', 'January', 'f', 't', NULL),
-(20220124, '2022-01-24', 2022, 1, 24, 1, 4, 'Monday', 'January', 'f', 'f', NULL),
-(20220125, '2022-01-25', 2022, 1, 25, 1, 4, 'Tuesday', 'January', 'f', 'f', NULL),
-(20220126, '2022-01-26', 2022, 1, 26, 1, 4, 'Wednesday', 'January', 'f', 'f', NULL),
-(20220127, '2022-01-27', 2022, 1, 27, 1, 4, 'Thursday', 'January', 'f', 'f', NULL),
-(20220128, '2022-01-28', 2022, 1, 28, 1, 4, 'Friday', 'January', 'f', 'f', NULL),
-(20220129, '2022-01-29', 2022, 1, 29, 1, 4, 'Saturday', 'January', 'f', 't', NULL),
-(20220130, '2022-01-30', 2022, 1, 30, 1, 4, 'Sunday', 'January', 'f', 't', NULL),
-(20220131, '2022-01-31', 2022, 1, 31, 1, 5, 'Monday', 'January', 'f', 'f', NULL),
-(20220201, '2022-02-01', 2022, 2, 1, 1, 5, 'Tuesday', 'February', 'f', 'f', NULL),
-(20220202, '2022-02-02', 2022, 2, 2, 1, 5, 'Wednesday', 'February', 'f', 'f', NULL),
-(20220203, '2022-02-03', 2022, 2, 3, 1, 5, 'Thursday', 'February', 'f', 'f', NULL),
-(20220204, '2022-02-04', 2022, 2, 4, 1, 5, 'Friday', 'February', 'f', 'f', NULL),
-(20220205, '2022-02-05', 2022, 2, 5, 1, 5, 'Saturday', 'February', 'f', 't', NULL),
-(20220206, '2022-02-06', 2022, 2, 6, 1, 5, 'Sunday', 'February', 'f', 't', NULL),
-(20220207, '2022-02-07', 2022, 2, 7, 1, 6, 'Monday', 'February', 'f', 'f', NULL),
-(20220208, '2022-02-08', 2022, 2, 8, 1, 6, 'Tuesday', 'February', 'f', 'f', NULL),
-(20220209, '2022-02-09', 2022, 2, 9, 1, 6, 'Wednesday', 'February', 'f', 'f', NULL),
-(20220210, '2022-02-10', 2022, 2, 10, 1, 6, 'Thursday', 'February', 'f', 'f', NULL),
-(20220211, '2022-02-11', 2022, 2, 11, 1, 6, 'Friday', 'February', 'f', 'f', NULL),
-(20220212, '2022-02-12', 2022, 2, 12, 1, 6, 'Saturday', 'February', 'f', 't', NULL),
-(20220213, '2022-02-13', 2022, 2, 13, 1, 6, 'Sunday', 'February', 'f', 't', NULL),
-(20220214, '2022-02-14', 2022, 2, 14, 1, 7, 'Monday', 'February', 'f', 'f', NULL),
-(20220215, '2022-02-15', 2022, 2, 15, 1, 7, 'Tuesday', 'February', 'f', 'f', NULL),
-(20220216, '2022-02-16', 2022, 2, 16, 1, 7, 'Wednesday', 'February', 'f', 'f', NULL),
-(20220217, '2022-02-17', 2022, 2, 17, 1, 7, 'Thursday', 'February', 'f', 'f', NULL),
-(20220218, '2022-02-18', 2022, 2, 18, 1, 7, 'Friday', 'February', 'f', 'f', NULL),
-(20220219, '2022-02-19', 2022, 2, 19, 1, 7, 'Saturday', 'February', 'f', 't', NULL),
-(20220220, '2022-02-20', 2022, 2, 20, 1, 7, 'Sunday', 'February', 'f', 't', NULL),
-(20220221, '2022-02-21', 2022, 2, 21, 1, 8, 'Monday', 'February', 'f', 'f', NULL),
-(20220222, '2022-02-22', 2022, 2, 22, 1, 8, 'Tuesday', 'February', 'f', 'f', NULL),
-(20220223, '2022-02-23', 2022, 2, 23, 1, 8, 'Wednesday', 'February', 'f', 'f', NULL),
-(20220224, '2022-02-24', 2022, 2, 24, 1, 8, 'Thursday', 'February', 'f', 'f', NULL),
-(20220225, '2022-02-25', 2022, 2, 25, 1, 8, 'Friday', 'February', 'f', 'f', NULL),
-(20220226, '2022-02-26', 2022, 2, 26, 1, 8, 'Saturday', 'February', 'f', 't', NULL),
-(20220227, '2022-02-27', 2022, 2, 27, 1, 8, 'Sunday', 'February', 'f', 't', NULL),
-(20220228, '2022-02-28', 2022, 2, 28, 1, 9, 'Monday', 'February', 'f', 'f', NULL),
-(20220301, '2022-03-01', 2022, 3, 1, 1, 9, 'Tuesday', 'March', 'f', 'f', NULL),
-(20220302, '2022-03-02', 2022, 3, 2, 1, 9, 'Wednesday', 'March', 'f', 'f', NULL),
-(20220303, '2022-03-03', 2022, 3, 3, 1, 9, 'Thursday', 'March', 'f', 'f', NULL),
-(20220304, '2022-03-04', 2022, 3, 4, 1, 9, 'Friday', 'March', 'f', 'f', NULL),
-(20220305, '2022-03-05', 2022, 3, 5, 1, 9, 'Saturday', 'March', 'f', 't', NULL),
-(20220306, '2022-03-06', 2022, 3, 6, 1, 9, 'Sunday', 'March', 'f', 't', NULL),
-(20220307, '2022-03-07', 2022, 3, 7, 1, 10, 'Monday', 'March', 'f', 'f', NULL),
-(20220308, '2022-03-08', 2022, 3, 8, 1, 10, 'Tuesday', 'March', 'f', 'f', NULL),
-(20220309, '2022-03-09', 2022, 3, 9, 1, 10, 'Wednesday', 'March', 'f', 'f', NULL),
-(20220310, '2022-03-10', 2022, 3, 10, 1, 10, 'Thursday', 'March', 'f', 'f', NULL),
-(20220311, '2022-03-11', 2022, 3, 11, 1, 10, 'Friday', 'March', 'f', 'f', NULL),
-(20220312, '2022-03-12', 2022, 3, 12, 1, 10, 'Saturday', 'March', 'f', 't', NULL),
-(20220313, '2022-03-13', 2022, 3, 13, 1, 10, 'Sunday', 'March', 'f', 't', NULL),
-(20220314, '2022-03-14', 2022, 3, 14, 1, 11, 'Monday', 'March', 'f', 'f', NULL),
-(20220315, '2022-03-15', 2022, 3, 15, 1, 11, 'Tuesday', 'March', 'f', 'f', NULL),
-(20220316, '2022-03-16', 2022, 3, 16, 1, 11, 'Wednesday', 'March', 'f', 'f', NULL),
-(20220317, '2022-03-17', 2022, 3, 17, 1, 11, 'Thursday', 'March', 'f', 'f', NULL),
-(20220318, '2022-03-18', 2022, 3, 18, 1, 11, 'Friday', 'March', 'f', 'f', NULL),
-(20220319, '2022-03-19', 2022, 3, 19, 1, 11, 'Saturday', 'March', 'f', 't', NULL),
-(20220320, '2022-03-20', 2022, 3, 20, 1, 11, 'Sunday', 'March', 'f', 't', NULL),
-(20220321, '2022-03-21', 2022, 3, 21, 1, 12, 'Monday', 'March', 'f', 'f', NULL),
-(20220322, '2022-03-22', 2022, 3, 22, 1, 12, 'Tuesday', 'March', 'f', 'f', NULL),
-(20220323, '2022-03-23', 2022, 3, 23, 1, 12, 'Wednesday', 'March', 'f', 'f', NULL),
-(20220324, '2022-03-24', 2022, 3, 24, 1, 12, 'Thursday', 'March', 'f', 'f', NULL),
-(20220325, '2022-03-25', 2022, 3, 25, 1, 12, 'Friday', 'March', 'f', 'f', NULL),
-(20220326, '2022-03-26', 2022, 3, 26, 1, 12, 'Saturday', 'March', 'f', 't', NULL),
-(20220327, '2022-03-27', 2022, 3, 27, 1, 12, 'Sunday', 'March', 'f', 't', NULL),
-(20220328, '2022-03-28', 2022, 3, 28, 1, 13, 'Monday', 'March', 'f', 'f', NULL),
-(20220329, '2022-03-29', 2022, 3, 29, 1, 13, 'Tuesday', 'March', 'f', 'f', NULL),
-(20220330, '2022-03-30', 2022, 3, 30, 1, 13, 'Wednesday', 'March', 'f', 'f', NULL),
-(20220331, '2022-03-31', 2022, 3, 31, 1, 13, 'Thursday', 'March', 'f', 'f', NULL),
-(20220401, '2022-04-01', 2022, 4, 1, 2, 13, 'Friday', 'April', 'f', 'f', NULL),
-(20220402, '2022-04-02', 2022, 4, 2, 2, 13, 'Saturday', 'April', 'f', 't', NULL),
-(20220403, '2022-04-03', 2022, 4, 3, 2, 13, 'Sunday', 'April', 'f', 't', NULL),
-(20220404, '2022-04-04', 2022, 4, 4, 2, 14, 'Monday', 'April', 'f', 'f', NULL),
-(20220405, '2022-04-05', 2022, 4, 5, 2, 14, 'Tuesday', 'April', 'f', 'f', NULL),
-(20220406, '2022-04-06', 2022, 4, 6, 2, 14, 'Wednesday', 'April', 'f', 'f', NULL),
-(20220407, '2022-04-07', 2022, 4, 7, 2, 14, 'Thursday', 'April', 'f', 'f', NULL),
-(20220408, '2022-04-08', 2022, 4, 8, 2, 14, 'Friday', 'April', 'f', 'f', NULL),
-(20220409, '2022-04-09', 2022, 4, 9, 2, 14, 'Saturday', 'April', 'f', 't', NULL),
-(20220410, '2022-04-10', 2022, 4, 10, 2, 14, 'Sunday', 'April', 'f', 't', NULL),
-(20220411, '2022-04-11', 2022, 4, 11, 2, 15, 'Monday', 'April', 'f', 'f', NULL),
-(20220412, '2022-04-12', 2022, 4, 12, 2, 15, 'Tuesday', 'April', 'f', 'f', NULL),
-(20220413, '2022-04-13', 2022, 4, 13, 2, 15, 'Wednesday', 'April', 'f', 'f', NULL),
-(20220414, '2022-04-14', 2022, 4, 14, 2, 15, 'Thursday', 'April', 'f', 'f', NULL),
-(20220415, '2022-04-15', 2022, 4, 15, 2, 15, 'Friday', 'April', 'f', 'f', NULL),
-(20220416, '2022-04-16', 2022, 4, 16, 2, 15, 'Saturday', 'April', 'f', 't', NULL),
-(20220417, '2022-04-17', 2022, 4, 17, 2, 15, 'Sunday', 'April', 'f', 't', NULL),
-(20220418, '2022-04-18', 2022, 4, 18, 2, 16, 'Monday', 'April', 'f', 'f', NULL),
-(20220419, '2022-04-19', 2022, 4, 19, 2, 16, 'Tuesday', 'April', 'f', 'f', NULL),
-(20220420, '2022-04-20', 2022, 4, 20, 2, 16, 'Wednesday', 'April', 'f', 'f', NULL),
-(20220421, '2022-04-21', 2022, 4, 21, 2, 16, 'Thursday', 'April', 'f', 'f', NULL),
-(20220422, '2022-04-22', 2022, 4, 22, 2, 16, 'Friday', 'April', 'f', 'f', NULL),
-(20220423, '2022-04-23', 2022, 4, 23, 2, 16, 'Saturday', 'April', 'f', 't', NULL),
-(20220424, '2022-04-24', 2022, 4, 24, 2, 16, 'Sunday', 'April', 'f', 't', NULL),
-(20220425, '2022-04-25', 2022, 4, 25, 2, 17, 'Monday', 'April', 'f', 'f', NULL),
-(20220426, '2022-04-26', 2022, 4, 26, 2, 17, 'Tuesday', 'April', 'f', 'f', NULL),
-(20220427, '2022-04-27', 2022, 4, 27, 2, 17, 'Wednesday', 'April', 'f', 'f', NULL),
-(20220428, '2022-04-28', 2022, 4, 28, 2, 17, 'Thursday', 'April', 'f', 'f', NULL),
-(20220429, '2022-04-29', 2022, 4, 29, 2, 17, 'Friday', 'April', 'f', 'f', NULL),
-(20220430, '2022-04-30', 2022, 4, 30, 2, 17, 'Saturday', 'April', 'f', 't', NULL),
-(20220501, '2022-05-01', 2022, 5, 1, 2, 17, 'Sunday', 'May', 'f', 't', NULL),
-(20220502, '2022-05-02', 2022, 5, 2, 2, 18, 'Monday', 'May', 'f', 'f', NULL),
-(20220503, '2022-05-03', 2022, 5, 3, 2, 18, 'Tuesday', 'May', 'f', 'f', NULL),
-(20220504, '2022-05-04', 2022, 5, 4, 2, 18, 'Wednesday', 'May', 'f', 'f', NULL),
-(20220505, '2022-05-05', 2022, 5, 5, 2, 18, 'Thursday', 'May', 'f', 'f', NULL),
-(20220506, '2022-05-06', 2022, 5, 6, 2, 18, 'Friday', 'May', 'f', 'f', NULL),
-(20220507, '2022-05-07', 2022, 5, 7, 2, 18, 'Saturday', 'May', 'f', 't', NULL),
-(20220508, '2022-05-08', 2022, 5, 8, 2, 18, 'Sunday', 'May', 'f', 't', NULL),
-(20220509, '2022-05-09', 2022, 5, 9, 2, 19, 'Monday', 'May', 'f', 'f', NULL),
-(20220510, '2022-05-10', 2022, 5, 10, 2, 19, 'Tuesday', 'May', 'f', 'f', NULL),
-(20220511, '2022-05-11', 2022, 5, 11, 2, 19, 'Wednesday', 'May', 'f', 'f', NULL),
-(20220512, '2022-05-12', 2022, 5, 12, 2, 19, 'Thursday', 'May', 'f', 'f', NULL),
-(20220513, '2022-05-13', 2022, 5, 13, 2, 19, 'Friday', 'May', 'f', 'f', NULL),
-(20220514, '2022-05-14', 2022, 5, 14, 2, 19, 'Saturday', 'May', 'f', 't', NULL),
-(20220515, '2022-05-15', 2022, 5, 15, 2, 19, 'Sunday', 'May', 'f', 't', NULL),
-(20220516, '2022-05-16', 2022, 5, 16, 2, 20, 'Monday', 'May', 'f', 'f', NULL),
-(20220517, '2022-05-17', 2022, 5, 17, 2, 20, 'Tuesday', 'May', 'f', 'f', NULL),
-(20220518, '2022-05-18', 2022, 5, 18, 2, 20, 'Wednesday', 'May', 'f', 'f', NULL),
-(20220519, '2022-05-19', 2022, 5, 19, 2, 20, 'Thursday', 'May', 'f', 'f', NULL),
-(20220520, '2022-05-20', 2022, 5, 20, 2, 20, 'Friday', 'May', 'f', 'f', NULL),
-(20220521, '2022-05-21', 2022, 5, 21, 2, 20, 'Saturday', 'May', 'f', 't', NULL),
-(20220522, '2022-05-22', 2022, 5, 22, 2, 20, 'Sunday', 'May', 'f', 't', NULL),
-(20220523, '2022-05-23', 2022, 5, 23, 2, 21, 'Monday', 'May', 'f', 'f', NULL),
-(20220524, '2022-05-24', 2022, 5, 24, 2, 21, 'Tuesday', 'May', 'f', 'f', NULL),
-(20220525, '2022-05-25', 2022, 5, 25, 2, 21, 'Wednesday', 'May', 'f', 'f', NULL),
-(20220526, '2022-05-26', 2022, 5, 26, 2, 21, 'Thursday', 'May', 'f', 'f', NULL),
-(20220527, '2022-05-27', 2022, 5, 27, 2, 21, 'Friday', 'May', 'f', 'f', NULL),
-(20220528, '2022-05-28', 2022, 5, 28, 2, 21, 'Saturday', 'May', 'f', 't', NULL),
-(20220529, '2022-05-29', 2022, 5, 29, 2, 21, 'Sunday', 'May', 'f', 't', NULL),
-(20220530, '2022-05-30', 2022, 5, 30, 2, 22, 'Monday', 'May', 'f', 'f', NULL),
-(20220531, '2022-05-31', 2022, 5, 31, 2, 22, 'Tuesday', 'May', 'f', 'f', NULL),
-(20220601, '2022-06-01', 2022, 6, 1, 2, 22, 'Wednesday', 'June', 'f', 'f', NULL),
-(20220602, '2022-06-02', 2022, 6, 2, 2, 22, 'Thursday', 'June', 'f', 'f', NULL),
-(20220603, '2022-06-03', 2022, 6, 3, 2, 22, 'Friday', 'June', 'f', 'f', NULL),
-(20220604, '2022-06-04', 2022, 6, 4, 2, 22, 'Saturday', 'June', 'f', 't', NULL),
-(20220605, '2022-06-05', 2022, 6, 5, 2, 22, 'Sunday', 'June', 'f', 't', NULL),
-(20220606, '2022-06-06', 2022, 6, 6, 2, 23, 'Monday', 'June', 'f', 'f', NULL),
-(20220607, '2022-06-07', 2022, 6, 7, 2, 23, 'Tuesday', 'June', 'f', 'f', NULL),
-(20220608, '2022-06-08', 2022, 6, 8, 2, 23, 'Wednesday', 'June', 'f', 'f', NULL),
-(20220609, '2022-06-09', 2022, 6, 9, 2, 23, 'Thursday', 'June', 'f', 'f', NULL),
-(20220610, '2022-06-10', 2022, 6, 10, 2, 23, 'Friday', 'June', 'f', 'f', NULL),
-(20220611, '2022-06-11', 2022, 6, 11, 2, 23, 'Saturday', 'June', 'f', 't', NULL),
-(20220612, '2022-06-12', 2022, 6, 12, 2, 23, 'Sunday', 'June', 'f', 't', NULL),
-(20220613, '2022-06-13', 2022, 6, 13, 2, 24, 'Monday', 'June', 'f', 'f', NULL),
-(20220614, '2022-06-14', 2022, 6, 14, 2, 24, 'Tuesday', 'June', 'f', 'f', NULL),
-(20220615, '2022-06-15', 2022, 6, 15, 2, 24, 'Wednesday', 'June', 'f', 'f', NULL),
-(20220616, '2022-06-16', 2022, 6, 16, 2, 24, 'Thursday', 'June', 'f', 'f', NULL),
-(20220617, '2022-06-17', 2022, 6, 17, 2, 24, 'Friday', 'June', 'f', 'f', NULL),
-(20220618, '2022-06-18', 2022, 6, 18, 2, 24, 'Saturday', 'June', 'f', 't', NULL),
-(20220619, '2022-06-19', 2022, 6, 19, 2, 24, 'Sunday', 'June', 'f', 't', NULL),
-(20220620, '2022-06-20', 2022, 6, 20, 2, 25, 'Monday', 'June', 'f', 'f', NULL),
-(20220621, '2022-06-21', 2022, 6, 21, 2, 25, 'Tuesday', 'June', 'f', 'f', NULL),
-(20220622, '2022-06-22', 2022, 6, 22, 2, 25, 'Wednesday', 'June', 'f', 'f', NULL),
-(20220623, '2022-06-23', 2022, 6, 23, 2, 25, 'Thursday', 'June', 'f', 'f', NULL),
-(20220624, '2022-06-24', 2022, 6, 24, 2, 25, 'Friday', 'June', 'f', 'f', NULL),
-(20220625, '2022-06-25', 2022, 6, 25, 2, 25, 'Saturday', 'June', 'f', 't', NULL),
-(20220626, '2022-06-26', 2022, 6, 26, 2, 25, 'Sunday', 'June', 'f', 't', NULL),
-(20220627, '2022-06-27', 2022, 6, 27, 2, 26, 'Monday', 'June', 'f', 'f', NULL),
-(20220628, '2022-06-28', 2022, 6, 28, 2, 26, 'Tuesday', 'June', 'f', 'f', NULL),
-(20220629, '2022-06-29', 2022, 6, 29, 2, 26, 'Wednesday', 'June', 'f', 'f', NULL),
-(20220630, '2022-06-30', 2022, 6, 30, 2, 26, 'Thursday', 'June', 'f', 'f', NULL),
-(20220701, '2022-07-01', 2022, 7, 1, 3, 26, 'Friday', 'July', 'f', 'f', NULL),
-(20220702, '2022-07-02', 2022, 7, 2, 3, 26, 'Saturday', 'July', 'f', 't', NULL),
-(20220703, '2022-07-03', 2022, 7, 3, 3, 26, 'Sunday', 'July', 'f', 't', NULL),
-(20220704, '2022-07-04', 2022, 7, 4, 3, 27, 'Monday', 'July', 'f', 'f', NULL),
-(20220705, '2022-07-05', 2022, 7, 5, 3, 27, 'Tuesday', 'July', 'f', 'f', NULL),
-(20220706, '2022-07-06', 2022, 7, 6, 3, 27, 'Wednesday', 'July', 'f', 'f', NULL),
-(20220707, '2022-07-07', 2022, 7, 7, 3, 27, 'Thursday', 'July', 'f', 'f', NULL),
-(20220708, '2022-07-08', 2022, 7, 8, 3, 27, 'Friday', 'July', 'f', 'f', NULL),
-(20220709, '2022-07-09', 2022, 7, 9, 3, 27, 'Saturday', 'July', 'f', 't', NULL),
-(20220710, '2022-07-10', 2022, 7, 10, 3, 27, 'Sunday', 'July', 'f', 't', NULL),
-(20220711, '2022-07-11', 2022, 7, 11, 3, 28, 'Monday', 'July', 'f', 'f', NULL),
-(20220712, '2022-07-12', 2022, 7, 12, 3, 28, 'Tuesday', 'July', 'f', 'f', NULL),
-(20220713, '2022-07-13', 2022, 7, 13, 3, 28, 'Wednesday', 'July', 'f', 'f', NULL),
-(20220714, '2022-07-14', 2022, 7, 14, 3, 28, 'Thursday', 'July', 'f', 'f', NULL),
-(20220715, '2022-07-15', 2022, 7, 15, 3, 28, 'Friday', 'July', 'f', 'f', NULL),
-(20220716, '2022-07-16', 2022, 7, 16, 3, 28, 'Saturday', 'July', 'f', 't', NULL),
-(20220717, '2022-07-17', 2022, 7, 17, 3, 28, 'Sunday', 'July', 'f', 't', NULL),
-(20220718, '2022-07-18', 2022, 7, 18, 3, 29, 'Monday', 'July', 'f', 'f', NULL),
-(20220719, '2022-07-19', 2022, 7, 19, 3, 29, 'Tuesday', 'July', 'f', 'f', NULL),
-(20220720, '2022-07-20', 2022, 7, 20, 3, 29, 'Wednesday', 'July', 'f', 'f', NULL),
-(20220721, '2022-07-21', 2022, 7, 21, 3, 29, 'Thursday', 'July', 'f', 'f', NULL),
-(20220722, '2022-07-22', 2022, 7, 22, 3, 29, 'Friday', 'July', 'f', 'f', NULL),
-(20220723, '2022-07-23', 2022, 7, 23, 3, 29, 'Saturday', 'July', 'f', 't', NULL),
-(20220724, '2022-07-24', 2022, 7, 24, 3, 29, 'Sunday', 'July', 'f', 't', NULL),
-(20220725, '2022-07-25', 2022, 7, 25, 3, 30, 'Monday', 'July', 'f', 'f', NULL),
-(20220726, '2022-07-26', 2022, 7, 26, 3, 30, 'Tuesday', 'July', 'f', 'f', NULL),
-(20220727, '2022-07-27', 2022, 7, 27, 3, 30, 'Wednesday', 'July', 'f', 'f', NULL),
-(20220728, '2022-07-28', 2022, 7, 28, 3, 30, 'Thursday', 'July', 'f', 'f', NULL),
-(20220729, '2022-07-29', 2022, 7, 29, 3, 30, 'Friday', 'July', 'f', 'f', NULL),
-(20220730, '2022-07-30', 2022, 7, 30, 3, 30, 'Saturday', 'July', 'f', 't', NULL),
-(20220731, '2022-07-31', 2022, 7, 31, 3, 30, 'Sunday', 'July', 'f', 't', NULL),
-(20220801, '2022-08-01', 2022, 8, 1, 3, 31, 'Monday', 'August', 'f', 'f', NULL),
-(20220802, '2022-08-02', 2022, 8, 2, 3, 31, 'Tuesday', 'August', 'f', 'f', NULL),
-(20220803, '2022-08-03', 2022, 8, 3, 3, 31, 'Wednesday', 'August', 'f', 'f', NULL),
-(20220804, '2022-08-04', 2022, 8, 4, 3, 31, 'Thursday', 'August', 'f', 'f', NULL),
-(20220805, '2022-08-05', 2022, 8, 5, 3, 31, 'Friday', 'August', 'f', 'f', NULL),
-(20220806, '2022-08-06', 2022, 8, 6, 3, 31, 'Saturday', 'August', 'f', 't', NULL),
-(20220807, '2022-08-07', 2022, 8, 7, 3, 31, 'Sunday', 'August', 'f', 't', NULL),
-(20220808, '2022-08-08', 2022, 8, 8, 3, 32, 'Monday', 'August', 'f', 'f', NULL),
-(20220809, '2022-08-09', 2022, 8, 9, 3, 32, 'Tuesday', 'August', 'f', 'f', NULL),
-(20220810, '2022-08-10', 2022, 8, 10, 3, 32, 'Wednesday', 'August', 'f', 'f', NULL),
-(20220811, '2022-08-11', 2022, 8, 11, 3, 32, 'Thursday', 'August', 'f', 'f', NULL),
-(20220812, '2022-08-12', 2022, 8, 12, 3, 32, 'Friday', 'August', 'f', 'f', NULL),
-(20220813, '2022-08-13', 2022, 8, 13, 3, 32, 'Saturday', 'August', 'f', 't', NULL),
-(20220814, '2022-08-14', 2022, 8, 14, 3, 32, 'Sunday', 'August', 'f', 't', NULL),
-(20220815, '2022-08-15', 2022, 8, 15, 3, 33, 'Monday', 'August', 'f', 'f', NULL),
-(20220816, '2022-08-16', 2022, 8, 16, 3, 33, 'Tuesday', 'August', 'f', 'f', NULL),
-(20220817, '2022-08-17', 2022, 8, 17, 3, 33, 'Wednesday', 'August', 'f', 'f', NULL),
-(20220818, '2022-08-18', 2022, 8, 18, 3, 33, 'Thursday', 'August', 'f', 'f', NULL),
-(20220819, '2022-08-19', 2022, 8, 19, 3, 33, 'Friday', 'August', 'f', 'f', NULL),
-(20220820, '2022-08-20', 2022, 8, 20, 3, 33, 'Saturday', 'August', 'f', 't', NULL),
-(20220821, '2022-08-21', 2022, 8, 21, 3, 33, 'Sunday', 'August', 'f', 't', NULL),
-(20220822, '2022-08-22', 2022, 8, 22, 3, 34, 'Monday', 'August', 'f', 'f', NULL),
-(20220823, '2022-08-23', 2022, 8, 23, 3, 34, 'Tuesday', 'August', 'f', 'f', NULL),
-(20220824, '2022-08-24', 2022, 8, 24, 3, 34, 'Wednesday', 'August', 'f', 'f', NULL),
-(20220825, '2022-08-25', 2022, 8, 25, 3, 34, 'Thursday', 'August', 'f', 'f', NULL),
-(20220826, '2022-08-26', 2022, 8, 26, 3, 34, 'Friday', 'August', 'f', 'f', NULL),
-(20220827, '2022-08-27', 2022, 8, 27, 3, 34, 'Saturday', 'August', 'f', 't', NULL),
-(20220828, '2022-08-28', 2022, 8, 28, 3, 34, 'Sunday', 'August', 'f', 't', NULL),
-(20220829, '2022-08-29', 2022, 8, 29, 3, 35, 'Monday', 'August', 'f', 'f', NULL),
-(20220830, '2022-08-30', 2022, 8, 30, 3, 35, 'Tuesday', 'August', 'f', 'f', NULL),
-(20220831, '2022-08-31', 2022, 8, 31, 3, 35, 'Wednesday', 'August', 'f', 'f', NULL),
-(20220901, '2022-09-01', 2022, 9, 1, 3, 35, 'Thursday', 'September', 'f', 'f', NULL),
-(20220902, '2022-09-02', 2022, 9, 2, 3, 35, 'Friday', 'September', 'f', 'f', NULL),
-(20220903, '2022-09-03', 2022, 9, 3, 3, 35, 'Saturday', 'September', 'f', 't', NULL),
-(20220904, '2022-09-04', 2022, 9, 4, 3, 35, 'Sunday', 'September', 'f', 't', NULL),
 (20220905, '2022-09-05', 2022, 9, 5, 3, 36, 'Monday', 'September', 'f', 'f', NULL),
 (20220906, '2022-09-06', 2022, 9, 6, 3, 36, 'Tuesday', 'September', 'f', 'f', NULL),
 (20220907, '2022-09-07', 2022, 9, 7, 3, 36, 'Wednesday', 'September', 'f', 'f', NULL),
 (20220908, '2022-09-08', 2022, 9, 8, 3, 36, 'Thursday', 'September', 'f', 'f', NULL),
 (20220909, '2022-09-09', 2022, 9, 9, 3, 36, 'Friday', 'September', 'f', 'f', NULL),
-(20220910, '2022-09-10', 2022, 9, 10, 3, 36, 'Saturday', 'September', 'f', 't', NULL);
-INSERT INTO `time_dimension` (`id`, `db_date`, `year`, `month`, `day`, `quarter`, `week`, `day_name`, `month_name`, `holiday_flag`, `weekend_flag`, `event`) VALUES
+(20220910, '2022-09-10', 2022, 9, 10, 3, 36, 'Saturday', 'September', 'f', 't', NULL),
 (20220911, '2022-09-11', 2022, 9, 11, 3, 36, 'Sunday', 'September', 'f', 't', NULL),
 (20220912, '2022-09-12', 2022, 9, 12, 3, 37, 'Monday', 'September', 'f', 'f', NULL),
 (20220913, '2022-09-13', 2022, 9, 13, 3, 37, 'Tuesday', 'September', 'f', 'f', NULL),
@@ -1191,165 +615,43 @@ INSERT INTO `time_dimension` (`id`, `db_date`, `year`, `month`, `day`, `quarter`
 (20230726, '2023-07-26', 2023, 7, 26, 3, 30, 'Wednesday', 'July', 'f', 'f', NULL),
 (20230727, '2023-07-27', 2023, 7, 27, 3, 30, 'Thursday', 'July', 'f', 'f', NULL),
 (20230728, '2023-07-28', 2023, 7, 28, 3, 30, 'Friday', 'July', 'f', 'f', NULL),
-(20230729, '2023-07-29', 2023, 7, 29, 3, 30, 'Saturday', 'July', 'f', 't', NULL),
-(20230730, '2023-07-30', 2023, 7, 30, 3, 30, 'Sunday', 'July', 'f', 't', NULL),
-(20230731, '2023-07-31', 2023, 7, 31, 3, 31, 'Monday', 'July', 'f', 'f', NULL),
-(20230801, '2023-08-01', 2023, 8, 1, 3, 31, 'Tuesday', 'August', 'f', 'f', NULL),
-(20230802, '2023-08-02', 2023, 8, 2, 3, 31, 'Wednesday', 'August', 'f', 'f', NULL),
-(20230803, '2023-08-03', 2023, 8, 3, 3, 31, 'Thursday', 'August', 'f', 'f', NULL),
-(20230804, '2023-08-04', 2023, 8, 4, 3, 31, 'Friday', 'August', 'f', 'f', NULL),
-(20230805, '2023-08-05', 2023, 8, 5, 3, 31, 'Saturday', 'August', 'f', 't', NULL),
-(20230806, '2023-08-06', 2023, 8, 6, 3, 31, 'Sunday', 'August', 'f', 't', NULL),
-(20230807, '2023-08-07', 2023, 8, 7, 3, 32, 'Monday', 'August', 'f', 'f', NULL),
-(20230808, '2023-08-08', 2023, 8, 8, 3, 32, 'Tuesday', 'August', 'f', 'f', NULL),
-(20230809, '2023-08-09', 2023, 8, 9, 3, 32, 'Wednesday', 'August', 'f', 'f', NULL),
-(20230810, '2023-08-10', 2023, 8, 10, 3, 32, 'Thursday', 'August', 'f', 'f', NULL),
-(20230811, '2023-08-11', 2023, 8, 11, 3, 32, 'Friday', 'August', 'f', 'f', NULL),
-(20230812, '2023-08-12', 2023, 8, 12, 3, 32, 'Saturday', 'August', 'f', 't', NULL),
-(20230813, '2023-08-13', 2023, 8, 13, 3, 32, 'Sunday', 'August', 'f', 't', NULL),
-(20230814, '2023-08-14', 2023, 8, 14, 3, 33, 'Monday', 'August', 'f', 'f', NULL),
-(20230815, '2023-08-15', 2023, 8, 15, 3, 33, 'Tuesday', 'August', 'f', 'f', NULL),
-(20230816, '2023-08-16', 2023, 8, 16, 3, 33, 'Wednesday', 'August', 'f', 'f', NULL),
-(20230817, '2023-08-17', 2023, 8, 17, 3, 33, 'Thursday', 'August', 'f', 'f', NULL),
-(20230818, '2023-08-18', 2023, 8, 18, 3, 33, 'Friday', 'August', 'f', 'f', NULL),
-(20230819, '2023-08-19', 2023, 8, 19, 3, 33, 'Saturday', 'August', 'f', 't', NULL),
-(20230820, '2023-08-20', 2023, 8, 20, 3, 33, 'Sunday', 'August', 'f', 't', NULL),
-(20230821, '2023-08-21', 2023, 8, 21, 3, 34, 'Monday', 'August', 'f', 'f', NULL),
-(20230822, '2023-08-22', 2023, 8, 22, 3, 34, 'Tuesday', 'August', 'f', 'f', NULL),
-(20230823, '2023-08-23', 2023, 8, 23, 3, 34, 'Wednesday', 'August', 'f', 'f', NULL),
-(20230824, '2023-08-24', 2023, 8, 24, 3, 34, 'Thursday', 'August', 'f', 'f', NULL),
-(20230825, '2023-08-25', 2023, 8, 25, 3, 34, 'Friday', 'August', 'f', 'f', NULL),
-(20230826, '2023-08-26', 2023, 8, 26, 3, 34, 'Saturday', 'August', 'f', 't', NULL),
-(20230827, '2023-08-27', 2023, 8, 27, 3, 34, 'Sunday', 'August', 'f', 't', NULL),
-(20230828, '2023-08-28', 2023, 8, 28, 3, 35, 'Monday', 'August', 'f', 'f', NULL),
-(20230829, '2023-08-29', 2023, 8, 29, 3, 35, 'Tuesday', 'August', 'f', 'f', NULL),
-(20230830, '2023-08-30', 2023, 8, 30, 3, 35, 'Wednesday', 'August', 'f', 'f', NULL),
-(20230831, '2023-08-31', 2023, 8, 31, 3, 35, 'Thursday', 'August', 'f', 'f', NULL),
-(20230901, '2023-09-01', 2023, 9, 1, 3, 35, 'Friday', 'September', 'f', 'f', NULL),
-(20230902, '2023-09-02', 2023, 9, 2, 3, 35, 'Saturday', 'September', 'f', 't', NULL),
-(20230903, '2023-09-03', 2023, 9, 3, 3, 35, 'Sunday', 'September', 'f', 't', NULL),
-(20230904, '2023-09-04', 2023, 9, 4, 3, 36, 'Monday', 'September', 'f', 'f', NULL),
-(20230905, '2023-09-05', 2023, 9, 5, 3, 36, 'Tuesday', 'September', 'f', 'f', NULL),
-(20230906, '2023-09-06', 2023, 9, 6, 3, 36, 'Wednesday', 'September', 'f', 'f', NULL),
-(20230907, '2023-09-07', 2023, 9, 7, 3, 36, 'Thursday', 'September', 'f', 'f', NULL),
-(20230908, '2023-09-08', 2023, 9, 8, 3, 36, 'Friday', 'September', 'f', 'f', NULL),
-(20230909, '2023-09-09', 2023, 9, 9, 3, 36, 'Saturday', 'September', 'f', 't', NULL),
-(20230910, '2023-09-10', 2023, 9, 10, 3, 36, 'Sunday', 'September', 'f', 't', NULL),
-(20230911, '2023-09-11', 2023, 9, 11, 3, 37, 'Monday', 'September', 'f', 'f', NULL),
-(20230912, '2023-09-12', 2023, 9, 12, 3, 37, 'Tuesday', 'September', 'f', 'f', NULL),
-(20230913, '2023-09-13', 2023, 9, 13, 3, 37, 'Wednesday', 'September', 'f', 'f', NULL),
-(20230914, '2023-09-14', 2023, 9, 14, 3, 37, 'Thursday', 'September', 'f', 'f', NULL),
-(20230915, '2023-09-15', 2023, 9, 15, 3, 37, 'Friday', 'September', 'f', 'f', NULL),
-(20230916, '2023-09-16', 2023, 9, 16, 3, 37, 'Saturday', 'September', 'f', 't', NULL),
-(20230917, '2023-09-17', 2023, 9, 17, 3, 37, 'Sunday', 'September', 'f', 't', NULL),
-(20230918, '2023-09-18', 2023, 9, 18, 3, 38, 'Monday', 'September', 'f', 'f', NULL),
-(20230919, '2023-09-19', 2023, 9, 19, 3, 38, 'Tuesday', 'September', 'f', 'f', NULL),
-(20230920, '2023-09-20', 2023, 9, 20, 3, 38, 'Wednesday', 'September', 'f', 'f', NULL),
-(20230921, '2023-09-21', 2023, 9, 21, 3, 38, 'Thursday', 'September', 'f', 'f', NULL),
-(20230922, '2023-09-22', 2023, 9, 22, 3, 38, 'Friday', 'September', 'f', 'f', NULL),
-(20230923, '2023-09-23', 2023, 9, 23, 3, 38, 'Saturday', 'September', 'f', 't', NULL),
-(20230924, '2023-09-24', 2023, 9, 24, 3, 38, 'Sunday', 'September', 'f', 't', NULL),
-(20230925, '2023-09-25', 2023, 9, 25, 3, 39, 'Monday', 'September', 'f', 'f', NULL),
-(20230926, '2023-09-26', 2023, 9, 26, 3, 39, 'Tuesday', 'September', 'f', 'f', NULL),
-(20230927, '2023-09-27', 2023, 9, 27, 3, 39, 'Wednesday', 'September', 'f', 'f', NULL),
-(20230928, '2023-09-28', 2023, 9, 28, 3, 39, 'Thursday', 'September', 'f', 'f', NULL),
-(20230929, '2023-09-29', 2023, 9, 29, 3, 39, 'Friday', 'September', 'f', 'f', NULL),
-(20230930, '2023-09-30', 2023, 9, 30, 3, 39, 'Saturday', 'September', 'f', 't', NULL),
-(20231001, '2023-10-01', 2023, 10, 1, 4, 39, 'Sunday', 'October', 'f', 't', NULL),
-(20231002, '2023-10-02', 2023, 10, 2, 4, 40, 'Monday', 'October', 'f', 'f', NULL),
-(20231003, '2023-10-03', 2023, 10, 3, 4, 40, 'Tuesday', 'October', 'f', 'f', NULL),
-(20231004, '2023-10-04', 2023, 10, 4, 4, 40, 'Wednesday', 'October', 'f', 'f', NULL),
-(20231005, '2023-10-05', 2023, 10, 5, 4, 40, 'Thursday', 'October', 'f', 'f', NULL),
-(20231006, '2023-10-06', 2023, 10, 6, 4, 40, 'Friday', 'October', 'f', 'f', NULL),
-(20231007, '2023-10-07', 2023, 10, 7, 4, 40, 'Saturday', 'October', 'f', 't', NULL),
-(20231008, '2023-10-08', 2023, 10, 8, 4, 40, 'Sunday', 'October', 'f', 't', NULL),
-(20231009, '2023-10-09', 2023, 10, 9, 4, 41, 'Monday', 'October', 'f', 'f', NULL),
-(20231010, '2023-10-10', 2023, 10, 10, 4, 41, 'Tuesday', 'October', 'f', 'f', NULL),
-(20231011, '2023-10-11', 2023, 10, 11, 4, 41, 'Wednesday', 'October', 'f', 'f', NULL),
-(20231012, '2023-10-12', 2023, 10, 12, 4, 41, 'Thursday', 'October', 'f', 'f', NULL),
-(20231013, '2023-10-13', 2023, 10, 13, 4, 41, 'Friday', 'October', 'f', 'f', NULL),
-(20231014, '2023-10-14', 2023, 10, 14, 4, 41, 'Saturday', 'October', 'f', 't', NULL),
-(20231015, '2023-10-15', 2023, 10, 15, 4, 41, 'Sunday', 'October', 'f', 't', NULL),
-(20231016, '2023-10-16', 2023, 10, 16, 4, 42, 'Monday', 'October', 'f', 'f', NULL),
-(20231017, '2023-10-17', 2023, 10, 17, 4, 42, 'Tuesday', 'October', 'f', 'f', NULL),
-(20231018, '2023-10-18', 2023, 10, 18, 4, 42, 'Wednesday', 'October', 'f', 'f', NULL),
-(20231019, '2023-10-19', 2023, 10, 19, 4, 42, 'Thursday', 'October', 'f', 'f', NULL),
-(20231020, '2023-10-20', 2023, 10, 20, 4, 42, 'Friday', 'October', 'f', 'f', NULL),
-(20231021, '2023-10-21', 2023, 10, 21, 4, 42, 'Saturday', 'October', 'f', 't', NULL),
-(20231022, '2023-10-22', 2023, 10, 22, 4, 42, 'Sunday', 'October', 'f', 't', NULL),
-(20231023, '2023-10-23', 2023, 10, 23, 4, 43, 'Monday', 'October', 'f', 'f', NULL),
-(20231024, '2023-10-24', 2023, 10, 24, 4, 43, 'Tuesday', 'October', 'f', 'f', NULL),
-(20231025, '2023-10-25', 2023, 10, 25, 4, 43, 'Wednesday', 'October', 'f', 'f', NULL),
-(20231026, '2023-10-26', 2023, 10, 26, 4, 43, 'Thursday', 'October', 'f', 'f', NULL),
-(20231027, '2023-10-27', 2023, 10, 27, 4, 43, 'Friday', 'October', 'f', 'f', NULL),
-(20231028, '2023-10-28', 2023, 10, 28, 4, 43, 'Saturday', 'October', 'f', 't', NULL),
-(20231029, '2023-10-29', 2023, 10, 29, 4, 43, 'Sunday', 'October', 'f', 't', NULL),
-(20231030, '2023-10-30', 2023, 10, 30, 4, 44, 'Monday', 'October', 'f', 'f', NULL),
-(20231031, '2023-10-31', 2023, 10, 31, 4, 44, 'Tuesday', 'October', 'f', 'f', NULL),
-(20231101, '2023-11-01', 2023, 11, 1, 4, 44, 'Wednesday', 'November', 'f', 'f', NULL),
-(20231102, '2023-11-02', 2023, 11, 2, 4, 44, 'Thursday', 'November', 'f', 'f', NULL),
-(20231103, '2023-11-03', 2023, 11, 3, 4, 44, 'Friday', 'November', 'f', 'f', NULL),
-(20231104, '2023-11-04', 2023, 11, 4, 4, 44, 'Saturday', 'November', 'f', 't', NULL),
-(20231105, '2023-11-05', 2023, 11, 5, 4, 44, 'Sunday', 'November', 'f', 't', NULL),
-(20231106, '2023-11-06', 2023, 11, 6, 4, 45, 'Monday', 'November', 'f', 'f', NULL),
-(20231107, '2023-11-07', 2023, 11, 7, 4, 45, 'Tuesday', 'November', 'f', 'f', NULL),
-(20231108, '2023-11-08', 2023, 11, 8, 4, 45, 'Wednesday', 'November', 'f', 'f', NULL),
-(20231109, '2023-11-09', 2023, 11, 9, 4, 45, 'Thursday', 'November', 'f', 'f', NULL),
-(20231110, '2023-11-10', 2023, 11, 10, 4, 45, 'Friday', 'November', 'f', 'f', NULL),
-(20231111, '2023-11-11', 2023, 11, 11, 4, 45, 'Saturday', 'November', 'f', 't', NULL),
-(20231112, '2023-11-12', 2023, 11, 12, 4, 45, 'Sunday', 'November', 'f', 't', NULL),
-(20231113, '2023-11-13', 2023, 11, 13, 4, 46, 'Monday', 'November', 'f', 'f', NULL),
-(20231114, '2023-11-14', 2023, 11, 14, 4, 46, 'Tuesday', 'November', 'f', 'f', NULL),
-(20231115, '2023-11-15', 2023, 11, 15, 4, 46, 'Wednesday', 'November', 'f', 'f', NULL),
-(20231116, '2023-11-16', 2023, 11, 16, 4, 46, 'Thursday', 'November', 'f', 'f', NULL),
-(20231117, '2023-11-17', 2023, 11, 17, 4, 46, 'Friday', 'November', 'f', 'f', NULL),
-(20231118, '2023-11-18', 2023, 11, 18, 4, 46, 'Saturday', 'November', 'f', 't', NULL),
-(20231119, '2023-11-19', 2023, 11, 19, 4, 46, 'Sunday', 'November', 'f', 't', NULL),
-(20231120, '2023-11-20', 2023, 11, 20, 4, 47, 'Monday', 'November', 'f', 'f', NULL),
-(20231121, '2023-11-21', 2023, 11, 21, 4, 47, 'Tuesday', 'November', 'f', 'f', NULL),
-(20231122, '2023-11-22', 2023, 11, 22, 4, 47, 'Wednesday', 'November', 'f', 'f', NULL),
-(20231123, '2023-11-23', 2023, 11, 23, 4, 47, 'Thursday', 'November', 'f', 'f', NULL),
-(20231124, '2023-11-24', 2023, 11, 24, 4, 47, 'Friday', 'November', 'f', 'f', NULL),
-(20231125, '2023-11-25', 2023, 11, 25, 4, 47, 'Saturday', 'November', 'f', 't', NULL),
-(20231126, '2023-11-26', 2023, 11, 26, 4, 47, 'Sunday', 'November', 'f', 't', NULL),
-(20231127, '2023-11-27', 2023, 11, 27, 4, 48, 'Monday', 'November', 'f', 'f', NULL),
-(20231128, '2023-11-28', 2023, 11, 28, 4, 48, 'Tuesday', 'November', 'f', 'f', NULL),
-(20231129, '2023-11-29', 2023, 11, 29, 4, 48, 'Wednesday', 'November', 'f', 'f', NULL),
-(20231130, '2023-11-30', 2023, 11, 30, 4, 48, 'Thursday', 'November', 'f', 'f', NULL),
-(20231201, '2023-12-01', 2023, 12, 1, 4, 48, 'Friday', 'December', 'f', 'f', NULL),
-(20231202, '2023-12-02', 2023, 12, 2, 4, 48, 'Saturday', 'December', 'f', 't', NULL),
-(20231203, '2023-12-03', 2023, 12, 3, 4, 48, 'Sunday', 'December', 'f', 't', NULL),
-(20231204, '2023-12-04', 2023, 12, 4, 4, 49, 'Monday', 'December', 'f', 'f', NULL),
-(20231205, '2023-12-05', 2023, 12, 5, 4, 49, 'Tuesday', 'December', 'f', 'f', NULL),
-(20231206, '2023-12-06', 2023, 12, 6, 4, 49, 'Wednesday', 'December', 'f', 'f', NULL),
-(20231207, '2023-12-07', 2023, 12, 7, 4, 49, 'Thursday', 'December', 'f', 'f', NULL),
-(20231208, '2023-12-08', 2023, 12, 8, 4, 49, 'Friday', 'December', 'f', 'f', NULL),
-(20231209, '2023-12-09', 2023, 12, 9, 4, 49, 'Saturday', 'December', 'f', 't', NULL),
-(20231210, '2023-12-10', 2023, 12, 10, 4, 49, 'Sunday', 'December', 'f', 't', NULL),
-(20231211, '2023-12-11', 2023, 12, 11, 4, 50, 'Monday', 'December', 'f', 'f', NULL),
-(20231212, '2023-12-12', 2023, 12, 12, 4, 50, 'Tuesday', 'December', 'f', 'f', NULL),
-(20231213, '2023-12-13', 2023, 12, 13, 4, 50, 'Wednesday', 'December', 'f', 'f', NULL),
-(20231214, '2023-12-14', 2023, 12, 14, 4, 50, 'Thursday', 'December', 'f', 'f', NULL),
-(20231215, '2023-12-15', 2023, 12, 15, 4, 50, 'Friday', 'December', 'f', 'f', NULL),
-(20231216, '2023-12-16', 2023, 12, 16, 4, 50, 'Saturday', 'December', 'f', 't', NULL),
-(20231217, '2023-12-17', 2023, 12, 17, 4, 50, 'Sunday', 'December', 'f', 't', NULL),
-(20231218, '2023-12-18', 2023, 12, 18, 4, 51, 'Monday', 'December', 'f', 'f', NULL),
-(20231219, '2023-12-19', 2023, 12, 19, 4, 51, 'Tuesday', 'December', 'f', 'f', NULL),
-(20231220, '2023-12-20', 2023, 12, 20, 4, 51, 'Wednesday', 'December', 'f', 'f', NULL),
-(20231221, '2023-12-21', 2023, 12, 21, 4, 51, 'Thursday', 'December', 'f', 'f', NULL),
-(20231222, '2023-12-22', 2023, 12, 22, 4, 51, 'Friday', 'December', 'f', 'f', NULL),
-(20231223, '2023-12-23', 2023, 12, 23, 4, 51, 'Saturday', 'December', 'f', 't', NULL),
-(20231224, '2023-12-24', 2023, 12, 24, 4, 51, 'Sunday', 'December', 'f', 't', NULL),
-(20231225, '2023-12-25', 2023, 12, 25, 4, 52, 'Monday', 'December', 'f', 'f', NULL),
-(20231226, '2023-12-26', 2023, 12, 26, 4, 52, 'Tuesday', 'December', 'f', 'f', NULL),
-(20231227, '2023-12-27', 2023, 12, 27, 4, 52, 'Wednesday', 'December', 'f', 'f', NULL),
-(20231228, '2023-12-28', 2023, 12, 28, 4, 52, 'Thursday', 'December', 'f', 'f', NULL),
-(20231229, '2023-12-29', 2023, 12, 29, 4, 52, 'Friday', 'December', 'f', 'f', NULL),
-(20231230, '2023-12-30', 2023, 12, 30, 4, 52, 'Saturday', 'December', 'f', 't', NULL);
+(20230729, '2023-07-29', 2023, 7, 29, 3, 30, 'Saturday', 'July', 'f', 't', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateur`
+--
+
+DROP TABLE IF EXISTS `utilisateur`;
+CREATE TABLE IF NOT EXISTS `utilisateur` (
+  `mailUtilisateur` varchar(50) NOT NULL,
+  `mdpUtilisateur` varchar(50) NOT NULL,
+  `idDroitUtilisateur` int(11) NOT NULL,
+  `idProfesseur` int(11) DEFAULT NULL,
+  PRIMARY KEY (`mailUtilisateur`),
+  KEY `FK_PROF2` (`idProfesseur`),
+  KEY `FK_DROIT` (`idDroitUtilisateur`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`mailUtilisateur`, `mdpUtilisateur`, `idDroitUtilisateur`, `idProfesseur`) VALUES
+('admin', 'admin', 1, NULL),
+('test', 'test', 2, 1);
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `activite`
+--
+ALTER TABLE `activite`
+  ADD CONSTRAINT `FK_CPC` FOREIGN KEY (`idCompetenceChapeau`) REFERENCES `competence_chapeau` (`idCompetence`),
+  ADD CONSTRAINT `FK_Prof` FOREIGN KEY (`idProfesseur`) REFERENCES `professeur` (`idProf`);
 
 --
 -- Contraintes pour la table `affecter`
@@ -1358,6 +660,13 @@ ALTER TABLE `affecter`
   ADD CONSTRAINT `fk_classe` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
   ADD CONSTRAINT `fk_event` FOREIGN KEY (`idEvent`) REFERENCES `evenement` (`idEvent`),
   ADD CONSTRAINT `fk_week` FOREIGN KEY (`idWeek`) REFERENCES `time_dimension` (`week`);
+
+--
+-- Contraintes pour la table `attribuer_classe`
+--
+ALTER TABLE `attribuer_classe`
+  ADD CONSTRAINT `FK_CLASSE1` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
+  ADD CONSTRAINT `FK_PROF45` FOREIGN KEY (`idProf`) REFERENCES `professeur` (`idProf`);
 
 --
 -- Contraintes pour la table `classe`
@@ -1376,6 +685,13 @@ ALTER TABLE `competence_chapeau`
 --
 ALTER TABLE `sous_competence`
   ADD CONSTRAINT `FKCOMPETENCE` FOREIGN KEY (`idCompetence`) REFERENCES `competence_chapeau` (`idCompetence`);
+
+--
+-- Contraintes pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD CONSTRAINT `FK_DROIT` FOREIGN KEY (`idDroitUtilisateur`) REFERENCES `droit` (`idDroit`),
+  ADD CONSTRAINT `FK_PROF2` FOREIGN KEY (`idProfesseur`) REFERENCES `professeur` (`idProf`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -37,37 +37,88 @@ function getEvent()
     return $resultat;
 }
 
-function getWeek(){
+function getWeek()
+{
     try {
         $connex = connexionPDO();
         $req = $connex->prepare("SELECT DISTINCT week from time_dimension where db_date BETWEEN '2021-09-06' and '2022-07-03' ORDER BY id");
 
-      
+
         $req->execute();
 
-        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
-        
-    }catch (PDOException $e) {
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
     }
     return $resultat;
 }
 
-function getWeekEvent($classe, $semaine){
+function getDateFin(){
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("select db_date from time_dimension where db_date =(select max(db_date) from time_dimension)");
+   
+
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getDateDebut(){
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("select db_date from time_dimension where db_date =(select min(db_date) from time_dimension)");
+   
+
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getWeekByDate($dateDebut, $dateFin)
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT DISTINCT week from time_dimension where db_date BETWEEN :dateDebut and :dateFin ORDER BY id");
+        $req->bindValue('dateDebut', $dateDebut);
+        $req->bindValue('dateFin', $dateFin);
+
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+
+function getWeekEvent($classe, $semaine)
+{
     try {
         $connex = connexionPDO();
         $req = $connex->prepare("SELECT idEvent from affecter
         Where  idClasse=:classe and idWeek=:semaine");
-        $req->bindValue('classe',$classe);
-        $req->bindValue('semaine',$semaine);
+        $req->bindValue('classe', $classe);
+        $req->bindValue('semaine', $semaine);
 
-      
+
         $req->execute();
 
-        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
-        
-    }catch (PDOException $e) {
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
     }
@@ -87,14 +138,13 @@ function supprTableCalendrier()
         FOREIGN KEY (idWeek) REFERENCES time_dimension(Week);");
 
         $req->execute();
-
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
     }
 }
 
-function creeTableCalendrier($dateDebut ,$dateFin)
+function creeTableCalendrier($dateDebut, $dateFin)
 {
     try {
         $connex = connexionPDO();
@@ -104,11 +154,8 @@ function creeTableCalendrier($dateDebut ,$dateFin)
         $req->bindValue('dateFin', $dateFin, PDO::PARAM_STR);
 
         $req->execute();
-
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
     }
-
 }
-?>

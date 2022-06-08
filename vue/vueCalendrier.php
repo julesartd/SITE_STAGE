@@ -15,4 +15,5 @@
 	<h3 id="lstA">Entrez la date de début et de fin d'année scolaire</h3>
 
 	Supprimer la table actuel : <input type="submit" value="Supprimer" name="btnSupprimer">
+
 	</form>

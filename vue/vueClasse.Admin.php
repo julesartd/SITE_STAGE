@@ -25,7 +25,6 @@
 
         ?>
     </select>
-    <input type="text" name='txtNom' placeholder='Nom de la classe'>
 
     </br>
     <input type="submit" value="AJOUTER" name="btnAjoutClasse">
@@ -40,7 +39,7 @@
 
         <th>Niveau de classe</th>
         <th>Bac</th>
-        <th>Nom de la classe</th>
+        <th>Détail de la classe</th>
         <th></th>
     </tr>
     <?php
@@ -49,7 +48,7 @@
         <tr>
             <td><?php echo $uneClasse["niveauClasse"]; ?></td>
             <td><?php echo $uneClasse["nomDiplome"]; ?></td>
-            <td><?php echo $uneClasse["nomClasse"]; ?></td>
+            <td><a href="index.php?action=classe">Détail</td>
             <td><a href="index.php?action=classe&idSuppr=<?php echo $uneClasse['idClasse']; ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette classe ?')">Supprimer</td>
         </tr>
     <?php

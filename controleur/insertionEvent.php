@@ -5,15 +5,33 @@
     include_once "modele/bd_calendrier.php";
  
 
-    $listeClasse = getClasse();   
+    if($_SESSION["idDroitUtilisateur"] ==1){
+        $listeClasse = getClasse();   
+    }
+    if($_SESSION["idDroitUtilisateur"]== 2){
+        $listeClasse = getClasseByIdProf($_SESSION['idProfesseur']);   
+    }
+  
+
+
+
     $listeEvent = getEvent();  
-    $semaine = getWeek();
+    $dateDt = getDateDebut();
+    $dateDebut = $dateDt['db_date'];
+    $dateF = getDateFin();
+    $dateFin = $dateF['db_date'];
+
+ 
+    $semaine = getWeekByDate($dateDebut,$dateFin);
+
+
+
+   
 
   
   
-    $semaineAdd = substr($_POST['numero'],-2);
-    $numeroEvent = $_POST['evenement'];
-    $numeroClasse = $_POST['classe'];
+    $semaineAdd = "";
+
 
   
 
@@ -42,7 +60,7 @@
 
 
   
-    include "vue/vueEvent.php";
+    include "vue/vueEvent.Admin.php";
   
     ?>
 </div>

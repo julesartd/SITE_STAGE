@@ -20,7 +20,7 @@
     </select>
 
 
-    <select name="evenement">
+    <select class="form-select" aria-label="Default select example" name="evenement">
 
         <option selected>Sélectionnez un évènement</option>
 
@@ -56,7 +56,6 @@
         <?php
 
 
-
         foreach ($semaine as $uneSemaine) {
 
         ?>
@@ -79,58 +78,27 @@
             <?php
 
             foreach ($semaine as $uneSemaine) {
-
-                $rechercheEvent = getWeekEvent($uneClasse['idClasse'], $uneSemaine['week']);
-
-                if ($recherche == 1) {
+ 
+                if ($uneSemaine['week'] == $semaineAdd) {
             ?>
                     <style>
-                        #tdRouge {
+                         #tdRouge {
                             background-color: red;
                         }
                     </style>
 
                     <td id="tdRouge">evenement</td>
-                    <?php
-
-                    if ($rechercheEvent['idEvent'] == 2) {
-
-                        ?>
-                        <style>
-                            #tdVert {
-                                background-color: green;
-                            }
-                        </style>
-
-                        <td id="tdVert">evenement</td>
-                    <?php
-
-                        if ($rechercheEvent['idEvent'] == 3) {
-                    ?>
-                            <style>
-                                #tdJaune {
-                                    background-color: yellow;
-                                }
-                            </style>
-
-                            <td id="tdJaune">evenement</td>
-                        <?php
-                        }
-                        ?>
-                      
                 <?php
                 } else {
                 ?>
-                    <td><?php echo ($uneClasse['idClasse'] . $uneSemaine['week']); ?></td>
-        <?php
+                    <td></td>
+            <?php
                 }
             }
-        }
-    }
-
-        ?>
+            ?>
 
         <?php
+    }
 
 
 
