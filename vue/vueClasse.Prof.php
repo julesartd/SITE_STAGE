@@ -15,7 +15,7 @@
         <tr>
             <td><?php echo $uneClasse["niveauClasse"]; ?></td>
             <td><?php echo $uneClasse["nomDiplome"]; ?></td>
-            <td><a href="index.php?action=classe">Détail</td>
+            <td><a href="index.php?action=detailClasse&id=<?php echo $uneClasse['idClasse']; ?>">Détail</td>
           
         </tr>
     <?php
