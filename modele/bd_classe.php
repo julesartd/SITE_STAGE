@@ -93,7 +93,6 @@ function insertEleve($nom, $prenom)
     }
 }
  
-<<<<<<< HEAD
 function getProfByClasse($idClasse){
     $resultat = array();
     try {
@@ -132,7 +131,4 @@ function getEleveByClasse($idClasse){
 
 }
 
-=======
- 
->>>>>>> 3613623433a79549c7c2d34d7c5de13ba5f27602
 ?>

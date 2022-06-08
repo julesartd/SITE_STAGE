@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 07 juin 2022 à 11:52
--- Version du serveur :  5.7.31
--- Version de PHP : 7.3.21
+-- Généré le : mer. 08 juin 2022 à 13:38
+-- Version du serveur : 5.7.36
+-- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -85,22 +85,43 @@ CREATE TABLE IF NOT EXISTS `affecter` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `attribuer_classe`
+-- Structure de la table `attribuer_eleve`
 --
 
-DROP TABLE IF EXISTS `attribuer_classe`;
-CREATE TABLE IF NOT EXISTS `attribuer_classe` (
+DROP TABLE IF EXISTS `attribuer_eleve`;
+CREATE TABLE IF NOT EXISTS `attribuer_eleve` (
   `idClasse` int(11) NOT NULL,
-  `idProf` int(11) NOT NULL,
-  PRIMARY KEY (`idClasse`,`idProf`),
-  KEY `FK_PROF45` (`idProf`)
+  `idEleve` int(11) NOT NULL,
+  PRIMARY KEY (`idClasse`,`idEleve`),
+  KEY `FK_ELEVE` (`idEleve`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Déchargement des données de la table `attribuer_classe`
+-- Déchargement des données de la table `attribuer_eleve`
 --
 
-INSERT INTO `attribuer_classe` (`idClasse`, `idProf`) VALUES
+INSERT INTO `attribuer_eleve` (`idClasse`, `idEleve`) VALUES
+(2, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `attribuer_prof`
+--
+
+DROP TABLE IF EXISTS `attribuer_prof`;
+CREATE TABLE IF NOT EXISTS `attribuer_prof` (
+  `idClasse` int(11) NOT NULL,
+  `idProf` int(11) NOT NULL,
+  PRIMARY KEY (`idClasse`,`idProf`),
+  KEY `FK_PROF6` (`idProf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `attribuer_prof`
+--
+
+INSERT INTO `attribuer_prof` (`idClasse`, `idProf`) VALUES
 (2, 1);
 
 -- --------------------------------------------------------
@@ -183,6 +204,27 @@ CREATE TABLE IF NOT EXISTS `droit` (
 INSERT INTO `droit` (`idDroit`, `Droit`) VALUES
 (1, 'Administrateur'),
 (2, 'Professeur');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `eleve`
+--
+
+DROP TABLE IF EXISTS `eleve`;
+CREATE TABLE IF NOT EXISTS `eleve` (
+  `idEleve` int(11) NOT NULL AUTO_INCREMENT,
+  `nomEleve` varchar(50) NOT NULL,
+  `prenomEleve` varchar(50) NOT NULL,
+  PRIMARY KEY (`idEleve`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `eleve`
+--
+
+INSERT INTO `eleve` (`idEleve`, `nomEleve`, `prenomEleve`) VALUES
+(1, 'Jules', 'ARTAUD');
 
 -- --------------------------------------------------------
 
@@ -662,11 +704,18 @@ ALTER TABLE `affecter`
   ADD CONSTRAINT `fk_week` FOREIGN KEY (`idWeek`) REFERENCES `time_dimension` (`week`);
 
 --
--- Contraintes pour la table `attribuer_classe`
+-- Contraintes pour la table `attribuer_eleve`
 --
-ALTER TABLE `attribuer_classe`
-  ADD CONSTRAINT `FK_CLASSE1` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
-  ADD CONSTRAINT `FK_PROF45` FOREIGN KEY (`idProf`) REFERENCES `professeur` (`idProf`);
+ALTER TABLE `attribuer_eleve`
+  ADD CONSTRAINT `FK_CLASSE6` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
+  ADD CONSTRAINT `FK_ELEVE` FOREIGN KEY (`idEleve`) REFERENCES `eleve` (`idEleve`);
+
+--
+-- Contraintes pour la table `attribuer_prof`
+--
+ALTER TABLE `attribuer_prof`
+  ADD CONSTRAINT `FK_CLASSE7` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
+  ADD CONSTRAINT `FK_PROF6` FOREIGN KEY (`idProf`) REFERENCES `professeur` (`idProf`);
 
 --
 -- Contraintes pour la table `classe`
