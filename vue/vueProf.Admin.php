@@ -4,7 +4,9 @@
         <input required type="text" name='txtNomProf' placeholder='Nom du professeur'>
 
         <input required type="text" name='txtPrenomProf' placeholder='Prénom du professeur'>
+        
 
+        <input type="submit" name='btnAjoutProf'>
 
     </div>
     </br>

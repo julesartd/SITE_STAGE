@@ -16,9 +16,11 @@ function controleurPrincipal($action){
     $lesActions["event"] = "insertionEvent.php";
     $lesActions["classe"] = "insertionClasse.php";
     $lesActions["activite"] = "activite.php";
- 
     $lesActions["connexion"] = "connexion.php";
     $lesActions["deconnexion"] = "deconnexion.php";
+    $lesActions["prof"] = "prof.php";
+    $lesActions["eleve"] = "eleve.php";
+
     if(isLoggedOn()){
         $lesActions["defaut"] = "insertionClasse.php";
     }

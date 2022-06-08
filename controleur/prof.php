@@ -2,13 +2,13 @@
     <?php
 
 
-    include_once "modele/bd_activite.php";
+    include_once "modele/bd_classe.php";
 
 
     if(isset($_POST['btnAjoutProf'])){
-        insertProf($_POST['nomProf'], $_POST['prenomProf']);
+        insertProf($_POST['txtNomProf'], $_POST['txtPrenomProf']);
         
-        header("Location:index.php?action=activite");
+        header("Location:index.php?action=prof");
     }
 
 

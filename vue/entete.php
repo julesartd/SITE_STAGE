@@ -13,6 +13,8 @@
             <li class="menu__group"><a href="./?action=classe" class="menu__link r-link text-underlined">Classe</a></li>
             <li class="menu__group"><a href="./?action=activite" class="menu__link r-link text-underlined">Activité</a></li>
             <li class="menu__group"><a href="./?action=deconnexion" class="menu__link r-link text-underlined">Déconnexion</a></li>
+            <li class="menu__group"><a href="./?action=prof" class="menu__link r-link text-underlined">Professeur</a></li>
+            <li class="menu__group"><a href="./?action=eleve" class="menu__link r-link text-underlined">élève</a></li>
             <?php
     }else{
     ?>
