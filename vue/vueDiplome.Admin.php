@@ -9,9 +9,10 @@
     <h2>Voici la liste des diplomes</h2>
     <div id=tableau>
         <table class="table table-bordered">
-            <tr>
+            <tr class="table-active">
                 <th>nom diplome</th>
                 <th>Compétence</th>
+                <th></th>
             </tr>
             <?php
             foreach ($tableauDiplome as $diplome) {

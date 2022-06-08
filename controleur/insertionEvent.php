@@ -1,9 +1,8 @@
 <div>
     <?php
 
-    include_once "modele/bd_diplome.php";
     include_once "modele/bd_calendrier.php";
- 
+    include_once "modele/bd_classe.php";
 
     if($_SESSION["idDroitUtilisateur"] ==1){
         $listeClasse = getClasse();   
