@@ -65,7 +65,23 @@ function insertProf($nom, $prenom)
 {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO professeur VALUES(:nom, :prenom)");
+        $req = $connex->prepare("INSERT INTO professeur VALUES(null,:nom, :prenom)");
+
+        $req->bindValue('nom', $nom);
+        $req->bindValue('prenom', $prenom);
+
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
+
+function insertEleve($nom, $prenom)
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("INSERT INTO eleve VALUES(null,:nom, :prenom)");
 
         $req->bindValue('nom', $nom);
         $req->bindValue('prenom', $prenom);
@@ -77,6 +93,7 @@ function insertProf($nom, $prenom)
     }
 }
  
+<<<<<<< HEAD
 function getProfByClasse($idClasse){
     $resultat = array();
     try {
@@ -115,4 +132,7 @@ function getEleveByClasse($idClasse){
 
 }
 
+=======
+ 
+>>>>>>> 3613623433a79549c7c2d34d7c5de13ba5f27602
 ?>
