@@ -16,6 +16,7 @@
                     <li class="menu__group"><a href="./?action=calendrier" class="menu__link r-link text-underlined">Calendrier</a></li>
                     <li class="menu__group"><a href="./?action=prof" class="menu__link r-link text-underlined">Professeur</a></li>
                     <li class="menu__group"><a href="./?action=eleve" class="menu__link r-link text-underlined">élève</a></li>
+                    <li class="menu__group"><a href="./?action=strategie" class="menu__link r-link text-underlined">stratégie</a></li>
                 <?php
                 }
                 ?>

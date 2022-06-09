@@ -3,7 +3,7 @@
 
     include_once "modele/bd_competence.php";
 
-    $max = getMaxCompetenceId($_GET['id']);
+    $max = getMaxSousCompetenceId($_GET['id']);
 
   
     $maxSousCompetence = $max['num'];
