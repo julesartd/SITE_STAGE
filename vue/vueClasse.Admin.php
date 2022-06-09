@@ -4,9 +4,12 @@
 
     <select  aria-label="Default select example" name="NiveauxClasse">
     <option selected>Sélectionnez un niveau de classe</option>
-    <option> terminal</option>
-    <option> 1ère</option>
     <option> 2nd</option>
+    <option> 1ère</option>
+    <option> Terminal</option>
+    <option> 1ère année</option>
+    <option> 2ème année</option>
+    
     </select>
 
     <select  aria-label="Default select example" name="diplome">

@@ -22,6 +22,7 @@ function controleurPrincipal($action){
     $lesActions["deconnexion"] = "deconnexion.php";
     $lesActions["prof"] = "prof.php";
     $lesActions["eleve"] = "eleve.php";
+    $lesActions["strategie"] = "strategie.php";
 
     if(isLoggedOn()){
         $lesActions["defaut"] = "insertionClasse.php";

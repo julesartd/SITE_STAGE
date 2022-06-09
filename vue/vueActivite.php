@@ -1,22 +1,41 @@
 <form method="POST" class="lb mb-3" action="">
-    <h1 id="lstA">Créer une activité</h1>
-    </br>
-
-
+    <h1 id="lstA">Créer une activité</h1>   
 
     
-    <input type="text" name='txtNom' placeholder="Nom de l'activité">
+    <input type="text" name='txtNomActivite' placeholder="Nom de l'activité">
 
-    <select  aria-label="Default select example" name="diplome">
+    <select  aria-label="Default select example" name="classe" onChange="submit()" >
 
-        <option selected>Sélectionnez un diplome</option>
+  
+
+        
 
         <?php
-        foreach ($listeDiplome as $unDiplome) {
+        foreach ($listeClasse as $uneClasse) {
+
+
 
         ?>
 
-            <option value=<?php echo $unDiplome['idDiplome']; ?>><?php echo $unDiplome['nomDiplome']; ?></option>
+
+            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'].' '.$uneClasse['nomDiplome'] ?></option>
+        <?php
+        }
+
+
+        ?>
+    </select>
+
+    <select  aria-label="Default select example" name="competence">
+
+        <option selected>Sélectionnez une compétence chapeau</option>
+
+        <?php
+        foreach ($listeCompetence as $uneCompetence) {
+
+        ?>
+
+            <option value=<?php echo $uneCompetence['idCompetence']; ?>><?php echo $uneCompetence['nomCompetence']; ?></option>
         <?php
         }
 

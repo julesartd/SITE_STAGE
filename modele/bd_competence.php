@@ -55,6 +55,23 @@ function getCompetenceChapeau(){
     return $resultat;
 }
 
+function getSousCompetence(){
+
+    $resultat = array();
+    try {
+        $connex = connexionPDO();
+        $rec = $connex->prepare("SELECT *, libelleCompetence FROM sous_competence s 
+        inner join competence_chapeau c on s.idCompetence = c.idCompetence");
+        $rec->execute();
+
+
+        $resultat=$rec->fetchAll(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
 
 
 function getCompetenceChapeauByDiplome($id){
@@ -114,7 +131,7 @@ function getSousCompetenceById($id){
 }
 
 
-function getMaxCompetenceId($id){
+function getMaxSousCompetenceId($id){
 
     try {
 
@@ -131,6 +148,26 @@ function getMaxCompetenceId($id){
     }
     return $resultat;
 }
+
+function nombreSousCompetenceVu(){
+
+    try {
+
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT COUNT(idSousCompetence) as nombre FROM attribuer_activite");
+     
+        $req->execute();
+
+        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
+
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+
 
 function supprSousCompetence($id){
 

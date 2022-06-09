@@ -5,7 +5,7 @@
     include_once "modele/bd_diplome.php";
     
     $idDiplome = $_GET['id'];
-    $listeDiplome = getdiplome();
+    $listeDiplome = getDiplome();
     $listeCompetence= getCompetenceChapeauBydiplome($_GET['id']);
 
 
