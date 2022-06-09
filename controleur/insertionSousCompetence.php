@@ -27,9 +27,13 @@
     }
     
     if (isset($_GET['idSuppr'])) {
-        
-        supprSousCompetence($_GET['idSuppr']);
-        header("Location:index.php?action=sousCompetence&id=$idComp");
+        try {
+            supprSousCompetence($_GET['idSuppr']);
+            header("Location:index.php?action=sousCompetence&id=$idComp");
+        } catch (Exception $e) {
+            echo "Cette sous-compétence est attribué à une activité, veuillez supprimer l'activité en premier :";
+       
+        }
         
     }
 

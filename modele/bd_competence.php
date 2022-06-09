@@ -43,7 +43,7 @@ function getCompetenceChapeau(){
     $resultat = array();
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM competence_chapeau");
+        $rec = $connex->prepare("SELECT * FROM competence_chapeau ORDER BY libelleCompetence ASC");
         $rec->execute();
 
 
@@ -61,7 +61,7 @@ function getSousCompetence(){
     try {
         $connex = connexionPDO();
         $rec = $connex->prepare("SELECT *, libelleCompetence FROM sous_competence s 
-        inner join competence_chapeau c on s.idCompetence = c.idCompetence");
+        inner join competence_chapeau c on s.idCompetence = c.idCompetence ORDER BY libelleCompetence ASC");
         $rec->execute();
 
 
@@ -79,7 +79,7 @@ function getCompetenceChapeauByDiplome($id){
    
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idDiplome =:id");
+        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idDiplome =:id ORDER BY libelleCompetence ASC");
         $rec->bindValue("id", $id);
         $rec->execute();
 
@@ -98,7 +98,7 @@ function getCompetenceChapeauById($id){
    
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idCompetence =:id");
+        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idCompetence =:id ORDER BY libelleCompetence ASC");
         $rec->bindValue("id", $id);
         $rec->execute();
 
@@ -149,16 +149,17 @@ function getMaxSousCompetenceId($id){
     return $resultat;
 }
 
-function nombreSousCompetenceVu(){
+function nombreSousCompetenceVu($idSousCompetence){
 
     try {
 
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT COUNT(idSousCompetence) as nombre FROM attribuer_activite");
-     
+        $req = $connex->prepare("SELECT COUNT(ac.idSousCompetence) as nbSousCompetence FROM attribuer_activite ac
+        INNER JOIN sous_competence sc on sc.idSousCompetence = ac.idSousCompetence WHERE sc.idSousCompetence = :idSousCompetence " );
+        $req->bindValue("idSousCompetence", $idSousCompetence);
         $req->execute();
 
-        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
+        $resultat=$req->fetch(PDO::FETCH_ASSOC);
 
     }catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();

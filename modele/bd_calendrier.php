@@ -159,3 +159,20 @@ function creeTableCalendrier($dateDebut, $dateFin)
         die();
     }
 }
+
+function getWeekActivite()
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT * from attribuer_activite");
+  
+
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}

@@ -11,16 +11,16 @@
 
     foreach ($listeCompetence as $uneCompetence) {
 
-        $comp = getMaxSousCompetenceId($uneCompetence['idCompetence']);
-        $nbSousComp = $comp['num'];
 
+        $nbSousCompInCompChapeau = getMaxSousCompetenceId($uneCompetence['idCompetence']);
+        $maxSousComp = $nbSousCompInCompChapeau['num'];
 
 
 
 
     ?>
 
-        <th colspan=<?php echo $nbSousComp; ?>><?php echo $uneCompetence['libelleCompetence'] . ' ' . $uneCompetence['intituleCompetence'] ?></th>
+        <th colspan=<?php echo $maxSousComp; ?>><?php echo $uneCompetence['libelleCompetence'] . ' ' . $uneCompetence['intituleCompetence'] ?></th>
 
     <?php
 
@@ -54,49 +54,61 @@
 
         foreach ($listeSousCompetence as $uneSousCompetence) {
 
-        
+            $nbSousCompetence = nombreSousCompetenceVu($uneSousCompetence['idSousCompetence']);
+            $nombre = $nbSousCompetence['nbSousCompetence'];
+
+
         ?>
-            
-         <td>1</td>
 
-            <?php
+            <td> <?php echo $nombre ?></td>
+
+
+        <?php
         }
 
-    ?>
+        ?>
     </tr>
     <?php
 
-        foreach ($listeSemaine as $uneSemaine) {
-            ?>
-            <th><?php echo $uneSemaine['week'] ?></th>
-            <?php
-            foreach ($listeSousCompetence as $uneSousCompetence) {
-
-                if ($uneSemaine['week'] == 20 && $uneSousCompetence['idSousCompetence'] == 35){
-                    ?><td>VU</td><?php
-                }else {
-                    echo "<td> </td>";
-                }
-            ?>
-
-                
-
-            <?php
-            }
-
-            ?>
-    <tr>
-
-
-        
-
-
-
-    <?php
-        }
+    foreach ($listeSemaine as $uneSemaine) {
     ?>
+        <th><?php echo $uneSemaine['idWeek'] ?></th>
 
-    </tr>
+        <td></td>
+        <?php
 
-    </tr>
+
+        foreach ($listeSousCompetence as $uneSousCompetence) {
+        ?>
+
+           
+            <?php
+            if ($uneSousCompetence['idSousCompetence'] == $uneSemaine['idSousCompetence']) {
+
+            ?><td>vu</td><?php
+                    } else {
+                        echo "<td> </td>";
+                    }
+                        ?>
+
+
+
+        <?php
+        }
+
+        ?>
+        <tr>
+
+
+
+
+
+
+        <?php
+    }
+        ?>
+
+        </tr>
+
+        </tr>
 </table>

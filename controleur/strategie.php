@@ -18,11 +18,9 @@
     $listeCompetence= getCompetenceChapeau();
     $listeSousCompetence = getSousCompetence();
 
-    $nombreSousCompetence = nombreSousCompetenceVu();
-    $nombreSC = $nombreSousCompetence['nombre'];
-    print_r($nombreSC);
+ 
      
-    $listeSemaine = getWeekByDate($dateDebut,$dateFin);
+    $listeSemaine = getWeekActivite();
 
 
 
