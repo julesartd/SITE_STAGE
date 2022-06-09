@@ -131,5 +131,4 @@ function getEleveByClasse($idClasse){
 
 }
 
- 
 ?>
