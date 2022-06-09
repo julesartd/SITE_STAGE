@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mer. 08 juin 2022 à 13:38
--- Version du serveur : 5.7.36
--- Version de PHP : 7.4.26
+-- Généré le : jeu. 09 juin 2022 à 12:33
+-- Version du serveur :  5.7.31
+-- Version de PHP : 7.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -61,10 +61,19 @@ CREATE TABLE IF NOT EXISTS `activite` (
   `nomActivite` varchar(5000) NOT NULL,
   `idCompetenceChapeau` int(11) NOT NULL,
   `idProfesseur` int(11) NOT NULL,
+  `idClasse` int(11) NOT NULL,
   PRIMARY KEY (`idActivite`),
   KEY `FK_CPC` (`idCompetenceChapeau`),
-  KEY `FK_Prof` (`idProfesseur`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  KEY `FK_Prof` (`idProfesseur`),
+  KEY `FK_CLASSE93` (`idClasse`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `activite`
+--
+
+INSERT INTO `activite` (`idActivite`, `nomActivite`, `idCompetenceChapeau`, `idProfesseur`, `idClasse`) VALUES
+(1, 'Créer un réseau informatique', 21, 1, 32);
 
 -- --------------------------------------------------------
 
@@ -80,6 +89,22 @@ CREATE TABLE IF NOT EXISTS `affecter` (
   PRIMARY KEY (`idEvent`,`idClasse`,`idWeek`),
   KEY `fk_classe` (`idClasse`),
   KEY `fk_week` (`idWeek`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `attribuer_activite`
+--
+
+DROP TABLE IF EXISTS `attribuer_activite`;
+CREATE TABLE IF NOT EXISTS `attribuer_activite` (
+  `idActivite` int(11) NOT NULL,
+  `idSousCompetence` int(11) NOT NULL,
+  `idWeek` int(11) NOT NULL,
+  PRIMARY KEY (`idActivite`,`idSousCompetence`,`idWeek`),
+  KEY `FK_WEEK80` (`idWeek`),
+  KEY `FK_SOUS_COMPETENCE2` (`idSousCompetence`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -137,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `classe` (
   `idDiplome` int(11) NOT NULL,
   PRIMARY KEY (`idClasse`),
   KEY `FKBac` (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `classe`
@@ -145,7 +170,8 @@ CREATE TABLE IF NOT EXISTS `classe` (
 
 INSERT INTO `classe` (`idClasse`, `niveauClasse`, `idDiplome`) VALUES
 (2, '1ère', 3),
-(31, '2nd', 3);
+(31, '2nd', 3),
+(32, '1ère année', 18);
 
 -- --------------------------------------------------------
 
@@ -161,7 +187,16 @@ CREATE TABLE IF NOT EXISTS `competence_chapeau` (
   `idDiplome` int(11) NOT NULL,
   PRIMARY KEY (`idCompetence`),
   KEY `FKBac1` (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `competence_chapeau`
+--
+
+INSERT INTO `competence_chapeau` (`idCompetence`, `libelleCompetence`, `intituleCompetence`, `idDiplome`) VALUES
+(20, 'C1.1', 'Assurer la veille commerciale', 3),
+(21, 'C3', 'oui', 18),
+(22, 'C1.2', 'test', 3);
 
 -- --------------------------------------------------------
 
@@ -692,6 +727,7 @@ INSERT INTO `utilisateur` (`mailUtilisateur`, `mdpUtilisateur`, `idDroitUtilisat
 -- Contraintes pour la table `activite`
 --
 ALTER TABLE `activite`
+  ADD CONSTRAINT `FK_CLASSE93` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
   ADD CONSTRAINT `FK_CPC` FOREIGN KEY (`idCompetenceChapeau`) REFERENCES `competence_chapeau` (`idCompetence`),
   ADD CONSTRAINT `FK_Prof` FOREIGN KEY (`idProfesseur`) REFERENCES `professeur` (`idProf`);
 
@@ -702,6 +738,14 @@ ALTER TABLE `affecter`
   ADD CONSTRAINT `fk_classe` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
   ADD CONSTRAINT `fk_event` FOREIGN KEY (`idEvent`) REFERENCES `evenement` (`idEvent`),
   ADD CONSTRAINT `fk_week` FOREIGN KEY (`idWeek`) REFERENCES `time_dimension` (`week`);
+
+--
+-- Contraintes pour la table `attribuer_activite`
+--
+ALTER TABLE `attribuer_activite`
+  ADD CONSTRAINT `FK_ACTIVITE42` FOREIGN KEY (`idActivite`) REFERENCES `activite` (`idActivite`),
+  ADD CONSTRAINT `FK_SOUS_COMPETENCE2` FOREIGN KEY (`idSousCompetence`) REFERENCES `sous_competence` (`idSousCompetence`),
+  ADD CONSTRAINT `FK_WEEK80` FOREIGN KEY (`idWeek`) REFERENCES `time_dimension` (`week`);
 
 --
 -- Contraintes pour la table `attribuer_eleve`

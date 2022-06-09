@@ -12,23 +12,26 @@
     if ($_SESSION["idDroitUtilisateur"] == 1) {
         $listeDiplome = getDiplome();
         $listeClasse = getClasse();
-        include "vue/vueActivite.php";
+        $listeProf = getProf();
+        if (isset($_POST['btnAjoutActivite'])) {
+            print_r( $_POST['SelectCompetence']);
+            insertActivite($_POST['txtNomActivite'], $_POST['selectCompetence'], $_POST['professeur'], $_POST['selectClasse']);
+
+            header("Location:index.php?action=activite");
+        }
+        include "vue/vueActivite.Admin.php";
     }
     if ($_SESSION["idDroitUtilisateur"] == 2) {
+        $listeDiplome = getDiplome();
         $listeClasse = getClasseByIdProf($_SESSION["idProfesseur"]);
+        if (isset($_POST['btnAjoutActivite'])) {
+            insertActivite($_POST['txtNomActivite'], $_POST['SelectCompetence'], $_SESSION['idProfesseur'], $_POST['selectClasse']);
+
+            header("Location:index.php?action=activite");
+        }
         include "vue/vueActivite.php";
     }
-
-    if(isset($_POST['btnAjoutActivite'])){
-        insertActivite($_POST['txtNomActivite'], $_POST['competence'],$_SESSION['idProfesseur'],$_POST['classe']);
-        
-        header("Location:index.php?action=activite");
-    }
-
-
-   
-    
     ?>
 
-    
+
 </div>
