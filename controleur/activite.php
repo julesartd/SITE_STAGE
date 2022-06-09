@@ -5,18 +5,17 @@
     include_once "modele/bd_activite.php";
     include_once "modele/bd_diplome.php";
     include_once "modele/bd_classe.php";
+    include_once "modele/bd_competence.php";
 
 
 
     if ($_SESSION["idDroitUtilisateur"] == 1) {
         $listeDiplome = getDiplome();
         $listeClasse = getClasse();
-        $listeCompetence = getCompetenceChapeauByDiplomeFromClasse($_POST['classe']);
         include "vue/vueActivite.php";
     }
     if ($_SESSION["idDroitUtilisateur"] == 2) {
         $listeClasse = getClasseByIdProf($_SESSION["idProfesseur"]);
-        $listeCompetence = getCompetenceChapeauByDiplomeFromClasse($_POST['classe']);
         include "vue/vueActivite.php";
     }
 
