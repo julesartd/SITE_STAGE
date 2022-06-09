@@ -16,11 +16,8 @@ function controleurPrincipal($action){
     $lesActions["event"] = "insertionEvent.php";
     $lesActions["classe"] = "insertionClasse.php";
     $lesActions["activite"] = "activite.php";
-<<<<<<< HEAD
     $lesActions["detailClasse"] = "detailClasse.php";
  
-=======
->>>>>>> 3613623433a79549c7c2d34d7c5de13ba5f27602
     $lesActions["connexion"] = "connexion.php";
     $lesActions["deconnexion"] = "deconnexion.php";
     $lesActions["prof"] = "prof.php";
