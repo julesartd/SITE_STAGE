@@ -53,9 +53,11 @@
 
 
         foreach ($listeSousCompetence as $uneSousCompetence) {
-        ?>
 
-            <td><?php echo $nombreSousCompetence['nombre'];?> </td>
+        
+        ?>
+            
+         <td>1</td>
 
             <?php
         }
@@ -69,9 +71,15 @@
             <th><?php echo $uneSemaine['week'] ?></th>
             <?php
             foreach ($listeSousCompetence as $uneSousCompetence) {
+
+                if ($uneSemaine['week'] == 20 && $uneSousCompetence['idSousCompetence'] == 35){
+                    ?><td>VU</td><?php
+                }else {
+                    echo "<td> </td>";
+                }
             ?>
 
-                <td> </td>
+                
 
             <?php
             }
