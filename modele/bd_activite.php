@@ -67,7 +67,7 @@ function getCountSemaine($semaine)
     try {
 
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT  count(idActivite) as num FROM attribuer_activite where idWeek = :semaine");
+        $req = $connex->prepare("SELECT COUNT(DISTINCT idActivite) as num FROM attribuer_activite  where idWeek = :semaine");
         $req->bindValue("semaine", $semaine);
         $req->execute();
 
@@ -84,7 +84,8 @@ function getAttribuerActivite()
     try {
 
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT  * FROM attribuer_activite ORDER BY idWeek ASC");
+        $req = $connex->prepare("SELECT DISTINCT ac.idActivite, idWeek, nomActivite FROM attribuer_activite ac 
+        inner join  activite a on ac.idActivite = a.idActivite ORDER BY idWeek");
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -111,14 +112,15 @@ function getWeekActivite()
     return $resultat;
 }
 
-function getWeekFromTimeDimensionInAC($idActivite)
+
+function getSousCompetenceFrom($week, $activite)
 {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT  DISTINCT idWeek from time_dimension td 
-        inner join attribuer_activite ac on td.week=ac.idWeek inner join activite a
-        ON ac.idActivite = a.idActivite where ac.idActivite = :idActivite");
-         $req->bindValue("idActivite", $idActivite);
+        $req = $connex->prepare("SELECT idSousCompetence from attribuer_activite where idWeek = :week and idActivite = :activite");
+        $req->bindValue('week', $week);
+        $req->bindValue('activite', $activite);
+
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);

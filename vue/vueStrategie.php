@@ -47,8 +47,8 @@
 
     <tr>
 
-        <th>Semaines</th>
-        <th>Nombre</th>
+        <th>Numéro de la semaine</th>
+        <th>Nom de l'activité</th>
         <?php
 
 
@@ -68,51 +68,57 @@
 
         ?>
     </tr>
+
     <?php
-    
+    $test = 0;
 
     foreach ($listeSemaine as $uneSemaine) {
 
-
-        $listeNumSemaine = getWeekFromTimeDimensionInAC($uneSemaine['idActivite']);
-        print_r($listeNumSemaine);
-
-        foreach ($listeNumSemaine as $unNumSemaine) {
-
-        
-            $nbActiviteParSemaine = getCountSemaine($unNumSemaine['idWeek']);
-            $nbActiviteParSemaine = $nbActiviteParSemaine['num'];
-    
+        if ($test == $uneSemaine['idWeek']) {
     ?>
-            <th rowspan="<?php echo $nbActiviteParSemaine; ?>"><?php echo $unNumSemaine['idWeek'] ?></th>
-            <td>NOM</td>
-    
-        <?php
-        }
-
-        foreach ($listeSousCompetence as $uneSousCompetence) {
-        ?>
-
+            <tr>
+                <td><?php echo $uneSemaine['nomActivite']; ?></td>
+            <?php
+        } else {
+            $nbActiviteParSemaine = getCountSemaine($uneSemaine['idWeek']);
+            $nbActiviteParSemaine = $nbActiviteParSemaine['num'];
+            ?>
+            <tr>
+                <th rowspan="<?php echo $nbActiviteParSemaine; ?>"><?php echo $uneSemaine['idWeek'] ?></th>
+                <td><?php echo $uneSemaine['nomActivite']; ?></td>
 
             <?php
-            if ($uneSousCompetence['idSousCompetence'] == $uneSemaine['idSousCompetence']) {
+            $test = $uneSemaine['idWeek'];
+        }
+        $listeSousCompetenceParSemaine = getSousCompetenceFrom($uneSemaine['idWeek'], $uneSemaine['idActivite']);
 
-            ?><td>vu</td><?php
-                            } else {
-                                echo "<td> </td>";
-                            }
-                                ?>
+        foreach ($listeSousCompetence as $uneSousCompetence) {
+            ?><td><?php
+            $verif = 0;
+
+            foreach ($listeSousCompetenceParSemaine as $uneSousCompetenceParSemaine){
+            ?>
 
 
+                <?php
+            if ($verif == 0) {
+                if ($uneSousCompetence['idSousCompetence'] == $uneSousCompetenceParSemaine['idSousCompetence']) {
+                    $verif = 1;
+                ?><div class = "bleu">X</td></div><?php
+                $verif = 1;
+                                    ?>
+            <?php
+                }
 
-        <?php
-
+            }
+            }
         }
 
 
-        ?>
-        <tr>
 
+            ?>
+
+            </tr>
 
 
 
@@ -124,7 +130,6 @@
 
         ?>
 
-        </tr>
 
-        </tr>
+
 </table>
