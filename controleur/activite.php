@@ -29,7 +29,7 @@
 
             header("Location:index.php?action=activite");
         }
-        include "vue/vueActivite.php";
+        include "vue/vueActivite.Prof.php";
     }
     ?>
 

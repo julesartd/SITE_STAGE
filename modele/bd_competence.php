@@ -112,6 +112,24 @@ function getCompetenceChapeauById($id){
 }
 
 
+function getMaxSousCompetenceId($id){
+
+    try {
+
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT MAX(libelleSousCompetence) as num FROM sous_competence where idCompetence = :id");
+        $req->bindValue("id", $id);
+        $req->execute();
+
+        $resultat=$req->fetch(PDO::FETCH_ASSOC);
+
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 function getSousCompetenceById($id){
 
    
