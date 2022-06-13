@@ -131,12 +131,12 @@ function getSousCompetenceById($id){
 }
 
 
-function getMaxSousCompetenceId($id){
+function getCountCompetenceId($id){
 
     try {
 
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT MAX(libelleSousCompetence) as num FROM sous_competence where idCompetence = :id");
+        $req = $connex->prepare("SELECT count(libelleSousCompetence) as num FROM sous_competence where idCompetence = :id");
         $req->bindValue("id", $id);
         $req->execute();
 

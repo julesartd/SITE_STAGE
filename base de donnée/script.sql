@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 09 juin 2022 à 12:33
+-- Généré le : Dim 12 juin 2022 à 17:15
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -65,15 +65,16 @@ CREATE TABLE IF NOT EXISTS `activite` (
   PRIMARY KEY (`idActivite`),
   KEY `FK_CPC` (`idCompetenceChapeau`),
   KEY `FK_Prof` (`idProfesseur`),
-  KEY `FK_CLASSE93` (`idClasse`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+  KEY `fk_classe1` (`idClasse`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `activite`
 --
 
 INSERT INTO `activite` (`idActivite`, `nomActivite`, `idCompetenceChapeau`, `idProfesseur`, `idClasse`) VALUES
-(1, 'Créer un réseau informatique', 21, 1, 32);
+(1, 'Revisions', 21, 1, 2),
+(2, 'Apprendre', 23, 1, 32);
 
 -- --------------------------------------------------------
 
@@ -91,6 +92,13 @@ CREATE TABLE IF NOT EXISTS `affecter` (
   KEY `fk_week` (`idWeek`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `affecter`
+--
+
+INSERT INTO `affecter` (`idEvent`, `idClasse`, `idWeek`) VALUES
+(2, 33, 38);
+
 -- --------------------------------------------------------
 
 --
@@ -106,6 +114,15 @@ CREATE TABLE IF NOT EXISTS `attribuer_activite` (
   KEY `FK_WEEK80` (`idWeek`),
   KEY `FK_SOUS_COMPETENCE2` (`idSousCompetence`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `attribuer_activite`
+--
+
+INSERT INTO `attribuer_activite` (`idActivite`, `idSousCompetence`, `idWeek`) VALUES
+(1, 35, 20),
+(2, 35, 21),
+(1, 39, 25);
 
 -- --------------------------------------------------------
 
@@ -162,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `classe` (
   `idDiplome` int(11) NOT NULL,
   PRIMARY KEY (`idClasse`),
   KEY `FKBac` (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `classe`
@@ -171,7 +188,8 @@ CREATE TABLE IF NOT EXISTS `classe` (
 INSERT INTO `classe` (`idClasse`, `niveauClasse`, `idDiplome`) VALUES
 (2, '1ère', 3),
 (31, '2nd', 3),
-(32, '1ère année', 18);
+(32, '1ère année', 18),
+(33, '2ème année', 18);
 
 -- --------------------------------------------------------
 
@@ -187,16 +205,16 @@ CREATE TABLE IF NOT EXISTS `competence_chapeau` (
   `idDiplome` int(11) NOT NULL,
   PRIMARY KEY (`idCompetence`),
   KEY `FKBac1` (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `competence_chapeau`
 --
 
 INSERT INTO `competence_chapeau` (`idCompetence`, `libelleCompetence`, `intituleCompetence`, `idDiplome`) VALUES
-(20, 'C1.1', 'Assurer la veille commerciale', 3),
-(21, 'C3', 'oui', 18),
-(22, 'C1.2', 'test', 3);
+(21, 'C1.2', 'Réaliser la vente dans un cadre omnicanal', 3),
+(22, 'C1.1', 'Assurer la veille commerciale', 3),
+(23, 'C1.3', ' Assurer l\'exécution de la vente', 3);
 
 -- --------------------------------------------------------
 
@@ -332,7 +350,19 @@ CREATE TABLE IF NOT EXISTS `sous_competence` (
   `idCompetence` int(11) NOT NULL,
   PRIMARY KEY (`idSousCompetence`),
   KEY `FKCOMPETENCE` (`idCompetence`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `sous_competence`
+--
+
+INSERT INTO `sous_competence` (`idSousCompetence`, `libelleSousCompetence`, `intituleSousCompetence`, `idCompetence`) VALUES
+(34, 1, 'Intégrer l\'omnicanal dans le processus de vente', 21),
+(35, 2, 'Prendre contact avec le client', 21),
+(36, 3, 'S\'adapter au contexte commercial et au comportement du client', 21),
+(37, 4, 'Découvrir, analyser et identifier les besoins du client, ses motivations et ses freins éventuels', 21),
+(39, 1, 'Maitriser la technologie des produits', 22),
+(42, 1, 'Mettre en place les modalités de règlement et de livraison', 23);
 
 -- --------------------------------------------------------
 
@@ -727,9 +757,9 @@ INSERT INTO `utilisateur` (`mailUtilisateur`, `mdpUtilisateur`, `idDroitUtilisat
 -- Contraintes pour la table `activite`
 --
 ALTER TABLE `activite`
-  ADD CONSTRAINT `FK_CLASSE93` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
   ADD CONSTRAINT `FK_CPC` FOREIGN KEY (`idCompetenceChapeau`) REFERENCES `competence_chapeau` (`idCompetence`),
-  ADD CONSTRAINT `FK_Prof` FOREIGN KEY (`idProfesseur`) REFERENCES `professeur` (`idProf`);
+  ADD CONSTRAINT `FK_Prof` FOREIGN KEY (`idProfesseur`) REFERENCES `professeur` (`idProf`),
+  ADD CONSTRAINT `fk_classe1` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`);
 
 --
 -- Contraintes pour la table `affecter`

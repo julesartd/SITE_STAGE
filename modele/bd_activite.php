@@ -2,7 +2,8 @@
 
 
 
-function insertActivite($nom, $competence, $prof, $classe){
+function insertActivite($nom, $competence, $prof, $classe)
+{
 
     try {
         $connex = connexionPDO();
@@ -13,15 +14,15 @@ function insertActivite($nom, $competence, $prof, $classe){
         $req->bindValue('prof', $prof);
         $req->bindValue('classe', $classe);
         $req->execute();
-        
-    }catch (PDOException $e) {
+    } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
     }
 }
 
 
-function getCompetenceChapeauByDiplomeFromClasse($classe){
+function getCompetenceChapeauByDiplomeFromClasse($classe)
+{
 
     $resultat = array();
     try {
@@ -33,8 +34,61 @@ function getCompetenceChapeauByDiplomeFromClasse($classe){
         $req->execute();
 
 
-        $resultat=$req->fetchAll(PDO::FETCH_ASSOC);
-    }catch (PDOException $e) {
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getActivite($semaine)
+{
+
+    $resultat = array();
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT idWeek FROM attribuer_activite where idWeek = :semaine");
+        $req->bindValue("semaine", $semaine);
+        $req->execute();
+
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getCountSemaine($semaine)
+{
+
+    try {
+
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT  count(idActivite) as num FROM attribuer_activite where idWeek = :semaine");
+        $req->bindValue("semaine", $semaine);
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getAttribuerActivite()
+{
+    try {
+
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT  * FROM attribuer_activite ORDER BY idWeek ASC");
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
     }
@@ -42,6 +96,35 @@ function getCompetenceChapeauByDiplomeFromClasse($classe){
 }
 
 
+function getWeekActivite()
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT DISTINCT idWeek from attribuer_activite");
+        $req->execute();
 
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
 
-?>
+function getWeekFromTimeDimensionInAC($idActivite)
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT  DISTINCT idWeek from time_dimension td 
+        inner join attribuer_activite ac on td.week=ac.idWeek inner join activite a
+        ON ac.idActivite = a.idActivite where ac.idActivite = :idActivite");
+         $req->bindValue("idActivite", $idActivite);
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
