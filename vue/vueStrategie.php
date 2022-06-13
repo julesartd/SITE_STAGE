@@ -1,4 +1,4 @@
-<table class="table table-bordered tableau">
+<table class="table table-bordered border-primary">
 
 
 
@@ -12,7 +12,7 @@
     foreach ($listeCompetence as $uneCompetence) {
 
 
-        $nbSousCompInCompChapeau = getMaxSousCompetenceId($uneCompetence['idCompetence']);
+        $nbSousCompInCompChapeau =  getCountCompetenceId($uneCompetence['idCompetence']);
         $maxSousComp = $nbSousCompInCompChapeau['num'];
 
 
@@ -69,32 +69,46 @@
         ?>
     </tr>
     <?php
+    
 
     foreach ($listeSemaine as $uneSemaine) {
+
+
+        $listeNumSemaine = getWeekFromTimeDimensionInAC($uneSemaine['idActivite']);
+        print_r($listeNumSemaine);
+
+        foreach ($listeNumSemaine as $unNumSemaine) {
+
+        
+            $nbActiviteParSemaine = getCountSemaine($unNumSemaine['idWeek']);
+            $nbActiviteParSemaine = $nbActiviteParSemaine['num'];
+    
     ?>
-        <th><?php echo $uneSemaine['idWeek'] ?></th>
-
-        <td></td>
+            <th rowspan="<?php echo $nbActiviteParSemaine; ?>"><?php echo $unNumSemaine['idWeek'] ?></th>
+            <td>NOM</td>
+    
         <?php
-
+        }
 
         foreach ($listeSousCompetence as $uneSousCompetence) {
         ?>
 
-           
+
             <?php
             if ($uneSousCompetence['idSousCompetence'] == $uneSemaine['idSousCompetence']) {
 
             ?><td>vu</td><?php
-                    } else {
-                        echo "<td> </td>";
-                    }
-                        ?>
+                            } else {
+                                echo "<td> </td>";
+                            }
+                                ?>
 
 
 
         <?php
+
         }
+
 
         ?>
         <tr>
@@ -106,6 +120,8 @@
 
         <?php
     }
+
+
         ?>
 
         </tr>

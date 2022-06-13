@@ -19,8 +19,11 @@
     $listeSousCompetence = getSousCompetence();
 
  
-     
-    $listeSemaine = getWeekActivite();
+    $listeSemaine = getAttribuerActivite();
+
+  
+
+
 
 
 
