@@ -4,6 +4,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 </head>
 
+<?php
+include_once "modele/fonction_javascript.php";
+?>
 <body>
     <h1 id="lstA">Créer une activité</h1>
     <form method="POST" class="lb mb-3" action="">
@@ -103,5 +106,6 @@
                 updateSelectBox($("select[trigger='true']"));
             });
         </script>
+
     </form>
 </body>

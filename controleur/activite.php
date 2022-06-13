@@ -19,7 +19,7 @@
 
             header("Location:index.php?action=activite");
         }
-        include "vue/vueActivite.Admin.php";
+        include "vue/vueActivite.Admin copy.php";
     }
     if ($_SESSION["idDroitUtilisateur"] == 2) {
         $listeDiplome = getDiplome();

@@ -11,8 +11,7 @@
 		date de fin : <input type="date" name="dateFin" value="" min="<?php $date ?>" max="">
 		</br></br>
 		<input type="submit" value="Valider" name="btnValider">
-		</br>
-	<h3 id="lstA">Entrez la date de début et de fin d'année scolaire</h3>
+		</br></br>
 
 	Supprimer la table actuel : <input type="submit" value="Supprimer" name="btnSupprimer">
 
