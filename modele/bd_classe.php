@@ -15,6 +15,25 @@ function getClasse()
     return $resultat;
 }
 
+function getClasseById($id)
+{
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT *, nomDiplome FROM classe 
+        inner join diplome on classe.idDiplome=diplome.idDiplome 
+        where idClasse= :id");
+        $req->bindValue('id', $id);
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 function getClasseByIdProf($idProf)
 {
     $resultat = array();
