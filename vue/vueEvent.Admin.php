@@ -40,7 +40,7 @@
 
 
 
-    <input type="week" name="numero">
+    <input type="week" name="numero" min="<?php echo $minCalendrier;?>" max="<?php echo $maxCalendrier;?>" >
     <input type="submit" value="AJOUTER" name="btnAjoutEvent">
 
 
@@ -78,29 +78,48 @@
             <?php
 
             foreach ($semaine as $uneSemaine) {
- 
-                if ($uneSemaine['week'] == $semaineAdd) {
-            ?>
-                    <style>
-                         #tdRouge {
-                            background-color: red;
-                        }
-                    </style>
-
-                    <td id="tdRouge">evenement</td>
-                <?php
-                } else {
-                ?>
+                $oui = 0;
+                $listeEventByClasse = getEventsByClasseAndWeek($uneClasse['idClasse'], $uneSemaine['week']);
+                if (empty($listeEventByClasse)){
+                    $event = "";
+                    ?>
                     <td></td>
-            <?php
+                    <?php
+                }else {
+                    $event = $listeEventByClasse['idEvent'];
+                  
+                   
                 }
-            }
+              
+
+                foreach ($listeEvent as $unEvent) {
+                    if($oui == 0){
+                    if ($unEvent['idEvent'] == $event) {
+                        $oui = 1;
+                        if ($event == 1) {
+                            ?>
+                            <td id="cyan"></td>
+                            <?php
+                        }
+                        if ($event == 2) {
+                            ?>
+                            <td id="vert"></td>
+                            <?php
+                        }
+                        if ($event == 3) {
+                            ?>
+                            <td id="jaune"></td>
+                            <?php
+                        }
+                    }
+                   
+                }
+                }
             ?>
 
         <?php
-    }
-
-
+            }
+        }
 
         ?>
         </tr>
