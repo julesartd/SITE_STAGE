@@ -1,10 +1,10 @@
 <?php
 include_once "modele/bd_activite.php";
-$IdCategorie = $_POST['IdClasse'];
+$idClasse = $_POST['niveauClasse'];
  
-$lsiteClasse = getCompetenceChapeauByDiplomeFromClasse($IdCategorie);
+$listeClasse = getCompetenceChapeauByDiplomeFromClasse($idClasse);
 echo "<select name='souscategorie'>";
-foreach ($lsiteClasse as $uneClasse){?>
+foreach ($listeClasse as $uneClasse){?>
         <option value="<?php echo $data['IdCompetence']; ?>"><?php echo $data['libelleCompetence']; ?></option>
 <?php }
 echo "</select>";

@@ -17,7 +17,7 @@ function controleurPrincipal($action){
     $lesActions["classe"] = "insertionClasse.php";
     $lesActions["activite"] = "activite.php";
     $lesActions["detailClasse"] = "detailClasse.php";
- 
+
     $lesActions["connexion"] = "connexion.php";
     $lesActions["deconnexion"] = "deconnexion.php";
     $lesActions["prof"] = "prof.php";

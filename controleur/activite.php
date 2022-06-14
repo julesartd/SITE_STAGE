@@ -8,7 +8,6 @@
     include_once "modele/bd_competence.php";
 
 
-
     if ($_SESSION["idDroitUtilisateur"] == 1) {
         $listeDiplome = getDiplome();
         $listeClasse = getClasse();

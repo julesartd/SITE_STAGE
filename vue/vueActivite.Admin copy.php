@@ -1,7 +1,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Des select liés entre eux en HTML5 et JQuery</title>
-    <script src="modele/fonction_javascript.php"></script>
+    <script type="text/javascript" src="modele/fonction_javascript.js"></script>
 </head>
 
 <body>
@@ -86,7 +86,7 @@
             <OPTION></OPTION>
             <OPTION></OPTION>
         </SELECT> -->
-
+            
         <select id="niveauClasse" name="niveauClasse" onchange="souscat();">
             <option value="0"></option>
             <?php
@@ -98,8 +98,20 @@
             ?>
         </select>
 
-        <div id= "conteneur">
-            
-        </div>
+        <span id= "conteneur"></span>
+
+        <select NAME="Rubrique" onChange='Choix(this.form)'>
+<OPTION selected value="0">-- Choisissez une rubrique ---</OPTION>
+<OPTION>Plongée</OPTION>
+<OPTION>Nucléaire</OPTION>
+<OPTION>Bonheur</OPTION>
+</select>
+
+<SELECT NAME="Page">
+<OPTION>-- Choisissez une page ---</OPTION>
+<OPTION></OPTION>
+<OPTION></OPTION>
+<OPTION></OPTION>
+</SELECT>
     </form>
 </body>
