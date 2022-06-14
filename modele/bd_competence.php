@@ -135,7 +135,9 @@ function getSousCompetenceById($id){
    
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM sous_competence where idCompetence =:id");
+        $rec = $connex->prepare("SELECT * FROM sous_competence 
+        INNER JOIN competence_chapeau ON sous_competence.idCompetence = competence_chapeau.idCompetence
+         where sous_competence.idCompetence =:id");
         $rec->bindValue("id", $id);
         $rec->execute();
 
@@ -167,14 +169,17 @@ function getCountCompetenceId($id){
     return $resultat;
 }
 
-function nombreSousCompetenceVu($idSousCompetence){
+function nombreSousCompetenceVu($idSousCompetence, $classe){
 
     try {
 
         $connex = connexionPDO();
         $req = $connex->prepare("SELECT COUNT(ac.idSousCompetence) as nbSousCompetence FROM attribuer_activite ac
-        INNER JOIN sous_competence sc on sc.idSousCompetence = ac.idSousCompetence WHERE sc.idSousCompetence = :idSousCompetence " );
+        INNER JOIN sous_competence sc on sc.idSousCompetence = ac.idSousCompetence 
+        inner join activite a on a.idActivite = ac.idActivite
+        WHERE sc.idSousCompetence = :idSousCompetence and a.idClasse = :classe " );
         $req->bindValue("idSousCompetence", $idSousCompetence);
+        $req->bindValue("classe", $classe);
         $req->execute();
 
         $resultat=$req->fetch(PDO::FETCH_ASSOC);

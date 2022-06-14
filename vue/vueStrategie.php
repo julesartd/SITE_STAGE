@@ -1,135 +1,24 @@
-<table class="table table-bordered border-primary">
 
+<form method="POST" class="lb mb-3" action="?action=strategie">
 
+    <select aria-label="Default select example" name="classe" onChange="submit()">
 
-    <th></th>
-    <th></th>
-
-
-    <?php
-
-
-    foreach ($listeCompetence as $uneCompetence) {
-
-
-        $nbSousCompInCompChapeau =  getCountCompetenceId($uneCompetence['idCompetence']);
-        $maxSousComp = $nbSousCompInCompChapeau['num'];
-
-
-
-
-    ?>
-
-        <th colspan=<?php echo $maxSousComp; ?>><?php echo $uneCompetence['libelleCompetence'] . ' ' . $uneCompetence['intituleCompetence'] ?></th>
-
-    <?php
-
-
-    }
-    ?>
-    <tr>
-        <th></th>
-        <th></th>
-
+        <option  selected value=<?php echo $uneClasseId['idClasse'];?>><?php echo $uneClasseId['niveauClasse'].' '. $uneClasseId['nomDiplome']?></option>
 
         <?php
-
-        foreach ($listeSousCompetence as $uneSousCompetence) {
-        ?>
-
-            <td><?php echo $uneSousCompetence['libelleCompetence'] . '.'
-                    . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence'] ?></td>
-
-        <?php
-        }
-        ?>
-    </tr>
-
-    <tr>
-
-        <th>Numéro de la semaine</th>
-        <th>Nom de l'activité</th>
-        <?php
-
-
-        foreach ($listeSousCompetence as $uneSousCompetence) {
-
-            $nbSousCompetence = nombreSousCompetenceVu($uneSousCompetence['idSousCompetence']);
-            $nombre = $nbSousCompetence['nbSousCompetence'];
-
+        foreach ($listeClasse as $uneClasse) {
 
         ?>
 
-            <td> <?php echo $nombre ?></td>
-
-
+            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'] . " " . $uneClasse['nomDiplome'] ?></option>
         <?php
         }
 
-        ?>
-    </tr>
-
-    <?php
-    $test = 0;
-
-    foreach ($listeSemaine as $uneSemaine) {
-
-        if ($test == $uneSemaine['idWeek']) {
-    ?>
-            <tr>
-                <td><?php echo $uneSemaine['nomActivite']; ?></td>
-            <?php
-        } else {
-            $nbActiviteParSemaine = getCountSemaine($uneSemaine['idWeek']);
-            $nbActiviteParSemaine = $nbActiviteParSemaine['num'];
-            ?>
-            <tr>
-                <th rowspan="<?php echo $nbActiviteParSemaine; ?>"><?php echo $uneSemaine['idWeek'] ?></th>
-                <td><?php echo $uneSemaine['nomActivite']; ?></td>
-
-            <?php
-            $test = $uneSemaine['idWeek'];
-        }
-        $listeSousCompetenceParSemaine = getSousCompetenceFrom($uneSemaine['idWeek'], $uneSemaine['idActivite']);
-
-        foreach ($listeSousCompetence as $uneSousCompetence) {
-            ?><td><?php
-            $verif = 0;
-
-            foreach ($listeSousCompetenceParSemaine as $uneSousCompetenceParSemaine){
-            ?>
-
-
-                <?php
-            if ($verif == 0) {
-                if ($uneSousCompetence['idSousCompetence'] == $uneSousCompetenceParSemaine['idSousCompetence']) {
-                    $verif = 1;
-                ?><div class = "bleu">X</td></div><?php
-                $verif = 1;
-                                    ?>
-            <?php
-                }
-
-            }
-            }
-        }
-
-
-
-            ?>
-
-            </tr>
-
-
-
-
-
-        <?php
-    }
-
 
         ?>
+    </select>
 
 
+</form>
 
-</table>
+
