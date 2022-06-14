@@ -37,16 +37,35 @@ function getEvent()
     return $resultat;
 }
 
-function getWeek()
+
+
+function getMaxYearAndWeek()
 {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT DISTINCT week from time_dimension where db_date BETWEEN '2021-09-06' and '2022-07-03' ORDER BY id");
+        $req = $connex->prepare("SELECT `year`, week from time_dimension where id = (select max(id) from time_dimension)");
 
 
         $req->execute();
 
-        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getMinYearAndWeek()
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT `year`, week from time_dimension where id = (select min(id) from time_dimension)");
+
+
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
@@ -105,7 +124,7 @@ function getWeekByDate($dateDebut, $dateFin)
 }
 
 
-function getWeekEvent($classe, $semaine)
+function getEventsByClasseAndWeek($classe, $semaine)
 {
     try {
         $connex = connexionPDO();
@@ -117,7 +136,7 @@ function getWeekEvent($classe, $semaine)
 
         $req->execute();
 
-        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();

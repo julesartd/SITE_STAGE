@@ -122,7 +122,7 @@
                             if ($verif == 0) {
                                 if ($uneSousCompetence['idSousCompetence'] == $uneSousCompetenceParSemaine['idSousCompetence']) {
                                     $verif = 1;
-                            ?><div class="bleu">X</td>
+                            ?><div id="cyan">X</td>
                     </div><?php
                                     $verif = 1;
                             ?>

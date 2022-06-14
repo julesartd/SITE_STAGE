@@ -204,7 +204,15 @@ DEPENDENCES
   table-layout: auto;
 }
 
-.bleu{
+#cyan{
 
   background-color: cyan;
+}
+
+#vert {
+  background-color: greenyellow;
+}
+
+#jaune {
+  background-color: yellow;
 }
