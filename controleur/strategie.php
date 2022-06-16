@@ -30,21 +30,21 @@
 
 
 
-
     if ($_SESSION["idDroitUtilisateur"] == 1) {
         $listeClasse = getClasse();
+        include "vue/vueStrategie.php";
         if (isset($_POST['classe'])) {
             $classe =  $_POST["classe"];
             $uneClasseId = getClasseById($classe);
             $listeCompetence = getCompetenceChapeauByDiplomeFromClasse($classe);
             $listeSemaine = getAttribuerActiviteByClasse($classe);
 
-
             include "vue/vueTableauStrategieByClasse.php";
         }
     }
     if ($_SESSION["idDroitUtilisateur"] == 2) {
         $listeClasse = getClasseByIdProf($_SESSION['idProfesseur']);
+        include "vue/vueStrategie.php";
         if (isset($_POST['classe'])) {
           
 
@@ -53,15 +53,12 @@
             $listeCompetence = getCompetenceChapeauByDiplomeFromClasse($classe);
             $listeSemaine = getAttribuerActiviteByClasse($classe);
 
-
             include "vue/vueTableauStrategieByClasse.php";
         }
     }
 
     if (isset($_POST['btnAjoutActivite'])) {
     }
-
-    include "vue/vueStrategie.php"
 
 
     ?>

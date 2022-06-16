@@ -1,6 +1,6 @@
 <?php
 
-
+include_once "bd_connexion.php";
 
 function insertActivite($nom, $competence, $prof, $classe)
 {

@@ -1,4 +1,7 @@
 <?php 
+
+include_once "bd_connexion.php";
+
 function getClasse()
 {
     $resultat = array();

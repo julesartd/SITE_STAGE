@@ -1,7 +1,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Des select liés entre eux en HTML5 et JQuery</title>
-    <script type="text/javascript" src="modele/fonction_javascript.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+    <script type="text/javascript" src="modele/fonction_java.js"></script>
 </head>
 
 <body>
@@ -87,7 +88,7 @@
             <OPTION></OPTION>
         </SELECT> -->
             
-        <select id="niveauClasse" name="niveauClasse" onchange="souscat();">
+        <select id="niveauClasse" name="niveauClasse" onchange="souscat(this.value);">
             <option value="0"></option>
             <?php
             foreach ($listeClasse as $uneClasse) {
@@ -98,20 +99,8 @@
             ?>
         </select>
 
-        <span id= "conteneur"></span>
+        <div id="conteneur"></div>
 
-        <select NAME="Rubrique" onChange='Choix(this.form)'>
-<OPTION selected value="0">-- Choisissez une rubrique ---</OPTION>
-<OPTION>Plongée</OPTION>
-<OPTION>Nucléaire</OPTION>
-<OPTION>Bonheur</OPTION>
-</select>
-
-<SELECT NAME="Page">
-<OPTION>-- Choisissez une page ---</OPTION>
-<OPTION></OPTION>
-<OPTION></OPTION>
-<OPTION></OPTION>
-</SELECT>
+    
     </form>
 </body>

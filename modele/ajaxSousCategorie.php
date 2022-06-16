@@ -1,11 +1,19 @@
 <?php
-include_once "modele/bd_activite.php";
-$idClasse = $_POST['niveauClasse'];
+include_once "bd_activite.php";
+
+if(!empty($_POST['idCompetence'])){
+        $idClasse = $_POST['idCompetence'];
  
-$listeClasse = getCompetenceChapeauByDiplomeFromClasse($idClasse);
-echo "<select name='souscategorie'>";
-foreach ($listeClasse as $uneClasse){?>
-        <option value="<?php echo $data['IdCompetence']; ?>"><?php echo $data['libelleCompetence']; ?></option>
-<?php }
-echo "</select>";
+        $listeCompetence = getCompetenceChapeauByDiplomeFromClasse($idClasse);
+        
+        ?>
+        <select name='souscategorie'>
+                <?php
+        foreach ($listeCompetence as $uneCompetence){?>
+                <option value="<?php echo $uneCompetence['idCompetence']; ?>"><?php echo $uneCompetence['libelleCompetence'].' '. $uneCompetence['intituleCompetence']; ?></option>
+        <?php }
+        ?>
+        </select>
+        <?php
+}
 ?>

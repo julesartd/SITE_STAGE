@@ -3,7 +3,7 @@
 
     <select aria-label="Default select example" name="classe" onChange="submit()">
 
-        <option  selected value=<?php echo $uneClasseId['idClasse'];?>><?php echo $uneClasseId['niveauClasse'].' '. $uneClasseId['nomDiplome']?></option>
+        <option selected>-- Choisissez une Classe --</OPTION>
 
         <?php
         foreach ($listeClasse as $uneClasse) {
