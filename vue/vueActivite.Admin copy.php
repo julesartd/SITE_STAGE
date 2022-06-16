@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    
+
     <h1 id="lstA">Créer une activité</h1>
     <form method="POST" class="lb mb-3" action="">
         Séléctionner un professeur :
@@ -37,7 +37,7 @@
         <br>
         <div>
             <label for="department" class="required">Séléctionner la compétence :</label>
-            <select id="department" name="selectCompetence" content-type="choices">
+            <select id="department" name="selectCompetence" content-type="choices" multiple>
                 <?php
                 foreach ($listeClasse as $uneClasse) {
                     $listeCompetence = getCompetenceChapeauBydiplome($uneClasse['idDiplome']);
@@ -63,7 +63,7 @@
 
 
 
-       <!-- <select name="selectClasse" onChange='Choix(this.form)'>
+        <!-- <select name="selectClasse" onChange='Choix(this.form)'>
             <OPTION value="">-- Choisissez une classe ---</OPTION>
             <?php
             foreach ($listeClasse as $uneClasse) {
