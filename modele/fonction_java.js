@@ -1,22 +1,28 @@
-function listeCompetence(val) {
+function competence1(val) {
     $.ajax({
     type: "POST",
     url: "modele/ajaxSousCategorie.php",
-    data:'idCompetence='+val,
+    data:'idClasse='+val,
     success: function(data){
-      $("#conteneur").html(data);
-      $('#oui').empty();
+      $("#competence1").html(data);
+      $("#competence2").html(data);
+      $("#competence3").html(data);
+      $("#competence4").html(data);
+      $('#sousCompetence1').empty();
+      $('#sousCompetence2').empty();
+      $('#sousCompetence3').empty();
+      $('#sousCompetence4').empty();
     }
     });
   }
 
-  function listeSousCompetence(val) {
+  function sousCompetence1(val) {
     $.ajax({
     type: "POST",
     url: "modele/ajaxSousCategorie.php",
     data:'idSousCompetence='+val,
     success: function(data){
-      $("#oui").html(data);
+      $("#sousCompetence1").html(data);
     }
     });
   }

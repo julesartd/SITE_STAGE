@@ -2,14 +2,14 @@
 include_once "bd_activite.php";
 include_once "bd_competence.php";
 
-if(!empty($_POST['idCompetence'])){
-        $idCompetence = $_POST['idCompetence'];
+if(!empty($_POST['idClasse'])){
+        $idCompetence = $_POST['idClasse'];
  
         $listeCompetence = getCompetenceChapeauByDiplomeFromClasse($idCompetence);
         
         ?>
-        <select name='souscategorie'onchange="listeSousCompetence(this.value);">
-        <option value="0">--Choisir Une Compétence--</option>
+        <select name='souscategorie'onchange='sousCompetence1(this.value);''>
+        <option value="">--Choisir Une Compétence--</option>
                 <?php
         foreach ($listeCompetence as $uneCompetence){?>
                 <option value="<?php echo $uneCompetence['idCompetence']; ?>"><?php echo $uneCompetence['libelleCompetence'].' '. $uneCompetence['intituleCompetence']; ?></option>
@@ -26,10 +26,10 @@ if(!empty($_POST['idSousCompetence'])){
         
         ?>
         <select name='souscategorie'>
-        <option value="0">--Choisir Une Sous-Compétence--</option>
+        <option value="">--Choisir Une Sous-Compétence--</option>
                 <?php
         foreach ($listeSousCompetence as $uneSousCompetence){?>
-                <option value="<?php echo $uneSousCompetence['idSousCompetence']; ?>"><?php echo $uneSousCompetence['libelleCompetence'].' '.$uneSousCompetence['libelleSousCompetence'].' '. $uneSousCompetence['intituleSousCompetence']; ?></option>
+                <option value="<?php echo $uneSousCompetence['idSousCompetence']; ?>"><?php echo $uneSousCompetence['libelleCompetence'].'.'.$uneSousCompetence['libelleSousCompetence'].' '. $uneSousCompetence['intituleSousCompetence']; ?></option>
         <?php }
         ?>
         </select>
