@@ -34,7 +34,9 @@
         $listeClasse = getClasse();
         include "vue/vueStrategie.php";
         if (isset($_POST['classe'])) {
+            
             $classe =  $_POST["classe"];
+            
             $uneClasseId = getClasseById($classe);
             $listeCompetence = getCompetenceChapeauByDiplomeFromClasse($classe);
             $listeSemaine = getAttribuerActiviteByClasse($classe);

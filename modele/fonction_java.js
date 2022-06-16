@@ -20,3 +20,16 @@ function listeCompetence(val) {
     }
     });
   }
+
+
+
+  function genererStrategie(val) {
+    $.ajax({  
+    type: "POST",
+    url: "controleur/strategie.php",
+    data:'idClasse='+val,
+    success: function(data){
+      $("#divTableau").html(data);
+    }
+    });
+  }
