@@ -5,7 +5,7 @@
 </head>
 
 <body>
-    
+
     <h1 id="lstA">Créer une activité</h1>
     <form method="POST" class="lb mb-3" action="">
         Séléctionner un professeur :
@@ -36,7 +36,7 @@
         <br>
         <div>
             <label for="department" class="required">Séléctionner la compétence :</label>
-            <select id="department" name="selectCompetence" content-type="choices">
+            <select id="department" name="selectCompetence" content-type="choices" multiple>
                 <?php
                 foreach ($listeClasse as $uneClasse) {
                     $listeCompetence = getCompetenceChapeauBydiplome($uneClasse['idDiplome']);
@@ -62,7 +62,7 @@
 
 
 
-       <!-- <select name="selectClasse" onChange='Choix(this.form)'>
+        <!-- <select name="selectClasse" onChange='Choix(this.form)'>
             <OPTION value="">-- Choisissez une classe ---</OPTION>
             <?php
             foreach ($listeClasse as $uneClasse) {
@@ -86,7 +86,7 @@
             <OPTION></OPTION>
             <OPTION></OPTION>
         </SELECT> -->
-            
+
         <select id="niveauClasse" name="niveauClasse" onchange="souscat();">
             <option value="0"></option>
             <?php
@@ -98,20 +98,20 @@
             ?>
         </select>
 
-        <span id= "conteneur"></span>
+        <span id="conteneur"></span>
 
         <select NAME="Rubrique" onChange='Choix(this.form)'>
-<OPTION selected value="0">-- Choisissez une rubrique ---</OPTION>
-<OPTION>Plongée</OPTION>
-<OPTION>Nucléaire</OPTION>
-<OPTION>Bonheur</OPTION>
-</select>
+            <OPTION selected value="0">-- Choisissez une rubrique ---</OPTION>
+            <OPTION>Plongée</OPTION>
+            <OPTION>Nucléaire</OPTION>
+            <OPTION>Bonheur</OPTION>
+        </select>
 
-<SELECT NAME="Page">
-<OPTION>-- Choisissez une page ---</OPTION>
-<OPTION></OPTION>
-<OPTION></OPTION>
-<OPTION></OPTION>
-</SELECT>
+        <SELECT NAME="Page">
+            <OPTION>-- Choisissez une page ---</OPTION>
+            <OPTION></OPTION>
+            <OPTION></OPTION>
+            <OPTION></OPTION>
+        </SELECT>
     </form>
 </body>
