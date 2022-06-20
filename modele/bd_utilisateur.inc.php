@@ -36,6 +36,24 @@ function getUtilisateurByMailU($mailU) {
     return $resultat;
 }
 
+function getUtilisateurById($id) {
+    $resultat = array();
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("select * from utilisateur where idProfesseur= :id");
+        $req->bindValue(':id', $id);
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+
 function insertUtilisateur($mail,$mdp,$droit,$idProf)
 {
     try {
@@ -51,6 +69,23 @@ function insertUtilisateur($mail,$mdp,$droit,$idProf)
         die();
     }
 }
+
+function updateMdptUtilisateur($mdp, $idProf)
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("UPDATE utilisateur SET mdpUtilisateur = :mdp where idProfesseur = :idProf");
+        $req->bindValue('mdp', $mdp);
+        $req->bindValue('idProf', $idProf);
+    
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
+
+
 
 
 ?>
