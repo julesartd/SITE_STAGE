@@ -36,4 +36,21 @@ function getUtilisateurByMailU($mailU) {
     return $resultat;
 }
 
+function insertUtilisateur($mail,$mdp,$droit,$idProf)
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("INSERT INTO utilisateur VALUES (:mail, :mdp, :droit, :idProf)");
+        $req->bindValue('mail', $mail);
+        $req->bindValue('mdp', $mdp);
+        $req->bindValue('droit', $droit);
+        $req->bindValue('idProf', $idProf);
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
+
+
 ?>

@@ -27,7 +27,7 @@
     <br>
     <br>
     <table><tr>
-    <td id="competence1"></td><td id="competence2"></td><td id="competence3"></td><td id="competence4"></td>
+    <td id="competence1"></td> <!--<td id="competence2"></td><td id="competence3"></td><td id="competence4"></td> -->
 </tr>
 <tr>
     <td id="sousCompetence1"></td><td id="sousCompetence2"></td><td id="sousCompetence3"></td><td id="sousCompetence4"></td>

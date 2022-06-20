@@ -8,7 +8,7 @@ if(!empty($_POST['idClasse'])){
         $listeCompetence = getCompetenceChapeauByDiplomeFromClasse($idCompetence);
         
         ?>
-        <select name='souscategorie'onchange='sousCompetence1(this.value);''>
+        <select name='souscategorie'onchange='sousCompetence1(this.value);'>
         <option value="">--Choisir Une Compétence--</option>
                 <?php
         foreach ($listeCompetence as $uneCompetence){?>
