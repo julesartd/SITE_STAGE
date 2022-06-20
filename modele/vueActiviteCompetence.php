@@ -1,7 +1,8 @@
 <?php
-include_once "bd_activite.php";
-include_once "bd_competence.php";
+include_once "modele/bd_activite.php";
+include_once "modele/bd_competence.php";
 
+echo"oui";
 if(!empty($_POST['idClasse'])){
         $idCompetence = $_POST['idClasse'];
  

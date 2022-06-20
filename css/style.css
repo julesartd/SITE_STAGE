@@ -81,6 +81,10 @@ table{
   float: right;
 }
 
+#activiteCompetence select{
+  max-width:50px;
+}
+
 /*
 =====
 DEPENDENCES

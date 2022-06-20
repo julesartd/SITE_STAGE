@@ -26,7 +26,7 @@
     </select>
     <br>
     <br>
-    <table><tr>
+    <table id ="activiteCompetence"><tr>
     <td id="competence1"></td><td id="competence2"></td><td id="competence3"></td><td id="competence4"></td>
 </tr>
 <tr>

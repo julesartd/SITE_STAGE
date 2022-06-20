@@ -1,7 +1,7 @@
 function competence1(val) {
     $.ajax({
     type: "POST",
-    url: "modele/ajaxSousCategorie.php",
+    url: "modele/vueActiviteCompetence.php",
     data:'idClasse='+val,
     success: function(data){
       $("#competence1").html(data);
