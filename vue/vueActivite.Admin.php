@@ -14,7 +14,7 @@
     nom de l'activité : <input type="text" name='txtNomActivite' placeholder="Nom de l'activité">
     <br><br>
 
-    <select id="niveauClasse" name="niveauClasse" onchange="competence1(this.value);">
+    <select id="niveauClasse" name="niveauClasse" onchange="competence(this.value);">
         <option value="">--Choisir Une Classe--</option>
         <?php
         foreach ($listeClasse as $uneClasse) {
@@ -27,7 +27,7 @@
     <br>
     <br>
     <table id ="activiteCompetence"><tr>
-    <td id="competence1"></td><td id="competence2"></td><td id="competence3"></td><td id="competence4"></td>
+    <td id="competence1" colspan="4"></td>
 </tr>
 <tr>
     <td id="sousCompetence1"></td><td id="sousCompetence2"></td><td id="sousCompetence3"></td><td id="sousCompetence4"></td>

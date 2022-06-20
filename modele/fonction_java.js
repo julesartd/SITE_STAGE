@@ -1,17 +1,14 @@
-function competence1(val) {
+function competence(val) {
     $.ajax({
     type: "POST",
-    url: "modele/vueActiviteCompetence.php",
+    url: "../vue/vueActiviteCompetence.php",
     data:'idClasse='+val,
     success: function(data){
       $("#competence1").html(data);
-      $("#competence2").html(data);
-      $("#competence3").html(data);
-      $("#competence4").html(data);
-      $('#sousCompetence1').empty();
-      $('#sousCompetence2').empty();
-      $('#sousCompetence3').empty();
-      $('#sousCompetence4').empty();
+      $("#sousCompetence1").empty();
+      $("#sousCompetence2").empty();
+      $("#sousCompetence3").empty();
+      $("#sousCompetence4").empty();
     }
     });
   }
@@ -19,23 +16,43 @@ function competence1(val) {
   function sousCompetence1(val) {
     $.ajax({
     type: "POST",
-    url: "modele/ajaxSousCategorie.php",
-    data:'idSousCompetence='+val,
+    url: "../vue/vueActiviteCompetence.php",
+    data:'idSousCompetence1='+val,
     success: function(data){
       $("#sousCompetence1").html(data);
     }
     });
   }
 
-
-
-  function genererStrategie(val) {
-    $.ajax({  
+  function sousCompetence2(val) {
+    $.ajax({
     type: "POST",
-    url: "controleur/strategie.php",
-    data:'idClasse='+val,
+    url: "../vue/vueActiviteCompetence.php",
+    data:'idSousCompetence2='+val,
     success: function(data){
-      $("#divTableau").html(data);
+      $("#sousCompetence2").html(data);
+    }
+    });
+  }
+
+  function sousCompetence3(val) {
+    $.ajax({
+    type: "POST",
+    url: "../vue/vueActiviteCompetence.php",
+    data:'idSousCompetence3='+val,
+    success: function(data){
+      $("#sousCompetence3").html(data);
+    }
+    });
+  }
+
+  function sousCompetence4(val) {
+    $.ajax({
+    type: "POST",
+    url: "../vue/vueActiviteCompetence.php",
+    data:'idSousCompetence4='+val,
+    success: function(data){
+      $("#sousCompetence4").html(data);
     }
     });
   }

@@ -151,6 +151,7 @@ function getSousCompetenceById($id){
 }
 
 
+
 function getCountCompetenceId($id){
 
     try {
