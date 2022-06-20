@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 include_once "bd_connexion.php";
 
@@ -83,14 +83,15 @@ function SupprClasse($id)
     }
 }
 
-function insertProf($nom, $prenom)
+function insertProf($nom, $prenom, $dateNaiss)
 {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO professeur VALUES(null,:nom, :prenom)");
+        $req = $connex->prepare("INSERT INTO professeur VALUES(null,:nom, :prenom, :dateNaiss)");
 
         $req->bindValue('nom', $nom);
         $req->bindValue('prenom', $prenom);
+        $req->bindValue('dateNaiss', $dateNaiss);
 
         $req->execute();
     } catch (PDOException $e) {
@@ -114,8 +115,9 @@ function insertEleve($nom, $prenom)
         die();
     }
 }
- 
-function getProfByClasse($idClasse){
+
+function getProfByClasse($idClasse)
+{
     $resultat = array();
     try {
         $cnx = connexionPDO();
@@ -131,10 +133,10 @@ function getProfByClasse($idClasse){
         die();
     }
     return $resultat;
-
 }
 
-function getEleveByClasse($idClasse){
+function getEleveByClasse($idClasse)
+{
     $resultat = array();
     try {
         $cnx = connexionPDO();
@@ -150,10 +152,10 @@ function getEleveByClasse($idClasse){
         die();
     }
     return $resultat;
-
 }
 
-function getProf(){
+function getProf()
+{
     $resultat = array();
     try {
         $cnx = connexionPDO();
@@ -166,5 +168,35 @@ function getProf(){
         die();
     }
     return $resultat;
+}
 
+function getLastProf()
+{
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT MAX(idProf) as num FROM professeur");
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function attribuerProf($classe, $prof)
+{    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("insert into attribuer_prof values (:classe, :prof)");
+        $req->bindValue('classe', $classe);
+        $req->bindValue('prof', $prof);
+        $req->execute();
+
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+   
 }

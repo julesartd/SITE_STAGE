@@ -23,6 +23,7 @@ function controleurPrincipal($action){
     $lesActions["prof"] = "prof.php";
     $lesActions["eleve"] = "eleve.php";
     $lesActions["strategie"] = "strategie.php";
+    $lesActions["utilisateur"] = "utilisateur.php";
 
     if(isLoggedOn()){
         $lesActions["defaut"] = "insertionClasse.php";

@@ -12,7 +12,7 @@ function login($mailU, $mdpU) {
     $droitBD = $util["idDroitUtilisateur"];
     $idProfBD = $util["idProfesseur"];
 
-    if (trim($mdpBD) == trim($mdpU)) {
+    if (trim($mdpBD) == crypt(trim($mdpU),$mdpBD)) {
         // le mot de passe est celui de l'utilisateur dans la base de donnees
         $_SESSION["mailUtilisateur"] = $mailU;
         $_SESSION["mdpUtilisateur"] = $mdpBD;

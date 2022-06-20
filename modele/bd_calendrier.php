@@ -73,11 +73,12 @@ function getMinYearAndWeek()
     return $resultat;
 }
 
-function getDateFin(){
+function getDateFin()
+{
     try {
         $connex = connexionPDO();
         $req = $connex->prepare("select db_date from time_dimension where db_date =(select max(db_date) from time_dimension)");
-   
+
 
         $req->execute();
 
@@ -89,11 +90,12 @@ function getDateFin(){
     return $resultat;
 }
 
-function getDateDebut(){
+function getDateDebut()
+{
     try {
         $connex = connexionPDO();
         $req = $connex->prepare("select db_date from time_dimension where db_date =(select min(db_date) from time_dimension)");
-   
+
 
         $req->execute();
 
@@ -179,3 +181,19 @@ function creeTableCalendrier($dateDebut, $dateFin)
     }
 }
 
+// Convertit une date ou un timestamp en français
+function dateToFrench($date, $format)
+{
+    $english_days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+    $french_days = array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche');
+    $english_months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+    $french_months = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+    return str_replace($english_months, $french_months, str_replace($english_days, $french_days, date($format, strtotime($date))));
+}
+
+
+function dateEN2FR($jour) //$jour au format aaaa-mm-jj
+{
+
+    return substr($jour, 8, 2) . substr($jour, 4, 4) . substr($jour, 0, 4);
+}

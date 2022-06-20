@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 16 juin 2022 à 06:31
+-- Généré le : lun. 20 juin 2022 à 12:58
 -- Version du serveur :  5.7.31
 -- Version de PHP : 7.3.21
 
@@ -90,6 +90,13 @@ CREATE TABLE IF NOT EXISTS `affecter` (
   KEY `fk_week` (`idWeek`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Déchargement des données de la table `affecter`
+--
+
+INSERT INTO `affecter` (`idEvent`, `idClasse`, `idWeek`) VALUES
+(2, 2, 36);
+
 -- --------------------------------------------------------
 
 --
@@ -156,7 +163,8 @@ CREATE TABLE IF NOT EXISTS `attribuer_prof` (
 --
 
 INSERT INTO `attribuer_prof` (`idClasse`, `idProf`) VALUES
-(2, 1);
+(2, 1),
+(32, 15);
 
 -- --------------------------------------------------------
 
@@ -305,15 +313,16 @@ CREATE TABLE IF NOT EXISTS `professeur` (
   `idProf` int(11) NOT NULL AUTO_INCREMENT,
   `nomProf` varchar(500) NOT NULL,
   `prenomProf` varchar(500) NOT NULL,
+  `dateNaissance` date DEFAULT NULL,
   PRIMARY KEY (`idProf`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `professeur`
 --
 
-INSERT INTO `professeur` (`idProf`, `nomProf`, `prenomProf`) VALUES
-(1, 'test', 'test');
+INSERT INTO `professeur` (`idProf`, `nomProf`, `prenomProf`, `dateNaissance`) VALUES
+(15, 'ARTAUD', 'Jules', '2002-12-07');
 
 -- --------------------------------------------------------
 
@@ -728,7 +737,7 @@ INSERT INTO `time_dimension` (`id`, `db_date`, `year`, `month`, `day`, `quarter`
 DROP TABLE IF EXISTS `utilisateur`;
 CREATE TABLE IF NOT EXISTS `utilisateur` (
   `mailUtilisateur` varchar(50) NOT NULL,
-  `mdpUtilisateur` varchar(50) NOT NULL,
+  `mdpUtilisateur` varchar(9999) NOT NULL,
   `idDroitUtilisateur` int(11) NOT NULL,
   `idProfesseur` int(11) DEFAULT NULL,
   PRIMARY KEY (`mailUtilisateur`),
@@ -741,8 +750,8 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`mailUtilisateur`, `mdpUtilisateur`, `idDroitUtilisateur`, `idProfesseur`) VALUES
-('admin', 'admin', 1, NULL),
-('test', 'test', 2, 1);
+('admin', '$2y$10$27/fItzR4lop1nHkOtAlHOFNRjA8cjO1QhIgnv5VVCoV55eWE/aKi', 1, NULL),
+('artaud.jules', '$2y$10$al6gDJYCh73ewIH.1guWPe.GALy6oMN93dpBaPtYslA4VmM4DTe6u', 2, 15);
 
 --
 -- Contraintes pour les tables déchargées

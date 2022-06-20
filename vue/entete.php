@@ -11,6 +11,7 @@
                 <li class="menu__group"><a href="./?action=classe" class="menu__link r-link text-underlined">Classe</a></li>
                 <li class="menu__group"><a href="./?action=activite" class="menu__link r-link text-underlined">Activité</a></li>
                 <li class="menu__group"><a href="./?action=strategie" class="menu__link r-link text-underlined">stratégie</a></li>
+                <li class="menu__group"><a href="./?action=utilisateur" class="menu__link r-link text-underlined">compte</a></li>
                 <?php
                 if ($_SESSION["idDroitUtilisateur"] == 1) {
                 ?>
