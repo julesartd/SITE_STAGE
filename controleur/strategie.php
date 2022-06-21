@@ -18,12 +18,13 @@
 
     $listeSousCompetence = getSousCompetence();
 
+$test="";
 
-
-
-    $uneClasseId = getClasseByIdProf($_SESSION['idProfesseur']);
-
-
+    if (isset($_POST['classe'])) {
+        $test="vrai";
+        $classe =  $_POST["classe"];
+        $classeDeListe = getClasseById($classe);
+    }
 
 
 

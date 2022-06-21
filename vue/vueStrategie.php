@@ -1,22 +1,19 @@
 <form method="POST" class="lb mb-3" action="?action=strategie">
 
     <select aria-label="Default select example" name="classe" onChange="submit()">
-        <?php
 
-        if (isset($_POST['classe'])) {
+
+        <?php
+        if ($test != "") {
         ?>
-            <option value="<?php echo $uneClasseId['idClasse']; ?>" selected><?php echo $uneClasseId['niveauClasse'] . ' ' . $uneClasseId['nomDiplome'] ?></OPTION>
+            <option selected><?php echo $classeDeListe['niveauClasse']. " " .$classeDeListe['nomDiplome']; ?></OPTION>
         <?php
-        }else {?>
-        
-        <option selected>-- Choisissez une Classe --</OPTION>
+        } else {
+        ?>
+            <option selected>-- Choisissez une Classe --</OPTION>
         <?php
-
         }
-        ?>
-        
 
-        <?php
         foreach ($listeClasse as $uneClasse) {
 
         ?>

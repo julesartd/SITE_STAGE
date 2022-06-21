@@ -137,7 +137,7 @@ function getSousCompetenceById($id){
         $connex = connexionPDO();
         $rec = $connex->prepare("SELECT * FROM sous_competence 
         INNER JOIN competence_chapeau ON sous_competence.idCompetence = competence_chapeau.idCompetence
-         where sous_competence.idCompetence =:id");
+         where sous_competence.idCompetence =:id ");
         $rec->bindValue("id", $id);
         $rec->execute();
 

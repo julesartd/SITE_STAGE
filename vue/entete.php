@@ -1,5 +1,4 @@
 <div class="page">
-    <input id="retour" type="button" value="Précédent" onclick="history.back();">
     <nav class="page__menu menu">
         <ul class="menu__list r-list">
             <?php
