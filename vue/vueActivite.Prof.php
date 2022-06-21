@@ -6,7 +6,7 @@
 
 <body>
     <h1 id="lstA">Créer une activité</h1>
-    <form method="POST" class="lb mb-3" action="">
+    <form method="POST" class="lb mb-3" >
         <br>
         nom de l'activité : <input type="text" name='txtNomActivite' placeholder="Nom de l'activité">
         <br><br>

@@ -21,8 +21,7 @@
 
 
 
-    $classe = "";
-    $uneClasseId = getClasseById($classe);
+    $uneClasseId = getClasseByIdProf($_SESSION['idProfesseur']);
 
 
 

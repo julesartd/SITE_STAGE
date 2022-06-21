@@ -200,3 +200,16 @@ function attribuerProf($classe, $prof)
     }
    
 }
+
+
+function deleteProfFromClasse($idClasse){
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("DELETE FROM attribuer_prof WHERE idClasse=:idClasse");
+        $req->bindValue('idClasse', $idClasse);
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}

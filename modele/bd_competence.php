@@ -230,7 +230,7 @@ function supprSousCompetenceByCompetence($id){
         $req->bindValue(':id', $id);
         $req->execute();
     }catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        print "Impossible de supprimer ce diplome car les sous-compétences ont été attribués dans des activités. Veuillez les supprimer";
         die();
     }
 

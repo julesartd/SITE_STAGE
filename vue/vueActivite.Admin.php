@@ -1,5 +1,5 @@
 <h1 id="lstA">Créer une activité</h1>
-<form method="POST" class="lb mb-3" action="">
+<form method="POST" class="lb mb-3" >
     Séléctionner un professeur :
     <select name="professeur">
         <?php

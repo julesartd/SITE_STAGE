@@ -2,17 +2,17 @@
     <h1 id="lstA">Créer une classe</h1>
     </br>
 
-    <select  aria-label="Default select example" name="NiveauxClasse">
-    <option selected>Sélectionnez un niveau de classe</option>
-    <option> 2nd</option>
-    <option> 1ère</option>
-    <option> Terminal</option>
-    <option> 1ère année</option>
-    <option> 2ème année</option>
-    
+    <select aria-label="Default select example" name="NiveauxClasse">
+        <option selected>Sélectionnez un niveau de classe</option>
+        <option> Seconde</option>
+        <option> Première</option>
+        <option> Terminal</option>
+        <option> 1ère année</option>
+        <option> 2ème année</option>
+
     </select>
 
-    <select  aria-label="Default select example" name="diplome">
+    <select aria-label="Default select example" name="diplome">
 
         <option selected>Sélectionnez un diplome</option>
 
@@ -32,30 +32,30 @@
     </br>
     <input type="submit" value="AJOUTER" name="btnAjoutClasse">
     <input type="submit" value="ANNULER" name="btnCancel">
-</form>
 
-<br>
-<br>
-<table class="table table-dark">
 
-    <tr class="table-active">
+    <br>
+    <br>
+    <table class="table table-dark">
 
-        <th>Niveau de classe</th>
-        <th>Bac</th>
-        <th>Détail de la classe</th>
-        <th></th>
-    </tr>
-    <?php
-    foreach ($listeClasse as $uneClasse) {
-    ?>
-        <tr>
-            <td><?php echo $uneClasse["niveauClasse"]; ?></td>
-            <td><?php echo $uneClasse["nomDiplome"]; ?></td>
-            <td><a href="index.php?action=detailClasse&id=<?php echo $uneClasse['idClasse']; ?>">Détail</td>
-            <td><a href="index.php?action=classe&idSuppr=<?php echo $uneClasse['idClasse']; ?>"onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette classe ?')">Supprimer</td>
+        <tr class="table-active">
+
+            <th>Niveau de classe</th>
+            <th>Bac</th>
+            <th>Détail de la classe</th>
+            <th></th>
         </tr>
-    <?php
-    }
+        <?php
+        foreach ($listeClasse as $uneClasse) {
+        ?>
+            <tr>
+                <td><?php echo $uneClasse["niveauClasse"]; ?></td>
+                <td><?php echo $uneClasse["nomDiplome"]; ?></td>
+                <td><a href="index.php?action=detailClasse&id=<?php echo $uneClasse['idClasse']; ?>">Détail</td>
+                <td><a href="index.php?action=classe&idSuppr=<?php echo $uneClasse['idClasse']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette classe ?')">Supprimer</td>
+            </tr>
+        <?php
+        }
 
-    ?>
-</table>
+        ?>
+    </table>

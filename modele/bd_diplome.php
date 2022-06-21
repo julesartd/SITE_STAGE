@@ -75,7 +75,7 @@ function supprDiplome($idDiplome)
         $req->bindValue(':idDiplome', $idDiplome);
         $req->execute();
     } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        print "Impossible de supprimer ce diplome, il existe encore des classes reliées. Veuillez les supprimer";
         die();
     }
 }
