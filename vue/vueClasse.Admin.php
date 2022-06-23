@@ -1,42 +1,46 @@
-<form method="POST" class="lb mb-3 classe">
-    <h1 id="lstA">Créer une classe</h1>
-    </br>
+<div class="classe">
 
-    <select class="form-select"  required aria-label="Default select example" name="NiveauxClasse">
-        <option value="" selected>Sélectionnez un niveau de classe</option>
-        <option> Seconde</option>
-        <option> Première</option>
-        <option> Terminal</option>
-        <option> 1ère année</option>
-        <option> 2ème année</option>
+    <form method="POST" class="lb mb-3">
+        <h1 id="lstA">Créer une classe</h1>
+        </br>
 
-    </select>
-    </br>
-    <select class="form-select" name="diplome" required>
+        <select class="form-select" required aria-label="Default select example" name="NiveauxClasse">
+            <option value="" selected>Sélectionnez un niveau de classe</option>
+            <option> Seconde</option>
+            <option> Première</option>
+            <option> Terminal</option>
+            <option> 1ère année</option>
+            <option> 2ème année</option>
 
-        <option value="" selected>Sélectionnez un diplome</option>
+        </select>
+        </br>
+        <select class="form-select" name="diplome" required>
 
-        <?php
-        foreach ($listeDiplome as $unDiplome) {
+            <option value="" selected>Sélectionnez un diplome</option>
 
-        ?>
+            <?php
+            foreach ($listeDiplome as $unDiplome) {
 
-            <option value=<?php echo $unDiplome['idDiplome']; ?>><?php echo $unDiplome['nomDiplome']; ?></option>
-        <?php
-        }
+            ?>
 
-
-        ?>
-    </select>
-    </br>
-    </br>
-    <input type="submit" class="btn btn-primary" value="AJOUTER" name="btnAjoutClasse">
-    <input type="submit" class="btn btn-primary" value="ANNULER" name="btnCancel">
+                <option value=<?php echo $unDiplome['idDiplome']; ?>><?php echo $unDiplome['nomDiplome']; ?></option>
+            <?php
+            }
 
 
-    </br>
-    </br>
-    </br>
+            ?>
+        </select>
+        </br>
+        </br>
+        <input type="submit" class="btn btn-primary" value="AJOUTER" name="btnAjoutClasse">
+        <input type="submit" class="btn btn-primary" value="ANNULER" name="btnCancel">
+
+
+        </br>
+        </br>
+        </br>
+    </form>
+
 
     <table class="table table-dark classe">
 
@@ -54,10 +58,12 @@
                 <td><?php echo $uneClasse["niveauClasse"]; ?></td>
                 <td><?php echo $uneClasse["nomDiplome"]; ?></td>
                 <td><a href="index.php?action=detailClasse&id=<?php echo $uneClasse['idClasse']; ?>">Détail</td>
-                <td><a href="index.php?action=classe&idSuppr=<?php echo $uneClasse['idClasse']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette classe ?')">Supprimer</td>
+                <td><a href="index.php?action=classe&idSuppr=<?php echo $uneClasse['idClasse']; ?>" 
+                onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette classe ?')">Supprimer</td>
             </tr>
         <?php
         }
 
         ?>
     </table>
+</div>

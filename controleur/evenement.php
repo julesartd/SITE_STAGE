@@ -37,40 +37,39 @@
         }
 
         $semaine = getWeekByDate($dateDebut, $dateFin);
+
+
+        if ($_SESSION["idDroitUtilisateur"] == 1) {
+            $listeClasse = getClasse();
+
+            include "vue/vueEvent.php";
+        }
+        if ($_SESSION["idDroitUtilisateur"] == 2) {
+            $listeClasse = getClasseByIdProf($_SESSION['idProfesseur']);
+
+            include "vue/vueEvent.php";
+        }
+
+
+
+
+        if (isset($_POST['btnAjoutEvent'])) {
+            $semaineAdd = substr($_POST['numero'], -2);
+
+            if (isset($_POST['numero'], $_POST['evenement'], $_POST['classe'])) {
+
+                if ($semaine < 10) {
+
+                    insertEvenement($_POST['evenement'], $_POST['classe'], substr($semaineAdd, -1));
+                } else {
+
+                    insertEvenement($_POST['evenement'], $_POST['classe'], $semaineAdd);
+                }
+            }
+        }
     } else {
         header("Location:/?action=connexion&login=non");
     }
-
-    if ($_SESSION["idDroitUtilisateur"] == 1) {
-        $listeClasse = getClasse();
-        
-        include "vue/vueEvent.php";
-    }
-    if ($_SESSION["idDroitUtilisateur"] == 2) {
-        $listeClasse = getClasseByIdProf($_SESSION['idProfesseur']);
-        
-        include "vue/vueEvent.php";
-    }
-
-
-
-    
-    if (isset($_POST['btnAjoutEvent'])) {
-        $semaineAdd = substr($_POST['numero'], -2);
-
-        if (isset($_POST['numero'], $_POST['evenement'], $_POST['classe'])) {
-
-            if ($semaine < 10) {
-
-                insertEvenement($_POST['evenement'], $_POST['classe'], substr($semaineAdd, -1));
-            } else {
-
-                insertEvenement($_POST['evenement'], $_POST['classe'], $semaineAdd);
-            }
-        }
-    }
-
-
 
 
     ?>

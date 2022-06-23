@@ -22,7 +22,7 @@ function controleurPrincipal($action){
     $lesActions["utilisateur"] = "utilisateur.php";
 
     if(isLoggedOn()){
-        $lesActions["defaut"] = "insertionClasse.php";
+        $lesActions["defaut"] = "classe.php";
     }
     else{
         $lesActions["defaut"] = "connexion.php";
