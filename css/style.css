@@ -73,6 +73,11 @@ table {
   padding-right: 300px;
 }
 
+#tableau2 {
+  padding-left: 500px;
+  padding-right: 500px;
+}
+
 #tableau table {
   border-color: rgb(0, 0, 0);
 }

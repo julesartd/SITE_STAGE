@@ -1,5 +1,5 @@
 <h1 id="lstA">Créer une activité</h1>
-<form method="POST" class="lb mb-3" >
+<form name="envoie" method="POST" class="lb mb-3" onsubmit="return validateForm()">
     Séléctionner un professeur :
     <select name="professeur">
         <?php
@@ -14,6 +14,10 @@
     nom de l'activité : <input type="text" name='txtNomActivite' placeholder="Nom de l'activité">
     <br><br>
 
+    <input type="week" name="numero" min="<?php echo $minCalendrier; ?>" max="<?php echo $maxCalendrier; ?>">
+
+    <br>
+    <br>
     <select id="niveauClasse" name="niveauClasse" onchange="competence(this.value);">
         <option value="">--Choisir Une Classe--</option>
         <?php
@@ -26,11 +30,18 @@
     </select>
     <br>
     <br>
-    <table id ="activiteCompetence"><tr>
-    <td id="competence1" colspan="4"></td>
-</tr>
-<tr>
-    <td id="sousCompetence1"></td><td id="sousCompetence2"></td><td id="sousCompetence3"></td><td id="sousCompetence4"></td>
-    </tr>
-</table>
+    <table id="activiteCompetence">
+        <tr>
+            <td id="competence1" colspan="4"></td>
+        </tr>
+        <tr>
+            <td id="sousCompetence1"></td>
+            <td id="sousCompetence2"></td>
+            <td id="sousCompetence3"></td>
+            <td id="sousCompetence4"></td>
+        </tr>
+    </table>
+
+    <input value="Valider" name="btnValider" type="submit">
+
 </form>

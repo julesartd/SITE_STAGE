@@ -77,9 +77,7 @@
 
 
     include "vue/vueEvent.Admin.php";
-    echo "<p>Stage : Jaune</p>
-    <p>Vacances : Bleu</p>
-    <p>Examen : Vert</p>";
+
 
     ?>
 </div>

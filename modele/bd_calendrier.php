@@ -152,10 +152,15 @@ function supprTableCalendrier()
     try {
         $connex = connexionPDO();
         $req =  $connex->prepare("ALTER TABLE affecter DROP FOREIGN KEY fk_week;
+        ALTER TABLE attribuer_activite DROP FOREIGN KEY FK_WEEK5;
+        TRUNCATE attribuer_activite;
         TRUNCATE affecter;
         TRUNCATE time_dimension; 
         ALTER TABLE affecter
         ADD CONSTRAINT fk_week
+        FOREIGN KEY (idWeek) REFERENCES time_dimension(Week);
+        ALTER TABLE attribuer
+        ADD CONSTRAINT FK_WEEK5
         FOREIGN KEY (idWeek) REFERENCES time_dimension(Week);");
 
         $req->execute();
