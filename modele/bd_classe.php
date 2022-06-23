@@ -135,6 +135,25 @@ function getProfByClasse($idClasse)
     return $resultat;
 }
 
+function getProfById($id)
+{
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM professeur p
+        WHERE idProf = :idProf");
+        $req->bindValue('idProf', $id);
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+
 function getEleveByClasse($idClasse)
 {
     $resultat = array();

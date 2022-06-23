@@ -1,7 +1,10 @@
 <?php
-include_once "modele/authentification.inc.php";
 
-header("Location:/");
+    include_once "modele/authentification.inc.php";
 
-logout();
+    if(isset($_SESSION['mailUtilisateur'])){
+        header("Location:/");
+        logout();
+    }
 ?>
+

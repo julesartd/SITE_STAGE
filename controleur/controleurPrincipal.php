@@ -1,29 +1,24 @@
 <?php
 
-if ( $_SERVER["SCRIPT_FILENAME"] == __FILE__ ){
-    $racine="..";
-}
 include_once "modele/authentification.inc.php";
 
 function controleurPrincipal($action){
     $lesActions = array();
 
-    $lesActions["calendrier"] = "calendrierProfesseur.php";
-    $lesActions["bloc"] = "insertionBloc.php";
-    $lesActions["competence"] = "insertionCompetence.php";
-    $lesActions["diplome"] = "insertionDiplome.php";
-    $lesActions["sousCompetence"] = "insertionSousCompetence.php";
-    $lesActions["event"] = "insertionEvent.php";
-    $lesActions["classe"] = "insertionClasse.php";
+    $lesActions["calendrier"] = "calendrier.php";
+    $lesActions["competence"] = "competence.php";
+    $lesActions["diplome"] = "diplome.php";
+    $lesActions["sousCompetence"] = "sousCompetence.php";
+    $lesActions["event"] = "evenement.php";
+    $lesActions["classe"] = "classe.php";
     $lesActions["activite"] = "activite.php";
     $lesActions["detailClasse"] = "detailClasse.php";
-
     $lesActions["connexion"] = "connexion.php";
     $lesActions["deconnexion"] = "deconnexion.php";
     $lesActions["prof"] = "prof.php";
     $lesActions["eleve"] = "eleve.php";
     $lesActions["strategie"] = "strategie.php";
-    $lesActions["strategieCompte"] = "strategieCompte.php";
+    $lesActions["recap"] = "recapCompetence.php";
     $lesActions["utilisateur"] = "utilisateur.php";
 
     if(isLoggedOn()){
@@ -41,5 +36,3 @@ function controleurPrincipal($action){
     }
 
 }
-
-?>

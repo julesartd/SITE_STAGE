@@ -2,14 +2,11 @@
 if ( $_SERVER["SCRIPT_FILENAME"] == __FILE__ ){
     $racine="..";
 }
+
 include_once "modele/authentification.inc.php";
+include "$racine/vue/vueAuthentification.php";
 
-if (!isset($_POST["mailU"]) || !isset($_POST["mdpU"])){
-
-    include "$racine/vue/vueAuthentification.php";
-
-}
-else
+if (isset($_POST["mailU"],$_POST["mdpU"]))
 {
     $mailU = $_POST["mailU"];
     $mdpU = $_POST["mdpU"];
@@ -21,4 +18,12 @@ else
         header("Location:index.php?action=connexion");
     }
 }
+
+if (isset($_GET['login']) && $_GET['login'] == 'non') {
+    
+    echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Veuillez vous connecter pour accéder à cette page
+      </div>";
+}
+
 ?>

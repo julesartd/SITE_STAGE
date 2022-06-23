@@ -9,6 +9,7 @@
 
 
     if ($_SESSION["idDroitUtilisateur"] == 1) {
+
         $listeDiplome = getDiplome();
         $listeClasse = getClasse();
         $listeProf = getProf();
@@ -19,8 +20,11 @@
             header("Location:index.php?action=activite");
         }
         include "vue/vueActivite.Admin.php";
+    }else {
+        header("Location:/?action=connexion&login=non");
     }
     if ($_SESSION["idDroitUtilisateur"] == 2) {
+        
         $listeDiplome = getDiplome();
         $listeClasse = getClasseByIdProf($_SESSION["idProfesseur"]);
         if (isset($_POST['btnAjoutActivite'])) {
@@ -29,6 +33,8 @@
             header("Location:index.php?action=activite");
         }
         include "vue/vueActivite.Prof.php";
+    }else {
+        header("Location:/?action=connexion&login=non");
     }
     ?>
 
