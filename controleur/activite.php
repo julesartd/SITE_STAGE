@@ -48,11 +48,28 @@
             $listeDiplome = getDiplome();
             $listeClasse = getClasse();
             $listeProf = getProf();
-            if (isset($_POST['btnAjoutActivite'])) {
-                print_r($_POST['SelectCompetence']);
-                insertActivite($_POST['txtNomActivite'], $_POST['selectCompetence'], $_POST['professeur'], $_POST['selectClasse']);
+            if (isset($_POST['btnValider'])) {
+                $semaineAdd = substr($_POST['numeroSemaine'], -2);
+                if ($semaine < 10) {
+                    $semaineAdd = substr($semaineAdd, -1);
+                } 
 
-                header("Location:index.php?action=activite");
+                insertActivite($_POST['txtNomActivite'], $_POST['professeur'], $_POST['niveauClasse']);
+                $recupId = getLastActivite();
+                $id = $recupId['num'];
+                if(isset($_POST['sous_Competence1']) != ""){
+                    
+                    attribuerActivite($id,$semaineAdd,$_POST['sous_Competence1']);
+                }
+                if(isset($_POST['sous_Competence2']) != ""){
+                    attribuerActivite($id,$semaineAdd,$_POST['sous_Competence2']);
+                }
+                if(isset($_POST['sous_Competence3']) != ""){
+                    attribuerActivite($id,$semaineAdd,$_POST['sous_Competence3']);
+                }
+                if(isset($_POST['sous_Competence4']) !=""){
+                    attribuerActivite($id,$semaineAdd,$_POST['sous_Competence4']);
+                }
             }
             include "vue/vueActivite.Admin.php";
         }

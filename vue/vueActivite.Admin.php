@@ -1,7 +1,7 @@
 <h1 id="lstA">Créer une activité</h1>
 <form name="envoie" method="POST" class="lb mb-3" onsubmit="return validateForm()">
-    Séléctionner un professeur :
-    <select name="professeur">
+    <select name="professeur" required>
+        <option value="" selected>--Choisir Un professeur--</option>
         <?php
         foreach ($listeProf as $unProf) {
         ?>
@@ -11,19 +11,19 @@
         ?>
     </select>
     <br><br>
-    nom de l'activité : <input type="text" name='txtNomActivite' placeholder="Nom de l'activité">
+    <input required type="text" name='txtNomActivite' placeholder="Nom de l'activité">
     <br><br>
 
-    <input type="week" name="numero" min="<?php echo $minCalendrier; ?>" max="<?php echo $maxCalendrier; ?>">
+    <input required type="week" name="numeroSemaine" min="<?php echo $minCalendrier; ?>" max="<?php echo $maxCalendrier; ?>">
 
     <br>
     <br>
-    <select id="niveauClasse" name="niveauClasse" onchange="competence(this.value);">
+    <select required id="niveauClasse" name="niveauClasse" onchange="competence(this.value);">
         <option value="">--Choisir Une Classe--</option>
         <?php
         foreach ($listeClasse as $uneClasse) {
         ?>
-            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'] . $uneClasse["nomDiplome"]; ?></option>
+            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'] .' '. $uneClasse["nomDiplome"]; ?></option>
         <?php
         }
         ?>
