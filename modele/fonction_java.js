@@ -67,9 +67,64 @@ function validateForm() {
 
   if (C1 != "") {
     if (C2 != "") {
-
-    } else if (C3 != "") {
-
+      if (C1 != C2) {
+        if (C3 != "") {
+          if (C3 != C2 && C3 != C1) {
+            if (C4 != "") {
+              if (C4 != C1 && C4 != C2 && C4 != C3) {
+                test = true;
+              }
+              else {
+                alert(m);
+                test = false;
+              }
+            }
+            else {
+              test = true;
+            }
+          }
+          else {
+            alert(m);
+            test = false;
+          }
+        }
+        else if (C4 != "") {
+          if (C4 != C2 && C4 != C1) {
+            test = true;
+          }
+          else {
+            alert(m);
+            test = false;
+          }
+        }
+        else {
+          test = true;
+        }
+      }
+      else {
+        alert(m);
+        test = false;
+      }
+    }
+    else if (C3 != "") {
+      if (C1 != C3) {
+        if (C4 != "") {
+          if (C4 != C3 && C4 != C1) {
+            test = true;
+          }
+          else {
+            alert(m);
+            test = false;
+          }
+        }
+        else {
+          test = true;
+        }
+      }
+      else {
+        alert(m);
+        test = false;
+      }
     }
     else if (C4 != "") {
       if (C1 != C4) {
@@ -77,19 +132,13 @@ function validateForm() {
       }
       else {
         alert(m);
-        test = false
+        test = false;
       }
     }
     else {
       test = true;
     }
   }
-
-
-
-
-
-  
   else if (C2 != "") {
     if (C3 != "") {
       if (C2 != C3) {
@@ -99,7 +148,7 @@ function validateForm() {
           }
           else {
             alert(m);
-            test = false
+            test = false;
           }
         }
         else {
@@ -108,7 +157,7 @@ function validateForm() {
       }
       else {
         alert(m);
-        test = false
+        test = false;
       }
     }
     else if (C4 != "") {
@@ -117,7 +166,7 @@ function validateForm() {
       }
       else {
         alert(m);
-        test = false
+        test = false;
       }
     }
     else {
@@ -125,13 +174,13 @@ function validateForm() {
     }
   }
   else if (C3 != "") {
-    if (c4 != "") {
+    if (C4 != "") {
       if (C3 != C4) {
         test = true;
       }
       else {
         alert(m);
-        test = false
+        test = false;
       }
     }
     else {
