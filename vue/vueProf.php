@@ -1,0 +1,83 @@
+<form method="POST" class="lb mb-3">
+    <h2>Ajouter un professeur : </h2>
+    </br>
+    <input required type="text" name='txtNomProf' placeholder='Nom du professeur'>
+
+    <input required type="text" name='txtPrenomProf' placeholder='Prénom du professeur'>
+    </br>
+    </br>
+    <label for="start">Date de naissance :</label>
+    <input required type="date" name="txtNaissProf" placeholder="dd-mm-yyyy" max="<?php echo date('Y-m-d'); ?>">
+
+    <input type="submit" name='btnAjoutProf'>
+
+    </div>
+    </br>
+</form>
+
+
+
+<form>
+    <table class="table table-dark">
+
+        <tr class="table-active">
+
+            <th>Nom du professeur</th>
+            <th>Prénom</th>
+            <th>Réinitialiser le mot de passe</th>
+
+        </tr>
+        <?php
+        foreach ($listeProf as $unProf) {
+
+
+        ?>
+            <tr>
+                <td><?php echo $unProf["nomProf"]; ?></td>
+                <td><?php echo $unProf["prenomProf"]; ?></td>
+                <td><a href="index.php?action=prof&id=<?php echo $unProf['idProf']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir réinitialiser le mot de passe de ce professeur ?')">
+                        Réinitisaliser</td>
+
+            </tr>
+        <?php
+        }
+
+        ?>
+    </table>
+</form>
+</br>
+
+
+<h2>Affecter un professeur à une classe : </h2>
+</br>
+<form method="POST" class="lb mb-3">
+    <select required aria-label="Default select example" name="prof">
+
+        <option selected value="">Sélectionnez un prof</option>
+
+        <?php
+        foreach ($listeProf as $unProf) {
+        ?>
+            <option value=<?php echo $unProf['idProf']; ?>><?php echo $unProf['prenomProf'] . ' ' . $unProf['nomProf']; ?></option>
+        <?php
+        }
+        ?>
+    </select>
+
+    <select required aria-label="Default select example" name="classe">
+
+        <option selected value="">Sélectionnez une classe</option>
+
+        <?php
+        foreach ($listeClasse as $uneClasse) {
+
+        ?>
+
+            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'] . " " . $uneClasse['nomDiplome'] ?></option>
+        <?php
+        }
+        ?>
+    </select>
+
+    <input type="submit" name="btnAttribuer" value="Attribuer">
+</form>

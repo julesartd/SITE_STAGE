@@ -259,6 +259,11 @@ DEPENDENCES
 
 .tableau {
   table-layout: auto;
+  
+}
+
+#tableEvent{
+  overflow: auto;
 }
 
 #cyan {
@@ -272,4 +277,19 @@ DEPENDENCES
 
 #jaune {
   background-color: yellow;
+}
+
+#formChangePassword {
+  width: 500px;
+  margin: auto;
+}
+
+.classe{
+  width: 800px;
+  margin: auto;
+}
+
+.event {
+  width: 500px;
+  margin: auto;
 }

@@ -1,9 +1,9 @@
-<form method="POST" class="lb mb-3" action="">
+<form method="POST" class="lb mb-3 classe">
     <h1 id="lstA">Créer une classe</h1>
     </br>
 
-    <select aria-label="Default select example" name="NiveauxClasse">
-        <option selected>Sélectionnez un niveau de classe</option>
+    <select class="form-select"  required aria-label="Default select example" name="NiveauxClasse">
+        <option value="" selected>Sélectionnez un niveau de classe</option>
         <option> Seconde</option>
         <option> Première</option>
         <option> Terminal</option>
@@ -11,10 +11,10 @@
         <option> 2ème année</option>
 
     </select>
+    </br>
+    <select class="form-select" name="diplome" required>
 
-    <select aria-label="Default select example" name="diplome">
-
-        <option selected>Sélectionnez un diplome</option>
+        <option value="" selected>Sélectionnez un diplome</option>
 
         <?php
         foreach ($listeDiplome as $unDiplome) {
@@ -28,15 +28,17 @@
 
         ?>
     </select>
+    </br>
+    </br>
+    <input type="submit" class="btn btn-primary" value="AJOUTER" name="btnAjoutClasse">
+    <input type="submit" class="btn btn-primary" value="ANNULER" name="btnCancel">
+
 
     </br>
-    <input type="submit" value="AJOUTER" name="btnAjoutClasse">
-    <input type="submit" value="ANNULER" name="btnCancel">
+    </br>
+    </br>
 
-
-    <br>
-    <br>
-    <table class="table table-dark">
+    <table class="table table-dark classe">
 
         <tr class="table-active">
 

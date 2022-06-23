@@ -57,59 +57,90 @@ function sousCompetence4(val) {
   });
 }
 
-function verify(competence1, competence2, competence3, competence4, sous_Competence1, sous_Competence2, sous_Competence3, sous_Competence4) {
-  var passed = false;
-  // On va donner à la variable passed la valeur false (fausse).
-
-  if (competence1.value != "")
-  {
-
-  }
-  else if (competence2.value != "")
-  {
-
-  }
-  else if (competence3.value != "")
-  {
-
-  }
-  else if (competence4.value != "")
-  {
-    if(sous_Competence4 != ""){
-      passed = true;
-    }
-    else{
-      passed =false;
-      document.write("oui");
-    }
-  }
-  else
-    passed = false;
-  return passed
-
-}
-
-function validateForm()  {
+function validateForm() {
   var test = false;
+  var m = "Les compétences chapeaux ne peuvent pas étre identique!";
   var C1 = document.forms["envoie"]["competence1"].value;
   var C2 = document.forms["envoie"]["competence2"].value;
   var C3 = document.forms["envoie"]["competence3"].value;
   var C4 = document.forms["envoie"]["competence4"].value;
 
-  if(C1!= "") {
-    
-  }
-  if(C2!= "") {
+  if (C1 != "") {
+    if (C2 != "") {
 
-  }
-  if(C3!= "") {
+    } else if (C3 != "") {
 
+    }
+    else if (C4 != "") {
+      if (C1 != C4) {
+        test = true;
+      }
+      else {
+        alert(m);
+        test = false
+      }
+    }
+    else {
+      test = true;
+    }
   }
-  if(C4!= "") {
 
-  }
+
+
 
 
   
+  else if (C2 != "") {
+    if (C3 != "") {
+      if (C2 != C3) {
+        if (C4 != "") {
+          if (C4 != C3 && C4 != C2) {
+            test = true;
+          }
+          else {
+            alert(m);
+            test = false
+          }
+        }
+        else {
+          test = true;
+        }
+      }
+      else {
+        alert(m);
+        test = false
+      }
+    }
+    else if (C4 != "") {
+      if (C2 != C4) {
+        test = true;
+      }
+      else {
+        alert(m);
+        test = false
+      }
+    }
+    else {
+      test = true;
+    }
+  }
+  else if (C3 != "") {
+    if (c4 != "") {
+      if (C3 != C4) {
+        test = true;
+      }
+      else {
+        alert(m);
+        test = false
+      }
+    }
+    else {
+      test = true;
+    }
+  }
+  else if (C4 != "") {
+    test = true;
+  }
+
   return test;
 }

@@ -2,7 +2,8 @@
 
 include_once "bd_connexion.php";
 
-function getUtilisateurs() {
+function getUtilisateurs()
+{
     $resultat = array();
 
     try {
@@ -11,7 +12,6 @@ function getUtilisateurs() {
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
-
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
@@ -19,7 +19,8 @@ function getUtilisateurs() {
     return $resultat;
 }
 
-function getUtilisateurByMailU($mailU) {
+function getUtilisateurByMailU($mailU)
+{
     $resultat = array();
 
     try {
@@ -36,7 +37,8 @@ function getUtilisateurByMailU($mailU) {
     return $resultat;
 }
 
-function getUtilisateurById($id) {
+function getUtilisateurById($id)
+{
     $resultat = array();
 
     try {
@@ -54,7 +56,7 @@ function getUtilisateurById($id) {
 }
 
 
-function insertUtilisateur($mail,$mdp,$droit,$idProf)
+function insertUtilisateur($mail, $mdp, $droit, $idProf)
 {
     try {
         $connex = connexionPDO();
@@ -77,7 +79,7 @@ function updateMdptUtilisateur($mdp, $idProf)
         $req = $connex->prepare("UPDATE utilisateur SET mdpUtilisateur = :mdp where idProfesseur = :idProf");
         $req->bindValue('mdp', $mdp);
         $req->bindValue('idProf', $idProf);
-    
+
         $req->execute();
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
@@ -86,6 +88,41 @@ function updateMdptUtilisateur($mdp, $idProf)
 }
 
 
+function str_to_noaccent($str)
+{
+    $url = $str;
+    $url = preg_replace('#Ç#', 'C', $url);
+    $url = preg_replace('#ç#', 'c', $url);
+    $url = preg_replace('#è|é|ê|ë#', 'e', $url);
+    $url = preg_replace('#È|É|Ê|Ë#', 'E', $url);
+    $url = preg_replace('#à|á|â|ã|ä|å#', 'a', $url);
+    $url = preg_replace('#@|À|Á|Â|Ã|Ä|Å#', 'A', $url);
+    $url = preg_replace('#ì|í|î|ï#', 'i', $url);
+    $url = preg_replace('#Ì|Í|Î|Ï#', 'I', $url);
+    $url = preg_replace('#ð|ò|ó|ô|õ|ö#', 'o', $url);
+    $url = preg_replace('#Ò|Ó|Ô|Õ|Ö#', 'O', $url);
+    $url = preg_replace('#ù|ú|û|ü#', 'u', $url);
+    $url = preg_replace('#Ù|Ú|Û|Ü#', 'U', $url);
+    $url = preg_replace('#ý|ÿ#', 'y', $url);
+    $url = preg_replace('#Ý#', 'Y', $url);
+     
+    return ($url);
+}
+
+function resetPassword($mdp,$idProf)
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("UPDATE utilisateur SET mdpUtilisateur = :mdp where idProfesseur = :idProf");
+        $req->bindValue('mdp', $mdp);
+        $req->bindValue('idProf', $idProf);
+
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
 
 
 ?>
