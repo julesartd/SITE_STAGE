@@ -1,6 +1,6 @@
 <table class="table table-bordered border-primary">
 
-    <th colspan="2" rowspan="2"><a href="index.php?action=strategieCompte&id=<?php echo $classeDeListe['idClasse'];?>">Récapitulif des compétence travailler</a></th>
+    <th colspan="2" rowspan="2"><a href="index.php?action=recap&id=<?php echo $classeDeListe['idClasse'];?>">Récapitulif des compétence travailler</a></th>
     
 
 

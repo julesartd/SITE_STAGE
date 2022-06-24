@@ -1,5 +1,4 @@
-<div>
-    <?php
+<?php
 
 
     include_once "modele/bd_activite.php";
@@ -87,7 +86,5 @@
     } else {
         header("Location:/?action=connexion&login=non");
     }
-    ?>
+?>
 
-
-</div>

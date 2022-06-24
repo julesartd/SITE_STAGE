@@ -1,6 +1,4 @@
-<div>
-    <?php
-
+<?php
     include_once "modele/bd_calendrier.php";
     include_once "modele/bd_classe.php";
 
@@ -21,8 +19,6 @@
         $yearDebut = $calendrierDebut['year'];
         $weekDebut = $calendrierDebut['week'];
 
-
-
         if ($weekFin < 10) {
             $maxCalendrier = $yearFin . '-W0' . $weekFin;
         } else {
@@ -39,38 +35,33 @@
         $semaine = getWeekByDate($dateDebut, $dateFin);
 
 
+        if (isset($_POST['btnAjoutEvent'])) {
+            $semaineAdd = substr($_POST['numero'], -2);
+            if (isset($_POST['numero'], $_POST['evenement'], $_POST['classe'])) {
+
+                if ($semaine < 10) {
+
+                    insertEvenement($_POST['evenement'], $_POST['classe'], substr($semaineAdd, -1));
+                    header("Location:/?action=event");
+                } else {
+
+                    insertEvenement($_POST['evenement'], $_POST['classe'], $semaineAdd);
+                    header("Location:/?action=event");
+                }
+            }
+        }
+        
         if ($_SESSION["idDroitUtilisateur"] == 1) {
             $listeClasse = getClasse();
-
+            
             include "vue/vueEvent.php";
+   
         }
         if ($_SESSION["idDroitUtilisateur"] == 2) {
             $listeClasse = getClasseByIdProf($_SESSION['idProfesseur']);
 
             include "vue/vueEvent.php";
         }
-
-
-
-
-        if (isset($_POST['btnAjoutEvent'])) {
-            $semaineAdd = substr($_POST['numero'], -2);
-
-            if (isset($_POST['numero'], $_POST['evenement'], $_POST['classe'])) {
-
-                if ($semaine < 10) {
-
-                    insertEvenement($_POST['evenement'], $_POST['classe'], substr($semaineAdd, -1));
-                } else {
-
-                    insertEvenement($_POST['evenement'], $_POST['classe'], $semaineAdd);
-                }
-            }
-        }
     } else {
         header("Location:/?action=connexion&login=non");
     }
-
-
-    ?>
-</div>
