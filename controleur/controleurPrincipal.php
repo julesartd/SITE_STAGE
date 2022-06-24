@@ -8,6 +8,7 @@ function controleurPrincipal($action){
     $lesActions["calendrier"] = "calendrier.php";
     $lesActions["competence"] = "competence.php";
     $lesActions["diplome"] = "diplome.php";
+    $lesActions["matiere"] = "matiere.php";
     $lesActions["sousCompetence"] = "sousCompetence.php";
     $lesActions["event"] = "evenement.php";
     $lesActions["classe"] = "classe.php";
