@@ -2,11 +2,14 @@
     <?php
 
     include_once "modele/bd_competence.php";
+    include_once "modele/bd_diplome.php";
     if (isset($_SESSION['mailUtilisateur'])) {
 
         $max = getMaxSousCompetenceId($_GET['id']);
         $maxSousCompetence = $max['num'];
         $idComp = $_GET['id'];
+        $idRetour = getDiplomeBySousCompetence($idComp);
+        $idRetour = $idRetour['idDiplome'];
         $uneCompetenceId = getCompetenceChapeauById($idComp);
         $listeSousCompetence = getSousCompetenceById($idComp);
     }else{
