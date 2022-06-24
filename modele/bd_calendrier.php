@@ -154,10 +154,9 @@ function supprTableCalendrier()
         $req =  $connex->prepare("ALTER TABLE affecter DROP FOREIGN KEY fk_week;
         ALTER TABLE attribuer_activite DROP FOREIGN KEY FK_WEEKDEBUT;
         ALTER TABLE attribuer_activite DROP FOREIGN KEY FK_WEEKFIN;
-        ALTER TABLE attribuer_activite DROP FOREIGN KEY FK_WEEKDEBUT;
         ALTER TABLE attribuer_activite_matiere DROP FOREIGN KEY FK_WeekDeb10;
         ALTER TABLE attribuer_activite_matiere DROP FOREIGN KEY FK_WeekFin10;
-        TRUNCATE attribuer_activite_matiere
+        TRUNCATE attribuer_activite_matiere;
         TRUNCATE attribuer_activite;
         TRUNCATE affecter;
         TRUNCATE time_dimension; 
