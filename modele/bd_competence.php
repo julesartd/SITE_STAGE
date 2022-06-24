@@ -226,7 +226,7 @@ function supprSousCompetenceByCompetence($id){
 
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("DELETE FROM Sous_Competence WHERE idCompetence=:id");
+        $req = $cnx->prepare("DELETE FROM sous_Competence WHERE idCompetence=:id");
         $req->bindValue(':id', $id);
         $req->execute();
     }catch (PDOException $e) {
