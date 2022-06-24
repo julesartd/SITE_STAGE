@@ -9,6 +9,7 @@ function controleurPrincipal($action){
     $lesActions["competence"] = "competence.php";
     $lesActions["diplome"] = "diplome.php";
     $lesActions["matiere"] = "matiere.php";
+    $lesActions["competenceMatiere"] = "competenceMatiere.php";
     $lesActions["sousCompetence"] = "sousCompetence.php";
     $lesActions["event"] = "evenement.php";
     $lesActions["classe"] = "classe.php";
