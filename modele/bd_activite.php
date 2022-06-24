@@ -60,15 +60,16 @@ function getActivite($semaine)
     return $resultat;
 }
 
-function getCountSemaine($semaine, $classe)
+function getCountSemaine($semaineDeb,$semaineFin, $classe)
 {
 
     try {
 
         $connex = connexionPDO();
         $req = $connex->prepare("SELECT COUNT(DISTINCT ac.idActivite) as num FROM attribuer_activite  ac
-        inner join activite a on ac.idActivite = a.idActivite  where idWeek = :semaine and a.idClasse = :classe");
-        $req->bindValue("semaine", $semaine);
+        inner join activite a on ac.idActivite = a.idActivite  where idWeekDebut = :semaineDeb and idWeekFin = :semaineFin and a.idClasse = :classe");
+        $req->bindValue("semaineDeb", $semaineDeb);
+        $req->bindValue("semaineFin", $semaineFin);
         $req->bindValue("classe", $classe);
         $req->execute();
 
@@ -85,8 +86,8 @@ function getAttribuerActiviteByClasse($classe)
     try {
 
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT DISTINCT ac.idActivite, idWeek, nomActivite FROM attribuer_activite ac 
-        inner join  activite a on ac.idActivite = a.idActivite   where a.idClasse = :id  ORDER BY idWeek");
+        $req = $connex->prepare("SELECT DISTINCT ac.idActivite, idWeekDebut, idWeekFin, nomActivite FROM attribuer_activite ac 
+        inner join  activite a on ac.idActivite = a.idActivite   where a.idClasse = :id  ORDER BY idWeekDebut, idWeekFin");
         $req->bindValue("id", $classe);
         $req->execute();
 
@@ -103,7 +104,7 @@ function getWeekActivite()
 {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT DISTINCT idWeek from attribuer_activite");
+        $req = $connex->prepare("SELECT DISTINCT idWeekDebut, idWeekFin from attribuer_activite");
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -120,7 +121,7 @@ function getSousCompetenceClasse($week, $activite)
     try {
         $connex = connexionPDO();
         $req = $connex->prepare("SELECT idSousCompetence from attribuer_activite ac 
-        inner join activite a on ac.idActivite = a.idActivite where ac.idWeek = :week and ac.idActivite = :activite");
+        inner join activite a on ac.idActivite = a.idActivite where ac.idWeekDebut = :week and ac.idActivite = :activite");
         $req->bindValue('week', $week);
         $req->bindValue('activite', $activite);
 
@@ -151,15 +152,16 @@ function getLastActivite(){
     return $resultat;
 }
 
-function attribuerActivite($idActivite, $idWeek, $idSousCompetence){
+function attribuerActivite($idActivite,$idSousCompetence,$idWeekDebut, $idWeekFin){
 
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO attribuer_activite VALUES(:idActivite, :idWeek, :idSousCompetence)");
+        $req = $connex->prepare("INSERT INTO attribuer_activite VALUES(:idActivite, :idSousCompetence, :idWeekDeb, :idWeekFin)");
 
         $req->bindValue('idActivite', $idActivite);
-        $req->bindValue('idWeek', $idWeek);
         $req->bindValue('idSousCompetence', $idSousCompetence);
+        $req->bindValue('idWeekDeb', $idWeekDebut);
+        $req->bindValue('idWeekFin', $idWeekFin);
         $req->execute();
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();

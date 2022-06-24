@@ -11,10 +11,12 @@
         ?>
     </select>
     <br><br>
-    <input required type="text" name='txtNomActivite' placeholder="Nom de l'activité">
+    <input required type="text" class="form-control" name='txtNomActivite' placeholder="Nom de l'activité">
     <br><br>
-
-    <input required type="week" name="numeroSemaine" min="<?php echo $minCalendrier; ?>" max="<?php echo $maxCalendrier; ?>">
+    <label class="form-label">Semaine de début de l'activité : </label>
+    <input class="form-control" xrequired type="week" name="numeroSemaineDebut" min="<?php echo $minCalendrier; ?>" max="<?php echo $maxCalendrier; ?>">
+    <label class="form-label">Semaine de fin de l'activité : </label>
+    <input required class="form-control" type="week" name="numeroSemaineFin" min="<?php echo $minCalendrier; ?>" max="<?php echo $maxCalendrier; ?>">
 
     <br>
     <br>
@@ -23,7 +25,7 @@
         <?php
         foreach ($listeClasse as $uneClasse) {
         ?>
-            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'] .' '. $uneClasse["nomDiplome"]; ?></option>
+            <option value=<?php echo $uneClasse['idClasse']; ?>><?php echo $uneClasse['niveauClasse'] . ' ' . $uneClasse["nomDiplome"]; ?></option>
         <?php
         }
         ?>
@@ -42,6 +44,6 @@
         </tr>
     </table>
 
-    <input value="Valider" name="btnValider" type="submit">
+    <input value="Valider" class="btn btn-primary" name="btnValider" type="submit">
 
 </form>
