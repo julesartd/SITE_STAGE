@@ -1,12 +1,14 @@
+
+
 <form method="POST" class="lb mb-3" action="?action=strategie">
 
-    <select aria-label="Default select example" name="classe" onChange="submit()">
+    <select aria-label="Default select example" name="classe" onchange="matiere(this.value,<?php echo $_SESSION['idProfesseur'];?>)">
 
 
         <?php
         if ($test != "") {
         ?>
-            <option selected><?php echo $classeDeListe['niveauClasse']. " " .$classeDeListe['nomDiplome']; ?></OPTION>
+            <option selected><?php echo $classeDeListe['niveauClasse'] . " " . $classeDeListe['nomDiplome']; ?></OPTION>
         <?php
         } else {
         ?>
@@ -15,6 +17,7 @@
         }
 
         foreach ($listeClasse as $uneClasse) {
+       
 
         ?>
 
@@ -25,6 +28,8 @@
 
         ?>
     </select>
+
+    <div id="matiere1"></div>
 
 
 </form>

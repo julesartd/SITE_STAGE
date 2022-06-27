@@ -121,7 +121,7 @@ function getSousCompetenceClasse($week, $activite)
 {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT idSousCompetence from attribuer_activite ac 
+        $req = $connex->prepare("SELECT idCompetenceMatiere from attribuer_activite ac 
         inner join activite a on ac.idActivite = a.idActivite where ac.idWeekDebut = :week and ac.idActivite = :activite");
         $req->bindValue('week', $week);
         $req->bindValue('activite', $activite);
