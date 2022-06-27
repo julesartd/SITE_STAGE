@@ -65,7 +65,9 @@ function insertUtilisateur($mail, $mdp, $droit, $idProf)
         $req->bindValue('mdp', $mdp);
         $req->bindValue('droit', $droit);
         $req->bindValue('idProf', $idProf);
+        print_r($req);
         $req->execute();
+        print_r($req);
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();

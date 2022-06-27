@@ -57,6 +57,49 @@ function sousCompetence4(val) {
   });
 }
 
+function apresChoix1(val) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueActiviteCompetence.php",
+    data: 'choix1=' + val,
+    success: function (data) {
+      $("#choix1").html(data);
+    }
+  });
+}
+
+function apresChoix2(val) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueActiviteCompetence.php",
+    data: 'choix2=' + val,
+    success: function (data) {
+      $("#choix2").html(data);
+    }
+  });
+}
+
+function apresChoix3(val) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueActiviteCompetence.php",
+    data: 'choix3=' + val,
+    success: function (data) {
+      $("#choix3").html(data);
+    }
+  });
+}
+
+function apresChoix4(val) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueActiviteCompetence.php",
+    data: 'choix4=' + val,
+    success: function (data) {
+      $("#choix4").html(data);
+    }
+  });
+}
 function profDroit(val) {
   $.ajax({
     type: "POST",
