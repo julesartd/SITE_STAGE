@@ -77,7 +77,7 @@
             include "vue/vueActivite.Admin.php";
         }
         
-        if ($_SESSION["idDroitUtilisateur"] == 2) {
+        if ($_SESSION["idDroitUtilisateur"] == 2 || $_SESSION["idDroitUtilisateur"] ==3 ) {
 
             $listeDiplome = getDiplome();
             $listeClasse = getClasseByIdProf($_SESSION["idProfesseur"]);
