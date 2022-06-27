@@ -59,7 +59,7 @@ function sousCompetence4(val) {
 
 function validateForm() {
   var test = false;
-  var m = "Les compétences chapeaux ne peuvent pas étre identique!";
+  var m = "Les compétences chapeaux ne peuvent pas être identique!";
   var C1 = document.forms["envoie"]["competence1"].value;
   var C2 = document.forms["envoie"]["competence2"].value;
   var C3 = document.forms["envoie"]["competence3"].value;
