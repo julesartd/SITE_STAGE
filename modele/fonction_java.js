@@ -57,6 +57,17 @@ function sousCompetence4(val) {
   });
 }
 
+function matiere(val) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueProfMatiere.php",
+    data: 'idMatiere=' + val,
+    success: function (data) {
+      $("#prof").html(data);
+    }
+  });
+}
+
 function validateForm() {
   var test = false;
   var m = "Les compétences chapeaux ne peuvent pas être identique!";

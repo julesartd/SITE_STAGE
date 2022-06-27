@@ -71,7 +71,7 @@
 <h2>Affecter un professeur à une classe : </h2>
 </br>
 <form method="POST" class="lb mb-3 event">
-    <select required class="form-select" name="prof">
+    <select required class="form-select" name="prof" onchange="matiere(this.value);">
 
         <option selected value="">Sélectionnez un prof</option>
 
@@ -83,6 +83,8 @@
         }
         ?>
     </select>
+    </br>
+    <div id ="prof"></div>
     </br>
     <select required class="form-select" name="classe">
 

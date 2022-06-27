@@ -42,7 +42,7 @@ function getDiplomeByIdProf($idProf)
         $cnx = connexionPDO();
         $req = $cnx->prepare("SELECT * FROM diplome d
          INNER JOIN classe c ON d.idDiplome = c.idDiplome 
-         INNER JOIN attribuer_classe a ON a.idClasse = c.idClasse WHERE a.idProf = :idProf");
+         INNER JOIN attribuer_prof a ON a.idClasse = c.idClasse WHERE a.idProf = :idProf");
          $req->bindValue('idProf', $idProf);
         $req->execute();
 
