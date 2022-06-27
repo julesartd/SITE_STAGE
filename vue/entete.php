@@ -22,13 +22,11 @@
                 if ($_SESSION["idDroitUtilisateur"] == 2) {
                 ?>
                     <li class="menu__group"><a href="./?action=diplome" class="menu__link r-link text-underlined">Diplome</a></li>
-                    <li class="menu__group"><a href="./?action=eleve" class="menu__link r-link text-underlined">élève</a></li>
                 <?php
                 }
                 if ($_SESSION["idDroitUtilisateur"] == 3) {
                 ?>
                     <li class="menu__group"><a href="./?action=matiere" class="menu__link r-link text-underlined">Matiere</a></li>
-                    <li class="menu__group"><a href="./?action=eleve" class="menu__link r-link text-underlined">élève</a></li>
                 <?php
                 }
                 ?>
