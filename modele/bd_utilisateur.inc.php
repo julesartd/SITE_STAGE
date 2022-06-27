@@ -37,7 +37,7 @@ function getUtilisateurByMailU($mailU)
     return $resultat;
 }
 
-function getUtilisateurById($id)
+function getUtilisateurByIdProf($id)
 {
     $resultat = array();
 

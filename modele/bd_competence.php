@@ -5,7 +5,7 @@ include_once "bd_connexion.php";
 function insertCompetence($libelle, $intitule, $idDiplome){
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO competence_chapeau VALUES(null, :libelle, :intitule, :idDiplome)");
+        $req = $connex->prepare("INSERT INTO competence_chapeau VALUES(null, :libelle, :intitule, :idDiplome,1)");
 
         $req->bindValue('libelle', $libelle);
         $req->bindValue('intitule', $intitule);
@@ -43,7 +43,7 @@ function getCompetenceChapeau(){
     $resultat = array();
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM competence_chapeau ORDER BY libelleCompetence ASC");
+        $rec = $connex->prepare("SELECT * FROM competence_chapeau WHERE isActive =1 ORDER BY libelleCompetence ASC");
         $rec->execute();
 
 
@@ -79,7 +79,7 @@ function getCompetenceChapeauByDiplome($id){
    
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idDiplome =:id ORDER BY libelleCompetence ASC");
+        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idDiplome =:id and isActive = 1 ORDER BY idCompetence ASC");
         $rec->bindValue("id", $id);
         $rec->execute();
 
@@ -98,7 +98,7 @@ function getCompetenceChapeauById($id){
    
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idCompetence =:id ORDER BY libelleCompetence ASC");
+        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idCompetence =:id and isActive = 1 ORDER BY libelleCompetence ASC");
         $rec->bindValue("id", $id);
         $rec->execute();
 

@@ -46,7 +46,7 @@
             <td id="sousCompetence4"></td>
         </tr>
     </table>
-
+<br>
     <input value="Valider" class="btn btn-primary" name="btnValider" type="submit">
 
 </form>

@@ -1,4 +1,6 @@
-<table class="table table-bordered border-primary">
+<div id="tableStrategie">
+
+<table class="table table-striped-columns table-responsive ">
 
     <th colspan="2" rowspan="2"><a href="index.php?action=recap&id=<?php echo $classeDeListe['idClasse']; ?>">Récapitulif des compétence travailler</a></th>
 
@@ -153,3 +155,4 @@
 
 
 </table>
+</div>

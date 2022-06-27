@@ -76,6 +76,14 @@ function validateForm() {
   var C3 = document.forms["envoie"]["competence3"].value;
   var C4 = document.forms["envoie"]["competence4"].value;
 
+  var SC1 = document.forms["envoie"]["sous_competence1"].value;
+  var SC11 = document.forms["envoie"]["sous_competence11"].value;
+  var SC2 = document.forms["envoie"]["sous_competence2"].value;
+  var SC22 = document.forms["envoie"]["sous_competence22"].value;
+  var SC3 = document.forms["envoie"]["sous_competence3"].value;
+  var SC33 = document.forms["envoie"]["sous_competence33"].value;
+  var SC4 = document.forms["envoie"]["sous_competence4"].value;
+  var SC44 = document.forms["envoie"]["sous_competence44"].value;
   if (C1 != "") {
     if (C2 != "") {
       if (C1 != C2) {
