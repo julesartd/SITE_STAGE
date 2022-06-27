@@ -1,4 +1,4 @@
-<form method="POST" class="lb mb-3">
+<form method="POST" class="lb mb-3 event">
     <h2>Ajouter un professeur : </h2>
     </br>
     <input required type="text" name='txtNomProf' placeholder='Nom du professeur'>
@@ -8,7 +8,27 @@
     </br>
     <label for="start">Date de naissance :</label>
     <input required type="date" name="txtNaissProf" placeholder="dd-mm-yyyy" max="<?php echo date('Y-m-d'); ?>">
+    </br>
 
+
+    </br>
+    <select class="form-select" name="selectDroit" required>
+
+        <option value="" selected>Sélectionnez les permissions</option>
+
+        <?php
+        foreach ($listeDroit as $unDroit) {
+
+        ?>
+
+            <option value=<?php echo $unDroit['idDroit']; ?>><?php echo $unDroit['Droit']; ?></option>
+        <?php
+        }
+
+
+        ?>
+    </select>
+    </br>
     <input type="submit" name='btnAjoutProf'>
 
     </div>
@@ -50,8 +70,8 @@
 
 <h2>Affecter un professeur à une classe : </h2>
 </br>
-<form method="POST" class="lb mb-3">
-    <select required aria-label="Default select example" name="prof">
+<form method="POST" class="lb mb-3 event">
+    <select required class="form-select" name="prof">
 
         <option selected value="">Sélectionnez un prof</option>
 
@@ -63,8 +83,8 @@
         }
         ?>
     </select>
-
-    <select required aria-label="Default select example" name="classe">
+    </br>
+    <select required class="form-select" name="classe">
 
         <option selected value="">Sélectionnez une classe</option>
 
@@ -79,5 +99,6 @@
         ?>
     </select>
 
+    </br>
     <input type="submit" name="btnAttribuer" value="Attribuer">
 </form>

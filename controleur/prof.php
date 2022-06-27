@@ -13,6 +13,7 @@
         if ($_SESSION["idDroitUtilisateur"] == 1) {
             $listeProf = getProf();
             $listeClasse = getClasse();
+            $listeDroit = getDroit();
 
             include "vue/vueProf.php";
         }else {
@@ -28,9 +29,11 @@
 
 
     if (isset($_POST['btnAjoutProf'])) {
+
         $nom = $_POST['txtNomProf'];
         $prenom = $_POST['txtPrenomProf'];
         $naissance = $_POST['txtNaissProf'];
+        $droit = $_POST['selectDroit'];
 
         $naissanceFR = dateEN2FR($naissance);
         $mdpDateNaissance  = str_replace('-', '', $naissanceFR);
