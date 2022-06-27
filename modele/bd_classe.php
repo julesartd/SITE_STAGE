@@ -214,7 +214,31 @@ function attribuerProf($classe, $prof)
         $req->execute();
 
     } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Ce professeur est déja attribuer a cette classe!
+        <br>
+        <a href='./?action=prof'>retour</a>
+        </div>";
+        die();
+    }
+   
+}
+
+function attribuerProfMatiere($classe, $prof, $matiere)
+{    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("insert into attribuer_matiere values (:matiere, :prof, :classe)");
+        $req->bindValue('matiere', $matiere);
+        $req->bindValue('classe', $classe);
+        $req->bindValue('prof', $prof);
+        $req->execute();
+
+    } catch (PDOException $e) {
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Ce professeur est déja attribuer a cette classe pour cette matière!
+        <br>
+        <a href='./?action=prof'>retour</a>
+        </div>";
         die();
     }
    

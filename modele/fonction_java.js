@@ -57,11 +57,11 @@ function sousCompetence4(val) {
   });
 }
 
-function matiere(val) {
+function profDroit(val) {
   $.ajax({
     type: "POST",
     url: "../vue/vueProfMatiere.php",
-    data: 'idMatiere=' + val,
+    data: 'idProf=' + val,
     success: function (data) {
       $("#prof").html(data);
     }

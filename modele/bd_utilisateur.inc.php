@@ -141,5 +141,20 @@ function getDroit(){
     return $resultat;
 }
 
+function getDroitUtilisateur($id){
+    $resultat = array();
 
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT idDroitUtilisateur FROM utilisateur WHERE idProfesseur = :id");
+        $req->bindValue('id', $id);
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
 ?>

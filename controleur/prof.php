@@ -30,9 +30,14 @@
     }
 
     if (isset($_POST['btnAttribuer'])) {
-
-
-        attribuerProf($_POST['classe'], $_POST['prof']);
+        $droit = getDroitUtilisateur($_POST['prof']);
+        $droit = $droit['idDroitUtilisateur'];
+        if ($droit == 3) {
+            attribuerProfMatiere($_POST['classe'], $_POST['prof'], $_POST['matiere']);
+            attribuerProf($_POST['classe'], $_POST['prof']);
+        } else {
+            attribuerProf($_POST['classe'], $_POST['prof']);
+        }
     }
 
     if (isset($_GET['id'])) {
@@ -52,7 +57,7 @@
             $listeDroit = getDroit();
 
             include "vue/vueProf.php";
-        }else {
+        } else {
             echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
             Veuillez vous connecter en administrateur pour accéder à cette page
           </div>";

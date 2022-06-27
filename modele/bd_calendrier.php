@@ -14,7 +14,11 @@ function insertEvenement($event, $classe, $semaine)
         $req->bindValue('idSemaine', $semaine);
         $req->execute();
     } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Il y a déja un événement pour cette classe, cette semaine!
+        <br>
+        <a href='./?action=event'>retour</a>
+        </div>";
         die();
     }
 }
