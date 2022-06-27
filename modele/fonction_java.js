@@ -212,3 +212,15 @@ function validateForm() {
 
   return test;
 }
+
+function matiere(val,prof) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueTableauStrategieByProfGeneral.php",
+    data: {'idClasse'  :val,'idProfesseur'  :prof},
+    success: function (data) {
+      $("#matiere1").html(data);
+
+    }
+  });
+}

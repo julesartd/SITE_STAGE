@@ -19,6 +19,24 @@ function getMatiere()
 }
 
 
+function getCompetenceMatiereById($id)
+{
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM matiere_competence where idMatiere = :id");
+        $req->bindValue("id", $id);
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+
 
 function getMatiereByProf($idProf)
 {
@@ -36,6 +54,27 @@ function getMatiereByProf($idProf)
     }
     return $resultat;
 }
+
+
+function getMatiereByProfAndClasse($idProf,$idClasse)
+{
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM matiere m INNER JOIN attribuer_matiere ap ON ap.idMatiere = m.idMatiere 
+        WHERE ap.idProf = :id and ap.idClasse = :classe");
+        $req->bindValue('id', $idProf);
+        $req->bindValue('classe', $idClasse);
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 
 function getCompetenceChapeauByMatiere($id)
 {
@@ -119,4 +158,22 @@ function supprCompetenceMatiere($id){
         print "Erreur !: " . $e->getMessage();
         die();
     }
+}
+
+function getCompetenceMatiereByProfAndClasse($prof, $classe){
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM matiere_competence mc 
+        INNER JOIN matiere m ON mc.idMatiere=m.idMatiere
+        INNER JOIN attribuer_matiere ma ON m.idMatiere=ma.idMatiere WHERE ma.idCLasse =:classe and ma.idProf = ");
+       
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
 }
