@@ -27,7 +27,7 @@
             $listeClasse = getClasse();
             include "vue/vueClasse.Admin.php";
         }
-        if ($_SESSION["idDroitUtilisateur"] == 2) {
+        if ($_SESSION["idDroitUtilisateur"] == 2 || $_SESSION["idDroitUtilisateur"] ==3) {
             $listeClasse = getClasseByIdProf($_SESSION["idProfesseur"]);
             include "vue/vueClasse.Prof.php";
         }

@@ -9,25 +9,6 @@
 
 
 
-    if (isset($_SESSION['mailUtilisateur']) && isset($_SESSION['mdpUtilisateur'])) {
-        if ($_SESSION["idDroitUtilisateur"] == 1) {
-            $listeProf = getProf();
-            $listeClasse = getClasse();
-            $listeDroit = getDroit();
-
-            include "vue/vueProf.php";
-        }else {
-            echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
-            Veuillez vous connecter en administrateur pour accéder à cette page
-          </div>";
-        }
-    } else {
-        header("Location:/?action=connexion&login=non");
-    }
-
-
-
-
     if (isset($_POST['btnAjoutProf'])) {
 
         $nom = $_POST['txtNomProf'];
@@ -44,7 +25,7 @@
         insertProf($nom, $prenom, $naissance);
         $lastProfAdd = getLastProf();
 
-        insertUtilisateur($mail, password_hash($mdpDateNaissance, PASSWORD_DEFAULT), 2, $lastProfAdd['num']);
+        insertUtilisateur($mail, password_hash($mdpDateNaissance, PASSWORD_DEFAULT), $droit, $lastProfAdd['num']);
         header("Location:index.php?action=prof");
     }
 
@@ -59,6 +40,25 @@
         $naissanceFR = dateEN2FR($date['dateNaissance']);
         $mdpDateNaissance  = str_replace('-', '', $naissanceFR);
         $reset = resetPassword(password_hash($mdpDateNaissance, PASSWORD_DEFAULT), $_GET['id']);
+    }
+
+
+
+
+    if (isset($_SESSION['mailUtilisateur']) && isset($_SESSION['mdpUtilisateur'])) {
+        if ($_SESSION["idDroitUtilisateur"] == 1) {
+            $listeProf = getProf();
+            $listeClasse = getClasse();
+            $listeDroit = getDroit();
+
+            include "vue/vueProf.php";
+        }else {
+            echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+            Veuillez vous connecter en administrateur pour accéder à cette page
+          </div>";
+        }
+    } else {
+        header("Location:/?action=connexion&login=non");
     }
 
 

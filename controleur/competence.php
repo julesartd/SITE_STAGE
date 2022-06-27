@@ -5,11 +5,16 @@
     include_once "modele/bd_diplome.php";
 
     if (isset($_SESSION['mailUtilisateur'])) {
+        if ($_SESSION["idDroitUtilisateur"] == 1 || $_SESSION["idDroitUtilisateur"] == 2) {
 
-        $idDiplome = $_GET['id'];
-        $listeDiplome = getDiplome();
-        $listeCompetence = getCompetenceChapeauBydiplome($_GET['id']);
-    }else {
+
+
+            $idDiplome = $_GET['id'];
+            $listeDiplome = getDiplome();
+            $listeCompetence = getCompetenceChapeauBydiplome($_GET['id']);
+            include "vue/vueCompetence.php";
+        }
+    } else {
         header("Location:/?action=connexion&login=non");
     }
 
@@ -34,7 +39,7 @@
 
 
 
-    include "vue/vueCompetence.php";
+
 
 
 
