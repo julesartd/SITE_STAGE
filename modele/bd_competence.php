@@ -79,7 +79,7 @@ function getCompetenceChapeauByDiplome($id){
    
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idDiplome =:id ORDER BY libelleCompetence ASC");
+        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idDiplome =:id AND isActive=1 ORDER BY idCompetence ASC");
         $rec->bindValue("id", $id);
         $rec->execute();
 
