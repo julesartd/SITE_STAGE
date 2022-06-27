@@ -11,6 +11,8 @@
     </br>
     <input type="submit" value="AJOUTER" name="btnAjoutCompetence">
     <input type="submit" value="ANNULER" name="btnCancel">
+    </br>
+    <a href="index.php?action=diplome">retour</a>
 </form>
 
 <br>

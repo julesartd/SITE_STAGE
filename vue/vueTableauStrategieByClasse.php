@@ -1,7 +1,7 @@
 <table class="table table-bordered border-primary">
 
-    <th colspan="2" rowspan="2"><a href="index.php?action=recap&id=<?php echo $classeDeListe['idClasse'];?>">Récapitulif des compétence travailler</a></th>
-    
+    <th colspan="2" rowspan="2"><a href="index.php?action=recap&id=<?php echo $classeDeListe['idClasse']; ?>">Récapitulif des compétence travailler</a></th>
+
 
 
     <?php
@@ -21,7 +21,7 @@
     }
     ?>
     <tr>
-        
+
         <?php
         foreach ($listeCompetence as $uneCompetence) {
 
@@ -58,7 +58,7 @@
             foreach ($listeSousCompetence as $uneSousCompetence) {
 
 
-                $nbSousCompetence = nombreSousCompetenceVu($uneSousCompetence['idSousCompetence'],$classe);
+                $nbSousCompetence = nombreSousCompetenceVu($uneSousCompetence['idSousCompetence'], $classe);
                 $nombre = $nbSousCompetence['nbSousCompetence'];
 
 
@@ -77,26 +77,36 @@
 
     <?php
     $test = 0;
-
+    $test2 = 0;
     foreach ($listeSemaine as $uneSemaine) {
 
 
 
-        if ($test == $uneSemaine['idWeek']) {
+        if ($test == $uneSemaine['idWeekDebut'] && $test2 == $uneSemaine['idWeekFin']) {
     ?>
             <tr>
                 <td><?php echo $uneSemaine['nomActivite']; ?></td>
             <?php
         } else {
-            $nbActiviteParSemaine = getCountSemaine($uneSemaine['idWeek'],$classe);
+            $nbActiviteParSemaine = getCountSemaine($uneSemaine['idWeekDebut'], $uneSemaine['idWeekFin'], $classe);
             $nbActiviteParSemaine = $nbActiviteParSemaine['num'];
             ?>
             <tr>
-                <th rowspan="<?php echo $nbActiviteParSemaine; ?>"><?php echo $uneSemaine['idWeek'] ?></th>
+                <th rowspan="<?php echo $nbActiviteParSemaine; ?>">
+                    <?php
+                    if ($uneSemaine['idWeekDebut'] != $uneSemaine['idWeekFin']) {
+                        echo $uneSemaine['idWeekDebut'] . '-' . $uneSemaine['idWeekFin'];
+                    } else {
+                        echo $uneSemaine['idWeekDebut'];
+                    } ?>
+                    
+                </th>
+
                 <td><?php echo $uneSemaine['nomActivite']; ?></td>
 
                 <?php
-                $test = $uneSemaine['idWeek'];
+                $test = $uneSemaine['idWeekDebut'];
+                $test2 = $uneSemaine['idWeekFin'];
             }
 
             foreach ($listeCompetence as $uneCompetence) {
@@ -106,15 +116,15 @@
                     $listeSousCompetence = getSousCompetenceById($uneCompetence['idCompetence']);
                 }
 
-                $listeSousCompetenceParSemaine = getSousCompetenceClasse($uneSemaine['idWeek'], $uneSemaine['idActivite']);
+                $listeSousCompetenceParSemaine = getSousCompetenceClasse($uneSemaine['idWeekDebut'], $uneSemaine['idActivite']);
 
 
                 foreach ($listeSousCompetence as $uneSousCompetence) {
                 ?><td><?php
-                    $verif = 0;
+                        $verif = 0;
 
-                    foreach ($listeSousCompetenceParSemaine as $uneSousCompetenceParSemaine) {
-                    ?>
+                        foreach ($listeSousCompetenceParSemaine as $uneSousCompetenceParSemaine) {
+                        ?>
 
 
                             <?php

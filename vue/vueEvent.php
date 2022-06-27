@@ -63,7 +63,7 @@
     </table>
 </div>
 
-<form method="POST" class="lb mb-3 event">
+<form method="POST" class="lb mb-3 event" action="/?action=event">
     <h1 id="lstA">Ajouter un évènement par semaine</h1>
 
     <select required class="form-select" name="classe">
@@ -93,5 +93,5 @@
     </br>
     </br>
     <input type="submit" class="btn btn-primary" value="AJOUTER" name="btnAjoutEvent">
-
+  
 </form>

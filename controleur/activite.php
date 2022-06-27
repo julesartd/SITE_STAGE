@@ -1,5 +1,4 @@
-<div>
-    <?php
+<?php
 
 
     include_once "modele/bd_activite.php";
@@ -48,10 +47,14 @@
             $listeDiplome = getDiplome();
             $listeClasse = getClasse();
             $listeProf = getProf();
+
+
             if (isset($_POST['btnValider'])) {
-                $semaineAdd = substr($_POST['numeroSemaine'], -2);
+                $semaineDeb = substr($_POST['numeroSemaineDebut'], -2);
+                $semaineFin = substr($_POST['numeroSemaineFin'], -2);
                 if ($semaine < 10) {
-                    $semaineAdd = substr($semaineAdd, -1);
+                    $semaineDeb = substr($semaineDeb, -1);
+                    $semaineFin = substr($semaineFin, -1);
                 } 
 
                 insertActivite($_POST['txtNomActivite'], $_POST['professeur'], $_POST['niveauClasse']);
@@ -59,20 +62,21 @@
                 $id = $recupId['num'];
                 if(isset($_POST['sous_Competence1']) != ""){
                     
-                    attribuerActivite($id,$semaineAdd,$_POST['sous_Competence1']);
+                    attribuerActivite($id,$_POST['sous_Competence1'],$semaineDeb,$semaineFin);
                 }
                 if(isset($_POST['sous_Competence2']) != ""){
-                    attribuerActivite($id,$semaineAdd,$_POST['sous_Competence2']);
+                    attribuerActivite($id,$_POST['sous_Competence2'],$semaineDeb,$semaineFin);
                 }
                 if(isset($_POST['sous_Competence3']) != ""){
-                    attribuerActivite($id,$semaineAdd,$_POST['sous_Competence3']);
+                    attribuerActivite($id,$_POST['sous_Competence3'],$semaineDeb,$semaineFin);
                 }
                 if(isset($_POST['sous_Competence4']) !=""){
-                    attribuerActivite($id,$semaineAdd,$_POST['sous_Competence4']);
+                    attribuerActivite($id,$_POST['sous_Competence4'],$semaineDeb,$semaineFin);
                 }
             }
             include "vue/vueActivite.Admin.php";
         }
+        
         if ($_SESSION["idDroitUtilisateur"] == 2) {
 
             $listeDiplome = getDiplome();
@@ -87,7 +91,5 @@
     } else {
         header("Location:/?action=connexion&login=non");
     }
-    ?>
+?>
 
-
-</div>

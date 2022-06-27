@@ -10,6 +10,8 @@
     </br>
     <input type="submit" value="AJOUTER" name="btnAjoutSousCompetence">
     <input type="submit" value="ANNULER" name="btnCancel">
+    </br>
+    <a href="index.php?action=competence&id=<?php echo $idRetour; ?>">retour</a>
 
 
     <table class="table table-dark">

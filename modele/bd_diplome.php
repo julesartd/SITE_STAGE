@@ -40,9 +40,9 @@ function getDiplomeByIdProf($idProf)
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT DISTINCT d.idDiplome, d.nomDiplome FROM diplome d
+        $req = $cnx->prepare("SELECT * FROM diplome d
          INNER JOIN classe c ON d.idDiplome = c.idDiplome 
-         INNER JOIN attribuer_prof a ON a.idClasse = c.idClasse WHERE a.idProf = :idProf");
+         INNER JOIN attribuer_classe a ON a.idClasse = c.idClasse WHERE a.idProf = :idProf");
          $req->bindValue('idProf', $idProf);
         $req->execute();
 
@@ -75,7 +75,25 @@ function supprDiplome($idDiplome)
         $req->bindValue(':idDiplome', $idDiplome);
         $req->execute();
     } catch (PDOException $e) {
-        print "Impossible de supprimer ce diplome, il existe encore des classes reliées. Veuillez les supprimer";
+        print "Erreur !: " . $e->getMessage();
         die();
     }
 }
+
+function getDiplomeBySousCompetence($id)
+{
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT idDiplome FROM competence_chapeau WHERE idCompetence = :id");
+        $req->bindValue(':id', $id);
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
