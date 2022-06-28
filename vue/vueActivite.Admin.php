@@ -1,6 +1,8 @@
 <h1 id="lstA">Créer une activité</h1>
+</br>
+<div class="event">
 <form name="envoie" method="POST" class="lb mb-3" onsubmit="return validateForm()">
-    <select name="professeur" required>
+    <select name="professeur" class="form-control" required>
         <option value="" selected>--Choisir Un professeur--</option>
         <?php
         foreach ($listeProf as $unProf) {
@@ -20,6 +22,7 @@
 
     <br>
     <br>
+    </div>
     <select required id="niveauClasse" name="niveauClasse" onchange="competence(this.value);">
         <option value="">--Choisir Une Classe--</option>
         <?php
@@ -43,7 +46,7 @@
             <td id="sousCompetence4"></td>
         </tr>
     </table>
-
+<br>
     <input value="Valider" class="btn btn-primary" name="btnValider" type="submit">
 
 </form>

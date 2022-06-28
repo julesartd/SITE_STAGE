@@ -9,7 +9,7 @@ if (!empty($_POST['idClasse'])) {
                 $competence = "competence" . $i . "";
                 $fonction = "sousCompetence" . $i . "(this.value);";
 ?>
-                <select name="<?php echo $competence; ?>" onchange="<?php echo $fonction?>;">
+                <select name="<?php echo $competence; ?>" onchange="<?php echo $fonction ?>;">
                         <option value="">--Choisir Une Compétence--</option>
                         <?php
                         foreach ($listeCompetence as $uneCompetence) { ?>
@@ -28,7 +28,17 @@ if (!empty($_POST['idSousCompetence1'])) {
         $listeSousCompetence = getSousCompetenceById($idSousCompetence);
 
         ?>
-        <select name='sous_Competence1' required>
+        </br>
+        <select name='sous_Competence1'>
+                <option value="">--Choisir Une Sous-Compétence--</option>
+                <?php
+                foreach ($listeSousCompetence as $uneSousCompetence) { ?>
+                        <option value="<?php echo $uneSousCompetence['idSousCompetence']; ?>"><?php echo $uneSousCompetence['libelleCompetence'] . '.' . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence']; ?></option>
+                <?php }
+                ?>
+        </select>
+
+        <select name='sous_Competence11'>
                 <option value="">--Choisir Une Sous-Compétence--</option>
                 <?php
                 foreach ($listeSousCompetence as $uneSousCompetence) { ?>
@@ -44,8 +54,17 @@ if (!empty($_POST['idSousCompetence2'])) {
 
         $listeSousCompetence = getSousCompetenceById($idSousCompetence);
 
-?>
-        <select name='sous_Competence2'required>
+?> </br>
+        <select name='sous_Competence2'>
+                <option value="">--Choisir Une Sous-Compétence--</option>
+                <?php
+                foreach ($listeSousCompetence as $uneSousCompetence) { ?>
+                        <option value="<?php echo $uneSousCompetence['idSousCompetence']; ?>"><?php echo $uneSousCompetence['libelleCompetence'] . '.' . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence']; ?></option>
+                <?php }
+                ?>
+        </select>
+
+        <select name='sous_Competence22'>
                 <option value="">--Choisir Une Sous-Compétence--</option>
                 <?php
                 foreach ($listeSousCompetence as $uneSousCompetence) { ?>
@@ -61,8 +80,17 @@ if (!empty($_POST['idSousCompetence3'])) {
 
         $listeSousCompetence = getSousCompetenceById($idSousCompetence);
 
-?>
-        <select name='sous_Competence3'required>
+?> </br>
+        <select name='sous_Competence3'>
+                <option value="">--Choisir Une Sous-Compétence--</option>
+                <?php
+                foreach ($listeSousCompetence as $uneSousCompetence) { ?>
+                        <option value="<?php echo $uneSousCompetence['idSousCompetence']; ?>"><?php echo $uneSousCompetence['libelleCompetence'] . '.' . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence']; ?></option>
+                <?php }
+                ?>
+        </select>
+
+        <select name='sous_Competence33'>
                 <option value="">--Choisir Une Sous-Compétence--</option>
                 <?php
                 foreach ($listeSousCompetence as $uneSousCompetence) { ?>
@@ -78,8 +106,17 @@ if (!empty($_POST['idSousCompetence4'])) {
 
         $listeSousCompetence = getSousCompetenceById($idSousCompetence);
 
-?>
-        <select name='sous_Competence4'required>
+?> </br>
+        <select name='sous_Competence4' required>
+                <option value="">--Choisir Une Sous-Compétence--</option>
+                <?php
+                foreach ($listeSousCompetence as $uneSousCompetence) { ?>
+                        <option value="<?php echo $uneSousCompetence['idSousCompetence']; ?>"><?php echo $uneSousCompetence['libelleCompetence'] . '.' . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence']; ?></option>
+                <?php }
+                ?>
+        </select>
+
+        <select name='sous_Competence44' required>
                 <option value="">--Choisir Une Sous-Compétence--</option>
                 <?php
                 foreach ($listeSousCompetence as $uneSousCompetence) { ?>

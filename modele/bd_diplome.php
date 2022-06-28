@@ -7,7 +7,8 @@ function getDiplomeWithClasse()
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM diplome INNER JOIN classe on diplome.idDiplome=classe.idDiplome");
+        $req = $cnx->prepare("SELECT * FROM diplome INNER JOIN classe on diplome.idDiplome=classe.idDiplome 
+        where diplome.isActive =1");
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -24,7 +25,7 @@ function getDiplome()
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM diplome");
+        $req = $cnx->prepare("SELECT * FROM diplome where isActive =1");
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -42,7 +43,7 @@ function getDiplomeByIdProf($idProf)
         $cnx = connexionPDO();
         $req = $cnx->prepare("SELECT * FROM diplome d
          INNER JOIN classe c ON d.idDiplome = c.idDiplome 
-         INNER JOIN attribuer_classe a ON a.idClasse = c.idClasse WHERE a.idProf = :idProf");
+         INNER JOIN attribuer_prof a ON a.idClasse = c.idClasse WHERE a.idProf = :idProf and  d.isActive =1");
          $req->bindValue('idProf', $idProf);
         $req->execute();
 
@@ -58,7 +59,7 @@ function insertDiplome($nomDiplome)
 {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO diplome VALUES (null, :nomDiplome)");
+        $req = $connex->prepare("INSERT INTO diplome VALUES (null, :nomDiplome, 1)");
         $req->bindValue('nomDiplome', $nomDiplome);
         $req->execute();
     } catch (PDOException $e) {
@@ -85,7 +86,7 @@ function getDiplomeBySousCompetence($id)
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT idDiplome FROM competence_chapeau WHERE idCompetence = :id");
+        $req = $cnx->prepare("SELECT idDiplome FROM competence_chapeau WHERE idCompetence = :id ");
         $req->bindValue(':id', $id);
         $req->execute();
 

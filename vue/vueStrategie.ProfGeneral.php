@@ -2,7 +2,7 @@
 
 <form method="POST" class="lb mb-3" action="?action=strategie">
 
-    <select aria-label="Default select example" name="classe" onchange="submit()">
+    <select aria-label="Default select example" name="classe" onchange="matiere(this.value,<?php echo $_SESSION['idProfesseur'];?>)">
 
 
         <?php

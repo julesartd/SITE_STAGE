@@ -10,7 +10,7 @@ if (isset($_SESSION['mailUtilisateur'])) {
         $pass_old = $_POST['pass_old'];
         $new_pass_conf = $_POST['new_pass_conf'];
 
-        $unProfId = getUtilisateurById($_SESSION['idProfesseur']);
+        $unProfId = getUtilisateurByIdProf($_SESSION['idProfesseur']);
 
 
 
