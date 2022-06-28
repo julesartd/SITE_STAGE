@@ -65,7 +65,6 @@ if (isset($_SESSION["mailUtilisateur"])) {
             $recupId = getLastActivite();
             $id = $recupId['num'];
             if (!empty($_POST['sous_Competence1'])) {
-
                 attribuerActivite($id, $_POST['sous_Competence1'], $semaineDeb, $semaineFin);
             }
             if (!empty($_POST['sous_Competence2'])) {
@@ -76,6 +75,18 @@ if (isset($_SESSION["mailUtilisateur"])) {
             }
             if (!empty($_POST['sous_Competence4'])) {
                 attribuerActivite($id, $_POST['sous_Competence4'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['sous_Competence5'])) {
+                attribuerActivite($id, $_POST['sous_Competence5'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['sous_Competence6'])) {
+                attribuerActivite($id, $_POST['sous_Competence6'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['sous_Competence7'])) {
+                attribuerActivite($id, $_POST['sous_Competence7'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['sous_Competence8'])) {
+                attribuerActivite($id, $_POST['sous_Competence8'], $semaineDeb, $semaineFin);
             }
         }
 
@@ -108,6 +119,18 @@ if (isset($_SESSION["mailUtilisateur"])) {
             }
             if (!empty($_POST['sous_Competence4'])) {
                 attribuerActivite($id, $_POST['sous_Competence4'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['sous_Competence5'])) {
+                attribuerActivite($id, $_POST['sous_Competence5'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['sous_Competence6'])) {
+                attribuerActivite($id, $_POST['sous_Competence6'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['sous_Competence7'])) {
+                attribuerActivite($id, $_POST['sous_Competence7'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['sous_Competence8'])) {
+                attribuerActivite($id, $_POST['sous_Competence8'], $semaineDeb, $semaineFin);
             }
         }
         include "vue/vueActivite.Prof.php";

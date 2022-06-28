@@ -9,6 +9,10 @@ function competence(val) {
       $("#sousCompetence2").empty();
       $("#sousCompetence3").empty();
       $("#sousCompetence4").empty();
+      $("#choix1").empty();
+      $("#choix2").empty();
+      $("#choix3").empty();
+      $("#choix4").empty();
     }
   });
 }
@@ -20,6 +24,7 @@ function sousCompetence1(val) {
     data: 'idSousCompetence1=' + val,
     success: function (data) {
       $("#sousCompetence1").html(data);
+      $("#choix1").empty();
     }
   });
 }
@@ -31,6 +36,7 @@ function sousCompetence2(val) {
     data: 'idSousCompetence2=' + val,
     success: function (data) {
       $("#sousCompetence2").html(data);
+      $("#choix2").empty();
     }
   });
 }
@@ -42,6 +48,7 @@ function sousCompetence3(val) {
     data: 'idSousCompetence3=' + val,
     success: function (data) {
       $("#sousCompetence3").html(data);
+      $("#choix3").empty();
     }
   });
 }
@@ -53,53 +60,54 @@ function sousCompetence4(val) {
     data: 'idSousCompetence4=' + val,
     success: function (data) {
       $("#sousCompetence4").html(data);
+      $("#choix4").empty();
     }
   });
 }
 
-// function apresChoix1(val) {
-//   $.ajax({
-//     type: "POST",
-//     url: "../vue/vueActiviteCompetence.php",
-//     data: 'choix1=' + val,
-//     success: function (data) {
-//       $("#choix1").html(data);
-//     }
-//   });
-// }
+function apresChoix1(val) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueActiviteCompetence.php",
+    data: 'choix1=' + val,
+    success: function (data) {
+      $("#choix1").html(data);
+    }
+  });
+}
 
-// function apresChoix2(val) {
-//   $.ajax({
-//     type: "POST",
-//     url: "../vue/vueActiviteCompetence.php",
-//     data: 'choix2=' + val,
-//     success: function (data) {
-//       $("#choix2").html(data);
-//     }
-//   });
-// }
+function apresChoix2(val) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueActiviteCompetence.php",
+    data: 'choix2=' + val,
+    success: function (data) {
+      $("#choix2").html(data);
+    }
+  });
+}
 
-// function apresChoix3(val) {
-//   $.ajax({
-//     type: "POST",
-//     url: "../vue/vueActiviteCompetence.php",
-//     data: 'choix3=' + val,
-//     success: function (data) {
-//       $("#choix3").html(data);
-//     }
-//   });
-// }
+function apresChoix3(val) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueActiviteCompetence.php",
+    data: 'choix3=' + val,
+    success: function (data) {
+      $("#choix3").html(data);
+    }
+  });
+}
 
-// function apresChoix4(val) {
-//   $.ajax({
-//     type: "POST",
-//     url: "../vue/vueActiviteCompetence.php",
-//     data: 'choix4=' + val,
-//     success: function (data) {
-//       $("#choix4").html(data);
-//     }
-//   });
-// }
+function apresChoix4(val) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueActiviteCompetence.php",
+    data: 'choix4=' + val,
+    success: function (data) {
+      $("#choix4").html(data);
+    }
+  });
+}
 
 function profDroit(val) {
   $.ajax({
@@ -245,11 +253,11 @@ function validateForm() {
   else if (C4 != "") {
     test = true;
   }
-  else{
+  else {
     alert("veuillez choisir une compétence!");
-        test = false;
+    test = false;
   }
-  
+
 
   return test;
 }
@@ -260,7 +268,7 @@ function listeMatiere(val, prof) {
   $.ajax({
     type: "POST",
     url: "../vue/vueActiviteCompetenceMatiere.php",
-    data: {'idClasse'  :val,'idProf'  :prof},
+    data: { 'idClasse': val, 'idProf': prof },
     success: function (data) {
       $("#listeMatiere").html(data);
 
@@ -280,3 +288,14 @@ function competenceMatiere(val) {
   });
 }
 
+function matiere(val, prof) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueProfMatiere.php",
+    data: { 'idC': val, 'idP': prof },
+    success: function (data) {
+      $("#ListeMatiere").html(data);
+
+    }
+  });
+}

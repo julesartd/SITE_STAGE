@@ -29,7 +29,7 @@
         ?>
     </select>
 
-    <div id="matiere1"></div>
+    <div id="ListeMatiere"></div>
 
 
 </form>

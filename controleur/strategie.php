@@ -7,6 +7,7 @@
     include_once "modele/bd_classe.php";
     include_once "modele/bd_calendrier.php";
     include_once "modele/bd_competence.php";
+    include_once "modele/bd_matiere.php";
 
     if (isset($_SESSION['mailUtilisateur'])) {
         $dateDt = getDateDebut();
@@ -59,15 +60,15 @@
     if ($_SESSION["idDroitUtilisateur"] == 3) {
         $listeClasse = getClasseByIdProf($_SESSION['idProfesseur']);
         include "vue/vueStrategie.ProfGeneral.php";
-        if (isset($_POST['classe'])) {
-
+        if (isset($_POST['classe']) && isset($_POST['matiere'])) {
 
             $classe =  $_POST["classe"];
+            $matiere = $_POST['matiere'];
             $uneClasseId = getClasseById($classe);
-            $listeCompetence = getCompetenceChapeauByDiplomeFromClasse($classe);
-            $listeSemaine = getAttribuerActiviteByClasse($classe);
+            $listeCompetence = getCompetenceByMatiere($matiere);
+            $listeSemaine = getAttribuerActiviteMatiereByClasseAndMatiere($classe, $matiere);
 
-            include "vue/vueTableauStrategieByClasse.php";
+            include "vue/vueTableauStrategieByClasse.ProfGeneral.php";
         }
     }
     

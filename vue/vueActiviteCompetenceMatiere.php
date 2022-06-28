@@ -28,7 +28,7 @@ if (isset($_POST['idClasse']) && isset($_POST['idProf'])) {
 
 if (isset($_POST['idCompetence'])) {
         $idCompetence = $_POST['idCompetence'];
-        $listeCompetence = getCompetenceByMatiereFromClasse($idCompetence);
+        $listeCompetence = getCompetenceByMatiere($idCompetence);
         for ($i = 1; $i <= 4; $i++) {
                 $competence = "competenceMatiere" . $i . "";
 ?>
