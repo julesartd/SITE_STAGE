@@ -1,4 +1,5 @@
-<?php
+<div>
+    <?php
 
 
 include_once "modele/bd_activite.php";
@@ -93,3 +94,7 @@ if (isset($_SESSION["mailUtilisateur"])) {
 } else {
     header("Location:/?action=connexion&login=non");
 }
+    ?>
+
+
+</div>
