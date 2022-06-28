@@ -5,7 +5,7 @@
     include_once "modele/bd_classe.php";
     include_once "modele/bd_utilisateur.inc.php";
     include_once "modele/bd_calendrier.php";
-
+    include_once "modele/bd_matiere.php";
 
 
 

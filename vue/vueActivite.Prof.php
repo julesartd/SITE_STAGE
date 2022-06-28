@@ -1,8 +1,6 @@
 <h1 id="lstA">Créer une activité</h1>
 </br>
-<div class="event">
 <form name="envoie" method="POST" class="lb mb-3" onsubmit="return validateForm()">
-    
     <br><br>
     <input required type="text" class="form-control" name='txtNomActivite' placeholder="Nom de l'activité">
     <br><br>
@@ -13,7 +11,6 @@
 
     <br>
     <br>
-    </div>
     <select required id="niveauClasse" name="niveauClasse" onchange="competence(this.value);">
         <option value="">--Choisir Une Classe--</option>
         <?php

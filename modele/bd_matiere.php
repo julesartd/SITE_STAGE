@@ -56,7 +56,7 @@ function getMatiereByProf($idProf)
 }
 
 
-function getMatiereByProfAndClasse($idProf,$idClasse)
+function getMatiereByProfAndClasse($idProf, $idClasse)
 {
     $resultat = array();
     try {
@@ -132,7 +132,8 @@ function supprMatiere($id)
     }
 }
 
-function insertCompetenceMatiere($libelle, $intitule, $id){
+function insertCompetenceMatiere($libelle, $intitule, $id)
+{
     try {
         $connex = connexionPDO();
         $req = $connex->prepare("INSERT INTO matiere_competence VALUES(null, :libelle, :intitule, :id)");
@@ -141,14 +142,14 @@ function insertCompetenceMatiere($libelle, $intitule, $id){
         $req->bindValue('intitule', $intitule);
         $req->bindValue('id', $id);
         $req->execute();
-        
-    }catch (PDOException $e) {
+    } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
     }
 }
 
-function supprCompetenceMatiere($id){
+function supprCompetenceMatiere($id)
+{
     try {
         $cnx = connexionPDO();
         $req = $cnx->prepare("DELETE FROM matiere_competence WHERE idCompetenceMatiere=:id");
@@ -160,14 +161,13 @@ function supprCompetenceMatiere($id){
     }
 }
 
-function getCompetenceMatiereByProfAndClasse($prof, $classe){
+function getCompetenceByMatiereFromClasse($idCompetence)
+{
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM matiere_competence mc 
-        INNER JOIN matiere m ON mc.idMatiere=m.idMatiere
-        INNER JOIN attribuer_matiere ma ON m.idMatiere=ma.idMatiere WHERE ma.idCLasse =:classe and ma.idProf = ");
-       
+        $req = $cnx->prepare("SELECT * FROM matiere_competence  WHERE idMatiere =:id ORDER BY idCompetenceMatiere");
+        $req->bindValue('id', $idCompetence);
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -176,4 +176,24 @@ function getCompetenceMatiereByProfAndClasse($prof, $classe){
         die();
     }
     return $resultat;
+}
+
+function attribuerProfMatiere($classe, $prof, $matiere)
+{    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("insert into attribuer_matiere values (:matiere, :prof, :classe)");
+        $req->bindValue('matiere', $matiere);
+        $req->bindValue('classe', $classe);
+        $req->bindValue('prof', $prof);
+        $req->execute();
+
+    } catch (PDOException $e) {
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Ce professeur est déja attribuer a cette classe pour cette matière!
+        <br>
+        <a href='./?action=prof'>retour</a>
+        </div>";
+        die();
+    }
+
 }
