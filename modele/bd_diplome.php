@@ -86,7 +86,7 @@ function getDiplomeBySousCompetence($id)
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT idDiplome FROM competence_chapeau WHERE idCompetence = :id and diplome.isActive =1");
+        $req = $cnx->prepare("SELECT idDiplome FROM competence_chapeau WHERE idCompetence = :id ");
         $req->bindValue(':id', $id);
         $req->execute();
 

@@ -45,75 +45,50 @@ if (isset($_SESSION["mailUtilisateur"])) {
     $listeDiplome = getDiplome();
     $listeClasse = getClasse();
     $listeProf = getProf();
+
+    if (isset($_POST['btnValider'])) {
+        $semaineDeb = substr($_POST['numeroSemaineDebut'], -2);
+        $semaineFin = substr($_POST['numeroSemaineFin'], -2);
+        if ($semaine < 10) {
+            $semaineDeb = substr($semaineDeb, -1);
+            $semaineFin = substr($semaineFin, -1);
+        }
+
+        insertActivite($_POST['txtNomActivite'], $_POST['professeur'], $_POST['niveauClasse']);
+        $recupId = getLastActivite();
+        $id = $recupId['num'];
+        if (isset($_POST['sous_Competence1']) != "") {
+
+            attribuerActivite($id, $_POST['sous_Competence1'], $semaineDeb, $semaineFin);
+        }
+        if (isset($_POST['sous_Competence2']) != "") {
+            attribuerActivite($id, $_POST['sous_Competence2'], $semaineDeb, $semaineFin);
+        }
+        if (isset($_POST['sous_Competence3']) != "") {
+            attribuerActivite($id, $_POST['sous_Competence3'], $semaineDeb, $semaineFin);
+        }
+        if (isset($_POST['sous_Competence4']) != "") {
+            attribuerActivite($id, $_POST['sous_Competence4'], $semaineDeb, $semaineFin);
+        }
+    }
+    
     if ($_SESSION["idDroitUtilisateur"] == 1) {
 
-
-
-
-        if (isset($_POST['btnValider'])) {
-            $semaineDeb = substr($_POST['numeroSemaineDebut'], -2);
-            $semaineFin = substr($_POST['numeroSemaineFin'], -2);
-            if ($semaine < 10) {
-                $semaineDeb = substr($semaineDeb, -1);
-                $semaineFin = substr($semaineFin, -1);
-            }
-
-            insertActivite($_POST['txtNomActivite'], $_POST['professeur'], $_POST['niveauClasse']);
-            $recupId = getLastActivite();
-            $id = $recupId['num'];
-            if (isset($_POST['sous_Competence1']) != "") {
-
-                attribuerActivite($id, $_POST['sous_Competence1'], $semaineDeb, $semaineFin);
-            }
-            if (isset($_POST['sous_Competence2']) != "") {
-                attribuerActivite($id, $_POST['sous_Competence2'], $semaineDeb, $semaineFin);
-            }
-            if (isset($_POST['sous_Competence3']) != "") {
-                attribuerActivite($id, $_POST['sous_Competence3'], $semaineDeb, $semaineFin);
-            }
-            if (isset($_POST['sous_Competence4']) != "") {
-                attribuerActivite($id, $_POST['sous_Competence4'], $semaineDeb, $semaineFin);
-            }
-        }
         include "vue/vueActivite.Admin.php";
-    } else {
-        if (isset($_POST['btnValider'])) {
-            $semaineDeb = substr($_POST['numeroSemaineDebut'], -2);
-            $semaineFin = substr($_POST['numeroSemaineFin'], -2);
-            if ($semaine < 10) {
-                $semaineDeb = substr($semaineDeb, -1);
-                $semaineFin = substr($semaineFin, -1);
-            }
+    } 
+    if ($_SESSION["idDroitUtilisateur"] == 2) {
 
-            insertActivite($_POST['txtNomActivite'], $_SESSION['idProfesseur'], $_POST['niveauClasse']);
-            $recupId = getLastActivite();
-            $id = $recupId['num'];
-            if (isset($_POST['sous_Competence1']) != "") {
+        $listeDiplome = getDiplome();
+        $listeClasse = getClasseByIdProf($_SESSION["idProfesseur"]);
+        if (isset($_POST['btnAjoutActivite'])) {
+            insertActivite($_POST['txtNomActivite'], $_POST['SelectCompetence'], $_SESSION['idProfesseur'], $_POST['selectClasse']);
 
-                attribuerActivite($id, $_POST['sous_Competence1'], $semaineDeb, $semaineFin);
-            }
-            if (isset($_POST['sous_Competence2']) != "") {
-                attribuerActivite($id, $_POST['sous_Competence2'], $semaineDeb, $semaineFin);
-            }
-            if (isset($_POST['sous_Competence3']) != "") {
-                attribuerActivite($id, $_POST['sous_Competence3'], $semaineDeb, $semaineFin);
-            }
-            if (isset($_POST['sous_Competence4']) != "") {
-                attribuerActivite($id, $_POST['sous_Competence4'], $semaineDeb, $semaineFin);
-            }
+            header("Location:index.php?action=activite");
         }
+        include "vue/vueActivite.Prof.php";
+    }
 
-        if ($_SESSION["idDroitUtilisateur"] == 2 || $_SESSION["idDroitUtilisateur"] == 3) {
-
-            $listeDiplome = getDiplome();
-            $listeClasse = getClasseByIdProf($_SESSION["idProfesseur"]);
-            if (isset($_POST['btnAjoutActivite'])) {
-                insertActivite($_POST['txtNomActivite'], $_POST['SelectCompetence'], $_SESSION['idProfesseur'], $_POST['selectClasse']);
-
-                header("Location:index.php?action=activite");
-            }
-            include "vue/vueActivite.Prof.php";
-        }
+    if ($_SESSION["idDroitUtilisateur"] == 3) {
     }
 } else {
     header("Location:/?action=connexion&login=non");
