@@ -256,11 +256,11 @@ function validateForm() {
 
 //activite general
 
-function listeMatiere(val,prof) {
+function listeMatiere(val, prof) {
   $.ajax({
     type: "POST",
     url: "../vue/vueActiviteCompetenceMatiere.php",
-    data: 'idCompetence=' + val,
+    data: {'idClasse'  :val,'idProf'  :prof},
     success: function (data) {
       $("#listeMatiere").html(data);
 
@@ -272,22 +272,11 @@ function competenceMatiere(val) {
   $.ajax({
     type: "POST",
     url: "../vue/vueActiviteCompetenceMatiere.php",
-    data: {'idClasse'  :val,'idProfesseur'  :prof},
-    success: function (data) {
-      $("#listeMatiere").html(data);
-
-    }
-  });
-}
-
-function matiere(val,prof) {
-  $.ajax({
-    type: "POST",
-    url: "../vue/vueTableauStrategieByProfGeneral.php",
-    data: {'idClasse'  :val,'idProfesseur'  :prof},
+    data: 'idCompetence=' + val,
     success: function (data) {
       $("#competenceMatiere").html(data);
 
     }
   });
 }
+

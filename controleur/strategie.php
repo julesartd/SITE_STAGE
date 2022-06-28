@@ -56,7 +56,21 @@
             include "vue/vueTableauStrategieByClasse.php";
         }
     }
+    if ($_SESSION["idDroitUtilisateur"] == 3) {
+        $listeClasse = getClasseByIdProf($_SESSION['idProfesseur']);
+        include "vue/vueStrategie.ProfGeneral.php";
+        if (isset($_POST['classe'])) {
 
+
+            $classe =  $_POST["classe"];
+            $uneClasseId = getClasseById($classe);
+            $listeCompetence = getCompetenceChapeauByDiplomeFromClasse($classe);
+            $listeSemaine = getAttribuerActiviteByClasse($classe);
+
+            include "vue/vueTableauStrategieByClasse.php";
+        }
+    }
+    
 
     ?>
 

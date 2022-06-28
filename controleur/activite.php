@@ -6,6 +6,7 @@ include_once "modele/bd_diplome.php";
 include_once "modele/bd_classe.php";
 include_once "modele/bd_competence.php";
 include_once "modele/bd_calendrier.php";
+include_once "modele/bd_matiere.php";
 
 
 
@@ -63,17 +64,17 @@ if (isset($_SESSION["mailUtilisateur"])) {
             insertActivite($_POST['txtNomActivite'], $_POST['professeur'], $_POST['niveauClasse']);
             $recupId = getLastActivite();
             $id = $recupId['num'];
-            if (isset($_POST['sous_Competence1']) != "") {
+            if (!empty($_POST['sous_Competence1'])) {
 
                 attribuerActivite($id, $_POST['sous_Competence1'], $semaineDeb, $semaineFin);
             }
-            if (isset($_POST['sous_Competence2']) != "") {
+            if (!empty($_POST['sous_Competence2'])) {
                 attribuerActivite($id, $_POST['sous_Competence2'], $semaineDeb, $semaineFin);
             }
-            if (isset($_POST['sous_Competence3']) != "") {
+            if (!empty($_POST['sous_Competence3'])) {
                 attribuerActivite($id, $_POST['sous_Competence3'], $semaineDeb, $semaineFin);
             }
-            if (isset($_POST['sous_Competence4']) != "") {
+            if (!empty($_POST['sous_Competence4'])) {
                 attribuerActivite($id, $_POST['sous_Competence4'], $semaineDeb, $semaineFin);
             }
         }
@@ -95,21 +96,50 @@ if (isset($_SESSION["mailUtilisateur"])) {
             insertActivite($_POST['txtNomActivite'], $_SESSION['idProfesseur'], $_POST['niveauClasse']);
             $recupId = getLastActivite();
             $id = $recupId['num'];
-            if (isset($_POST['sous_Competence1']) != "") {
+            if (!empty($_POST['sous_Competence1'])) {
 
                 attribuerActivite($id, $_POST['sous_Competence1'], $semaineDeb, $semaineFin);
             }
-            if (isset($_POST['sous_Competence2']) != "") {
+            if (!empty($_POST['sous_Competence2'])) {
                 attribuerActivite($id, $_POST['sous_Competence2'], $semaineDeb, $semaineFin);
             }
-            if (isset($_POST['sous_Competence3']) != "") {
+            if (!empty($_POST['sous_Competence3'])) {
                 attribuerActivite($id, $_POST['sous_Competence3'], $semaineDeb, $semaineFin);
             }
-            if (isset($_POST['sous_Competence4']) != "") {
+            if (!empty($_POST['sous_Competence4'])) {
                 attribuerActivite($id, $_POST['sous_Competence4'], $semaineDeb, $semaineFin);
             }
         }
         include "vue/vueActivite.Prof.php";
+    }
+    if ($_SESSION["idDroitUtilisateur"] == 3) {
+        $listeClasse = getClasseByIdProf($_SESSION["idProfesseur"]);
+
+        if (isset($_POST['btnValider'])) {
+            $semaineDeb = substr($_POST['numeroSemaineDebut'], -2);
+            $semaineFin = substr($_POST['numeroSemaineFin'], -2);
+            if ($semaine < 10) {
+                $semaineDeb = substr($semaineDeb, -1);
+                $semaineFin = substr($semaineFin, -1);
+            }
+            insertActivite($_POST['txtNomActivite'], $_SESSION['idProfesseur'], $_POST['niveauClasse']);
+            $recupId = getLastActivite();
+            $id = $recupId['num'];
+            echo $_POST['competenceMatiere1'],$_POST['competenceMatiere2'],$_POST['competenceMatiere3'],$_POST['competenceMatiere4'];
+            if (!empty($_POST['competenceMatiere1'])) {
+                attribuerActiviteMatiere($id, $_POST['competenceMatiere1'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['competenceMatiere2'])) {
+                attribuerActiviteMatiere($id, $_POST['competenceMatiere2'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['competenceMatiere3'])) {
+                attribuerActiviteMatiere($id, $_POST['competenceMatiere3'], $semaineDeb, $semaineFin);
+            }
+            if (!empty($_POST['competenceMatiere4'])) {
+                attribuerActiviteMatiere($id, $_POST['competenceMatiere4'], $semaineDeb, $semaineFin);
+            }
+        }
+        include "vue/vueActivite.ProfGeneral.php";
     }
 } else {
     header("Location:/?action=connexion&login=non");

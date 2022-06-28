@@ -1,6 +1,9 @@
 <?php
+
+include_once "../modele/bd_matiere.php";
+
 if (isset($_POST['idClasse']) && isset($_POST['idProf'])) {
-    $listeMatiere = getMatiereByProfAndClasse($_POST['idProfesseur'],$_POST['idClasse']);
+    $listeMatiere = getMatiereByProfAndClasse($_POST['idProf'],$_POST['idClasse']);
 ?>
     <select name="selectMatiere" onChange="competenceMatiere(this.value);">
         <option selected>-- Choisissez une matière --</OPTION>
@@ -27,13 +30,13 @@ if (isset($_POST['idCompetence'])) {
         $idCompetence = $_POST['idCompetence'];
         $listeCompetence = getCompetenceByMatiereFromClasse($idCompetence);
         for ($i = 1; $i <= 4; $i++) {
-                $competence = "competence" . $i . "";
+                $competence = "competenceMatiere" . $i . "";
 ?>
                 <select name="<?php echo $competence; ?>">
                         <option value="">--Choisir Une Compétence--</option>
                         <?php
                         foreach ($listeCompetence as $uneCompetence) { ?>
-                                <option value="<?php echo $uneCompetence['idCompetence']; ?>"><?php echo $uneCompetence['libelleCompetence'] . ' ' . $uneCompetence['intituleCompetence']; ?></option>
+                                <option value="<?php echo $uneCompetence['idCompetenceMatiere']; ?>"><?php echo $uneCompetence['libelleCompetenceMatiere'] . ' ' . $uneCompetence['intitulerCompetenceMatiere']; ?></option>
                         <?php }
                         ?>
                 </select>

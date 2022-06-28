@@ -197,3 +197,20 @@ function attribuerProfMatiere($classe, $prof, $matiere)
     }
 
 }
+
+function attribuerActiviteMatiere($idActivite,$idCompetence,$idWeekDebut, $idWeekFin){
+
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("INSERT INTO attribuer_activite_matiere VALUES(:idActivite, :idCompetence, :idWeekDeb, :idWeekFin)");
+
+        $req->bindValue('idActivite', $idActivite);
+        $req->bindValue('idCompetence', $idCompetence);
+        $req->bindValue('idWeekDeb', $idWeekDebut);
+        $req->bindValue('idWeekFin', $idWeekFin);
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
