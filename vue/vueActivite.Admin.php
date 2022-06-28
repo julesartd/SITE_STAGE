@@ -47,4 +47,5 @@
 <br>
     <input value="Valider" class="btn btn-primary" name="btnValider" type="submit">
 
-</form>
+    </form>
+</div>

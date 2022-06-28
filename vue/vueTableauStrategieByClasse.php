@@ -1,6 +1,6 @@
 <div id="tableStrategie">
 
-<table class="table table-striped-columns table-responsive ">
+<table class="tableStrategie">
 
     <th colspan="2" rowspan="2"><a href="index.php?action=recap&id=<?php echo $classeDeListe['idClasse']; ?>">Récapitulif des compétence travailler</a></th>
 
@@ -35,8 +35,8 @@
             foreach ($listeSousCompetence as $uneSousCompetence) {
         ?>
 
-                <td><?php echo $uneSousCompetence['libelleCompetence'] . '.'
-                        . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence'] ?></td>
+                <th><?php echo $uneSousCompetence['libelleCompetence'] . '.'
+                        . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence'] ?></th>
 
         <?php
 
@@ -66,7 +66,7 @@
 
         ?>
 
-                <td> <?php echo $nombre ?></td>
+                <th> <?php echo $nombre ?></th>
         <?php
 
             }
@@ -87,7 +87,7 @@
         if ($test == $uneSemaine['idWeekDebut'] && $test2 == $uneSemaine['idWeekFin']) {
     ?>
             <tr>
-                <td><?php echo $uneSemaine['nomActivite']; ?></td>
+                <th><?php echo $uneSemaine['nomActivite']; ?></th>
             <?php
         } else {
             $nbActiviteParSemaine = getCountSemaine($uneSemaine['idWeekDebut'], $uneSemaine['idWeekFin'], $classe);
@@ -104,7 +104,7 @@
                     
                 </th>
 
-                <td><?php echo $uneSemaine['nomActivite']; ?></td>
+                <th><?php echo $uneSemaine['nomActivite']; ?></th>
 
                 <?php
                 $test = $uneSemaine['idWeekDebut'];

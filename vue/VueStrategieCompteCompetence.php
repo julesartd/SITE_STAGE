@@ -1,4 +1,4 @@
-<table class="table table-dark">
+<table class="table table-bordered">
 
     <tr class="table-active">
         <th>Compétences</th>
@@ -21,12 +21,23 @@
 
     ?>
             <tr>
-                <td><?php echo $uneSousCompetence['libelleCompetence'] . '.' . $uneSousCompetence['libelleSousCompetence'] ?></td>
-                <td><?php echo $nombre ?></td>
+            <?php
+                if ($nombre > 0) {
+                ?>
+                <td class="table-success"><?php echo $uneSousCompetence['libelleCompetence'] . '.' .
+                        $uneSousCompetence['libelleSousCompetence'] ?></td>
+                
+                    <td class="table-success"><?php echo $nombre ?></td>
             </tr>
-    <?php
-
+            <?php
+                }else {
+                    ?>
+                     <td><?php echo $uneSousCompetence['libelleCompetence'] . '.' .
+                        $uneSousCompetence['libelleSousCompetence'] ?></td>
+                    <td><?php echo $nombre ?></td>
+                    <?php 
+                }
+            }
         }
-    }
-    ?>
+?>
 </table>
