@@ -7,8 +7,7 @@ function getClasse()
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT *, nomDiplome FROM classe inner join diplome on classe.idDiplome=diplome.idDiplome
-        where classe.isActive = 1");
+        $req = $cnx->prepare("SELECT *, nomDiplome FROM classe inner join diplome on classe.idDiplome=diplome.idDiplome");
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -26,7 +25,7 @@ function getClasseById($id)
         $cnx = connexionPDO();
         $req = $cnx->prepare("SELECT *, nomDiplome FROM classe 
         inner join diplome on classe.idDiplome=diplome.idDiplome 
-        where idClasse= :id and classe.isActive = 1");
+        where idClasse= :id");
         $req->bindValue('id', $id);
         $req->execute();
 
@@ -45,7 +44,7 @@ function getClasseByIdProf($idProf)
         $cnx = connexionPDO();
         $req = $cnx->prepare("SELECT *, nomDiplome FROM classe 
         inner join diplome on classe.idDiplome=diplome.idDiplome 
-        INNER JOIN attribuer_prof a ON a.idClasse = classe.idClasse WHERE a.idProf = :idProf and classe.isActive = 1");
+        INNER JOIN attribuer_prof a ON a.idClasse = classe.idClasse WHERE a.idProf = :idProf");
         $req->bindValue('idProf', $idProf);
         $req->execute();
 
@@ -61,7 +60,7 @@ function insertClasse($NiveauClasse, $idDiplome)
 {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO classe VALUES (null, :niveauClasse, :idDiplome, 1)");
+        $req = $connex->prepare("INSERT INTO classe VALUES (null, :niveauClasse, :idDiplome)");
         $req->bindValue('niveauClasse', $NiveauClasse);
         $req->bindValue('idDiplome', $idDiplome);
         $req->execute();
@@ -88,7 +87,7 @@ function insertProf($nom, $prenom, $dateNaiss)
 {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("INSERT INTO professeur VALUES(null,:nom, :prenom, :dateNaiss,1)");
+        $req = $connex->prepare("INSERT INTO professeur VALUES(null,:nom, :prenom, :dateNaiss)");
 
         $req->bindValue('nom', $nom);
         $req->bindValue('prenom', $prenom);
@@ -124,7 +123,7 @@ function getProfByClasse($idClasse)
         $cnx = connexionPDO();
         $req = $cnx->prepare("SELECT * FROM professeur p
         INNER JOIN attribuer_prof ap ON p.idProf = ap.idProf
-        WHERE ap.idClasse = :idClasse and p.isActive=1");
+        WHERE ap.idClasse = :idClasse");
         $req->bindValue('idClasse', $idClasse);
         $req->execute();
 
@@ -142,7 +141,7 @@ function getProfById($id)
     try {
         $cnx = connexionPDO();
         $req = $cnx->prepare("SELECT * FROM professeur p
-        WHERE idProf = :idProf and p.isActive = 1");
+        WHERE idProf = :idProf");
         $req->bindValue('idProf', $id);
         $req->execute();
 
@@ -179,7 +178,7 @@ function getProf()
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM professeur where professeur.isActive = 1");
+        $req = $cnx->prepare("SELECT * FROM professeur");
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -215,31 +214,7 @@ function attribuerProf($classe, $prof)
         $req->execute();
 
     } catch (PDOException $e) {
-        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
-        Ce professeur est déja attribuer a cette classe!
-        <br>
-        <a href='./?action=prof'>retour</a>
-        </div>";
-        die();
-    }
-   
-}
-
-function attribuerProfMatiere($classe, $prof, $matiere)
-{    try {
-        $cnx = connexionPDO();
-        $req = $cnx->prepare("insert into attribuer_matiere values (:matiere, :prof, :classe)");
-        $req->bindValue('matiere', $matiere);
-        $req->bindValue('classe', $classe);
-        $req->bindValue('prof', $prof);
-        $req->execute();
-
-    } catch (PDOException $e) {
-        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
-        Ce professeur est déja attribuer a cette classe pour cette matière!
-        <br>
-        <a href='./?action=prof'>retour</a>
-        </div>";
+        print "Erreur !: " . $e->getMessage();
         die();
     }
    

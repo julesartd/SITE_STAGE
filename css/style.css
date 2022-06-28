@@ -269,6 +269,7 @@ DEPENDENCES
 #cyan {
 
   background-color: cyan;
+  height: 60px;
 }
 
 #vert {
@@ -296,4 +297,36 @@ DEPENDENCES
 .connexion {
   width: 500px;
   margin: auto;
+}
+
+.activite {
+  width: 1000px;
+  text-align: center;
+  margin : auto;
+}
+
+#tableStrategie {
+  border : solid 1px black;
+  overflow: auto;
+  width: auto;
+
+}
+
+.tableStrategie th {
+  border: 1px solid red;
+  width: 500px;
+  table-layout: fixed;
+  
+}
+
+.tableStrategie tr {
+  border: 1px solid red;
+  width: 1000px;
+  
+}
+
+.tableStrategie td {
+  border: 1px solid black;
+  width: 1000px;
+  
 }

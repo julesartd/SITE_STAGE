@@ -28,7 +28,7 @@ function getCompetenceChapeauByDiplomeFromClasse($classe)
         $connex = connexionPDO();
         $req = $connex->prepare("SELECT * FROM competence_chapeau cp 
         INNER JOIN diplome d ON cp.idDiplome=d.idDiplome 
-        INNER JOIN classe c ON d.idDiplome=c.idDiplome WHERE c.idCLasse =:classe  and cp.isActive = 1 ORDER BY idCompetence");
+        INNER JOIN classe c ON d.idDiplome=c.idDiplome WHERE c.idCLasse =:classe ORDER BY idCompetence");
         $req->bindValue('classe', $classe);
         $req->execute();
 
@@ -74,7 +74,6 @@ function getCountSemaine($semaineDeb,$semaineFin, $classe)
         $req->execute();
 
         $resultat = $req->fetch(PDO::FETCH_ASSOC);
-        
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
@@ -121,7 +120,7 @@ function getSousCompetenceClasse($week, $activite)
 {
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("SELECT idCompetenceMatiere from attribuer_activite ac 
+        $req = $connex->prepare("SELECT idSousCompetence from attribuer_activite ac 
         inner join activite a on ac.idActivite = a.idActivite where ac.idWeekDebut = :week and ac.idActivite = :activite");
         $req->bindValue('week', $week);
         $req->bindValue('activite', $activite);

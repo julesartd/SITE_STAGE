@@ -79,7 +79,7 @@ function getCompetenceChapeauByDiplome($id){
    
     try {
         $connex = connexionPDO();
-        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idDiplome =:id AND isActive=1 ORDER BY idCompetence ASC");
+        $rec = $connex->prepare("SELECT * FROM competence_chapeau where idDiplome =:id ORDER BY idCompetence     ASC");
         $rec->bindValue("id", $id);
         $rec->execute();
 
@@ -249,25 +249,4 @@ function supprCompetenceByDiplome($id){
     }
 
 }
-
-
-
-function getCompetenceByActivite($idWeekDebut, $idActivite){
-    try {
-
-        $connex = connexionPDO();
-        $req = $connex->prepare("select * from attribuer_activite_matiere where idWeekDebut = :idW and idActivite  = :idA" );
-        $req->bindValue("idW", $idActivite);
-        $req->bindValue("idA", $idWeekDebut);
-        $req->execute();
-
-        $resultat=$req->fetch(PDO::FETCH_ASSOC);
-
-    }catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
-        die();
-    }
-    return $resultat;
-}
-
 

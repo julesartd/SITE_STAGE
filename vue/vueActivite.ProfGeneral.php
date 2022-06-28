@@ -1,6 +1,8 @@
 <h1 id="lstA">Créer une activité</h1>
 </br>
+<div class="event">
 <form name="envoie" method="POST" class="lb mb-3" onsubmit="return validateForm()">
+    
     <br><br>
     <input required type="text" class="form-control" name='txtNomActivite' placeholder="Nom de l'activité">
     <br><br>
@@ -11,7 +13,8 @@
 
     <br>
     <br>
-    <select required id="niveauClasse" name="niveauClasse" onchange="competence(this.value);">
+    </div>
+    <select required id="niveauClasse" name="niveauClasse" onchange="listeMatiere(this.value, <?php echo $_SESSION['idProfesseur'];?>);">
         <option value="">--Choisir Une Classe--</option>
         <?php
         foreach ($listeClasse as $uneClasse) {
@@ -21,17 +24,12 @@
         }
         ?>
     </select>
+    <div id="listeMatiere"></div>
     <br>
     <br>
     <table id="activiteCompetence">
         <tr>
-            <td id="competence1" colspan="4"></td>
-        </tr>
-        <tr>
-            <td id="sousCompetence1"></td>
-            <td id="sousCompetence2"></td>
-            <td id="sousCompetence3"></td>
-            <td id="sousCompetence4"></td>
+            <td id="competenceMatiere"></td>
         </tr>
     </table>
 <br>

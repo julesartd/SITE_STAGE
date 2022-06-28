@@ -37,15 +37,6 @@ if (!empty($_POST['idSousCompetence1'])) {
                 <?php }
                 ?>
         </select>
-
-        <select name='sous_Competence11'>
-                <option value="">--Choisir Une Sous-Compétence--</option>
-                <?php
-                foreach ($listeSousCompetence as $uneSousCompetence) { ?>
-                        <option value="<?php echo $uneSousCompetence['idSousCompetence']; ?>"><?php echo $uneSousCompetence['libelleCompetence'] . '.' . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence']; ?></option>
-                <?php }
-                ?>
-        </select>
 <?php
 }
 
@@ -56,15 +47,6 @@ if (!empty($_POST['idSousCompetence2'])) {
 
 ?> </br>
         <select name='sous_Competence2'>
-                <option value="">--Choisir Une Sous-Compétence--</option>
-                <?php
-                foreach ($listeSousCompetence as $uneSousCompetence) { ?>
-                        <option value="<?php echo $uneSousCompetence['idSousCompetence']; ?>"><?php echo $uneSousCompetence['libelleCompetence'] . '.' . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence']; ?></option>
-                <?php }
-                ?>
-        </select>
-
-        <select name='sous_Competence22'>
                 <option value="">--Choisir Une Sous-Compétence--</option>
                 <?php
                 foreach ($listeSousCompetence as $uneSousCompetence) { ?>
@@ -89,15 +71,6 @@ if (!empty($_POST['idSousCompetence3'])) {
                 <?php }
                 ?>
         </select>
-
-        <select name='sous_Competence33'>
-                <option value="">--Choisir Une Sous-Compétence--</option>
-                <?php
-                foreach ($listeSousCompetence as $uneSousCompetence) { ?>
-                        <option value="<?php echo $uneSousCompetence['idSousCompetence']; ?>"><?php echo $uneSousCompetence['libelleCompetence'] . '.' . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence']; ?></option>
-                <?php }
-                ?>
-        </select>
 <?php
 }
 
@@ -108,15 +81,6 @@ if (!empty($_POST['idSousCompetence4'])) {
 
 ?> </br>
         <select name='sous_Competence4' required>
-                <option value="">--Choisir Une Sous-Compétence--</option>
-                <?php
-                foreach ($listeSousCompetence as $uneSousCompetence) { ?>
-                        <option value="<?php echo $uneSousCompetence['idSousCompetence']; ?>"><?php echo $uneSousCompetence['libelleCompetence'] . '.' . $uneSousCompetence['libelleSousCompetence'] . ' ' . $uneSousCompetence['intituleSousCompetence']; ?></option>
-                <?php }
-                ?>
-        </select>
-
-        <select name='sous_Competence44' required>
                 <option value="">--Choisir Une Sous-Compétence--</option>
                 <?php
                 foreach ($listeSousCompetence as $uneSousCompetence) { ?>
