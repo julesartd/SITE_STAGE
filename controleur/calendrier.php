@@ -7,11 +7,9 @@
 
 	if (isset($_SESSION['mailUtilisateur'])) {
 		if (isset($_POST['btnValider'])) {
-			$oui = creeTableCalendrier($_POST['dateDebut'], $_POST['dateFin']);
-		}
-
-		if (isset($_POST['btnSupprimer'])) {
 			supprTableCalendrier();
+			creeTableCalendrier($_POST['dateDebut'], $_POST['dateFin']);
+			echo "Le calendrier a bien été créé.";
 		}
 		include "vue/vueCalendrier.php";
 	}else {

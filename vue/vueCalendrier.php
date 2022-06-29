@@ -7,12 +7,9 @@
 		?>
 		<h3 id="lstA">Entrez la date de début et de fin d'année scolaire</h3>
 		</br>
-		date de début : <input type="date" name="dateDebut" value="" min="<?php $date ?>" max="">
-		date de fin : <input type="date" name="dateFin" value="" min="<?php $date ?>" max="">
+		date de début : <input required type="date" name="dateDebut" value="" min="<?php $date ?>" max="">
+		date de fin : <input required type="date" name="dateFin" value="" min="<?php $date ?>" max="">
 		</br></br>
-		<input type="submit" value="Valider" name="btnValider">
+		<input type="submit" value="Valider" name="btnValider" onclick="return confirm('Cette action suppprimera les tableaux de stratégie de cette année! Enregistrez-les avant de créer le nouveau calendrier!')">
 		</br></br>
-
-	Supprimer la table actuel : <input type="submit" value="Supprimer" name="btnSupprimer">
-
 	</form>

@@ -194,9 +194,12 @@ function supprTableCalendrier()
         ALTER TABLE attribuer_activite DROP FOREIGN KEY FK_WEEKFIN;
         ALTER TABLE attribuer_activite_matiere DROP FOREIGN KEY FK_WeekDeb10;
         ALTER TABLE attribuer_activite_matiere DROP FOREIGN KEY FK_WeekFin10;
+        ALTER TABLE attribuer_activite DROP FOREIGN KEY FK_ACTIVITE11;
+        ALTER TABLE attribuer_activite_matiere DROP FOREIGN KEY FK_Activite10;
         TRUNCATE attribuer_activite_matiere;
         TRUNCATE attribuer_activite;
         TRUNCATE affecter;
+        TRUNCATE activite; 
         TRUNCATE time_dimension; 
         ALTER TABLE affecter
         ADD CONSTRAINT fk_week
@@ -212,7 +215,13 @@ function supprTableCalendrier()
         FOREIGN KEY (idWeekDebut) REFERENCES time_dimension(Week);
         ALTER TABLE attribuer_activite_matiere
         ADD CONSTRAINT FK_WeekFin10
-        FOREIGN KEY (idWeekFin) REFERENCES time_dimension(Week);");
+        FOREIGN KEY (idWeekFin) REFERENCES time_dimension(Week);
+        ALTER TABLE attribuer_activite
+        ADD CONSTRAINT FK_ACTIVITE11
+        FOREIGN KEY (idActivite) REFERENCES activite(idActivite);
+        ALTER TABLE attribuer_activite_matiere
+        ADD CONSTRAINT FK_Activite10
+        FOREIGN KEY (idActivite) REFERENCES activite(idActivite);");
 
         $req->execute();
     } catch (PDOException $e) {
