@@ -227,7 +227,7 @@ function getAttribuerActiviteMatiereByClasseAndMatiere($classe, $matiere)
         matiere m on m.idMatiere = mc.idMatiere
         where a.idClasse = :idC  and m.idMatiere = :idM ORDER BY idWeekDebut, idWeekFin");
         $req->bindValue("idC", $classe);
-        $req->bindValue("idM", $classe);
+        $req->bindValue("idM", $matiere);
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -255,6 +255,47 @@ function nombreCompetenceMatiereVu($idCompetence, $classe, $matiere){
         $resultat=$req->fetch(PDO::FETCH_ASSOC);
 
     }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getCompetenceMatiereClasse($week, $activite)
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT idCompetenceMatiere from attribuer_activite_matiere acm 
+        inner join activite a on acm.idActivite = a.idActivite where acm.idWeekDebut = :week and acm.idActivite = :activite");
+        $req->bindValue('week', $week);
+        $req->bindValue('activite', $activite);
+
+
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getCountSemaineMatiere($semaineDeb,$semaineFin, $classe)
+{
+
+    try {
+
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT COUNT(DISTINCT acm.idActivite) as num FROM attribuer_activite_matiere  acm
+        inner join activite a on acm.idActivite = a.idActivite  where idWeekDebut = :semaineDeb and idWeekFin = :semaineFin and a.idClasse = :classe");
+        $req->bindValue("semaineDeb", $semaineDeb);
+        $req->bindValue("semaineFin", $semaineFin);
+        $req->bindValue("classe", $classe);
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
     }
