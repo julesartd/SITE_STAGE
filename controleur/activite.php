@@ -110,20 +110,15 @@ if (isset($_SESSION["mailUtilisateur"])) {
             if (!empty($_POST['sous_Competence1'])) {
 
                 attribuerActivite($id, $_POST['sous_Competence1'], $semaineDeb, $semaineFin);
-                echo "L'activité a bien été attribué";
             }
             if (!empty($_POST['sous_Competence2'])) {
                 attribuerActivite($id, $_POST['sous_Competence2'], $semaineDeb, $semaineFin);
-                echo "L'activité a bien été attribué";
-                
             }
             if (!empty($_POST['sous_Competence3'])) {
                 attribuerActivite($id, $_POST['sous_Competence3'], $semaineDeb, $semaineFin);
-                echo "L'activité a bien été attribué";
             }
             if (!empty($_POST['sous_Competence4'])) {
                 attribuerActivite($id, $_POST['sous_Competence4'], $semaineDeb, $semaineFin);
-                echo "L'activité a bien été attribué";
             }
             if (!empty($_POST['sous_Competence5'])) {
                 attribuerActivite($id, $_POST['sous_Competence5'], $semaineDeb, $semaineFin);
@@ -156,19 +151,15 @@ if (isset($_SESSION["mailUtilisateur"])) {
             echo $_POST['competenceMatiere1'],$_POST['competenceMatiere2'],$_POST['competenceMatiere3'],$_POST['competenceMatiere4'];
             if (!empty($_POST['competenceMatiere1'])) {
                 attribuerActiviteMatiere($id, $_POST['competenceMatiere1'], $semaineDeb, $semaineFin);
-                echo "L'activité a bien été attribué";
             }
             if (!empty($_POST['competenceMatiere2'])) {
                 attribuerActiviteMatiere($id, $_POST['competenceMatiere2'], $semaineDeb, $semaineFin);
-                echo "L'activité a bien été attribué";
             }
             if (!empty($_POST['competenceMatiere3'])) {
                 attribuerActiviteMatiere($id, $_POST['competenceMatiere3'], $semaineDeb, $semaineFin);
-                echo "L'activité a bien été attribué";
             }
             if (!empty($_POST['competenceMatiere4'])) {
                 attribuerActiviteMatiere($id, $_POST['competenceMatiere4'], $semaineDeb, $semaineFin);
-                echo "L'activité a bien été attribué";
             }
         }
         include "vue/vueActivite.ProfGeneral.php";

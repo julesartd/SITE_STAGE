@@ -29,7 +29,7 @@
         ?>
     </select>
     </br>
-    <input type="submit" name='btnAjoutProf' class="btn btn-primary">
+    <input type="submit" name='btnAjoutProf'>
 
     </div>
     </br>
@@ -102,5 +102,5 @@
     </select>
 
     </br>
-    <input type="submit" name="btnAttribuer" class="btn btn-primary" value="Attribuer">
+    <input type="submit" name="btnAttribuer" value="Attribuer">
 </form>

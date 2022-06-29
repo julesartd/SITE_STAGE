@@ -1,20 +1,21 @@
+<div class="event">
 <form method="POST" class="lb mb-3" action="">
     <h1 id="lstA">Créer une compétence</h1>
     </br>
 
-    <input required type="text" name='txtLibelle' placeholder='Libellé de la compétence'>
-
-    <input required type="text" name='txtIntitule' placeholder='Intitulé de la compétence'>
+    <input required  class="form-control" type="text" name='txtLibelle' placeholder='Libellé de la compétence'>
+    <br>
+    <input required class="form-control" type="text" name='txtIntitule' placeholder='Intitulé de la compétence'>
 
 
 
     </br>
-    <input type="submit" value="AJOUTER" name="btnAjoutCompetence">
-    <input type="submit" value="ANNULER" name="btnCancel">
+    <input type="submit" value="AJOUTER" class="btn btn-primary" name="btnAjoutCompetence">
+ 
     </br>
     <a href="index.php?action=matiere">retour</a>
 </form>
-
+</div>
 <br>
 <br>
 <table class="table table-dark">

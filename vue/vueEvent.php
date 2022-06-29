@@ -1,5 +1,5 @@
 <div id="tableEvent">
-    <table class="table table-bordered">
+    <table class="table table-bordered tableau">
 
         <h1 id="lstA">Liste des évènements lors de l'année scolaire</h1>
         </br>
