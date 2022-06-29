@@ -7,18 +7,28 @@ function login($mailU, $mdpU) {
         session_start();
     }
 
-    $util = getUtilisateurByMailU($mailU);
-    $mdpBD = $util["mdpUtilisateur"];
-    $droitBD = $util["idDroitUtilisateur"];
-    $idProfBD = $util["idProfesseur"];
 
-    if (trim($mdpBD) == crypt(trim($mdpU),$mdpBD)) {
-        // le mot de passe est celui de l'utilisateur dans la base de donnees
-        $_SESSION["mailUtilisateur"] = $mailU;
-        $_SESSION["mdpUtilisateur"] = $mdpBD;
-        $_SESSION["idDroitUtilisateur"] = $droitBD;
-        $_SESSION["idProfesseur"] = $idProfBD;
+    $util = getUtilisateurByMailU($mailU);
+    if(!empty($util)){
+        $mdpBD = $util["mdpUtilisateur"];
+        $mailBD = $util["mailUtilisateur"];
+        $droitBD = $util["idDroitUtilisateur"];
+        $idProfBD = $util["idProfesseur"];
+
+        if (trim($mdpBD) == crypt(trim($mdpU),$mdpBD)) {
+            // le mot de passe est celui de l'utilisateur dans la base de donnees
+            $_SESSION["mailUtilisateur"] = $mailU;
+            $_SESSION["mdpUtilisateur"] = $mdpBD;
+            $_SESSION["idDroitUtilisateur"] = $droitBD;
+            $_SESSION["idProfesseur"] = $idProfBD;
+        }
+
+    }else {
+        echo "Vos identifiants sont invalides";
     }
+   
+
+   
 }
 
 function logout() {

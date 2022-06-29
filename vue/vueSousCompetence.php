@@ -8,8 +8,8 @@
 
 
     </br>
-    <input type="submit" value="AJOUTER" name="btnAjoutSousCompetence">
-    <input type="submit" value="ANNULER" name="btnCancel">
+    <input type="submit"  class="btn btn-primary" value="AJOUTER" name="btnAjoutSousCompetence">
+
     </br>
     <a href="index.php?action=competence&id=<?php echo $idRetour; ?>">retour</a>
 
