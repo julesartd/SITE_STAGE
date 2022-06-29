@@ -250,3 +250,37 @@ function supprCompetenceByDiplome($id){
 
 }
 
+function getCompetenceBySousCompetence($id){
+    try {
+        $connex = connexionPDO();
+        $rec = $connex->prepare("SELECT idCompetence FROM sous_competence where idSousCompetence =:id ");
+        $rec->bindValue("id", $id);
+        $rec->execute();
+
+
+        $resultat=$rec->fetch(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getSousCompetenceNotIn($idCp, $idSc){
+    try {
+        $connex = connexionPDO();
+        $rec = $connex->prepare("SELECT * FROM sous_competence sc
+        INNER JOIN competence_chapeau cp ON sc.idCompetence = cp.idCompetence
+         where sc.idCompetence =:idCp AND sc.idSousCompetence NOT IN (:idSc)");
+        $rec->bindValue("idCp", $idCp);
+        $rec->bindValue("idSc", $idSc);
+        $rec->execute();
+
+
+        $resultat=$rec->fetchAll(PDO::FETCH_ASSOC);
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
