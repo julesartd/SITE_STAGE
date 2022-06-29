@@ -35,8 +35,10 @@
         if ($droit == 3) {
             attribuerProfMatiere($_POST['classe'], $_POST['prof'], $_POST['matiere']);
             attribuerProf($_POST['classe'], $_POST['prof']);
+            echo "Le prof à bien été attribué";
         } else {
             attribuerProf($_POST['classe'], $_POST['prof']);
+            echo "Le prof à bien été attribué";
         }
     }
 
