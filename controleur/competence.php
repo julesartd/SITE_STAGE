@@ -5,7 +5,11 @@
     include_once "modele/bd_diplome.php";
 
   
-
+    if (isset($_GET['idSuppr'])) {
+        supprSousCompetenceByCompetence($_GET['idSuppr']);
+        supprCompetence($_GET['idSuppr']);
+        header("Location:index.php?action=competence&id=$idDiplome");
+    }
 
 
     if (isset($_POST['btnAjoutCompetence']) && isset($_GET['id'])) {
@@ -17,11 +21,7 @@
             header("Location:index.php?action=competence&id=$idDiplome");
         }
     }
-    if (isset($_GET['idSuppr'])) {
-        supprSousCompetenceByCompetence($_GET['idSuppr']);
-        supprCompetence($_GET['idSuppr']);
-        header("Location:index.php?action=competence&id=$idDiplome");
-    }
+   
 
     if (isset($_SESSION['mailUtilisateur'])) {
         if ($_SESSION["idDroitUtilisateur"] == 1 || $_SESSION["idDroitUtilisateur"] == 2|| $_SESSION["idDroitUtilisateur"] == 3) {

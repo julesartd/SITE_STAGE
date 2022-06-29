@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/xlsx@0.15.1/dist/xlsx.full.min.js"></script>
     <script type="text/javascript" src="../modele/fonction_java.js"></script>
-    <title>Document</title>
+    <title>Outil pédagogique Lycée Edouard Vaillant</title>
 </head>
 
 <body>
