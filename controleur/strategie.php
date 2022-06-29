@@ -10,10 +10,9 @@
     include_once "modele/bd_matiere.php";
 
     if (isset($_SESSION['mailUtilisateur'])) {
-        $dateDt = getDateDebut();
-        $dateDebut = $dateDt['db_date'];
-        $dateF = getDateFin();
-        $dateFin = $dateF['db_date'];
+        $anneeDt = getAnneeDebut();
+        $anneeF = getAnneeFin();
+        $annee = $anneeDt['year'].'-'.$anneeF['year'];
         $listeSousCompetence = getSousCompetence();
         $test = "";
     }else{
@@ -61,7 +60,8 @@
         $listeClasse = getClasseByIdProf($_SESSION['idProfesseur']);
         include "vue/vueStrategie.ProfGeneral.php";
         if (isset($_POST['classe']) && isset($_POST['matiere'])) {
-
+            $nomMatiere = getNomMatiere($_POST['matiere']);
+            $nomMatiere = $nomMatiere['nom'];
             $classe =  $_POST["classe"];
             $matiere = $_POST['matiere'];
             $uneClasseId = getClasseById($classe);

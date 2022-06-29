@@ -111,6 +111,40 @@ function getDateDebut()
     return $resultat;
 }
 
+function getAnneeFin()
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("select year from time_dimension where db_date =(select max(db_date) from time_dimension)");
+
+
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
+function getAnneeDebut()
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("select year from time_dimension where db_date =(select min(db_date) from time_dimension)");
+
+
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 function getWeekByDate($dateDebut, $dateFin)
 {
     try {

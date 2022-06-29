@@ -301,3 +301,20 @@ function getCountSemaineMatiere($semaineDeb,$semaineFin, $classe)
     }
     return $resultat;
 }
+
+function getNomMatiere($id)
+{
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT nomMatiere as nom FROM matiere WHERE idMatiere = :id");
+        $req->bindValue("id", $id);
+        $req->execute();
+
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
