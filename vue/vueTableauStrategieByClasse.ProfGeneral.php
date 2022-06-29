@@ -1,6 +1,6 @@
 <div id="tableStrategie">
-
-    <table class="tableStrategie">
+        <div id="employee_data">
+        <table class="tableStrategie">
         <th colspan="2"></th>
         <?php
         foreach ($listeCompetence as $uneCompetence) {
@@ -79,4 +79,29 @@
 ?>
 </tr>
 </table>
-</div>
+    </div>
+    </div>
+    <button type="button" id="export_button" class="btn btn-success btn-sm">Export</button>
+    <script>
+        function html_table_to_excel(type, name) {
+            var data = document.getElementById('employee_data');
+
+            var file = XLSX.utils.table_to_book(data, {
+                sheet: "sheet1"
+            });
+
+            XLSX.write(file, {
+                bookType: type,
+                bookSST: true,
+                type: 'base64'
+            });
+
+            XLSX.writeFile(file, name +'.' + type);
+        }
+
+        const export_button = document.getElementById('export_button');
+        var name = <?php echo json_encode($nomMatiere.'-'.$uneClasseId['niveauClasse'].'-'.$uneClasseId['nomDiplome'].'-'.$annee); ?>;
+        export_button.addEventListener('click', () => {
+            html_table_to_excel('xlsx', name);
+        });
+    </script>
