@@ -33,3 +33,17 @@ if (!empty($_POST['idC']) && !empty($_POST['idP'])) {
         </select>
 <?php
 }
+
+if (!empty($_POST['idClasse'])) {
+        $listeMatiere = getMatiereByClasse($_POST['idClasse']);
+        ?>
+        <select name="matiere" required onchange="submit()">
+                <option value="">--Choisir Une Matiére--</option>
+                <?php
+                foreach ($listeMatiere as $uneMatiere) { ?>
+                        <option value="<?php echo $uneMatiere['idMatiere']; ?>"><?php echo $uneMatiere['nomMatiere']; ?></option>
+                <?php }
+                ?>
+        </select>
+<?php
+}

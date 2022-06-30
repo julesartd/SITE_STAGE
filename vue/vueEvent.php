@@ -1,7 +1,16 @@
 <div id="tableEvent">
+    <h1 id="lstA">Liste des évènements lors de l'année scolaire</h1>
+    </br>
+    <div class="event">
+        <table class="table table-bordered tableau">
+            <tr>
+                <th id="jaune">Stage</th>
+                <th id="vert">Examen</th>
+                <th id="cyan">Vacances</th>
+            </tr>
+        </table>
+    </div>
     <table class="table table-bordered tableau">
-
-        <h1 id="lstA">Liste des évènements lors de l'année scolaire</h1>
         </br>
         <tr>
             <th>Numéro de la semaine</th>
@@ -61,15 +70,6 @@
             ?>
             </tr>
     </table>
-    <div class="event">
-        <table class="table table-bordered tableau">
-            <tr>
-                <th id="jaune">Stage</th>
-                <th id="vert">Examen</th>
-                <th id="cyan">Vacances</th>
-            </tr>
-        </table>
-    </div>
 </div>
 
 <form method="POST" class="lb mb-3 event" action="/?action=event">

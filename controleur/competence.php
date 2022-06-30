@@ -6,6 +6,7 @@
 
   
     if (isset($_GET['idSuppr'])) {
+        $idDiplome = $_GET['id'];
         supprSousCompetenceByCompetence($_GET['idSuppr']);
         supprCompetence($_GET['idSuppr']);
         header("Location:index.php?action=competence&id=$idDiplome");

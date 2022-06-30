@@ -51,7 +51,7 @@ if (isset($_SESSION["mailUtilisateur"])) {
 
         $listeDiplome = getDiplome();
         $listeClasse = getClasse();
-        $listeProf = getProf();
+        $listeProf = getProfPro();
 
         if (isset($_POST['btnValider'])) {
             $semaineDeb = substr($_POST['numeroSemaineDebut'], -2);

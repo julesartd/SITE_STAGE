@@ -20,6 +20,8 @@ function controleurPrincipal($action){
     $lesActions["prof"] = "prof.php";
     $lesActions["eleve"] = "eleve.php";
     $lesActions["strategie"] = "strategie.php";
+    $lesActions["strategieSuppr"] = "strategieSuppr.php";
+    $lesActions["strategieSupprGenerale"] = "strategieSupprGenerale.php";
     $lesActions["recap"] = "recapCompetence.php";
     $lesActions["utilisateur"] = "utilisateur.php";
 

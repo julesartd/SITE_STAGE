@@ -1,3 +1,8 @@
+#gauche a {
+  padding-left: 10px;
+  float: left;
+}
+
 #calendar {
   padding: 0;
   margin: 0;
@@ -259,10 +264,10 @@ DEPENDENCES
 
 .tableau {
   table-layout: auto;
-  
+
 }
 
-#tableEvent{
+#tableEvent {
   overflow: auto;
 }
 
@@ -285,7 +290,7 @@ DEPENDENCES
   margin: auto;
 }
 
-.classe{
+.classe {
   width: 800px;
   margin: auto;
 }
@@ -294,6 +299,7 @@ DEPENDENCES
   width: 500px;
   margin: auto;
 }
+
 .connexion {
   width: 500px;
   margin: auto;
@@ -302,11 +308,11 @@ DEPENDENCES
 .activite {
   width: 1000px;
   text-align: center;
-  margin : auto;
+  margin: auto;
 }
 
 #tableStrategie {
-  border : solid 1px black;
+  border: solid 1px black;
   overflow: auto;
   width: auto;
 
@@ -316,17 +322,17 @@ DEPENDENCES
   border: 1px solid red;
   width: 500px;
   table-layout: fixed;
-  
+
 }
 
 .tableStrategie tr {
   border: 1px solid red;
   width: 1000px;
-  
+
 }
 
 .tableStrategie td {
   border: 1px solid black;
   width: 1000px;
-  
+
 }

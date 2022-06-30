@@ -41,6 +41,9 @@
 
             include "vue/vueTableauStrategieByClasse.php";
         }
+        if(isset($_POST['suppr'])){
+            include "vue/vueStrategieSuppr.php";
+        }
     }
     if ($_SESSION["idDroitUtilisateur"] == 2) {
         $listeClasse = getClasseByIdProf($_SESSION['idProfesseur']);
