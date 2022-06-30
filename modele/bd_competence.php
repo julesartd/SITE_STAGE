@@ -244,6 +244,24 @@ function supprSousCompetenceByCompetence($id){
 
 }
 
+function supprSousCompetenceByCompetence2($id){
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("DELETE FROM sous_Competence WHERE idCompetence=:id");
+        $req->bindValue(':id', $id);
+        $req->execute();
+    }catch (PDOException $e) {
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Impossible de supprimer cette compétence car elle posséde des sous-compétences attribuées dans des activités !
+        <br>
+        <a href='./?action=diplome'>retour</a>
+        </div>";
+        die();
+    }
+
+}
+
 function supprCompetenceByDiplome($id){
 
     try {
