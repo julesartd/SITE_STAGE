@@ -189,6 +189,22 @@ function getProf()
     return $resultat;
 }
 
+function getProfPro()
+{
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM professeur p INNER JOIN utilisateur u ON u.idProfesseur = p.idProf WHERE u.idDroitUtilisateur != 3");
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 function getLastProf()
 {
     $resultat = array();
@@ -226,6 +242,54 @@ function deleteProfFromClasse($idClasse){
         $connex = connexionPDO();
         $req = $connex->prepare("DELETE FROM attribuer_prof WHERE idClasse=:idClasse");
         $req->bindValue('idClasse', $idClasse);
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
+
+function desatribuerProfFromClasse($idClasse){
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("DELETE FROM attribuer_prof WHERE idProf=:idClasse");
+        $req->bindValue('idClasse', $idClasse);
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
+
+function desatribuerProfFromClasseMatiere($idClasse){
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("DELETE FROM attribuer_matiere WHERE idProf=:idClasse");
+        $req->bindValue('idClasse', $idClasse);
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
+
+function supprProf($id){
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("DELETE FROM professeur WHERE idProf=:id");
+        $req->bindValue('id', $id);
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
+
+function deleteUtilisateur($id){
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("DELETE FROM utilisateur WHERE idProfesseur=:id");
+        $req->bindValue('id', $id);
         $req->execute();
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();

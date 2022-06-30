@@ -33,8 +33,17 @@
             <input class='txt' type='hidden' name='txtNum' value="<?php echo $uneCompetenceMatiere["idCompetenceMatiere"]; ?>">
             <td><?php echo $uneCompetenceMatiere["libelleCompetenceMatiere"]; ?></td>
             <td><?php echo $uneCompetenceMatiere["intitulerCompetenceMatiere"]; ?></td>
-            <td><a href="index.php?action=competenceMatiere&idSuppr=<?php echo $uneCompetenceMatiere['idCompetenceMatiere']; ?>&id=<?php echo $uneCompetenceMatiere["idMatiere"]; ?> "onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet compétence ?Cette action supprimera les sous compétences affecter à celle-ci !')">Supprimer</td>
-
+            <?php
+            if ($_SESSION["idDroitUtilisateur"] == 1) {
+            ?>
+                <td><a href="index.php?action=competenceMatiere&idSuppr=<?php echo $uneCompetenceMatiere['idCompetenceMatiere']; ?>&id=<?php echo $uneCompetenceMatiere["idMatiere"]; ?> "onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet compétence ?Cette action supprimera les sous compétences affecter à celle-ci !')">Supprimer</td>
+            <?php
+            } else {
+            ?>
+                <td></td>
+            <?php
+            }
+            ?>
         </tr>
     <?php
     }

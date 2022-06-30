@@ -51,7 +51,7 @@ if (isset($_SESSION["mailUtilisateur"])) {
 
         $listeDiplome = getDiplome();
         $listeClasse = getClasse();
-        $listeProf = getProf();
+        $listeProf = getProfPro();
 
         if (isset($_POST['btnValider'])) {
             $semaineDeb = substr($_POST['numeroSemaineDebut'], -2);
@@ -148,17 +148,16 @@ if (isset($_SESSION["mailUtilisateur"])) {
             insertActivite($_POST['txtNomActivite'], $_SESSION['idProfesseur'], $_POST['niveauClasse']);
             $recupId = getLastActivite();
             $id = $recupId['num'];
-            echo $_POST['competenceMatiere1'],$_POST['competenceMatiere2'],$_POST['competenceMatiere3'],$_POST['competenceMatiere4'];
-            if (!empty($_POST['competenceMatiere1'])) {
+            if (!empty($_POST['competence1'])) {
                 attribuerActiviteMatiere($id, $_POST['competenceMatiere1'], $semaineDeb, $semaineFin);
             }
-            if (!empty($_POST['competenceMatiere2'])) {
+            if (!empty($_POST['competence2'])) {
                 attribuerActiviteMatiere($id, $_POST['competenceMatiere2'], $semaineDeb, $semaineFin);
             }
-            if (!empty($_POST['competenceMatiere3'])) {
+            if (!empty($_POST['competence3'])) {
                 attribuerActiviteMatiere($id, $_POST['competenceMatiere3'], $semaineDeb, $semaineFin);
             }
-            if (!empty($_POST['competenceMatiere4'])) {
+            if (!empty($_POST['competence4'])) {
                 attribuerActiviteMatiere($id, $_POST['competenceMatiere4'], $semaineDeb, $semaineFin);
             }
         }

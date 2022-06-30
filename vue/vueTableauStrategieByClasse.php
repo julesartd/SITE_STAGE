@@ -1,3 +1,5 @@
+<button type="button" id="export_button" class="btn btn-success btn-sm">Télécharger le tableau excel</button>
+<br>
 <div id="tableStrategie">
         <div id="employee_data">
             <table class="tableStrategie">
@@ -157,7 +159,6 @@
     </table>
     </div>
     </div>
-    <button type="button" id="export_button" class="btn btn-success btn-sm">Export</button>
     <script>
         function html_table_to_excel(type, name) {
             var data = document.getElementById('employee_data');

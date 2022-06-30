@@ -99,6 +99,24 @@ function getAttribuerActiviteByClasse($classe)
     return $resultat;
 }
 
+function getAttribuerActiviteMatiereByClasse($classe)
+{
+    try {
+
+        $connex = connexionPDO();
+        $req = $connex->prepare("SELECT DISTINCT acm.idActivite, idWeekDebut, idWeekFin, nomActivite FROM attribuer_activite_matiere acm 
+        inner join  activite a on acm.idActivite = a.idActivite   where a.idClasse = :id  ORDER BY idWeekDebut, idWeekFin");
+        $req->bindValue("id", $classe);
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 
 function getWeekActivite()
 {
@@ -167,4 +185,46 @@ function attribuerActivite($idActivite,$idSousCompetence,$idWeekDebut, $idWeekFi
         print "Erreur !: " . $e->getMessage();
         die();
     }
+}
+
+function supprAttribuerActivite($id){
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("DELETE FROM attribuer_activite WHERE idActivite=:id");
+        $req->bindValue(':id', $id);
+        $req->execute();
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+
+}
+
+function supprAttribuerActiviteMatiere($id){
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("DELETE FROM attribuer_activite_matiere WHERE idActivite=:id");
+        $req->bindValue(':id', $id);
+        $req->execute();
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+
+}
+
+function supprActivite($id){
+
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("DELETE FROM activite WHERE idActivite=:id");
+        $req->bindValue(':id', $id);
+        $req->execute();
+    }catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+
 }

@@ -30,7 +30,7 @@ if (isset($_POST['idCompetence'])) {
         $idCompetence = $_POST['idCompetence'];
         $listeCompetence = getCompetenceByMatiere($idCompetence);
         for ($i = 1; $i <= 4; $i++) {
-                $competence = "competenceMatiere" . $i . "";
+                $competence = "competence" . $i . "";
 ?>
                 <select name="<?php echo $competence; ?>">
                         <option value="">--Choisir Une Compétence--</option>

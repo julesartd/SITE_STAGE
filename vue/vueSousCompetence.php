@@ -1,10 +1,9 @@
-<div class="event">
 <form method="POST" class="lb mb-3" action ="">
     <h1 id="lstA">Créer une sous-compétence</h1>
     </br>
 
 
-    <input required type="text" class="form-control" name='txtIntituleSousCompetence' placeholder='Intitulé de la sous-compétence'>
+    <input required id="taille" class="form-control" type="text" name='txtIntituleSousCompetence' placeholder='Intitulé de la sous-compétence'>
 
 
 
@@ -14,7 +13,7 @@
     </br>
     <a href="index.php?action=competence&id=<?php echo $idRetour; ?>">retour</a>
 
-    </div>
+
     <table class="table table-dark">
 
         <tr class="table-active">
@@ -31,9 +30,17 @@
                 <td><?php echo $uneCompetenceId["libelleCompetence"]; ?></td>
                 <td><?php echo $uneSousCompetence["libelleSousCompetence"]; ?></td>
                 <td><?php echo $uneSousCompetence["intituleSousCompetence"]; ?></td>
+                <?php
+            if ($_SESSION["idDroitUtilisateur"] == 1) {
+            ?>
                 <td><a href="index.php?action=sousCompetence&idSuppr=<?php echo $uneSousCompetence['idSousCompetence']; ?>&id=<?php echo $uneSousCompetence["idCompetence"]; ?>">Supprimer</td>
-
-
+            <?php
+            } else {
+            ?>
+                <td></td>
+            <?php
+            }
+            ?>
             </tr>
         <?php
         }

@@ -299,3 +299,15 @@ function matiere(val, prof) {
     }
   });
 }
+
+function matiere2(val) {
+  $.ajax({
+    type: "POST",
+    url: "../vue/vueProfMatiere.php",
+    data: 'idClasse=' + val,
+    success: function (data) {
+      $("#ListeMatiere").html(data);
+
+    }
+  });
+}

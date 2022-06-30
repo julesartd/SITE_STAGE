@@ -75,6 +75,24 @@ function getMatiereByProfAndClasse($idProf, $idClasse)
     return $resultat;
 }
 
+function getMatiereByClasse($idClasse)
+{
+    $resultat = array();
+    try {
+        $cnx = connexionPDO();
+        $req = $cnx->prepare("SELECT * FROM matiere m INNER JOIN attribuer_matiere ap ON ap.idMatiere = m.idMatiere 
+        WHERE ap.idClasse = :classe");
+        $req->bindValue('classe', $idClasse);
+        $req->execute();
+
+        $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+    return $resultat;
+}
+
 
 function getCompetenceChapeauByMatiere($id)
 {
