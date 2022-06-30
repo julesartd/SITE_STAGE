@@ -30,9 +30,17 @@
                 <td><?php echo $uneCompetenceId["libelleCompetence"]; ?></td>
                 <td><?php echo $uneSousCompetence["libelleSousCompetence"]; ?></td>
                 <td><?php echo $uneSousCompetence["intituleSousCompetence"]; ?></td>
+                <?php
+            if ($_SESSION["idDroitUtilisateur"] == 1) {
+            ?>
                 <td><a href="index.php?action=sousCompetence&idSuppr=<?php echo $uneSousCompetence['idSousCompetence']; ?>&id=<?php echo $uneSousCompetence["idCompetence"]; ?>">Supprimer</td>
-
-
+            <?php
+            } else {
+            ?>
+                <td></td>
+            <?php
+            }
+            ?>
             </tr>
         <?php
         }
