@@ -300,6 +300,11 @@ DEPENDENCES
   margin: auto;
 }
 
+#taille {
+  width: 500px;
+  margin: auto;
+}
+
 .connexion {
   width: 500px;
   margin: auto;
