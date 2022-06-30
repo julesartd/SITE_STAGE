@@ -149,10 +149,10 @@ if (isset($_SESSION["mailUtilisateur"])) {
             $recupId = getLastActivite();
             $id = $recupId['num'];
             if (!empty($_POST['competence1'])) {
-                attribuerActiviteMatiere($id, $_POST['competence'], $semaineDeb, $semaineFin);
+                attribuerActiviteMatiere($id, $_POST['competence1'], $semaineDeb, $semaineFin);
             }
             if (!empty($_POST['competence2'])) {
-                attribuerActiviteMatiere($id, $_POST['competence'], $semaineDeb, $semaineFin);
+                attribuerActiviteMatiere($id, $_POST['competence2'], $semaineDeb, $semaineFin);
             }
             if (!empty($_POST['competence3'])) {
                 attribuerActiviteMatiere($id, $_POST['competence3'], $semaineDeb, $semaineFin);
