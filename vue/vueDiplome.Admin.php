@@ -1,7 +1,7 @@
 <div id=tableau>
     <table class="table table-bordered">
         <tr class="table-active">
-            <th>nom diplome</th>
+            <th>Nom diplome</th>
             <th>Compétence</th>
             <th></th>
         </tr>

@@ -1,10 +1,10 @@
-<button type="button" id="export_button" class="btn btn-success btn-sm">Télécharger le tableau excel</button>
+<button type="button" id="export_button" class="btn btn-success btn-sm">Télécharger</button>
 <br>
 <div id="tableStrategie">
         <div id="employee_data">
             <table class="tableStrategie">
 
-                <th colspan="2" rowspan="2"><a href="index.php?action=recap&id=<?php echo $classeDeListe['idClasse']; ?>">Récapitulif des compétence travailler</a></th>
+                <th colspan="2" rowspan="2"><a href="index.php?action=recap&id=<?php echo $classeDeListe['idClasse']; ?>">Récapitulif des compétences travaillées</a></th>
 
 
 

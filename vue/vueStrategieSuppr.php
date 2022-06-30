@@ -1,5 +1,5 @@
 <form method="POST" class="lb mb-3" action="?action=strategieSuppr">
-    <h2>Supprimer une Activité</h2>
+    <h2>Supprimer une activité</h2>
     <select aria-label="Default select example" name="classe" onchange="submit()">
 
 
