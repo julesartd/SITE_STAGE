@@ -202,7 +202,11 @@ function supprSousCompetence($id){
         $req->bindValue(':id', $id);
         $req->execute();
     }catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Impossible de supprimer cette sous-compétence car des activité lui sont attribuer!
+        <br>
+        <a href='./?action=diplome'>retour</a>
+        </div>";
         die();
     }
 
@@ -230,7 +234,11 @@ function supprSousCompetenceByCompetence($id){
         $req->bindValue(':id', $id);
         $req->execute();
     }catch (PDOException $e) {
-        print "Impossible de supprimer ce diplome car les sous-compétences ont été attribués dans des activités. Veuillez les supprimer";
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Impossible de supprimer cette compétence car elle posséde des sous-compétences avec des activités attribuer!
+        <br>
+        <a href='./?action=diplome'>retour</a>
+        </div>";
         die();
     }
 

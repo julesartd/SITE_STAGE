@@ -132,7 +132,11 @@ function supprCompetenceByMatiere($id)
         $req->bindValue(':id', $id);
         $req->execute();
     } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Impossible de supprimer cette Matiére car elle posséde une compétence attribuer a une ou plusieurs activités!
+        <br>
+        <a href='./?action=matiere'>retour</a>
+        </div>";
         die();
     }
 }
@@ -145,7 +149,11 @@ function supprMatiere($id)
         $req->bindValue(':id', $id);
         $req->execute();
     } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Impossible de supprimer cette Matière car elle posséde une compétence attribuer a une ou plusieurs activités!
+        <br>
+        <a href='./?action=matiere'>retour</a>
+        </div>";
         die();
     }
 }
@@ -174,7 +182,11 @@ function supprCompetenceMatiere($id)
         $req->bindValue(':id', $id);
         $req->execute();
     } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Impossible de supprimer cette compétence car elle est attribuer a une ou plusieurs activités!
+        <br>
+        <a href='./?action=matiere'>retour</a>
+        </div>";
         die();
     }
 }

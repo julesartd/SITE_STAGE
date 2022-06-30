@@ -75,7 +75,11 @@ function supprDiplome($idDiplome)
         $req->bindValue(':idDiplome', $idDiplome);
         $req->execute();
     } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Impossible de supprimer ce diplôme car des classes lui sont attribuer!
+        <br>
+        <a href='./?action=diplome'>retour</a>
+        </div>";
         die();
     }
 }
