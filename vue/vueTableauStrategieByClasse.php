@@ -4,7 +4,7 @@
         <div id="employee_data">
             <table class="tableStrategie">
 
-                <th colspan="2" rowspan="2"><a href="index.php?action=recap&id=<?php echo $classeDeListe['idClasse']; ?>">Récapitulif des compétence travailler</a></th>
+                <th colspan="2" rowspan="2"><a href="index.php?action=recap&id=<?php echo $classeDeListe['idClasse']; ?>">Récapitulif des compétences travaillées</a></th>
 
 
 

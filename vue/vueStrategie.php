@@ -2,7 +2,7 @@
     <?php
     if ($_SESSION["idDroitUtilisateur"] == 1) {
     ?>
-        <a href="./?action=strategieSuppr">Supprimer des activite professionel</a>
+        <a href="./?action=strategieSuppr">Supprimer des activite professionelle</a>
         <br>
         <a href="./?action=strategieSupprGenerale">Supprimer des activite générale</a>
     <?php
