@@ -1,20 +1,19 @@
-<div class="event">
 <form method="POST" class="lb mb-3" action ="">
     <h1 id="lstA">Créer une sous-compétence</h1>
     </br>
 
 
-    <input required type="text" class="form-control" name='txtIntituleSousCompetence' placeholder='Intitulé de la sous-compétence'>
+    <input required type="text" name='txtIntituleSousCompetence' placeholder='Intitulé de la sous-compétence'>
 
 
 
     </br>
-    <input type="submit"  class="btn btn-primary" value="AJOUTER" name="btnAjoutSousCompetence">
-
+    <input type="submit" value="AJOUTER" name="btnAjoutSousCompetence">
+    <input type="submit" value="ANNULER" name="btnCancel">
     </br>
     <a href="index.php?action=competence&id=<?php echo $idRetour; ?>">retour</a>
 
-    </div>
+
     <table class="table table-dark">
 
         <tr class="table-active">
