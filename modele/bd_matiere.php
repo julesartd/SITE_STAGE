@@ -133,7 +133,7 @@ function supprCompetenceByMatiere($id)
         $req->execute();
     } catch (PDOException $e) {
         echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
-        Impossible de supprimer cette Matiére car elle posséde une compétence attribuer a une ou plusieurs activités!
+        Impossible de supprimer cette matière car elle posséde une compétence qui est attribuée à une ou plusieurs activités!
         <br>
         <a href='./?action=matiere'>retour</a>
         </div>";
@@ -150,7 +150,7 @@ function supprMatiere($id)
         $req->execute();
     } catch (PDOException $e) {
         echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
-        Impossible de supprimer cette Matière car elle posséde une compétence attribuer a une ou plusieurs activités!
+        Impossible de supprimer cette matière car elle posséde une compétence qui est attribuée à une ou plusieurs activités!
         <br>
         <a href='./?action=matiere'>retour</a>
         </div>";
@@ -183,7 +183,7 @@ function supprCompetenceMatiere($id)
         $req->execute();
     } catch (PDOException $e) {
         echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
-        Impossible de supprimer cette compétence car elle est attribuer a une ou plusieurs activités!
+        Impossible de supprimer cette compétence car elle est attribuée à une ou plusieurs activités !
         <br>
         <a href='./?action=matiere'>retour</a>
         </div>";
@@ -219,7 +219,7 @@ function attribuerProfMatiere($classe, $prof, $matiere)
 
     } catch (PDOException $e) {
         echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
-        Ce professeur est déja attribuer a cette classe pour cette matière!
+        Ce professeur est déja attribué à cette classe avec cette matière!
         <br>
         <a href='./?action=prof'>retour</a>
         </div>";
