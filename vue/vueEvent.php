@@ -7,6 +7,7 @@
                 <th id="jaune">Stage</th>
                 <th id="vert">Examen</th>
                 <th id="cyan">Vacances</th>
+                <th id="rouge">Evénement</th>
             </tr>
         </table>
     </div>
@@ -59,6 +60,11 @@
                                     <td id="jaune"></td>
                     <?php
                                 }
+                                if ($event == 4) {
+                                    ?>
+                                        <td id="rouge"></td>
+                        <?php
+                                    }
                             }
                         }
                     }

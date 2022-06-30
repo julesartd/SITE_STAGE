@@ -285,6 +285,10 @@ DEPENDENCES
   background-color: yellow;
 }
 
+#rouge {
+  background-color: rgb(255, 0, 0);
+}
+
 #formChangePassword {
   width: 500px;
   margin: auto;
