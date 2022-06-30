@@ -6,7 +6,6 @@
 
         <th>Niveau de classe</th>
         <th>Bac</th>
-        <th>Détail de la classe</th>
      
     </tr>
     <?php
@@ -15,7 +14,6 @@
         <tr>
             <td><?php echo $uneClasse["niveauClasse"]; ?></td>
             <td><?php echo $uneClasse["nomDiplome"]; ?></td>
-            <td><a href="index.php?action=detailClasse&id=<?php echo $uneClasse['idClasse']; ?>">Détail</td>
           
         </tr>
     <?php

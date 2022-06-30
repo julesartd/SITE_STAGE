@@ -57,7 +57,7 @@
                 <td><?php echo $unProf["nomProf"]; ?></td>
                 <td><?php echo $unProf["prenomProf"]; ?></td>
                 <td><a href="index.php?action=prof&id=<?php echo $unProf['idProf']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir réinitialiser le mot de passe de ce professeur ?')">Réinitisaliser</td>
-                <td><a href="index.php?action=prof&idSuppr=<?php echo $unProf['idProf']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce professeur ?')">Supprimer</td>
+                <td><a href="index.php?action=prof&id=<?php echo $unProf['idProf']; ?>" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce professeur ?')">Supprimer</td>
 
             </tr>
         <?php
