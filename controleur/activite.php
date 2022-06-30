@@ -149,16 +149,16 @@ if (isset($_SESSION["mailUtilisateur"])) {
             $recupId = getLastActivite();
             $id = $recupId['num'];
             if (!empty($_POST['competence1'])) {
-                attribuerActiviteMatiere($id, $_POST['competenceMatiere1'], $semaineDeb, $semaineFin);
+                attribuerActiviteMatiere($id, $_POST['competence'], $semaineDeb, $semaineFin);
             }
             if (!empty($_POST['competence2'])) {
-                attribuerActiviteMatiere($id, $_POST['competenceMatiere2'], $semaineDeb, $semaineFin);
+                attribuerActiviteMatiere($id, $_POST['competence'], $semaineDeb, $semaineFin);
             }
             if (!empty($_POST['competence3'])) {
-                attribuerActiviteMatiere($id, $_POST['competenceMatiere3'], $semaineDeb, $semaineFin);
+                attribuerActiviteMatiere($id, $_POST['competence3'], $semaineDeb, $semaineFin);
             }
             if (!empty($_POST['competence4'])) {
-                attribuerActiviteMatiere($id, $_POST['competenceMatiere4'], $semaineDeb, $semaineFin);
+                attribuerActiviteMatiere($id, $_POST['competence4'], $semaineDeb, $semaineFin);
             }
         }
         include "vue/vueActivite.ProfGeneral.php";
