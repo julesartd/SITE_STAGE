@@ -2,9 +2,9 @@
     <?php
     if ($_SESSION["idDroitUtilisateur"] == 1) {
     ?>
-        <a href="./?action=strategieSuppr">Supprimer des activitées professionelle</a>
+        <a href="./?action=strategieSuppr">Supprimer des activités d'enseignement professionel</a>
         <br>
-        <a href="./?action=strategieSupprGenerale">Supprimer des activités générales</a>
+        <a href="./?action=strategieSupprGenerale">Supprimer des activités d'enseignement général</a>
     <?php
     }
     ?>

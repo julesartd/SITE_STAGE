@@ -1,4 +1,4 @@
-<button type="button" id="export_button" class="btn btn-success btn-sm">Télécharger le tableau excel</button>
+<button type="button" id="export_button" class="btn btn-success btn-sm">Télécharger</button>
 <br>
 <div id="tableStrategie">
         <div id="employee_data">

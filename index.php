@@ -46,5 +46,6 @@
         ?>
     </div>
 </body>
-
+<br>
+<footer><center>Application développé par ARTAUD Jules et DELANNOY Jérémy en stage au lycée Edouard Vaillant</center></footer>
 </html>

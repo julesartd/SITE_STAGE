@@ -2,7 +2,7 @@
 
     <tr class="table-active">
         <th>Compétences</th>
-        <th>Nombre de fois vue</th>
+        <th>Nombre</th>
     </tr>
     <?php
     foreach ($listeCompetence as $uneCompetence) {
