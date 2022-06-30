@@ -47,7 +47,13 @@
         $reset = resetPassword(password_hash($mdpDateNaissance, PASSWORD_DEFAULT), $_GET['id']);
     }
 
-
+    if (isset($_GET['idSuppr'])) {
+        $id = ($_GET['idSuppr']);
+        desatribuerProfFromClasseMatiere($id);
+        desatribuerProfFromClasse($id);
+        deleteUtilisateur($id);
+        supprProf($id);
+    }
 
 
     if (isset($_SESSION['mailUtilisateur']) && isset($_SESSION['mdpUtilisateur'])) {

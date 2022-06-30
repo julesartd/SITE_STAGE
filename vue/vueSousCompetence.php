@@ -3,7 +3,7 @@
     </br>
 
 
-    <input required type="text" name='txtIntituleSousCompetence' placeholder='Intitulé de la sous-compétence'>
+    <input required id="taille" class="form-control" type="text" name='txtIntituleSousCompetence' placeholder='Intitulé de la sous-compétence'>
 
 
 
