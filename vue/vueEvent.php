@@ -61,6 +61,15 @@
             ?>
             </tr>
     </table>
+    <div class="event">
+        <table class="table table-bordered tableau">
+            <tr>
+                <th id="jaune">Stage</th>
+                <th id="vert">Examen</th>
+                <th id="cyan">Vacances</th>
+            </tr>
+        </table>
+    </div>
 </div>
 
 <form method="POST" class="lb mb-3 event" action="/?action=event">
@@ -77,7 +86,7 @@
         ?>
     </select>
     </br>
-    <select required class="form-select"  name="evenement">
+    <select required class="form-select" name="evenement">
         <option value="" selected>Sélectionnez un évènement</option>
         <?php
         foreach ($listeEvent as $unEvent) {
@@ -93,5 +102,5 @@
     </br>
     </br>
     <input type="submit" class="btn btn-primary" value="AJOUTER" name="btnAjoutEvent">
-  
+
 </form>
