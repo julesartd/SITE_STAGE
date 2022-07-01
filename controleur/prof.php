@@ -47,12 +47,13 @@
         $reset = resetPassword(password_hash($mdpDateNaissance, PASSWORD_DEFAULT), $_GET['id']);
     }
 
-    if (isset($_GET['idSuppr'])) {
-        $id = ($_GET['idSuppr']);
+    if (isset($_GET['id'])) {
+        $id = ($_GET['id']);
         desatribuerProfFromClasseMatiere($id);
         desatribuerProfFromClasse($id);
         deleteUtilisateur($id);
         supprProf($id);
+        
     }
 
 
