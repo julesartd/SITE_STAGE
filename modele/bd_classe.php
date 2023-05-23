@@ -222,7 +222,8 @@ function getLastProf()
 }
 
 function attribuerProf($classe, $prof)
-{    try {
+{
+    try {
         $cnx = connexionPDO();
         $req = $cnx->prepare("insert into attribuer_prof values (:classe, :prof)");
         $req->bindValue('classe', $classe);
@@ -233,11 +234,12 @@ function attribuerProf($classe, $prof)
         print "Erreur !: " . $e->getMessage();
         die();
     }
-   
+
 }
 
 
-function deleteProfFromClasse($idClasse){
+function deleteProfFromClasse($idClasse)
+{
     try {
         $connex = connexionPDO();
         $req = $connex->prepare("DELETE FROM attribuer_prof WHERE idClasse=:idClasse");
@@ -249,7 +251,8 @@ function deleteProfFromClasse($idClasse){
     }
 }
 
-function desatribuerProfFromClasse($idClasse){
+function desatribuerProfFromClasse($idClasse)
+{
     try {
         $connex = connexionPDO();
         $req = $connex->prepare("DELETE FROM attribuer_prof WHERE idProf=:idClasse");
@@ -261,10 +264,11 @@ function desatribuerProfFromClasse($idClasse){
     }
 }
 
-function desatribuerProfFromClasseMatiere($idClasse){
+function desatribuerProfFromClasseMatiere($idClasse)
+{
     try {
         $connex = connexionPDO();
-        $req = $connex->prepare("DELETE FROM attribuer_matiere WHERE idProf=:idClasse");
+        $req = $connex->prepare("DELETE FROM attibuer_matiere WHERE idProf=:idClasse");
         $req->bindValue('idClasse', $idClasse);
         $req->execute();
     } catch (PDOException $e) {
@@ -273,7 +277,8 @@ function desatribuerProfFromClasseMatiere($idClasse){
     }
 }
 
-function supprProf($id){
+function supprProf($id)
+{
     try {
         $connex = connexionPDO();
         $req = $connex->prepare("DELETE FROM professeur WHERE idProf=:id");
@@ -285,7 +290,8 @@ function supprProf($id){
     }
 }
 
-function deleteUtilisateur($id){
+function deleteUtilisateur($id)
+{
     try {
         $connex = connexionPDO();
         $req = $connex->prepare("DELETE FROM utilisateur WHERE idProfesseur=:id");
