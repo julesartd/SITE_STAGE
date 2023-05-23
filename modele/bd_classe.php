@@ -280,7 +280,12 @@ function supprProf($id){
         $req->bindValue('id', $id);
         $req->execute();
     } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+    
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Erreur ! Impossible de supprimer le prof car il a des activités en cours, veuillez d'abord les supprimer
+        <br>
+        <a href='./?action=prof'>retour</a>
+        </div>";
         die();
     }
 }
