@@ -43,7 +43,7 @@ function getMatiereByProf($idProf)
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM matiere m INNER JOIN attribuer_matiere ap ON ap.idMatiere = m.idMatiere WHERE ap.idProf = :id");
+        $req = $cnx->prepare("SELECT DISTINCT(nomMatiere) , m.idMatiere FROM matiere m INNER JOIN attribuer_matiere ap ON ap.idMatiere = m.idMatiere WHERE ap.idProf = :id");
         $req->bindValue('id', $idProf);
         $req->execute();
 
@@ -209,7 +209,8 @@ function getCompetenceByMatiere($idCompetence)
 }
 
 function attribuerProfMatiere($classe, $prof, $matiere)
-{    try {
+{
+    try {
         $cnx = connexionPDO();
         $req = $cnx->prepare("insert into attribuer_matiere values (:matiere, :prof, :classe)");
         $req->bindValue('matiere', $matiere);
@@ -228,7 +229,8 @@ function attribuerProfMatiere($classe, $prof, $matiere)
 
 }
 
-function attribuerActiviteMatiere($idActivite,$idCompetence,$idWeekDebut, $idWeekFin){
+function attribuerActiviteMatiere($idActivite, $idCompetence, $idWeekDebut, $idWeekFin)
+{
 
     try {
         $connex = connexionPDO();
@@ -268,7 +270,8 @@ function getAttribuerActiviteMatiereByClasseAndMatiere($classe, $matiere)
     return $resultat;
 }
 
-function nombreCompetenceMatiereVu($idCompetence, $classe, $matiere){
+function nombreCompetenceMatiereVu($idCompetence, $classe, $matiere)
+{
 
     try {
 
@@ -276,15 +279,15 @@ function nombreCompetenceMatiereVu($idCompetence, $classe, $matiere){
         $req = $connex->prepare("SELECT COUNT(acm.idCompetenceMatiere) as nbCompetence FROM attribuer_activite_matiere acm
         INNER JOIN matiere_competence mc on mc.idCompetenceMatiere = acm.idCompetenceMatiere 
         inner join activite a on a.idActivite = acm.idActivite
-        WHERE mc.idCompetenceMatiere = :idCompetenceMatiere and a.idClasse = :classe AND mc.idMatiere = :matiere" );
+        WHERE mc.idCompetenceMatiere = :idCompetenceMatiere and a.idClasse = :classe AND mc.idMatiere = :matiere");
         $req->bindValue("idCompetenceMatiere", $idCompetence);
         $req->bindValue("classe", $classe);
         $req->bindValue("matiere", $matiere);
         $req->execute();
 
-        $resultat=$req->fetch(PDO::FETCH_ASSOC);
+        $resultat = $req->fetch(PDO::FETCH_ASSOC);
 
-    }catch (PDOException $e) {
+    } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();
         die();
     }
@@ -311,7 +314,7 @@ function getCompetenceMatiereClasse($week, $activite)
     return $resultat;
 }
 
-function getCountSemaineMatiere($semaineDeb,$semaineFin, $classe)
+function getCountSemaineMatiere($semaineDeb, $semaineFin, $classe)
 {
 
     try {

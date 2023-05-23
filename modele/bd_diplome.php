@@ -40,10 +40,10 @@ function getDiplomeByIdProf($idProf)
     $resultat = array();
     try {
         $cnx = connexionPDO();
-        $req = $cnx->prepare("SELECT * FROM diplome d
+        $req = $cnx->prepare("SELECT DISTINCT(nomDiplome), d.idDiplome FROM diplome d
          INNER JOIN classe c ON d.idDiplome = c.idDiplome 
          INNER JOIN attribuer_prof a ON a.idClasse = c.idClasse WHERE a.idProf = :idProf");
-         $req->bindValue('idProf', $idProf);
+        $req->bindValue('idProf', $idProf);
         $req->execute();
 
         $resultat = $req->fetchAll(PDO::FETCH_ASSOC);
@@ -100,4 +100,3 @@ function getDiplomeBySousCompetence($id)
     }
     return $resultat;
 }
-

@@ -3,18 +3,21 @@
     <div id=tableau>
         <table class="table table-bordered">
             <tr>
-                <th>nom diplome</th>
+                <th>Nom diplôme</th>
                 <th>Compétence</th>
             </tr>
             <?php
             foreach ($tableauDiplome as $diplome) {
-            ?>
-                <tr>
-                    <td><?php echo $diplome["nomDiplome"]; ?></td>
-                    <td><a href="index.php?action=competence&id=<?php echo $diplome['idDiplome']; ?>">Voir les compétences</td>
-                <?php
-            }
                 ?>
+                <tr>
+                    <td>
+                        <?php echo $diplome["nomDiplome"]; ?>
+                    </td>
+                    <td><a href="index.php?action=competence&id=<?php echo $diplome['idDiplome']; ?>">Voir les compétences
+                    </td>
+                    <?php
+            }
+            ?>
 
         </table>
     </div>

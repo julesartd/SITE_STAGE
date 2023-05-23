@@ -78,7 +78,11 @@ function SupprClasse($id)
         $req->bindValue(':idClasse', $id);
         $req->execute();
     } catch (PDOException $e) {
-        print "Erreur !: " . $e->getMessage();
+        echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
+        Impossible de supprimer cette classe car des événements sont attribués à cette classe
+        <br>
+        <a href='./?action=classe'>retour</a>
+        </div>";
         die();
     }
 }
@@ -251,6 +255,19 @@ function deleteProfFromClasse($idClasse)
     }
 }
 
+function deleteProfGeneralFromClasse($idClasse)
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("DELETE FROM attribuer_matiere WHERE idClasse=:idClasse");
+        $req->bindValue('idClasse', $idClasse);
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
+
 function desatribuerProfFromClasse($idClasse)
 {
     try {
@@ -285,7 +302,7 @@ function supprProf($id)
         $req->bindValue('id', $id);
         $req->execute();
     } catch (PDOException $e) {
-    
+
         echo " <div id='msgErr' class='alert alert-danger mx-auto' role='alert'>
         Erreur ! Impossible de supprimer le prof car il a des activités en cours, veuillez d'abord les supprimer
         <br>
@@ -301,6 +318,20 @@ function deleteUtilisateur($id)
         $connex = connexionPDO();
         $req = $connex->prepare("DELETE FROM utilisateur WHERE idProfesseur=:id");
         $req->bindValue('id', $id);
+        $req->execute();
+    } catch (PDOException $e) {
+        print "Erreur !: " . $e->getMessage();
+        die();
+    }
+}
+
+
+function deleteEventFromClasse($idClasse)
+{
+    try {
+        $connex = connexionPDO();
+        $req = $connex->prepare("DELETE FROM affecter WHERE idClasse=:id");
+        $req->bindValue('id', $idClasse);
         $req->execute();
     } catch (PDOException $e) {
         print "Erreur !: " . $e->getMessage();

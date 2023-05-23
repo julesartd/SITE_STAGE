@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 23 juin 2022 à 06:29
--- Version du serveur :  5.7.31
--- Version de PHP : 7.3.21
+-- Généré le : mar. 23 mai 2023 à 13:31
+-- Version du serveur : 5.7.36
+-- Version de PHP : 7.4.26
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -64,7 +64,19 @@ CREATE TABLE IF NOT EXISTS `activite` (
   PRIMARY KEY (`idActivite`),
   KEY `FK_PROF45` (`idProfesseur`),
   KEY `FK_CLASSE45` (`idClasse`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `activite`
+--
+
+INSERT INTO `activite` (`idActivite`, `nomActivite`, `idProfesseur`, `idClasse`) VALUES
+(5, 'Présenter un sujet d\'actualité à l\'oral', 26, 131),
+(6, 'Rédiger une dissertation', 26, 131),
+(7, 'Cas Denas', 25, 50),
+(8, 'Cas Lamazoo', 25, 50),
+(9, 'Rédiger un corpus', 26, 50),
+(10, 'S\'exprimer à l\'oral', 26, 50);
 
 -- --------------------------------------------------------
 
@@ -77,10 +89,24 @@ CREATE TABLE IF NOT EXISTS `affecter` (
   `idEvent` int(11) NOT NULL,
   `idClasse` int(11) NOT NULL,
   `idWeek` int(11) NOT NULL,
-  PRIMARY KEY (`idEvent`,`idClasse`,`idWeek`),
-  KEY `fk_classe` (`idClasse`),
-  KEY `fk_week` (`idWeek`)
+  PRIMARY KEY (`idClasse`,`idWeek`),
+  KEY `fk_week` (`idWeek`),
+  KEY `fk_event` (`idEvent`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `affecter`
+--
+
+INSERT INTO `affecter` (`idEvent`, `idClasse`, `idWeek`) VALUES
+(1, 50, 52),
+(1, 51, 52),
+(1, 131, 52),
+(2, 51, 23),
+(3, 50, 16),
+(3, 50, 17),
+(3, 50, 18),
+(4, 131, 25);
 
 -- --------------------------------------------------------
 
@@ -90,13 +116,62 @@ CREATE TABLE IF NOT EXISTS `affecter` (
 
 DROP TABLE IF EXISTS `attribuer_activite`;
 CREATE TABLE IF NOT EXISTS `attribuer_activite` (
-  `idActivite` int(11) NOT NULL,
-  `idWeek` int(11) NOT NULL,
+  `idActivite` int(11) NOT NULL AUTO_INCREMENT,
   `idSousCompetence` int(11) NOT NULL,
-  PRIMARY KEY (`idActivite`,`idWeek`,`idSousCompetence`),
-  KEY `FK_WEEK5` (`idWeek`),
+  `idWeekDebut` int(11) NOT NULL,
+  `idWeekFin` int(11) NOT NULL,
+  PRIMARY KEY (`idActivite`,`idSousCompetence`,`idWeekDebut`,`idWeekFin`),
+  KEY `FK_WEEKDEBUT` (`idWeekDebut`),
+  KEY `FK_WEEKFIN` (`idWeekFin`),
   KEY `FK_SC` (`idSousCompetence`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `attribuer_activite`
+--
+
+INSERT INTO `attribuer_activite` (`idActivite`, `idSousCompetence`, `idWeekDebut`, `idWeekFin`) VALUES
+(8, 69, 9, 14),
+(8, 72, 9, 14),
+(8, 78, 9, 14),
+(7, 64, 21, 26),
+(7, 67, 21, 26),
+(7, 72, 21, 26),
+(7, 73, 21, 26),
+(7, 76, 21, 26),
+(7, 78, 21, 26);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `attribuer_activite_matiere`
+--
+
+DROP TABLE IF EXISTS `attribuer_activite_matiere`;
+CREATE TABLE IF NOT EXISTS `attribuer_activite_matiere` (
+  `idActivite` int(11) NOT NULL,
+  `idCompetenceMatiere` int(11) NOT NULL,
+  `idWeekDebut` int(11) NOT NULL,
+  `idWeekFin` int(11) NOT NULL,
+  PRIMARY KEY (`idActivite`,`idCompetenceMatiere`,`idWeekDebut`,`idWeekFin`),
+  KEY `FK_MatiereComp10` (`idCompetenceMatiere`),
+  KEY `FK_WeekDeb10` (`idWeekDebut`),
+  KEY `FK_WeekFin10` (`idWeekFin`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `attribuer_activite_matiere`
+--
+
+INSERT INTO `attribuer_activite_matiere` (`idActivite`, `idCompetenceMatiere`, `idWeekDebut`, `idWeekFin`) VALUES
+(5, 5, 19, 23),
+(10, 5, 11, 19),
+(5, 6, 19, 23),
+(6, 6, 8, 11),
+(9, 6, 36, 1),
+(10, 6, 11, 19),
+(6, 7, 8, 11),
+(9, 7, 36, 1);
 
 -- --------------------------------------------------------
 
@@ -115,6 +190,31 @@ CREATE TABLE IF NOT EXISTS `attribuer_eleve` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `attribuer_matiere`
+--
+
+DROP TABLE IF EXISTS `attribuer_matiere`;
+CREATE TABLE IF NOT EXISTS `attribuer_matiere` (
+  `idMatiere` int(11) NOT NULL,
+  `idProf` int(11) NOT NULL,
+  `idClasse` int(11) NOT NULL,
+  PRIMARY KEY (`idMatiere`,`idProf`,`idClasse`),
+  KEY `FK_Prof8` (`idProf`),
+  KEY `FK_Classe8` (`idClasse`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `attribuer_matiere`
+--
+
+INSERT INTO `attribuer_matiere` (`idMatiere`, `idProf`, `idClasse`) VALUES
+(1, 26, 50),
+(1, 26, 51),
+(1, 26, 131);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `attribuer_prof`
 --
 
@@ -125,6 +225,19 @@ CREATE TABLE IF NOT EXISTS `attribuer_prof` (
   PRIMARY KEY (`idClasse`,`idProf`),
   KEY `FK_PROF6` (`idProf`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `attribuer_prof`
+--
+
+INSERT INTO `attribuer_prof` (`idClasse`, `idProf`) VALUES
+(50, 24),
+(51, 24),
+(50, 25),
+(51, 25),
+(50, 26),
+(51, 26),
+(131, 26);
 
 -- --------------------------------------------------------
 
@@ -139,7 +252,16 @@ CREATE TABLE IF NOT EXISTS `classe` (
   `idDiplome` int(11) NOT NULL,
   PRIMARY KEY (`idClasse`),
   KEY `FKBac` (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `classe`
+--
+
+INSERT INTO `classe` (`idClasse`, `niveauClasse`, `idDiplome`) VALUES
+(50, 'Seconde', 3),
+(51, 'Première', 3),
+(131, 'Première', 25);
 
 -- --------------------------------------------------------
 
@@ -155,7 +277,20 @@ CREATE TABLE IF NOT EXISTS `competence_chapeau` (
   `idDiplome` int(11) NOT NULL,
   PRIMARY KEY (`idCompetence`),
   KEY `FKBac1` (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `competence_chapeau`
+--
+
+INSERT INTO `competence_chapeau` (`idCompetence`, `libelleCompetence`, `intituleCompetence`, `idDiplome`) VALUES
+(32, 'C1', 'CONSEILLER ET VENDRE', 25),
+(33, 'C2', 'SUIVRE LES VENTES', 25),
+(34, 'C3', 'FIDELISER LA CLIENTELE ET DEVELOPPER LA RELATION CLIENT', 25),
+(35, 'C4', 'ANIMER ET GERER L\'ESPACE COMMERCIAL', 25),
+(36, 'C1', 'Etude et préparation de la réalisation', 3),
+(37, 'C2', 'Réalisation d\'un outillage', 3),
+(38, 'C3', 'Suivi de la production', 3);
 
 -- --------------------------------------------------------
 
@@ -168,15 +303,15 @@ CREATE TABLE IF NOT EXISTS `diplome` (
   `idDiplome` int(11) NOT NULL AUTO_INCREMENT,
   `nomDiplome` varchar(500) NOT NULL,
   PRIMARY KEY (`idDiplome`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `diplome`
 --
 
 INSERT INTO `diplome` (`idDiplome`, `nomDiplome`) VALUES
-(3, 'BAC TRMP'),
-(18, 'BTS SIO');
+(3, 'BAC TRPM'),
+(25, 'BAC MCV');
 
 -- --------------------------------------------------------
 
@@ -189,7 +324,7 @@ CREATE TABLE IF NOT EXISTS `droit` (
   `idDroit` int(11) NOT NULL AUTO_INCREMENT,
   `Droit` varchar(50) NOT NULL,
   PRIMARY KEY (`idDroit`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `droit`
@@ -197,7 +332,8 @@ CREATE TABLE IF NOT EXISTS `droit` (
 
 INSERT INTO `droit` (`idDroit`, `Droit`) VALUES
 (1, 'Administrateur'),
-(2, 'Professeur');
+(2, 'Professeur d\'enseignement professionnel'),
+(3, 'Professeur d\'enseignement général');
 
 -- --------------------------------------------------------
 
@@ -224,7 +360,7 @@ CREATE TABLE IF NOT EXISTS `evenement` (
   `idEvent` int(11) NOT NULL AUTO_INCREMENT,
   `nomEvent` varchar(500) NOT NULL,
   PRIMARY KEY (`idEvent`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `evenement`
@@ -233,7 +369,57 @@ CREATE TABLE IF NOT EXISTS `evenement` (
 INSERT INTO `evenement` (`idEvent`, `nomEvent`) VALUES
 (1, 'Vacances'),
 (2, 'Examen'),
-(3, 'Stage');
+(3, 'Stage'),
+(4, 'Evenement');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `matiere`
+--
+
+DROP TABLE IF EXISTS `matiere`;
+CREATE TABLE IF NOT EXISTS `matiere` (
+  `idMatiere` int(11) NOT NULL AUTO_INCREMENT,
+  `nomMatiere` varchar(20000) NOT NULL,
+  PRIMARY KEY (`idMatiere`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `matiere`
+--
+
+INSERT INTO `matiere` (`idMatiere`, `nomMatiere`) VALUES
+(1, 'Français'),
+(4, 'Mathématiques');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `matiere_competence`
+--
+
+DROP TABLE IF EXISTS `matiere_competence`;
+CREATE TABLE IF NOT EXISTS `matiere_competence` (
+  `idCompetenceMatiere` int(11) NOT NULL AUTO_INCREMENT,
+  `libelleCompetenceMatiere` varchar(20000) NOT NULL,
+  `intitulerCompetenceMatiere` varchar(20000) NOT NULL,
+  `idMatiere` int(11) NOT NULL,
+  PRIMARY KEY (`idCompetenceMatiere`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `matiere_competence`
+--
+
+INSERT INTO `matiere_competence` (`idCompetenceMatiere`, `libelleCompetenceMatiere`, `intitulerCompetenceMatiere`, `idMatiere`) VALUES
+(5, 'C1', 'Maîtriser l’échange oral', 1),
+(6, 'C2', 'Maîtriser l’échange écrit', 1),
+(7, 'C3', 'Devenir un lecteur compétent et critique', 1),
+(8, 'C1', 'Rechercher, extraire et organiser l’information', 4),
+(9, 'C2', 'Émettre une conjecture, une hypothèse', 4),
+(10, 'C3', 'Proposer une méthode de résolution, un protocole expérimental.', 4),
+(11, 'C4', 'Choisir une méthode de résolution, un protocole expérimental.', 4);
 
 -- --------------------------------------------------------
 
@@ -248,21 +434,16 @@ CREATE TABLE IF NOT EXISTS `professeur` (
   `prenomProf` varchar(500) NOT NULL,
   `dateNaissance` date DEFAULT NULL,
   PRIMARY KEY (`idProf`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
--- Structure de la table `promotion`
+-- Déchargement des données de la table `professeur`
 --
 
-DROP TABLE IF EXISTS `promotion`;
-CREATE TABLE IF NOT EXISTS `promotion` (
-  `idPromotion` int(11) NOT NULL AUTO_INCREMENT,
-  `nomPromotion` varchar(500) NOT NULL,
-  `annee` int(11) NOT NULL,
-  PRIMARY KEY (`idPromotion`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `professeur` (`idProf`, `nomProf`, `prenomProf`, `dateNaissance`) VALUES
+(24, 'Bourgeois', 'Agnès', '2000-01-01'),
+(25, 'Cervelle', 'Jérôme', '2000-01-01'),
+(26, 'Delannoy', 'Jérémy', '2000-01-01');
 
 -- --------------------------------------------------------
 
@@ -278,7 +459,40 @@ CREATE TABLE IF NOT EXISTS `sous_competence` (
   `idCompetence` int(11) NOT NULL,
   PRIMARY KEY (`idSousCompetence`),
   KEY `FKCOMPETENCE` (`idCompetence`)
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=79 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `sous_competence`
+--
+
+INSERT INTO `sous_competence` (`idSousCompetence`, `libelleSousCompetence`, `intituleSousCompetence`, `idCompetence`) VALUES
+(50, 1, 'Assurer la veille commerciale', 32),
+(51, 2, 'Réaliser la vente dans un cadre omnicanal', 32),
+(52, 3, 'Assurer l\'exécution de la vente', 32),
+(53, 1, 'Assurer le suivi de la commande du produit et/ou du service', 33),
+(54, 2, 'Mettre en œuvre le ou les services associés', 33),
+(55, 3, 'Traiter les retours et les réclamations du client', 33),
+(56, 4, 'S\'assurer de la satisfaction du client', 33),
+(57, 1, 'Traiter et exploiter l\'information ou le contact client', 34),
+(58, 2, 'Contribuer à des actions de fidélisation de la clientèle et de développement de la relation client', 34),
+(59, 3, 'Evaluer les actions de fidélisation et de développement de la relation client', 34),
+(60, 1, 'Assurer les opérations préalables à la vente', 35),
+(61, 2, 'Rendre l\'unité commerciale attractive et fonctionnelle', 35),
+(62, 3, 'Développer la clientèle ', 35),
+(64, 1, 'Mettre en œuvre une démarche de recherche', 36),
+(65, 2, 'Classer et hiérarchiser les informations', 36),
+(66, 3, 'Analyser les solutions constructives', 36),
+(67, 4, 'Exploiter le modele numérique', 36),
+(68, 5, 'Proposer un modele numérique d\'une modification du modèle  de  définition', 36),
+(69, 1, 'Organiser et préparer son poste de travail', 37),
+(70, 2, 'Installer les outils et entrer les paramètres', 37),
+(72, 3, 'Régler les moyens de production', 37),
+(73, 4, 'Vérifier et valider les réglages', 37),
+(74, 1, 'Identifier les informations à transmettre', 38),
+(75, 2, 'Choisir et utiliser les outils de communication', 38),
+(76, 3, 'Structurer la communication', 38),
+(77, 4, 'Adapter la communication', 38),
+(78, 5, 'Rédiger un rapport une note', 38);
 
 -- --------------------------------------------------------
 
@@ -662,7 +876,10 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 --
 
 INSERT INTO `utilisateur` (`mailUtilisateur`, `mdpUtilisateur`, `idDroitUtilisateur`, `idProfesseur`) VALUES
-('admin', '$2y$10$27/fItzR4lop1nHkOtAlHOFNRjA8cjO1QhIgnv5VVCoV55eWE/aKi', 1, NULL);
+('admin', '$2y$10$27/fItzR4lop1nHkOtAlHOFNRjA8cjO1QhIgnv5VVCoV55eWE/aKi', 1, NULL),
+('bourgeois.agnes', '$2y$10$iXCf8tbGMUiMrmeNj0DGEOHQlAkmR3bxbeTHK4Y2YdyQPsPDe2OPC', 2, 24),
+('cervelle.jerome', '$2y$10$JLbXf4jiUSYsG11lLlambOK6AicnPjva9gFK8VRfbbZFF6n0KmeZq', 2, 25),
+('delannoy.jeremy', '$2y$10$X0wIa1h2NZJP1YIzTVgxGO/iQ07ibh8PUmjVAQBlzBlXAKVWOFA46', 3, 26);
 
 --
 -- Contraintes pour les tables déchargées
@@ -687,9 +904,19 @@ ALTER TABLE `affecter`
 -- Contraintes pour la table `attribuer_activite`
 --
 ALTER TABLE `attribuer_activite`
-  ADD CONSTRAINT `FK_ACTIVITE42` FOREIGN KEY (`idActivite`) REFERENCES `activite` (`idActivite`),
+  ADD CONSTRAINT `FK_ACTIVITE11` FOREIGN KEY (`idActivite`) REFERENCES `activite` (`idActivite`),
   ADD CONSTRAINT `FK_SC` FOREIGN KEY (`idSousCompetence`) REFERENCES `sous_competence` (`idSousCompetence`),
-  ADD CONSTRAINT `FK_WEEK5` FOREIGN KEY (`idWeek`) REFERENCES `time_dimension` (`week`);
+  ADD CONSTRAINT `FK_WEEKDEBUT` FOREIGN KEY (`idWeekDebut`) REFERENCES `time_dimension` (`week`),
+  ADD CONSTRAINT `FK_WEEKFIN` FOREIGN KEY (`idWeekFin`) REFERENCES `time_dimension` (`week`);
+
+--
+-- Contraintes pour la table `attribuer_activite_matiere`
+--
+ALTER TABLE `attribuer_activite_matiere`
+  ADD CONSTRAINT `FK_Activite10` FOREIGN KEY (`idActivite`) REFERENCES `activite` (`idActivite`),
+  ADD CONSTRAINT `FK_MatiereComp10` FOREIGN KEY (`idCompetenceMatiere`) REFERENCES `matiere_competence` (`idCompetenceMatiere`),
+  ADD CONSTRAINT `FK_WeekDeb10` FOREIGN KEY (`idWeekDebut`) REFERENCES `time_dimension` (`week`),
+  ADD CONSTRAINT `FK_WeekFin10` FOREIGN KEY (`idWeekFin`) REFERENCES `time_dimension` (`week`);
 
 --
 -- Contraintes pour la table `attribuer_eleve`
@@ -697,6 +924,14 @@ ALTER TABLE `attribuer_activite`
 ALTER TABLE `attribuer_eleve`
   ADD CONSTRAINT `FK_CLASSE6` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
   ADD CONSTRAINT `FK_ELEVE` FOREIGN KEY (`idEleve`) REFERENCES `eleve` (`idEleve`);
+
+--
+-- Contraintes pour la table `attribuer_matiere`
+--
+ALTER TABLE `attribuer_matiere`
+  ADD CONSTRAINT `FK_Classe8` FOREIGN KEY (`idClasse`) REFERENCES `classe` (`idClasse`),
+  ADD CONSTRAINT `FK_Matiere` FOREIGN KEY (`idMatiere`) REFERENCES `matiere` (`idMatiere`),
+  ADD CONSTRAINT `FK_Prof8` FOREIGN KEY (`idProf`) REFERENCES `professeur` (`idProf`);
 
 --
 -- Contraintes pour la table `attribuer_prof`
